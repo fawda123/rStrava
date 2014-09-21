@@ -1,5 +1,9 @@
-######
+############
 # functions for rStrava
+
+############
+# text mining functions, not through strava API
+# no login required
 
 ######
 # get units of measurement
@@ -130,7 +134,6 @@ summ_fun <- function(prsd){
   
 }
 
-
 ######
 # get athlete location
 # input is xml from URL
@@ -215,3 +218,8 @@ athl_fun <- function(athl_num){
   return(out)
   
 }
+
+############
+# functions for accessing data through strava api
+# login required
+
