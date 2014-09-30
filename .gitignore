@@ -1,3 +1,5 @@
 .Rproj.user
 .Rhistory
 .RData
+extra.R
+.httr-oauth
