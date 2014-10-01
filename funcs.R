@@ -3,7 +3,7 @@
 
 ############
 # text mining functions, not through strava API
-# no login required
+# no login or authentication required
 
 ######
 # get units of measurement
@@ -221,5 +221,77 @@ athl_fun <- function(athl_num){
 
 ############
 # functions for accessing data through strava api
-# login required
+# authentication required
+# credit to: https://github.com/ptdrow/Rtrava
+
+######
+# oauth2.0 authentication for accessing strava app
+# returns authentication token used as input to data retrieval functions
+# 'app_name', 'client_id', and 'client_secret' are assigned to user when registering their app
+# visit http://www.strava.com/developers, http://strava.github.io/api/
+# 'app_name' is chr string of name of app to access
+# 'client_id' is chr string of assigned client id
+# 'client_secret' is chr string of client secret
+# 'scope' is chr string of 'public', 'write', 'view_private', or 'view_private,write'
+rStrava_oauth <- function(app_name, client_id, client_secret, scope = NULL){
+
+	# oath2 application
+	app <- oauth_app('rStrava', key, app_secret)  
+	
+	# oauth2 end point
+	endpt <- oauth_endpoint(
+		request = "https://www.strava.com/oauth/authorize?",
+		authorize = "https://www.strava.com/oauth/authorize",
+		access = "https://www.strava.com/oauth/token")
+
+	# oauth2 token
+	out <- config(token = oauth2.0_token(endpt, app, scope = scope))
+
+	return(out)
+	
+	}
+
+######
+# get basic athlete info (yourself) via v3/athlete
+# 'token' is oauth2 access token, returned from 'rStrava_oauth'
+# returns list athlete data
+athlete <- function(token){
+
+	# response class
+	raw <- GET('https://www.strava.com/api/v3/athlete', token)
+	
+	# parse response
+	parsed <- content(raw)
+	
+	# return output
+	return(parsed)
+	
+	}
+
+######
+# get athlete info of someone else via /v3/athletes/:id
+# 'id' is athlete number
+# 'token' is oath2 authentication token from 'rStrava_oauth'
+athlete_id <- function(id, token){
+	
+	# response class
+	url_in <- paste0('https://www.strava.com/api/v3/athletes/', id)
+	raw <- GET(url_in, token)
+	
+	# parse response
+	parsed <- content(raw)
+	
+	# return output
+	return(parsed)
+	
+	}
+
+
+
+
+
+
+
+
+
 

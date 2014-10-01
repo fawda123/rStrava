@@ -7,6 +7,7 @@ library(RCurl)
 library(httr)
 library(plyr)
 library(ggplot2)
+library(Rfacebook)
 
 # functions to use
 source('funcs.r')
