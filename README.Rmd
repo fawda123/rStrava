@@ -8,9 +8,9 @@ output:
     toc: yes
 ---
 
-## rStrava
+# rStrava
 
-#### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com*
+##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com*
 
 ### Overview and Installation
 
@@ -25,9 +25,30 @@ devtools::install_github('fawda123/rStrava')
 
 Please report any issues and suggestions on the [issues link](https://github.com/fawda123/rStrava/issues) for the repository.
 
+Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
+
+Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
+
 ### Package overview
 
-Forthcoming...
+The functions are in two categories depending on ease of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category also requires an authentication token.  The help files for each category can be viewed using ```help.search```:
+
+```{r eval = FALSE}
+help.search('notoken', package = 'rStrava')
+help.search('token', package = 'rStrava')
+```
+
+
+An example using the scraping functions:
+```{r echo = FALSE, message = FALSE}
+devtools::load_all('.')
+```
+```{r message = FALSE}
+# get athlete data for these guys
+athl_fun(c(2837007, 2527465), trace = FALSE)
+```
+
+More info forthcoming...
 
 ### License
 

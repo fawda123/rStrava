@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+R/funcs.R
+extra.R
+examples.r
+.httr-oauth
+^\.travis\.yml$
+^appveyor\.yml$
