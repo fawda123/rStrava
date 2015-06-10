@@ -1,3 +1,12 @@
+---
+output:
+  html_document:
+    keep_md: yes
+    toc: no
+    self_contained: no
+  pdf_document:
+    toc: yes
+---
 
 ## rStrava
 
@@ -7,8 +16,7 @@
 
 This is the development repository for rStrava, an R package to access data from the Strava API.  The package can be installed and loaded as follows:
 
-
-```r
+```{r eval = F}
 install.packages('devtools')
 devtools::install_github('fawda123/rStrava')
 ```

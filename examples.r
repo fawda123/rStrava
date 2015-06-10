@@ -35,11 +35,9 @@ athl_xml
 
 ##
 # create oath token
-# 'mytoken' created using 'strava_oauth' function and user-specific access id, secrete
+# 'stoken' created using 'strava_oauth' function and user-specific access id, secrete
 
-## mytoken <- strava_oauth(app_name, app_client_id, app_secret)
-
-stoken <- config(token = mytoken)
+## stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret)
 
 # setup info for rate-limiter
 usage_left <- as.integer(c(600, 30000))
