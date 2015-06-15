@@ -14,12 +14,12 @@
 # AUTHETICATION
 # Generate a token for an user and the desired scope. It sends the user to the strava authentication page
 # if he/she hasn't given permission to the app yet, else, is sent to the app webpage:
-strava_oauth <- function(app_name, app_client_id, app_secret, app_scope = NULL,  cache = FALSE) {
+strava_oauth <- function(app_name, app_client_id, app_secret, app_scope = 'public',  cache = FALSE) {
       # app_name:      Name of the app (string)
       # app_client_id: ID received when the app was registered (string)
       # app_secret:    Secret received when the app was registered (string)
       # app_scope:     Scopes for the authentication (string)
-      #                Must be "public" (or NULL), "write", "view_private", or "view_private,write"
+      #                Must be "public", "write", "view_private", or "view_private,write"
       
       strava_app <- oauth_app(app_name, app_client_id, app_secret)  
       
