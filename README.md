@@ -23,7 +23,7 @@ Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/g
 
 ### Package overview
 
-The functions are in two categories depending on ease of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category also requires an authentication token.  The help files for each category can be viewed using ```help.search```:
+The functions are in two categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
 
 
 ```r
@@ -31,6 +31,7 @@ help.search('notoken', package = 'rStrava')
 help.search('token', package = 'rStrava')
 ```
 
+#### Scraping functions
 
 An example using the scraping functions:
 
@@ -50,17 +51,17 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ## 
 ## $`2837007`$monthly
 ## Jun 2014      Jul      Aug      Sep      Oct      Nov      Dec Jan 2015 
-##   423.95   514.30   625.50   298.85   653.30   298.85   430.90   382.25 
+## 429.2629 520.7452 633.3387 302.5952 661.4871 302.5952 436.3000 387.0403 
 ##      Feb      Mar      Apr      May      Jun 
-##   333.60   479.55   486.50   437.85   111.20 
+## 337.7806 485.5597 492.5968 443.3371 436.3000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      2241.2000       134.5833     10384.0000       184.0000 
+##         2566.3          153.8        11552.0          205.0 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       9381.8000        541.0333      59295.0000        698.0000 
+##         9706.80          560.25        60463.00          719.00 
 ## 
 ## 
 ## $`2527465`
@@ -85,7 +86,48 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ##       6662.4000        349.7333     109611.0000        301.0000
 ```
 
-More info forthcoming...
+#### API functions
+
+These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instruction on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the peronsal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggest workflow for using the API functions with rStrava.
+
+First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info.
+
+```r
+app_name <- 'myappname' # chosen by user
+app_client_id  <- 'myid' # an integer, assigned by Strava
+app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
+
+# create the authentication token
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))
+```
+
+The API retrieval functions can be used after the token is created.
+
+
+```r
+myinfo <- get_athlete(stoken, id = '2837007')
+head(myinfo)
+```
+
+```
+## $id
+## [1] 2837007
+## 
+## $resource_state
+## [1] 3
+## 
+## $firstname
+## [1] "Marcus"
+## 
+## $lastname
+## [1] "Beck"
+## 
+## $profile_medium
+## [1] "https://dgalywyr863hv.cloudfront.net/pictures/athletes/2837007/900880/2/medium.jpg"
+## 
+## $profile
+## [1] "https://dgalywyr863hv.cloudfront.net/pictures/athletes/2837007/900880/2/large.jpg"
+```
 
 ### License
 

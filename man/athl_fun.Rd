@@ -21,10 +21,10 @@ Get data for an athlete by web scraping, does not require authentication.
 The athlete id is assigned to the user during registration with Strava and this must be known to use the function.
 }
 \examples{
-## single
+## single athlete
 athl_fun(2837007)
 
-## multiple
+## multiple athletes
 athl_fun(c(2837007, 2527465))
 }
 \concept{

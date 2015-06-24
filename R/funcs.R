@@ -1,64 +1,11 @@
 ############
-# functions for rStrava
-
-############
 # functions for accessing data through strava api
 # authentication required
 # credit to: https://github.com/ptdrow/Rtrava
 
-# Rtrava 0.5.0
-# Library for the Strava API v3 in R
-
-# Dependencies: httr.
-
-# AUTHETICATION
-# Generate a token for an user and the desired scope. It sends the user to the strava authentication page
-# if he/she hasn't given permission to the app yet, else, is sent to the app webpage:
-strava_oauth <- function(app_name, app_client_id, app_secret, app_scope = NULL,  cache = FALSE) {
-      # app_name:      Name of the app (string)
-      # app_client_id: ID received when the app was registered (string)
-      # app_secret:    Secret received when the app was registered (string)
-      # app_scope:     Scopes for the authentication (string)
-      #                Must be "public" (or NULL), "write", "view_private", or "view_private,write"
-      
-      strava_app <- oauth_app(app_name, app_client_id, app_secret)  
-      
-      oauth2.0_token(oauth_endpoint(
-            request = "https://www.strava.com/oauth/authorize?",
-            authorize = "https://www.strava.com/oauth/authorize",
-            access = "https://www.strava.com/oauth/token"),
-            strava_app, scope = app_scope, cache = cache)
-}
-
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-# Use this line for the first time you use the get functions
-# usage_left <- as.integer(c(600, 30000))
-
-# RATE LIMIT
-# Checks the ratelimit values after the last request and stores the left requests in a global variable
-ratelimit <- function(req){
-      # req: Output from the GET(...) function
-      
-      limit <- as.integer(strsplit(req$headers$`x-ratelimit-limit`, ",")[[1]])
-      usage <- as.integer(strsplit(req$headers$`x-ratelimit-usage`, ",")[[1]])
-      usage_left <<- limit - usage
-}
-
-# GET
-# Getting data with requests that don't require for pagination
-get_basic <- function(url_, stoken, queries = NULL){
-      # url_:   URL to get data from (string)
-      # stoken: Configured token (output from config(token = strava_oauth(...)))
-      # queries: Specific additional queries or parameters (list)
-      
-      req <- GET(url_, stoken, query = queries)
-      ratelimit(req)
-      stop_for_status(req)
-      dataRaw <- content(req)
-      return (dataRaw)
-}
 
 # Getting several pages of one type of request
 get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, queries=NULL, All = FALSE){
@@ -99,27 +46,6 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
       return(dataRaw)
 }
 
-# ATHLETE
-# Set the url of the athlete to get data from (according to its ID)
-url_athlete <- function(id = NULL){
-      # id: ID of the athlete (string or integer)
-      #     Leaving the id = NULL will set the authenticated user URL
-      
-      url_ <- "https://www.strava.com/api/v3/athlete"
-      if(!is.null(id))
-            url_ <- paste(url_,"s/",id, sep = "")
-      return(url_)
-}
-
-#Get the athlete's data
-get_athlete <-function(stoken, id = NULL){
-      # stoken: Configured token (output from config(token = strava_oauth(...)))
-      # id:     ID of the athlete (string or integer)
-      #         Leaving the id = NULL will get the authenticated user data
-      
-      dataRaw <- get_basic(url_athlete(id), stoken)
-      return(dataRaw)
-}
 
 #Get the list of friends or followers from an user or the both-following according to another user
 get_following <- function(following, stoken, id = NULL){

@@ -3,29 +3,6 @@
 # Oct. 2014
 
 ######
-# test non-api functions
-
-source('funcs.r')
-
-# check if athletes exist, I have no idea what max number is
-athl_chks <- 1:2000000
-athl_chks <- sample(athl_chks, 30)
-system.time({
-  for(val in 1:length(athl_chks)){
-    cat(val, '\t')
-    athl_num <- athl_chks[val]
-    try_athl <- try(athl_fun(athl_num))
-    if('try-error' %in% class(try_athl)) athl_chks[val] <- NA_real_
-    }
-  }
-)
-
-# try some random athletes
-rand <- sample(1:2e6, 1)
-athl_xml <- athl_fun(rand)
-athl_xml
-
-######
 # test api functions
 
 # get authentication token to access functions
@@ -37,7 +14,7 @@ athl_xml
 # create oath token
 # 'stoken' created using 'strava_oauth' function and user-specific access id, secrete
 
-## stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret)
+stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret)
 
 # setup info for rate-limiter
 usage_left <- as.integer(c(600, 30000))

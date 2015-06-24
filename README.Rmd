@@ -31,13 +31,14 @@ Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/g
 
 ### Package overview
 
-The functions are in two categories depending on ease of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category also requires an authentication token.  The help files for each category can be viewed using ```help.search```:
+The functions are in two categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
 
 ```{r eval = FALSE}
 help.search('notoken', package = 'rStrava')
 help.search('token', package = 'rStrava')
 ```
 
+#### Scraping functions
 
 An example using the scraping functions:
 ```{r echo = FALSE, message = FALSE}
@@ -48,7 +49,29 @@ devtools::load_all('.')
 athl_fun(c(2837007, 2527465), trace = FALSE)
 ```
 
-More info forthcoming...
+#### API functions
+
+These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instruction on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the peronsal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggest workflow for using the API functions with rStrava.
+
+First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info.
+```{r, eval = FALSE}
+
+app_name <- 'myappname' # chosen by user
+app_client_id  <- 'myid' # an integer, assigned by Strava
+app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
+
+# create the authentication token
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))
+```
+
+The API retrieval functions can be used after the token is created.
+```{r echo = FALSE}
+source('extra.R')
+```
+```{r}
+myinfo <- get_athlete(stoken, id = '2837007')
+head(myinfo)
+```
 
 ### License
 

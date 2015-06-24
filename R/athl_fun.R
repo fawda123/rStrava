@@ -14,10 +14,10 @@
 #' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.
 #' 
 #' @examples
-#' ## single
+#' ## single athlete
 #' athl_fun(2837007)
 #' 
-#' ## multiple
+#' ## multiple athletes
 #' athl_fun(c(2837007, 2527465))
 athl_fun <- function(athl_num, trace = TRUE){
 	

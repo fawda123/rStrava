@@ -3,4 +3,5 @@
 export(athl_fun)
 import(RCurl)
 import(XML)
+import(httr)
 import(plyr)
