@@ -1,10 +1,10 @@
-#' Get basic Strava data
+#' Get followers, friends, or both-following
 #' 
-#' Get basic Strava data with requests that don't require pagination
+#' Get followers or friends of the athlete or both-following relative to another user
 #' 
-#' @param url_ string of url for the request to the API
+#' @param following string equal to ``friends", ``followers", or ``both-following"
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param queries list of additional queries or parameters 
+#' @param id string or integer of athlete, taken from \code{stoken} if \code{NULL}
 #'
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.   
 #' 
@@ -14,22 +14,19 @@
 #' 
 #' @import httr
 #' 
-#' @examples 
+#' @examples
 #' \dontrun{
 #' # create authentication token
 #' # requires user created app name, id, and secret from Strava website
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' # get basic user info
-#' get_basic('https://strava.com/api/v3/athlete', stoken)
+#' get_following('friends', stoken)
 #' }
-get_basic <- function(url_, stoken, queries = NULL){
+get_following <- function(following, stoken, id = NULL){
 	
-	req <- GET(url_, stoken, query = queries)
-	ratelimit(req)
-	stop_for_status(req)
-	dataRaw <- content(req)
-	return (dataRaw)
+	url_ <- paste(url_athlete(id),"/", following, sep = "")
+	dataRaw <- get_basic(url_, stoken)
+	return(dataRaw)
 	
 }

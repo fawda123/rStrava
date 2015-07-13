@@ -7,57 +7,6 @@
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
 
-# Getting several pages of one type of request
-get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, queries=NULL, All = FALSE){
-      # url_:     URL to get data from (string)
-      # stoken:   Configured token (output from config(token = strava_oauth(...)))
-      # per_page: Number of items retrieved per page. Max=200 (integer)
-      # page_id:  First page to get data from. (integer)
-      # page_max: Max number of pages to get data from. (integer)
-      # queries:  Specific additional queries or parameters (list)
-      # All:      TRUE if you want all pages possible according to the number of pages and ratelimit (logic)
-      
-      dataRaw <- list()
-      
-      if(All){
-            per_page=200 #reduces the number of requests
-            page_id=1
-            page_max=usage_left[1]
-      }
-      else if(page_max > usage_left[1]){#Trying to avoid exceeding the 15 min limit
-            page_max <- usage_left[1]
-            print (paste("The number of pages would exceed the rate limit, retrieving only"), usage_left[1], "pages")
-      }      
-      
-      i = page_id - 1
-      repeat{
-            i <- i + 1
-            req <- GET(url_, stoken, query = c(list(per_page=per_page, page=i), queries))
-            ratelimit(req)
-            stop_for_status(req)
-            dataRaw <- c(dataRaw,content(req))
-            if(length(content(req)) < per_page) {#breaks when the last page retrieved less items than the per_page value
-                  break
-            }
-            if(i>=page_max) {#breaks when the max number of pages or ratelimit was reached
-                  break
-            }
-      }
-      return(dataRaw)
-}
-
-
-#Get the list of friends or followers from an user or the both-following according to another user
-get_following <- function(following, stoken, id = NULL){
-      # stoken:    Configured token (output from config(token = strava_oauth(...)))
-      # following: Query. Must be equal to "friends", "followers" or "both-following"
-      # id:        ID of the athlete (string or integer)
-      
-      url_ <- paste(url_athlete(id),"/", following, sep = "")
-      dataRaw <- get_basic(url_, stoken)
-      return(dataRaw)
-}
-
 #Get the list of KOMs/QOMs/CRs of an athlete
 get_KOMs <- function(id, stoken){
       #id:     ID of the athlete (string or integer)
