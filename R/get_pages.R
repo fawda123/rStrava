@@ -5,6 +5,8 @@
 #' @param url_ string of url for the request to the API
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
 #' @param per_page numeric indicating number of items retrieved per page (maximum 200)
+#' @param page_id numeric indicating page id
+#' @param page_max numeric indicating maximum number of pages to return
 #' @param queries list of additional queries to pass to the API
 #' @param All logical if you want all possible pages within the ratelimit constraint
 #'

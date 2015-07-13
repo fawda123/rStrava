@@ -6,25 +6,6 @@
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-#Get the activities list of the desired type (club, friends, user)
-get_activity_list <- function(stoken, id = NULL, club = FALSE, friends = FALSE){
-      #stoken:  Configured token (output from config(token = strava_oauth(...)))
-      #id:      ID of the activity or club if club=TRUE (string)
-      #friends: TRUE if you want the friends activities of the authenticated user (logic)
-      #club:    TRUE if you want the activities of a club (logic)
-      
-      #This codes assumes requesting all the pages of activities. In other circunstances change the parameters of 'get_pages'
-      
-      if (friends | club){
-            dataRaw <- get_pages(url_activities(id = id, club = club, friends=friends), stoken, per_page = 200, page_id = 1, page_max = 1)
-      }
-      else{
-            dataRaw <- get_pages(url_activities(), stoken, All=TRUE)
-      }
-      
-      return(dataRaw)
-}
-
 #Get detailed data of an activity. It includes the segment efforts
 get_activity <- function(id, stoken){
       # id:     ID of the required activity

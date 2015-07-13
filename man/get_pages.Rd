@@ -14,6 +14,10 @@ get_pages(url_, stoken, per_page = 30, page_id = 1, page_max = 1,
 
 \item{per_page}{numeric indicating number of items retrieved per page (maximum 200)}
 
+\item{page_id}{numeric indicating page id}
+
+\item{page_max}{numeric indicating maximum number of pages to return}
+
 \item{queries}{list of additional queries to pass to the API}
 
 \item{All}{logical if you want all possible pages within the ratelimit constraint}
