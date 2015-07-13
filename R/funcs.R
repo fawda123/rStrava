@@ -6,43 +6,6 @@
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-
-#Get the list of KOMs/QOMs/CRs of an athlete
-get_KOMs <- function(id, stoken){
-      #id:     ID of the athlete (string or integer)
-      #stoken: Configured token (output from config(token = strava_oauth(...)))
-      
-      url_ <- paste(url_athlete(id),"/koms", sep = "")
-      dataRaw <- get_basic(url_, stoken)
-      return(dataRaw)
-}
-
-#ACTIVITIES
-#Set the url of activities for differents activities lists.
-url_activities <- function(id=NULL, friends=FALSE, club=FALSE){
-      #id:      ID of the activity or club if club=TRUE (string).
-      #friends: TRUE if you want the friends activities of the authenticated user (logic)
-      #club:    TRUE if you want the activities of a club (logic)
-      
-      url_ <- "https://www.strava.com/api/v3/activities/"
-      if(!is.null(id)){
-            if(club){#Url for the activities of the club with ID = id
-                  url_ <- paste("https://www.strava.com/api/v3/clubs/", id,"/activities", sep="")
-            }
-            else{#Url for an specific activity
-                  url_ <- paste(url_, id, sep = "")
-            }
-      }
-      else if(friends){#Url for the activities of the authenticated user's friends
-            url_ <- paste(url_,"following", sep = "")
-      }
-      else{#Url for the list of activities of the authenticated user
-            url_ <- paste(url_athlete(),"/activities", sep = "")
-      }
-      
-      return(url_)      
-}
-
 #Get the activities list of the desired type (club, friends, user)
 get_activity_list <- function(stoken, id = NULL, club = FALSE, friends = FALSE){
       #stoken:  Configured token (output from config(token = strava_oauth(...)))
