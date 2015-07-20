@@ -13,6 +13,8 @@
 #' 
 #' @concept token
 #' 
+#' @export
+#' 
 #' @import httr
 #' 
 #' @examples

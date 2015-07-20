@@ -11,6 +11,8 @@
 #' 
 #' @return Data from an API request.
 #' 
+#' @export
+#' 
 #' @concept token
 #' 
 #' @import httr

@@ -9,6 +9,8 @@
 #' 
 #' @return A url string.
 #' 
+#' @export
+#' 
 #' @concept token
 #' 
 #' @examples

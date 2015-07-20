@@ -18,6 +18,8 @@
 #' 
 #' @import httr
 #' 
+#' @export
+#' 
 #' @examples
 #' \dontrun{
 #' # create authentication token

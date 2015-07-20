@@ -11,6 +11,8 @@
 #' 
 #' @return The set url.
 #' 
+#' @export
+#' 
 #' @concept token
 #' 
 #' @import httr

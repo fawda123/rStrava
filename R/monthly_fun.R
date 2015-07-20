@@ -6,6 +6,8 @@
 #'
 #' @import XML
 #' 
+#' @export
+#' 
 #' @concept notoken
 monthly_fun <- function(prsd){
 	

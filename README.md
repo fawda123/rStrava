@@ -51,17 +51,17 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ## 
 ## $`2837007`$monthly
 ## Jul 2014      Aug      Sep      Oct      Nov      Dec Jan 2015      Feb 
-## 521.2067 633.9000 302.8633 662.0733 302.8633 436.6867 387.3833 338.0800 
+## 522.9333 636.0000 303.8667 664.2667 303.8667 438.1333 388.6667 339.2000 
 ##      Mar      Apr      May      Jun      Jul 
-## 485.9900 493.0333 443.7300 563.4667 211.3000 
+## 487.6000 494.6667 445.2000 565.3333 339.2000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         2886.1          173.1        12897.0          226.0 
+##      3007.4000       180.8667     13865.0000       235.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##        10026.70          579.55        61808.00          740.00 
+##      10147.9000        587.3167      62776.0000        749.0000 
 ## 
 ## 
 ## $`2527465`
@@ -73,24 +73,24 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ## 
 ## $`2527465`$monthly
 ## Jul 2014      Aug      Sep      Oct      Nov      Dec Jan 2015      Feb 
-## 215.0500 241.1167 267.1833 143.3667 221.5667 625.6000 371.4500 540.8833 
+##   259.05   290.45   321.85   172.70   266.90   753.60   447.45   651.55 
 ##      Mar      Apr      May      Jun      Jul 
-## 156.4000   0.0000   0.0000   0.0000   0.0000 
+##   188.40     0.00     0.00     0.00    15.70 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##        1067.50          59.75       17955.00          40.00 
+##        1083.30          61.15       18108.00          41.00 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       6662.4000        349.7333     109611.0000        301.0000
+##       6678.2000        351.1167     109764.0000        302.0000
 ```
 
 #### API functions
 
-These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instruction on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the peronsal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggest workflow for using the API functions with rStrava.
+These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggested workflow for using the API functions with rStrava.
 
-First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info.
+First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info from your account.
 
 ```r
 app_name <- 'myappname' # chosen by user
@@ -132,3 +132,6 @@ head(myinfo)
 ### License
 
 This package is released in the public domain under the creative commons license [CC0](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal). 
+
+### To do
+check date format for `get_efforts_list`, is there an easy way to get athlete, segment, club id numbers?

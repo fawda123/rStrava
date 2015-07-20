@@ -8,6 +8,8 @@
 #' 
 #' @return A global variable \code{usage_left} shows the current limits.
 #'
+#' @export
+#'
 #' @concept token
 ratelimit <- function(req){
 	

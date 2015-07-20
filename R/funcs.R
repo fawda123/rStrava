@@ -6,39 +6,6 @@
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-#Get all the efforts in a segment if no queries are specified
-get_efforts_list <- function(stoken, id,athlete_id=NULL, start_date_local=NULL, end_date_local=NULL){
-      #stoken:     Configured token (output from config(token = strava_oauth(...)))
-      #id:         ID of the segment (string or integer)
-      #athlete_id: ID of an athlete to filter the data (string or integer)
-      #start_date_local and end_date_local are queries for filtering the data. Haven't check the required date format yet
-      
-      queries <- list(athlete_id=athlete_id,
-                      start_date_local=start_date_local,
-                      end_date_local=end_date_local)
-      
-      dataRaw <- get_pages(url_segment(id, request="all_efforts"), stoken, queries=queries, All=TRUE)
-      return(dataRaw)
-}
-
-get_explore <- function(stoken, bounds, activity_type="riding", max_cat=NULL, min_cat=NULL){
-      #stoken:        Configured token (output from config(token = strava_oauth(...)))
-      #bounds:        string representing the comma separated list of bounding box corners 
-      #               'sw.lat,sw.lng,ne.lat,ne.lng' 
-      #               'south,west,north,east
-      #               eg.: bounds="37.821362,-122.505373,37.842038,-122.465977"
-      #activity_type: "riding" or "running"
-      #max_cat:       integer representing the max climbing category
-      #min_cat:       integer reprenenting the min climbing category
-      
-      url_ <- url_segment(request="explore")
-      dataRaw <- get_basic(url_, stoken, queries=list(bounds=bounds,
-                                                      activity_type=activity_type,
-                                                      max_cat=max_cat,
-                                                      min_cat=min_cat))
-      return(dataRaw)
-}
-
 #STREAMS
 #Set the url for the different requests of streams
 url_streams  <- function(id, request="activities", types=list("latlng")){

@@ -8,6 +8,8 @@
 #' 
 #' @concept notoken
 #' 
+#' @export
+#' 
 #' @return 	A list with elements for the athlete id, units of measurement, location, monthly data, year-to-date data, and an all-time summary.
 athlind_fun <- function(athl_num){
 	

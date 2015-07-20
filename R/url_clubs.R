@@ -7,6 +7,8 @@
 #' 
 #' @details Function is used internally within \code{\link{get_club}}
 #' 
+#' @export
+#' 
 #' @return A url string.
 #' 
 #' @concept token

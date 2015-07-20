@@ -76,3 +76,6 @@ head(myinfo)
 ### License
 
 This package is released in the public domain under the creative commons license [CC0](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal). 
+
+### To do
+check date format for `get_efforts_list`, is there an easy way to get athlete, segment, club id numbers?
