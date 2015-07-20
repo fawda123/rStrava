@@ -6,28 +6,6 @@
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-# Retrieve a summary representation of the segments starred by an athlete
-get_starred <- function(stoken, id=NULL){     
-      #stoken: Configured token (output from config(token = strava_oauth(...)))
-      #id:     ID of the athlete. If NULL gets the authenticate athlete
-      
-      dataRaw <- get_basic(url_segment(id=id, request="starred"), stoken)
-      return(dataRaw)
-}
-
-#Retrieve the leaderboard of a segment
-get_leaderboard <- function(stoken, id, nleaders=10, All=FALSE){
-      #stoken:   Configured token (output from config(token = strava_oauth(...)))
-      #id:       ID of the segment (string)
-      #nleaders: Number of leaders to retrieve
-      #All:      TRUE to retrieve all the list (logic)
-      
-      
-      dataRaw <- get_pages(url_segment(id, request="leaderboard"), stoken, 
-                           per_page = nleaders, All = All)
-      return(dataRaw)
-}
-
 #Get all the efforts in a segment if no queries are specified
 get_efforts_list <- function(stoken, id,athlete_id=NULL, start_date_local=NULL, end_date_local=NULL){
       #stoken:     Configured token (output from config(token = strava_oauth(...)))
