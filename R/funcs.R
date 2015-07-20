@@ -6,43 +6,6 @@
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-#SEGMENTS
-#Set the url for the different segment requests
-url_segment <- function(id=NULL, request=NULL) {
-      # id:      ID of the segment (for request= "all_efforts", "leaderboard")
-      #          or ID of the athlete (in case using request="starred" of an selected athlete)
-      #          or NULL (in case of using request="explore" or "starred" of the athenticated user)
-      # request: Must be "starred", "all_efforts", "leaderboard", "explore" or NULL for segment details
-      
-      if(!is.null(request)){
-            if(!is.null(id) & request == "starred"){
-                  url_ <- paste("https://www.strava.com/api/v3/athlete/", id,"/segments/starred", sep="")
-            }
-            else{
-                  url_ <- "https://www.strava.com/api/v3/segments/"
-                  if(request == "starred" | request == "explore"){
-                        url_ <- paste(url_, request, sep="")
-                  }
-                  else{
-                        url_ <- paste(url_, id, "/", request, sep = "")
-                  }
-            }
-      }
-      else{
-            url_ <- paste("https://www.strava.com/api/v3/segments/", id, sep="")
-      }
-      return(url_)
-}
-
-#Retrieve details about a specific segment.
-get_segment <- function(stoken, id=NULL, request=NULL){
-      #stoken: Configured token (output from config(token = strava_oauth(...)))
-      #id:     ID of the segment
-      
-      dataRaw <- get_basic(url_segment(id), stoken)
-      return(dataRaw)
-}
-
 # Retrieve a summary representation of the segments starred by an athlete
 get_starred <- function(stoken, id=NULL){     
       #stoken: Configured token (output from config(token = strava_oauth(...)))
