@@ -6,54 +6,6 @@
 # The token should be configured to work in the httr functions. Use the next line of code to configure it.
 # stoken <- config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope))
 
-#Get detailed data of an activity. It includes the segment efforts
-get_activity <- function(id, stoken){
-      # id:     ID of the required activity
-      # stoken: Configured token (output from config(token = strava_oauth(...)))
-      
-      req <- GET(url_activities(id), stoken, query = list(include_all_efforts=TRUE)) 
-      stop_for_status(req)
-      dataRaw <- content(req)
-      return(dataRaw)
-}
-
-#CLUBS
-#Set the url of the clubs for the different requests
-url_clubs <- function(id=NULL, request=NULL){
-      # id:      ID of the club. If NULL gets the clubs of the authenticated athlete
-      # request: must be "members", "activities" or NULL for club details
-      
-      if(is.null(id)){#Clubs of the authenticated athlete
-            url_ <- paste(url_athlete(), "/clubs", sep = "")
-      }
-      else{ #request must be "members", "activities" or NULL for club details
-            url_ <- paste("https://www.strava.com/api/v3/clubs/", id,"/", request, sep="")
-      }
-      return(url_)
-}      
-
-#Get the data according to the different requests or urls.
-get_club <- function(stoken, id=NULL, request=NULL){
-      # stoken:  Configured token (output from config(token = strava_oauth(...)))
-      # id:      ID of the club. If NULL gets the clubs of the authenticated athlete
-      # request: Must be "members", "activities" or NULL for club details
-      
-      if(is.null(id)){
-            dataRaw <- get_basic(url_clubs(), stoken)
-      }
-      else{ 
-            switch(request,
-                   NULL = dataRaw <- get_basic(url_clubs(id), stoken),
-                   
-                   activities = dataRaw <- get_activity_list(stoken, id, club = TRUE),
-                   
-                   members = dataRaw <- get_pages(url_clubs(id = id, request = request), stoken,
-                                                  per_page = 200, page_id = 1, page_max = 1)
-            )
-      }
-      return(dataRaw)
-}
-
 #SEGMENTS
 #Set the url for the different segment requests
 url_segment <- function(id=NULL, request=NULL) {

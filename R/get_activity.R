@@ -25,11 +25,10 @@
 #' get_activity(75861631, stoken)
 #' }
 get_activity <- function(id, stoken){
-	# id:     ID of the required activity
-	# stoken: Configured token (output from config(token = strava_oauth(...)))
-	
+
 	req <- GET(url_activities(id), stoken, query = list(include_all_efforts=TRUE)) 
 	stop_for_status(req)
 	dataRaw <- content(req)
 	return(dataRaw)
+
 }
