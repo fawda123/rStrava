@@ -51,17 +51,17 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ## 
 ## $`2837007`$monthly
 ## Jul 2014      Aug      Sep      Oct      Nov      Dec Jan 2015      Feb 
-## 522.9333 636.0000 303.8667 664.2667 303.8667 438.1333 388.6667 339.2000 
+## 519.2109 631.4727 301.7036 659.5382 301.7036 435.0145 385.9000 336.7855 
 ##      Mar      Apr      May      Jun      Jul 
-## 487.6000 494.6667 445.2000 565.3333 339.2000 
+## 484.1291 491.1455 442.0309 561.3091 385.9000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      3007.4000       180.8667     13865.0000       235.0000 
+##      3051.1000       183.3833     14045.0000       239.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      10147.9000        587.3167      62776.0000        749.0000 
+##      10191.6000        589.8333      62956.0000        753.0000 
 ## 
 ## 
 ## $`2527465`
@@ -88,7 +88,7 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 
 #### API functions
 
-These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggested workflow for using the API functions with rStrava.
+These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieval function in the rStrava package requires an authentication token (called `stoken` in the help documents).  The following is a suggested workflow for using the API functions with rStrava.
 
 First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info from your account.
 
