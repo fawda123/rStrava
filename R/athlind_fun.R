@@ -23,7 +23,7 @@ athlind_fun <- function(athl_num){
 	
 	# url as HTMLInternalDoc
 	prsd <- htmlTreeParse(athl_url, useInternalNodes = TRUE)
-	
+
 	# get units of measurement
 	unts <- units_fun(prsd)
 	
@@ -37,11 +37,12 @@ athlind_fun <- function(athl_num){
 	
 	# year to date and all time summary
 	summ <- summ_fun(prsd)
-	
+
 	# output
 	out <- list(
 		units = unts, 
 		location = loc, 
+		current_month = summ[['current_month']],
 		monthly = monthly, 
 		year_to_date = summ[['year_to_date']],
 		all_time = summ[['all_time']]

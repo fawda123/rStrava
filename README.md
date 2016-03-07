@@ -49,41 +49,49 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ## $`2837007`$location
 ## [1] "Pensacola, FL"
 ## 
+## $`2837007`$current_month
+##   Distance       Time  Elevation 
+##  97.700000   6.133333 102.000000 
+## 
 ## $`2837007`$monthly
-## Jun 2014      Jul      Aug      Sep      Oct      Nov      Dec Jan 2015 
-## 429.2629 520.7452 633.3387 302.5952 661.4871 302.5952 436.3000 387.0403 
-##      Feb      Mar      Apr      May      Jun 
-## 337.7806 485.5597 492.5968 443.3371 436.3000 
+## Mar 2015      Apr      May      Jun      Jul      Aug      Sep      Oct 
+## 481.5214 488.5000 439.6500 558.2857 516.4143 558.2857 544.3286 683.9000 
+##      Nov      Dec Jan 2016      Feb      Mar 
+## 425.6929 397.7786 439.6500 341.9500  97.7000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         2566.3          153.8        11552.0          205.0 
+##      828.50000       53.58333     1404.00000       71.00000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         9706.80          560.25        60463.00          719.00 
+##      13588.6000        801.3833      85938.0000        989.0000 
 ## 
 ## 
 ## $`2527465`
 ## $`2527465`$units
-## [1] "km" "h"  "m" 
+## [1] "km" "h"  "m"  "m" 
 ## 
 ## $`2527465`$location
 ## [1] "Caracas, Distrito Metropolitano de Caracas, Venezuela"
 ## 
+## $`2527465`$current_month
+##  Distance      Time Elevation 
+## 191.50000  15.56667 962.00000 
+## 
 ## $`2527465`$monthly
-## Jun 2014      Jul      Aug      Sep      Oct      Nov      Dec Jan 2015 
-## 136.8500 215.0500 241.1167 267.1833 143.3667 221.5667 625.6000 371.4500 
-##      Feb      Mar      Apr      May      Jun 
-## 540.8833 156.4000   0.0000   0.0000   0.0000 
+##  Mar 2015       Apr       May       Jun       Jul       Aug       Sep 
+## 155.59375   0.00000   0.00000   0.00000  67.82292 119.68750  51.86458 
+##       Oct       Nov       Dec  Jan 2016       Feb       Mar 
+## 307.19792 271.29167 383.00000  35.90625 191.50000   0.00000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##        1067.50          59.75       17955.00          40.00 
+##      229.30000       18.38333     1253.00000       11.00000 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       6662.4000        349.7333     109611.0000        301.0000
+##       8093.2000        451.8333     120915.0000        347.0000
 ```
 
 #### API functions
@@ -113,6 +121,9 @@ head(myinfo)
 ## $id
 ## [1] 2837007
 ## 
+## $username
+## [1] "beck_marcus"
+## 
 ## $resource_state
 ## [1] 3
 ## 
@@ -123,10 +134,7 @@ head(myinfo)
 ## [1] "Beck"
 ## 
 ## $profile_medium
-## [1] "https://dgalywyr863hv.cloudfront.net/pictures/athletes/2837007/900880/2/medium.jpg"
-## 
-## $profile
-## [1] "https://dgalywyr863hv.cloudfront.net/pictures/athletes/2837007/900880/2/large.jpg"
+## [1] "https://dgalywyr863hv.cloudfront.net/pictures/athletes/2837007/900880/4/medium.jpg"
 ```
 
 ### License
