@@ -143,8 +143,8 @@ athl_fun(c(2837007, 2527465), trace = FALSE)</code></pre>
 </div>
 <div id="api-functions" class="section level4">
 <h4>API functions</h4>
-<p>These functions require a Strava account and a personal API, both of which can be obtained on the Strava website. The user account can be created by following instruction on the <a href="https://www.strava.com/">Strava homepage</a>. After the account is created, a personal API can be created under API tab of <a href="https://www.strava.com/settings/api">profile settings</a>. The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token. Additional information about the peronsal API can be found <a href="https://strava.github.io/api/">here</a>. Every API retrieveal function in the rStrava package requires an authentication token. The following is a suggest workflow for using the API functions with rStrava.</p>
-<p>First, create the authentication token using your personal information from your API. Replace the <code>app_name</code>, <code>app_client_id</code>, and <code>app_secret</code> objects with the relevant info.</p>
+<p>These functions require a Strava account and a personal API, both of which can be obtained on the Strava website. The user account can be created by following instructions on the <a href="https://www.strava.com/">Strava homepage</a>. After the account is created, a personal API can be created under API tab of <a href="https://www.strava.com/settings/api">profile settings</a>. The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token. Additional information about the personal API can be found <a href="https://strava.github.io/api/">here</a>. Every API retrieval function in the rStrava package requires an authentication token (called <code>stoken</code> in the help documents). The following is a suggested workflow for using the API functions with rStrava.</p>
+<p>First, create the authentication token using your personal information from your API. Replace the <code>app_name</code>, <code>app_client_id</code>, and <code>app_secret</code> objects with the relevant info from your account.</p>
 <pre class="r"><code>app_name &lt;- &#39;myappname&#39; # chosen by user
 app_client_id  &lt;- &#39;myid&#39; # an integer, assigned by Strava
 app_secret &lt;- &#39;xxxxxxxx&#39; # an alphanumeric secret, assigned by Strava
@@ -176,6 +176,10 @@ head(myinfo)</code></pre>
 <div id="license" class="section level3">
 <h3>License</h3>
 <p>This package is released in the public domain under the creative commons license <a href="https://tldrlegal.com/license/creative-commons-cc0-1.0-universal">CC0</a>.</p>
+</div>
+<div id="to-do" class="section level3">
+<h3>To do</h3>
+<p>check date format for <code>get_efforts_list</code>, is there an easy way to get athlete, segment, club id numbers?</p>
 </div>
 </div>
 

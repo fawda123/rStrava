@@ -80,25 +80,25 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 ## 191.50000  15.56667 962.00000 
 ## 
 ## $`2527465`$monthly
-##  Mar 2015       Apr       May       Jun       Jul       Aug       Sep 
-## 155.59375   0.00000   0.00000   0.00000  67.82292 119.68750  51.86458 
-##       Oct       Nov       Dec  Jan 2016       Feb       Mar 
-## 307.19792 271.29167 383.00000  35.90625 191.50000   0.00000 
+## Jul 2014      Aug      Sep      Oct      Nov      Dec Jan 2015      Feb 
+##   259.05   290.45   321.85   172.70   266.90   753.60   447.45   651.55 
+##      Mar      Apr      May      Jun      Jul 
+##   188.40     0.00     0.00     0.00    15.70 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      229.30000       18.38333     1253.00000       11.00000 
+##        1083.30          61.15       18108.00          41.00 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       8093.2000        451.8333     120915.0000        347.0000
+##       6678.2000        351.1167     109764.0000        302.0000
 ```
 
 #### API functions
 
-These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instruction on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the peronsal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggest workflow for using the API functions with rStrava.
+These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieval function in the rStrava package requires an authentication token (called `stoken` in the help documents).  The following is a suggested workflow for using the API functions with rStrava.
 
-First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info.
+First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info from your account.
 
 ```r
 app_name <- 'myappname' # chosen by user
@@ -140,3 +140,6 @@ head(myinfo)
 ### License
 
 This package is released in the public domain under the creative commons license [CC0](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal). 
+
+### To do
+check date format for `get_efforts_list`, is there an easy way to get athlete, segment, club id numbers?

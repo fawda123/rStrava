@@ -1,17 +1,19 @@
-#' Get basic data for an athlete
+#' Get detailed data of an activity
 #' 
-#' Get basic athlete data for an athlete using an API request
-#' 
+#' Get detailed data of an activity, including segment efforts
+#'
+#' @param id numeric for id of the activity
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id string or integer of athlete
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
 #' 
-#' @return Data from an API request to \url{https://strava.com/api/v3/athlete}.  Specifically, a list of athlete information including athlete name, location, followers, etc. as described here: \url{https://strava.github.io/api/v3/athlete/}.
+#' The id for each activity can be viewed using results from \code{\link{get_activity_list}}.
 #' 
-#' @concept token
+#' @return Data from an API request.
 #' 
 #' @export
+#' 
+#' @concept token
 #' 
 #' @import httr
 #' 
@@ -22,11 +24,13 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' get_athlete(stoken, id = '2527465')
+#' get_activity(75861631, stoken)
 #' }
-get_athlete <-function(stoken, id = NULL){
+get_activity <- function(id, stoken){
 
-	dataRaw <- get_basic(url_athlete(id), stoken)
+	req <- GET(url_activities(id), stoken, query = list(include_all_efforts=TRUE)) 
+	stop_for_status(req)
+	dataRaw <- content(req)
 	return(dataRaw)
-	
+
 }

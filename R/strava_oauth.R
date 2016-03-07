@@ -11,6 +11,8 @@
 #' @details The \code{app_name}, \code{app_client_id}, and \code{app_secret} are specific to the user and can be obtained by registering an app on the Strava API authentication page: \url{http://strava.github.io/api/v3/oauth/}.  This requires a personal Strava account.
 #'
 #' @import httr
+#' 
+#' @export
 #'
 #' @concept token
 strava_oauth <- function(app_name, app_client_id, app_secret, app_scope = 'public', cache = FALSE){

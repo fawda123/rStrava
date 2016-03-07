@@ -4,6 +4,8 @@
 #' 
 #' @param id str or integet of athlete id assigned by Strava, NULL will set the authenticated user URL
 #' 
+#' @export
+#' 
 #' @details used by other functions
 url_athlete <- function(id = NULL){
 

@@ -6,6 +6,8 @@
 #'
 #' @import XML
 #' 
+#' @export
+#' 
 #' @concept notoken
 units_fun <- function(xml_in){
 

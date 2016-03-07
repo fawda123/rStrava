@@ -6,6 +6,8 @@
 #'
 #' @import plyr XML
 #' 
+#' @export
+#' 
 #' @concept notoken
 #' 
 #' @return two-element list

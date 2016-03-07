@@ -1,13 +1,15 @@
-#' Get basic data for an athlete
+#' Retrieve the leaderboard of a segment
 #' 
-#' Get basic athlete data for an athlete using an API request
-#' 
+#' Retrieve the leaderboard of a segment
+#'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id string or integer of athlete
+#' @param id numeric for id of the segment
+#' @param nleaders numeric for number of leaders to retrieve
+#' @param All logical to retrieve all of the list
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
 #' 
-#' @return Data from an API request to \url{https://strava.com/api/v3/athlete}.  Specifically, a list of athlete information including athlete name, location, followers, etc. as described here: \url{https://strava.github.io/api/v3/athlete/}.
+#' @return Data from an API request.
 #' 
 #' @concept token
 #' 
@@ -22,11 +24,12 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' get_athlete(stoken, id = '2527465')
+#' get_leaderboard(stoken, id = 229781)
 #' }
-get_athlete <-function(stoken, id = NULL){
+get_leaderboard <- function(stoken, id, nleaders = 10, All = FALSE){
 
-	dataRaw <- get_basic(url_athlete(id), stoken)
+	dataRaw <- get_pages(url_segment(id, request="leaderboard"), stoken, 
+											 per_page = nleaders, All = All)
 	return(dataRaw)
 	
 }
