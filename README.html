@@ -10,14 +10,15 @@
 
 
 
+
 <title></title>
 
-<script src="README_files/jquery-1.11.0/jquery.min.js"></script>
+<script src="README_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="README_files/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<script src="README_files/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="README_files/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="README_files/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="README_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="README_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <link rel="stylesheet"
@@ -39,6 +40,34 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
 </head>
 
 <body>
@@ -53,14 +82,42 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
 <div class="container-fluid main-container">
 
+<!-- tabsets -->
+<script src="README_files/navigation-1.0/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
 
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
 
 
 <div id="rstrava" class="section level1">
@@ -85,64 +142,19 @@ devtools::install_github(&#39;fawda123/rStrava&#39;)</code></pre>
 <p>The functions are in two categories depending on mode of use. The first category of functions scrape data from the public Strava website and the second category uses the API functions. The second category requires an authentication token. The help files for each category can be viewed using <code>help.search</code>:</p>
 <pre class="r"><code>help.search(&#39;notoken&#39;, package = &#39;rStrava&#39;)
 help.search(&#39;token&#39;, package = &#39;rStrava&#39;)</code></pre>
-<div id="scraping-functions" class="section level4">
-<h4>Scraping functions</h4>
+<div id="scraping-functions-no-token" class="section level4">
+<h4>Scraping functions (no token)</h4>
 <p>An example using the scraping functions:</p>
 <pre class="r"><code># get athlete data for these guys
 athl_fun(c(2837007, 2527465), trace = FALSE)</code></pre>
 <pre><code>## $`2837007`
-## $`2837007`$units
-## [1] &quot;mi&quot; &quot;h&quot;  &quot;m&quot;  &quot;ft&quot;
-## 
-## $`2837007`$location
-## [1] &quot;Pensacola, FL&quot;
-## 
-## $`2837007`$current_month
-##   Distance       Time  Elevation 
-##  97.700000   6.133333 102.000000 
-## 
-## $`2837007`$monthly
-## Mar 2015      Apr      May      Jun      Jul      Aug      Sep      Oct 
-## 481.5214 488.5000 439.6500 558.2857 516.4143 558.2857 544.3286 683.9000 
-##      Nov      Dec Jan 2016      Feb      Mar 
-## 425.6929 397.7786 439.6500 341.9500  97.7000 
-## 
-## $`2837007`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##      828.50000       53.58333     1404.00000       71.00000 
-## 
-## $`2837007`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      13588.6000        801.3833      85938.0000        989.0000 
-## 
+## [1] NA
 ## 
 ## $`2527465`
-## $`2527465`$units
-## [1] &quot;km&quot; &quot;h&quot;  &quot;m&quot;  &quot;m&quot; 
-## 
-## $`2527465`$location
-## [1] &quot;Caracas, Distrito Metropolitano de Caracas, Venezuela&quot;
-## 
-## $`2527465`$current_month
-##  Distance      Time Elevation 
-## 191.50000  15.56667 962.00000 
-## 
-## $`2527465`$monthly
-##  Mar 2015       Apr       May       Jun       Jul       Aug       Sep 
-## 155.59375   0.00000   0.00000   0.00000  67.82292 119.68750  51.86458 
-##       Oct       Nov       Dec  Jan 2016       Feb       Mar 
-## 307.19792 271.29167 383.00000  35.90625 191.50000   0.00000 
-## 
-## $`2527465`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##      229.30000       18.38333     1253.00000       11.00000 
-## 
-## $`2527465`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       8093.2000        451.8333     120915.0000        347.0000</code></pre>
+## [1] NA</code></pre>
 </div>
-<div id="api-functions" class="section level4">
-<h4>API functions</h4>
+<div id="api-functions-token" class="section level4">
+<h4>API functions (token)</h4>
 <p>These functions require a Strava account and a personal API, both of which can be obtained on the Strava website. The user account can be created by following instructions on the <a href="https://www.strava.com/">Strava homepage</a>. After the account is created, a personal API can be created under API tab of <a href="https://www.strava.com/settings/api">profile settings</a>. The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token. Additional information about the personal API can be found <a href="https://strava.github.io/api/">here</a>. Every API retrieval function in the rStrava package requires an authentication token (called <code>stoken</code> in the help documents). The following is a suggested workflow for using the API functions with rStrava.</p>
 <p>First, create the authentication token using your personal information from your API. Replace the <code>app_name</code>, <code>app_client_id</code>, and <code>app_secret</code> objects with the relevant info from your account.</p>
 <pre class="r"><code>app_name &lt;- &#39;myappname&#39; # chosen by user
@@ -169,19 +181,17 @@ head(myinfo)</code></pre>
 ## $lastname
 ## [1] &quot;Beck&quot;
 ## 
-## $profile_medium
-## [1] &quot;https://dgalywyr863hv.cloudfront.net/pictures/athletes/2837007/900880/4/medium.jpg&quot;</code></pre>
+## $city
+## [1] &quot;Pensacola&quot;</code></pre>
 </div>
 </div>
 <div id="license" class="section level3">
 <h3>License</h3>
 <p>This package is released in the public domain under the creative commons license <a href="https://tldrlegal.com/license/creative-commons-cc0-1.0-universal">CC0</a>.</p>
 </div>
-<div id="to-do" class="section level3">
-<h3>To do</h3>
-<p>check date format for <code>get_efforts_list</code>, is there an easy way to get athlete, segment, club id numbers?</p>
 </div>
-</div>
+
+
 
 
 </div>
