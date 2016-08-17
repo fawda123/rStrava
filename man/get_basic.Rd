@@ -26,7 +26,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 \dontrun{
 # create authentication token
 # requires user created app name, id, and secret from Strava website
-stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
 # get basic user info

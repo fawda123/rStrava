@@ -36,6 +36,10 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
 
 	dataRaw <- list()
 	
+	# initalize usage_left with ratelimit
+	req <- GET(url_, stoken, query = c(list(per_page=per_page, page=page_id), queries))
+	ratelimit(req)
+	
 	if(All){
 		per_page=200 #reduces the number of requests
 		page_id=1
