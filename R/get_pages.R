@@ -57,7 +57,15 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
 		ratelimit(req)
 		stop_for_status(req)
 		dataRaw <- c(dataRaw,content(req))
-		if(length(content(req)) < per_page) {#breaks when the last page retrieved less items than the per_page value
+		
+		# check content lengths, must check efforts if get_leaderboard
+		if(grepl('leaderboard$', url_)){
+			len_cont <- length(content(req)$effort)
+		} else {
+			len_cont <- length(content(req))
+		}
+		
+		if(len_cont < per_page) {#breaks when the last page retrieved less items than the per_page value
 			break
 		}
 		if(i>=page_max) {#breaks when the max number of pages or ratelimit was reached
