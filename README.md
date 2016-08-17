@@ -43,10 +43,55 @@ athl_fun(c(2837007, 2527465), trace = FALSE)
 
 ```
 ## $`2837007`
-## [1] NA
+## $`2837007`$units
+## [1] "mi" "h"  "m"  "ft"
+## 
+## $`2837007`$location
+## [1] "Pensacola, FL"
+## 
+## $`2837007`$current_month
+##   Distance       Time  Elevation 
+## 116.200000   8.683333 671.000000 
+## 
+## $`2837007`$monthly
+## Aug 2015      Sep      Oct      Nov      Dec Jan 2016      Feb      Mar 
+## 546.8235 533.1529 669.8588 416.9529 389.6118 430.6235 334.9294 451.1294 
+##      Apr      May      Jun      Jul      Aug 
+## 451.1294 355.4353 451.1294 457.9647 116.2000 
+## 
+## $`2837007`$year_to_date
+##       Distance           Time Elevation Gain          Rides 
+##      2978.6000       185.4167     16033.0000       228.0000 
+## 
+## $`2837007`$all_time
+##  Total Distance      Total Time Total Elev Gain     Total Rides 
+##         15738.7           933.2        100568.0          1146.0 
+## 
 ## 
 ## $`2527465`
-## [1] NA
+## $`2527465`$units
+## [1] "km" "h"  "m"  "m" 
+## 
+## $`2527465`$location
+## [1] "Caracas, Distrito Metropolitano de Caracas, Venezuela"
+## 
+## $`2527465`$current_month
+##   Distance       Time  Elevation 
+##  813.50000   42.06667 4467.00000 
+## 
+## $`2527465`$monthly
+##  Aug 2015       Sep       Oct       Nov       Dec  Jan 2016       Feb 
+## 118.63542  50.84375 305.06250 271.16667 381.32812  33.89583 194.90104 
+##       Mar       Apr       May       Jun       Jul       Aug 
+## 415.22396 415.22396 669.44271 355.90625 415.22396 813.50000 
+## 
+## $`2527465`$year_to_date
+##       Distance           Time Elevation Gain          Rides 
+##        3312.00         175.95       35353.00          85.00 
+## 
+## $`2527465`$all_time
+##  Total Distance      Total Time Total Elev Gain     Total Rides 
+##         11175.9           609.4        155015.0           421.0
 ```
 
 #### API functions (token)

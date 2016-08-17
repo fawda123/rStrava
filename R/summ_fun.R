@@ -33,6 +33,7 @@ summ_fun <- function(prsd){
 	cmo_tim <- as.numeric(strsplit(gsub('[a-z]*', '', cmo_tim), ' ')[[1]])
 	cmo_tim <- cmo_tim[1] + cmo_tim[2]/60
 	cmo[2] <- cmo_tim
+	cmo <- gsub(',', '', cmo)
 	cmo <- as.numeric(gsub('[a-z]*', '', cmo))
 	names(cmo) <- c('Distance', 'Time', 'Elevation')
 	

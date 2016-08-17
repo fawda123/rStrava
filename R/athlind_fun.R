@@ -14,7 +14,7 @@
 athlind_fun <- function(athl_num){
 	
 	# get unparsed url text using input
-	url_in <- paste0('http://www.strava.com/athletes/', athl_num)
+	url_in <- paste0('https://www.strava.com/athletes/', athl_num)
 	
 	athl_exists <- url.exists(url_in)
 	
