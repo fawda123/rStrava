@@ -36,10 +36,14 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
 
 	dataRaw <- list()
 	
+	# check for leaderboard request
+	# per_page and length of content request are handled differently
+	chk_lead <- grepl('leaderboard$', url_)
+	
 	# initalize usage_left with ratelimit
 	req <- GET(url_, stoken, query = c(list(per_page=per_page, page=page_id), queries))
 	ratelimit(req)
-	
+
 	if(All){
 		per_page=200 #reduces the number of requests
 		page_id=1
@@ -53,19 +57,31 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
 	i = page_id - 1
 	repeat{
 		i <- i + 1
-		req <- GET(url_, stoken, query = c(list(per_page=per_page, page=i), queries))
+
+		if(chk_lead){
+			
+			req <- GET(url_, stoken, query = c(list(per_page=pmin(200, per_page), page=i), queries))
+			cont_req <- content(req)$entries
+			
+			if(length(cont_req) == 200){
+				per_page <- per_page - length(cont_req)
+				page_max <- 1 + page_max
+			}
+			
+			if(per_page == 0) page_max <- i
+				
+		} else {
+			
+			req <- GET(url_, stoken, query = c(list(per_page=per_page, page=i), queries))
+			cont_req <- content(req)
+			
+		}
+	
 		ratelimit(req)
 		stop_for_status(req)
-		dataRaw <- c(dataRaw,content(req))
-		
-		# check content lengths, must check efforts if get_leaderboard
-		if(grepl('leaderboard$', url_)){
-			len_cont <- length(content(req)$effort)
-		} else {
-			len_cont <- length(content(req))
-		}
-		
-		if(len_cont < per_page) {#breaks when the last page retrieved less items than the per_page value
+		dataRaw <- c(dataRaw, cont_req)
+
+		if(length(cont_req) < per_page) {#breaks when the last page retrieved less items than the per_page value
 			break
 		}
 		if(i>=page_max) {#breaks when the max number of pages or ratelimit was reached
