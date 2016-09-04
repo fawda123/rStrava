@@ -2,6 +2,7 @@
 
 export(athl_fun)
 export(athlind_fun)
+export(decode_Polyline)
 export(get_KOMs)
 export(get_activity)
 export(get_activity_list)
