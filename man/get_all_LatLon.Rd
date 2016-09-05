@@ -24,6 +24,6 @@ uses \code{\link{get_all_LatLon}} and \code{\link{decode_Polyline}} to produce a
 Daniel Padfield
 }
 \concept{
-token
+posttoken
 }
 

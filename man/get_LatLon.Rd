@@ -24,6 +24,6 @@ used internally in \code{\link{get_all_LatLon}}
 Daniel Padfield
 }
 \concept{
-token
+posttoken
 }
 

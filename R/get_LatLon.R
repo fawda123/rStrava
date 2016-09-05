@@ -6,7 +6,7 @@
 #' @param .id_col the column that you want to be used as an identifier for the dataframe of latitude and longitude coordinates
 #' @author Daniel Padfield
 #' @details used internally in \code{\link{get_all_LatLon}}
-#' @concept token
+#' @concept posttoken
 #' @return dataframe of latitude and longitudes with a column for the unique identifier
 #' @export
 get_LatLon <- function(x, .id_col){
