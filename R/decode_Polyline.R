@@ -2,11 +2,13 @@
 #' 
 #' Decodes Google's polyline that are given in get_activity() and get_activity_list()
 #' 
-#' @author Max
+#' @author Daniel Padfield
 #' @param Google_polyline character element of Google polyline of an activity
 #' @return A vector of latitudes an longitudes in decimals separated by a comma
 #' @concept notoken
 #' @details When getting an activity using get_activity() a Google polyline is returned as one of the outputs. This function converts the polyline into latitude and longitude coordinates suitable for plotting. Function is used internally within \code{\link{get_LatLon}} and \code{\link{get_all_LatLon}}.
+#' @examples
+#' decode_Polyline()
 #' @export
 #' @references https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460
 

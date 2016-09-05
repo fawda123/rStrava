@@ -20,6 +20,11 @@ convert a single activity list into a dataframe
 \details{
 used internally in \code{\link{compile_activities}}
 }
+\examples{
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+acts <- get_activity_list(stoken, 2837007))
+compile_activity(acts[1])
+}
 \author{
 Daniel Padfield
 }

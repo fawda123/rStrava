@@ -20,6 +20,9 @@ get latitude and longitude for multiple activities
 \details{
 uses \code{\link{get_all_LatLon}} and \code{\link{decode_Polyline}} to produce a dataframe of latitudes and longitudes
 }
+\examples{
+get_all_LatLon('upload_id', acts_data)
+}
 \author{
 Daniel Padfield
 }

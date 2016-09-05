@@ -20,6 +20,9 @@ get latitude and longitude from Google polyline
 \details{
 used internally in \code{\link{get_all_LatLon}}
 }
+\examples{
+getLatLon(act, 'upload_id')
+}
 \author{
 Daniel Padfield
 }

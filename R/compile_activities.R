@@ -7,6 +7,10 @@
 #' @return dataframe where each row is a different activity
 #' @details each activity has a value for every column present across all activities, with NAs populating empty values
 #' @concept posttoken
+#' @examples  
+#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+#' acts <- get_activity_list(stoken, 2837007))
+#' acts_data <- compile_activities(acts)
 #' @export
 
 compile_activities <- function(list){
