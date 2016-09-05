@@ -12,7 +12,10 @@ Imports:
     plyr,
     RCurl,
     XML,
-    bitops
+    bitops,
+    magrittr,
+    dplyr,
+    tidyr
 Suggests:
     ggplot2
 Depends:
