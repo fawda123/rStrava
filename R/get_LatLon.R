@@ -13,6 +13,6 @@
 #' @export
 get_LatLon <- function(x, .id_col){
 	y <- decode_Polyline(x$map.summary_polyline)
-	y[,id_col] <- unique(x[,.id_col])
+	y[,.id_col] <- unique(x[,.id_col])
 	return(y)
 }
