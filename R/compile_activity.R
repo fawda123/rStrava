@@ -14,17 +14,15 @@
 #' @export
 
 compile_activity <- function(x, columns){
-	library(magrittr)
-	library(dplyr)
 
 	temp <- data.frame(unlist(x), stringsAsFactors = F) %>%
 		mutate(ColNames = rownames(.)) %>%
 		spread(., ColNames, unlist.x.)
 	if(missing(columns)){return(temp)}
 	else{
-	cols_not_present <- columns[! columns %in% colnames(temp)] %>%
-		data.frame(cols = .) %>%
-		mutate(., value = NA)
+	cols_not_present <- columns[! columns %in% colnames(temp)]
+	cols_not_present <- data.frame(cols = cols_not_present)
+	cols_not_present$value <- NA
 	if(nrow(cols_not_present) >= 1){cols_not_present <- tidyr::spread(cols_not_present, cols, value)}
 	if(nrow(cols_not_present) == 1){temp <- cbind(temp, cols_not_present)}
 	return(temp)}
