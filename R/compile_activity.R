@@ -8,9 +8,11 @@
 #' @return dataframe where every column is an item from a list. Any missing columns rom the total number of columns 
 #' @concept posttoken
 #' @examples 
-#' stoken <- httr::config(stoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+#' \dontrun{stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+#' 
 #' acts <- get_activity_list(stoken, 2837007)
-#' compile_activity(acts[1])
+#' 
+#' compile_activity(acts[1])}
 #' @export
 
 compile_activity <- function(x, columns){
