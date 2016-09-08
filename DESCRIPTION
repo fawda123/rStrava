@@ -11,7 +11,11 @@ Imports:
     httr,
     plyr,
     RCurl,
-    XML
+    XML,
+    bitops,
+    magrittr,
+    dplyr,
+    tidyr
 Suggests:
     ggplot2
 Depends:
