@@ -11,7 +11,7 @@
 #' \dontrun{
 #' decode_Polyline()}
 #' @export
-#' @references \link{https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460}
+#' @references Original code from : https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460
 
 decode_Polyline <- function(Google_polyline){
 	

@@ -9,7 +9,9 @@
 #' @concept posttoken
 #' @return dataframe of latitude and longitudes with a column for the unique identifier
 #' @examples
+#' \dontrun{
 #' getLatLon(act, 'upload_id')
+#' }
 #' @export
 get_LatLon <- function(x, .id_col){
 	y <- decode_Polyline(x$map.summary_polyline)

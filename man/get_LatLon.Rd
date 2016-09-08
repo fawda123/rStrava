@@ -21,7 +21,9 @@ get latitude and longitude from Google polyline
 used internally in \code{\link{get_all_LatLon}}
 }
 \examples{
+\dontrun{
 getLatLon(act, 'upload_id')
+}
 }
 \author{
 Daniel Padfield

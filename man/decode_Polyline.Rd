@@ -26,7 +26,7 @@ decode_Polyline()}
 Daniel Padfield
 }
 \references{
-\link{https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460}
+Original code from : https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460
 }
 \concept{
 notoken
