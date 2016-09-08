@@ -19,13 +19,14 @@ Decodes Google's polyline that are given in get_activity() and get_activity_list
 When getting an activity using get_activity() a Google polyline is returned as one of the outputs. This function converts the polyline into latitude and longitude coordinates suitable for plotting. Function is used internally within \code{\link{get_LatLon}} and \code{\link{get_all_LatLon}}.
 }
 \examples{
-decode_Polyline()
+\dontrun{
+decode_Polyline()}
 }
 \author{
 Daniel Padfield
 }
 \references{
-https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460
+\link{https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460}
 }
 \concept{
 notoken
