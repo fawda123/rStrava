@@ -18,6 +18,6 @@ get_all_LatLon <- function(id_col, parent_data){
 	id_col_fac <- as.factor(parent_data[,id_col])
 	temp <- split(parent_data, id_col_fac)
 	temp_data <- plyr::ldply(temp, get_LatLon, .id_col = id_col)
-	data <- temp_data[,c('latlon', 'activity_no')]
+	data <- temp_data[,c(3, 2)]
 	return(data)
 }
