@@ -18,7 +18,7 @@ plot of activity on a Google map
 Makes a heat map from your activity data
 }
 \details{
-uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses \code{\link{ggmap}} to produce map and plot it in \code{\link{ggplot2}}
+uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses {ggmap} to produce map and ggplot2 it
 }
 \examples{
 \dontrun{
