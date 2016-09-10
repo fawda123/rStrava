@@ -18,7 +18,7 @@ dataframe of latitude and longitudes with a column for each unique identifier
 get latitude and longitude for multiple activities
 }
 \details{
-uses \code{\link{get_all_LatLon}} and \code{\link{decode_Polyline}} to produce a dataframe of latitudes and longitudes
+uses \code{\link{get_LatLon}} and \code{\link{decode_Polyline}} to produce a dataframe of latitudes and longitudes
 }
 \examples{
 \dontrun{

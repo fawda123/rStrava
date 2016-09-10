@@ -6,7 +6,7 @@
 #' @return dataframe of latitude and longitudes with a column for each unique identifier
 #' @author Daniel Padfield
 #' @concept posttoken
-#' @details uses \code{\link{get_all_LatLon}} and \code{\link{decode_Polyline}} to produce a dataframe of latitudes and longitudes
+#' @details uses \code{\link{get_LatLon}} and \code{\link{decode_Polyline}} to produce a dataframe of latitudes and longitudes
 #' @examples
 #' \dontrun{
 #' get_all_LatLon('upload_id', acts_data)
