@@ -28,6 +28,6 @@ get_heat_map <- function(act_data, alpha = seq(0,1,0.05)){
 	bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = 0.15)
 	map <- suppressMessages(ggmap::get_map(bbox))
 	print(ggmap::ggmap(map, extent = 'device') +
-					ggplot::coord_cartesian() +
-					ggplot::geom_path(aes(x = lon, y = lat, group = map.summary_polyline), col = 'red', alpha = alpha, data = temp, size = 0.5))
+					ggplot2::coord_cartesian() +
+					ggplot2::geom_path(aes(x = lon, y = lat, group = map.summary_polyline), col = 'red', alpha = alpha, data = temp, size = 0.5))
 }
