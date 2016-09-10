@@ -5,7 +5,7 @@
 #' @concept posttoken
 #' @param act_data a dataframe of Strava activities derived from \code{\link{compile_activities}}
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.25
-#' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses \code{\link{ggmap}{get_all_LatLon}} to produce map and plot it in \code{\link{ggplot2}}
+#' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses \code{ggmap} to produce map and \code{ggplot2} it
 #' @return plot of activity on a Google map
 #' @examples 
 #' \dontrun{

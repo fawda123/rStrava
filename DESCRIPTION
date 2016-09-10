@@ -15,7 +15,8 @@ Imports:
     bitops,
     magrittr,
     dplyr,
-    tidyr
+    tidyr,
+    ggmap
 Suggests:
     ggplot2
 Depends:
