@@ -23,10 +23,10 @@ Depends:
     R (>= 3.1.1)
 Authors@R: c(
 	person(given = "Marcus W.", family = "Beck",
-    role = c("aut","cre"),
+    role = c("cre"),
     email = "mbafs2012@gmail.com"),
 	person(given = "Pedro", family = "Villarroel",
-    role = c("aut","cre"),
+    role = c("aut"),
     email = "pedrodvf@gmail.com"
     ), 
   person(given = "Daniel", family = "Padfield",
