@@ -4,12 +4,14 @@
 \alias{get_heat_map}
 \title{Makes a heat map from your activity data}
 \usage{
-get_heat_map(act_data, alpha = seq(0, 1, 0.05))
+get_heat_map(act_data, alpha = NULL, f = 1)
 }
 \arguments{
 \item{act_data}{a dataframe of Strava activities derived from \code{\link{compile_activities}}}
 
-\item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.25}
+\item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
+
+\item{f}{number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}}
 }
 \value{
 plot of activity on a Google map
@@ -35,6 +37,6 @@ get_heat_map(acts_data[1,], alpha = 1)
 Daniel Padfield
 }
 \concept{
-posttoken
+token
 }
 

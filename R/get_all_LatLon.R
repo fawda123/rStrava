@@ -5,7 +5,7 @@
 #' @param parent_data the dataframe that contains the Strava activity data
 #' @return dataframe of latitude and longitudes with a column for each unique identifier
 #' @author Daniel Padfield
-#' @concept posttoken
+#' @concept token
 #' @details uses \code{\link{get_LatLon}} and \code{\link{decode_Polyline}} to produce a dataframe of latitudes and longitudes
 #' @examples
 #' \dontrun{

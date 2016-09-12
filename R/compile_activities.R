@@ -6,7 +6,7 @@
 #' @author Daniel Padfield
 #' @return dataframe where each row is a different activity
 #' @details each activity has a value for every column present across all activities, with NAs populating empty values
-#' @concept posttoken
+#' @concept token
 #' @examples  
 #' \dontrun{
 #' stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))

@@ -32,6 +32,6 @@ compile_activity(acts[1])}
 Daniel Padfield
 }
 \concept{
-posttoken
+token
 }
 

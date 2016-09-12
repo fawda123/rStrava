@@ -6,7 +6,7 @@
 #' @param x a list containing details of a single Strava activity
 #' @param columns a character vector of all the columns in the list of Strava activities. Produced automatically in \code{\link{compile_activities}}. Leave blank if running for a single activity list.
 #' @return dataframe where every column is an item from a list. Any missing columns rom the total number of columns 
-#' @concept posttoken
+#' @concept token
 #' @examples 
 #' \dontrun{
 #' stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))

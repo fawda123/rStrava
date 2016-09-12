@@ -31,6 +31,6 @@ acts_data <- compile_activities(acts)}
 Daniel Padfield
 }
 \concept{
-posttoken
+token
 }
 

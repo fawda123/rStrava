@@ -29,6 +29,6 @@ getLatLon(act, 'upload_id')
 Daniel Padfield
 }
 \concept{
-posttoken
+token
 }
 

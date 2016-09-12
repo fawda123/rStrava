@@ -10,7 +10,7 @@ output:
 
 # rStrava
 
-##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com*
+##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield*
 
 ### Overview and Installation
 
@@ -31,9 +31,9 @@ Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/g
 
 ### Package overview
 
-The functions are in two categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
+The functions are in three categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 help.search('notoken', package = 'rStrava')
 help.search('token', package = 'rStrava')
 ```
@@ -46,7 +46,7 @@ devtools::load_all('.')
 ```
 ```{r message = FALSE}
 # get athlete data for these guys
-athl_fun(c(2837007, 2527465), trace = FALSE)
+athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ```
 
 #### API functions (token)
@@ -72,6 +72,19 @@ source('extra.R')
 myinfo <- get_athlete(stoken, id = '2837007')
 head(myinfo)
 ```
+
+An example creating a heat map of activities:
+```{r message = F, fig.height = 7, fig.width = 7, cache = TRUE}
+library(dplyr)
+
+# get activities, compile, filter by location
+acts <- get_activity_list(stoken, '2837007') %>% 
+	compile_activities %>% 
+	filter(location_city %in% c('Pensacola', 'Pensacola Beach'))
+
+get_heat_map(acts)
+```
+
 
 ### License
 
