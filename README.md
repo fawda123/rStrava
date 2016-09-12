@@ -28,17 +28,6 @@ The functions are in three categories depending on mode of use.  The first categ
 
 ```r
 help.search('notoken', package = 'rStrava')
-```
-
-```
-## starting httpd help server ...
-```
-
-```
-##  done
-```
-
-```r
 help.search('token', package = 'rStrava')
 ```
 

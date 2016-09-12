@@ -30,6 +30,6 @@ Authors@R: c(
     ), 
   person(given = "Daniel", family = "Padfield",
   	role = c("aut"), 
-  	email = "")
+  	email = "dp323@exeter.ac.uk")
   	)
 RoxygenNote: 5.0.1
