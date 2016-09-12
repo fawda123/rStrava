@@ -17,7 +17,8 @@ Imports:
     dplyr,
     tidyr,
     ggmap,
-    ggplot2
+    ggplot2,
+    geosphere
 Depends:
     R (>= 3.1.1)
 Authors@R: c(
