@@ -25,9 +25,12 @@ Authors@R: c(
 	person(given = "Marcus W.", family = "Beck",
     role = c("aut","cre"),
     email = "mbafs2012@gmail.com"),
-	person(given = c("Pedro", family = "Villarroel",
+	person(given = "Pedro", family = "Villarroel",
     role = c("aut","cre"),
-    email = "pedrodvf@gmail.com")
-    )
-  )
+    email = "pedrodvf@gmail.com"
+    ), 
+  person(given = "Daniel", family = "Padfield",
+  	role = c("aut"), 
+  	email = "")
+  	)
 RoxygenNote: 5.0.1
