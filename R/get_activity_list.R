@@ -24,7 +24,7 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' get_activity_list(stoken, 2837007)
+#' get_activity_list(stoken)
 #' }
 get_activity_list <- function(stoken, id = NULL, club = FALSE, friends = FALSE){
 	#stoken:  Configured token (output from config(token = strava_oauth(...)))

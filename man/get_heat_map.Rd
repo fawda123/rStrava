@@ -26,7 +26,7 @@ uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longit
 \dontrun{
 stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 
-acts <- get_activity_list(stoken, 2837007)
+acts <- get_activity_list(stoken)
 
 acts_data <- compile_activities(acts)
 

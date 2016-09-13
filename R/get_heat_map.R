@@ -20,7 +20,7 @@
 #' \dontrun{
 #' stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' 
-#' acts <- get_activity_list(stoken, 2837007)
+#' acts <- get_activity_list(stoken)
 #' 
 #' acts_data <- compile_activities(acts)
 #' 
@@ -42,8 +42,8 @@ get_heat_map <- function(act_data, alpha = NULL, f = 1){
 	
 	# map
 	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox)))
-	p <- ggmap::ggmap(map, extent = 'device') +
-					ggplot2::coord_cartesian() +
+	p <- ggmap::ggmap(map) +
+					ggplot2::coord_equal() +
 					ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline), col = 'red', alpha = alpha, data = temp, size = 0.5)
 
 	return(p)

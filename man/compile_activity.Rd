@@ -24,7 +24,7 @@ used internally in \code{\link{compile_activities}}
 \dontrun{
 stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 
-acts <- get_activity_list(stoken, 2837007)
+acts <- get_activity_list(stoken)
 
 compile_activity(acts[1])}
 }

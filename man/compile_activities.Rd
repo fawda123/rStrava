@@ -23,7 +23,7 @@ each activity has a value for every column present across all activities, with N
 \dontrun{
 stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 
-acts <- get_activity_list(stoken, 2837007)
+acts <- get_activity_list(stoken)
 
 acts_data <- compile_activities(acts)}
 }

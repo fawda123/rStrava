@@ -31,7 +31,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_activity_list(stoken, 2837007)
+get_activity_list(stoken)
 }
 }
 \concept{
