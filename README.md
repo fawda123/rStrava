@@ -1,7 +1,7 @@
 
 # rStrava
 
-##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield*
+##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk*
 
 ### Overview and Installation
 
@@ -51,21 +51,21 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## 
 ## $`2837007`$current_month
 ##  Distance      Time Elevation 
-##    131.70      9.35    809.00 
+## 146.20000  10.48333 809.00000 
 ## 
 ## $`2837007`$monthly
 ## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
-## 540.6632 679.2947 422.8263 395.1000 436.6895 339.6474 457.4842 457.4842 
+## 543.0286 682.2667 424.6762 396.8286 438.6000 341.1333 459.4857 459.4857 
 ##      May      Jun      Jul      Aug      Sep 
-## 360.4421 457.4842 464.4158 318.8526 131.7000 
+## 362.0190 459.4857 466.4476 320.2476 146.2000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         3295.1          205.0        18274.0          251.0 
+##      3306.4000       205.7333     18274.0000       252.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         16055.2           952.8        102808.0          1169.0 
+##      16066.5000        953.5167     102808.0000       1170.0000 
 ## 
 ## 
 ## $`2527465`
@@ -173,15 +173,25 @@ An example creating a heat map of activities:
 library(dplyr)
 
 # get activities, compile, filter by location
-acts <- get_activity_list(stoken, '2837007') %>% 
+act_data <- get_activity_list(stoken) %>% 
 	compile_activities %>% 
 	filter(location_city %in% c('Pensacola', 'Pensacola Beach'))
 
-get_heat_map(acts)
+get_heat_map(act_data)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
+Get elevation profiles for activities:
+
+```r
+# get activities
+my_acts <- get_activity_list(stoken) 
+
+get_elev_prof(my_acts, acts = 1:2, key = mykey)
+```
+
+![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 ### License
 

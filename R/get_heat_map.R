@@ -44,7 +44,8 @@ get_heat_map <- function(act_data, alpha = NULL, f = 1){
 	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox)))
 	p <- ggmap::ggmap(map) +
 					ggplot2::coord_equal() +
-					ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline), col = 'red', alpha = alpha, data = temp, size = 0.5)
+					ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline), col = 'red', alpha = alpha, data = temp, size = 0.5) + 
+		ggplot2::theme(axis.title = ggplot2::element_blank())
 
 	return(p)
 	

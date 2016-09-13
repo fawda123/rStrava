@@ -78,13 +78,20 @@ An example creating a heat map of activities:
 library(dplyr)
 
 # get activities, compile, filter by location
-acts <- get_activity_list(stoken, '2837007') %>% 
+act_data <- get_activity_list(stoken) %>% 
 	compile_activities %>% 
 	filter(location_city %in% c('Pensacola', 'Pensacola Beach'))
 
-get_heat_map(acts)
+get_heat_map(act_data)
 ```
 
+Get elevation profiles for activities:
+```{r message = F, fig.height = 4, fig.width = 7, cache = TRUE}
+# get activities
+my_acts <- get_activity_list(stoken) 
+
+get_elev_prof(my_acts, acts = 1:2, key = mykey)
+```
 
 ### License
 
