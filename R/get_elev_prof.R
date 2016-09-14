@@ -29,6 +29,7 @@
 #' mykey <- 'Get Google API key'
 #' get_elev_prof(my_acts, acts = 1:2, key = mykey)
 #' }
+#' @export
 get_elev_prof <- function(act_data, acts = 1, key, total = FALSE){
 
 	# compile
