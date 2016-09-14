@@ -12,12 +12,12 @@
 #' get_all_LatLon('upload_id', acts_data)
 #' }
 #' @export
-
-
 get_all_LatLon <- function(id_col, parent_data){
 	id_col_fac <- as.factor(parent_data[,id_col])
 	temp <- split(parent_data, id_col_fac)
 	temp_data <- plyr::ldply(temp, get_LatLon, .id_col = id_col)
-	data <- temp_data[,c(3, 2)]
-	return(data)
+	dat <- temp_data[,c(3, 2)]
+	dat <- tidyr::separate(dat, latlon, c('lat', 'lon'), sep = ',')
+	dat <- dplyr::mutate_at(dat, c('lat', 'lon'), as.numeric)
+	return(dat)
 }

@@ -6,3 +6,6 @@ examples.r
 .httr-oauth
 ^\.travis\.yml$
 ^appveyor\.yml$
+^README.*
+^README_files/.*
+^README_cache/.*

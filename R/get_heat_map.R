@@ -32,8 +32,6 @@ get_heat_map <- function(act_data, alpha = NULL, f = 1){
 	
 	# data to plot
 	temp <- get_all_LatLon('map.summary_polyline', act_data)
-	temp <- tidyr::separate(temp, latlon, c('lat', 'lon'), sep = ',')
-	temp <- dplyr::mutate_at(temp, c('lat', 'lon'), as.numeric)
 	
 	# xy lims
 	xlim <- c(min(temp$lon), max(temp$lon))

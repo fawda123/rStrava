@@ -4,7 +4,7 @@
 \alias{get_elev_prof}
 \title{Create elevation profiles from activitiy data}
 \usage{
-get_elev_prof(act_data, acts = 1, key)
+get_elev_prof(act_data, acts = 1, key, total = FALSE)
 }
 \arguments{
 \item{act_data}{a list of Strava activities derived from \code{\link{get_activity_list}}}
@@ -12,6 +12,8 @@ get_elev_prof(act_data, acts = 1, key)
 \item{acts}{numeric value indicating which elements of \code{act_data} to plot}
 
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
+
+\item{total}{logical indicating if elevations are plotted as cumulative climbed by distance}
 }
 \value{
 A \code{ggplot} of elevation profiles, facetted by activity id, date
@@ -35,6 +37,9 @@ get_elev_prof(my_acts, acts = 1:2, key = mykey)
 }
 \author{
 Daniel Padfield
+}
+\seealso{
+\code{\link{get_dists}}
 }
 \concept{
 token
