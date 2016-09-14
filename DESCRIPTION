@@ -18,7 +18,11 @@ Imports:
     tidyr,
     magrittr,
     ggmap,
+<<<<<<< 73344da2b457d4d077d115089583181e518baab8
     rgbif, 
+=======
+    ggplot2,
+>>>>>>> adding function for distance
     geosphere
 Depends:
     R (>= 3.1.1)
