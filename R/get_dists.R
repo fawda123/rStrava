@@ -29,6 +29,7 @@
 #' # get distance
 #' get_dists(latlon)
 #' }
+#' @export
 get_dists <- function(dat_in, lon = 'lon', lat = 'lat'){
   
 	dat <- dat_in[,c(lon, lat)]
