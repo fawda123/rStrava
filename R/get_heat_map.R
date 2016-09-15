@@ -64,21 +64,25 @@ get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALS
 		
 		# get elevation
 		temp$`Elevation (m)` <- rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
+		temp <- mutate(temp, EleDiff = c(0, diff(`Elevation (m)`)),
+									 distdiff = c(0, diff(rStrava::get_dists(temp))),
+									 grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
+		
 		
 		p <- pbase +
-			ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline, colour = `Elevation (m)`), 
-				alpha = alpha, data = temp, size = size) +
-			ggplot2::scale_colour_distiller(palette = col)
-
-	# otherwise dont		
+			ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline, colour = grad), 
+												 alpha = alpha, data = temp, size = size) +
+			ggplot2::scale_colour_distiller(palette = col, trans = 'reverse')
+		
+		# otherwise dont		
 	} else {
 		
 		p <- pbase +
 			ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline), 
-				alpha = alpha, data = temp, size = size, colour = col)
+												 alpha = alpha, data = temp, size = size, colour = col)
 		
 	}
-
+	
 	return(p)
 	
 }
