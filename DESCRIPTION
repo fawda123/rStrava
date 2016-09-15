@@ -18,7 +18,8 @@ Imports:
     tidyr,
     magrittr,
     ggmap,
-    rgbif, 
+    rgbif,
+    ggplot2,
     geosphere
 Depends:
     R (>= 3.1.1)

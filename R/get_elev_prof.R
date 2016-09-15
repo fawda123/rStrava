@@ -29,6 +29,7 @@
 #' mykey <- 'Get Google API key'
 #' get_elev_prof(my_acts, acts = 1:2, key = mykey)
 #' }
+#' @export
 get_elev_prof <- function(act_data, acts = 1, key, total = FALSE){
 
 	# compile
@@ -37,7 +38,7 @@ get_elev_prof <- function(act_data, acts = 1, key, total = FALSE){
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = MyActs) %>%
 	  dplyr::full_join(., MyActs, by = 'upload_id') %>%
-	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city)
+	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain)
 	
 	distances <- dplyr::group_by(lat_lon, upload_id) %>%
 	  dplyr::do(data.frame(distance = get_dists(.)))
@@ -48,7 +49,7 @@ get_elev_prof <- function(act_data, acts = 1, key, total = FALSE){
 
 	lat_lon$start_date <- gsub('T.*$', '', lat_lon$start_date) %>% 
 		as.Date(format = '%Y-%m-%d')
-	lat_lon <- tidyr::unite(lat_lon, 'facets', upload_id, start_date, sep = ', ')
+	lat_lon <- tidyr::unite(lat_lon, 'facets', upload_id, start_date, total_elevation_gain, sep = ', ')
 
 	ylab <- 'Elevation (m)'
 	
