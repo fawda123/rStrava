@@ -261,13 +261,14 @@ head(myinfo)</code></pre>
 <p>An example creating a heat map of activities:</p>
 <pre class="r"><code>library(dplyr)
 
-# get activities, compile, filter by location
-act_data &lt;- get_activity_list(stoken) %&gt;% 
-    compile_activities %&gt;% 
-    filter(location_city %in% c(&#39;Pensacola&#39;, &#39;Pensacola Beach&#39;))
-
-get_heat_map(act_data)</code></pre>
+# get activities, get activities by location, plot
+my_acts &lt;- get_activity_list(stoken)
+acts &lt;- lapply(my_acts, function(x) x$location_city) %in% c(&#39;Pensacola&#39;, &#39;Pensacola Beach&#39;) 
+get_heat_map(my_acts, acts = which(acts))</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
+<pre class="r"><code># plot elevation along a single ride
+get_heat_map(my_acts, acts = 2, alpha = 1, add_ele = T, key = mykey, size = 2, col = &#39;Reds&#39;)</code></pre>
+<p><img src="README_files/figure-html/unnamed-chunk-8-2.png" /><!-- --></p>
 <p>Get elevation profiles for activities:</p>
 <pre class="r"><code># get activities
 my_acts &lt;- get_activity_list(stoken) 

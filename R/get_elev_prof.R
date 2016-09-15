@@ -7,7 +7,7 @@
 #' @concept token
 #' 
 #' @param act_data a list of Strava activities derived from \code{\link{get_activity_list}}
-#' @param acts numeric value indicating which elements of \code{act_data} to plot
+#' @param acts numeric value indicating which elements of \code{act_data} to plot, defaults to most recent
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
 #' 

@@ -9,7 +9,7 @@ get_elev_prof(act_data, acts = 1, key, total = FALSE)
 \arguments{
 \item{act_data}{a list of Strava activities derived from \code{\link{get_activity_list}}}
 
-\item{acts}{numeric value indicating which elements of \code{act_data} to plot}
+\item{acts}{numeric value indicating which elements of \code{act_data} to plot, defaults to most recent}
 
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
 

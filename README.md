@@ -172,15 +172,20 @@ An example creating a heat map of activities:
 ```r
 library(dplyr)
 
-# get activities, compile, filter by location
-act_data <- get_activity_list(stoken) %>% 
-	compile_activities %>% 
-	filter(location_city %in% c('Pensacola', 'Pensacola Beach'))
-
-get_heat_map(act_data)
+# get activities, get activities by location, plot
+my_acts <- get_activity_list(stoken)
+acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach') 
+get_heat_map(my_acts, acts = which(acts))
 ```
 
 ![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+```r
+# plot elevation along a single ride
+get_heat_map(my_acts, acts = 2, alpha = 1, add_ele = T, key = mykey, size = 2, col = 'Reds')
+```
+
+![](README_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
 
 Get elevation profiles for activities:
 

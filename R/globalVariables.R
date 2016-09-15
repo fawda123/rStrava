@@ -1,1 +1,1 @@
-globalVariables(c('ColNames', 'cols', 'distance', 'ele', 'facets', 'lat', 'latlon', 'location_city', 'lon', 'map.summary_polyline', 'start_date', 'type', 'unlist.x.', 'upload_id', 'usage_left', 'value', '<<-'))
+globalVariables(c('ColNames', 'cols', 'distance', 'ele', 'Elevation (m)', 'facets', 'lat', 'latlon', 'location_city', 'lon', 'map.summary_polyline', 'start_date', 'total_elevatation_gain', 'type', 'unlist.x.', 'upload_id', 'usage_left', 'value', '<<-'))

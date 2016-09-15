@@ -4,14 +4,25 @@
 \alias{get_heat_map}
 \title{Makes a heat map from your activity data}
 \usage{
-get_heat_map(act_data, alpha = NULL, f = 1)
+get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALSE,
+  key = NULL, size = 0.5, col = "red")
 }
 \arguments{
 \item{act_data}{a dataframe of Strava activities derived from \code{\link{compile_activities}}}
 
+\item{acts}{numeric indicating which activities to plot based on index in \code{act_data}, defaults to most recent}
+
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 
 \item{f}{number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}}
+
+\item{add_ele}{logical indicating if elevation is overlayed by color shading on the activity lines}
+
+\item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
+
+\item{size}{numeric indicating width of activity lines}
+
+\item{col}{chr string indicating either a single color of the activity lines if \code{add_ele = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_ele = TRUE}}
 }
 \value{
 plot of activity on a Google map
@@ -24,13 +35,16 @@ uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longit
 }
 \examples{
 \dontrun{
+# get my activities
 stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+my_acts <- get_activity_list(stoken)
 
-acts <- get_activity_list(stoken)
+# default
+get_heat_map(my_acts, acts = 1, alpha = 1)
 
-acts_data <- compile_activities(acts)
-
-get_heat_map(acts_data[1,], alpha = 1)
+# plot elevation on locations, requires key
+mykey <- 'Get Google API key'
+get_heat_map(my_acts[1], alpha = 1, key = mykey, add_ele = TRUE)
 }
 }
 \author{
