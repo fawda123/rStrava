@@ -10,10 +10,10 @@
 #' @param acts numeric indicating which activities to plot based on index in \code{act_data}, defaults to most recent
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
-#' @param add_ele logical indicating if elevation is overlayed by color shading on the activity lines
+#' @param add_grad logical indicating if gradient is overlayed by color shading on the activity lines
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param size numeric indicating width of activity lines
-#' @param col chr string indicating either a single color of the activity lines if \code{add_ele = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_ele = TRUE}
+#' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' 
 #' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses {ggmap} to produce map and ggplot2 it
 #' 
@@ -32,9 +32,9 @@
 #' 
 #' # plot elevation on locations, requires key
 #' mykey <- 'Get Google API key'
-#' get_heat_map(my_acts[1], alpha = 1, key = mykey, add_ele = TRUE)
+#' get_heat_map(my_acts[1], alpha = 1, key = mykey, add_grad = TRUE)
 #' }
-get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALSE, key = NULL, size = 0.5, col = 'red'){
+get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, add_grad = FALSE, key = NULL, size = 0.5, col = 'red'){
 	
 	if(is.null(alpha)) alpha <- 0.5
 	
@@ -56,7 +56,7 @@ get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALS
 		ggplot2::theme(axis.title = ggplot2::element_blank())
 	
 	# add elevation to plot
-	if(add_ele){
+	if(add_grad){
 		
 		# check if key provided
 		if(is.null(key))
@@ -72,7 +72,7 @@ get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALS
 		p <- pbase +
 			ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = map.summary_polyline, colour = grad), 
 												 alpha = alpha, data = temp, size = size) +
-			ggplot2::scale_colour_distiller(palette = col, trans = 'reverse')
+			ggplot2::scale_colour_distiller('Gradient (%)', palette = col, trans = 'reverse')
 		
 		# otherwise dont		
 	} else {

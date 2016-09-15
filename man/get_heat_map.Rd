@@ -4,7 +4,7 @@
 \alias{get_heat_map}
 \title{Makes a heat map from your activity data}
 \usage{
-get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALSE,
+get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, add_grad = FALSE,
   key = NULL, size = 0.5, col = "red")
 }
 \arguments{
@@ -16,13 +16,13 @@ get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, add_ele = FALSE,
 
 \item{f}{number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}}
 
-\item{add_ele}{logical indicating if elevation is overlayed by color shading on the activity lines}
+\item{add_grad}{logical indicating if gradient is overlayed by color shading on the activity lines}
 
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
 
 \item{size}{numeric indicating width of activity lines}
 
-\item{col}{chr string indicating either a single color of the activity lines if \code{add_ele = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_ele = TRUE}}
+\item{col}{chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}}
 }
 \value{
 plot of activity on a Google map
@@ -44,7 +44,7 @@ get_heat_map(my_acts, acts = 1, alpha = 1)
 
 # plot elevation on locations, requires key
 mykey <- 'Get Google API key'
-get_heat_map(my_acts[1], alpha = 1, key = mykey, add_ele = TRUE)
+get_heat_map(my_acts[1], alpha = 1, key = mykey, add_grad = TRUE)
 }
 }
 \author{
