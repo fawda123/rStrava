@@ -38,7 +38,8 @@ get_elev_prof <- function(act_data, acts = 1, key, total = FALSE){
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = MyActs) %>%
 	  dplyr::full_join(., MyActs, by = 'upload_id') %>%
-	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain)
+	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain) %>% 
+		mutate(total_elevation_gain = paste('Elev. gain', total_elevation_gain))
 	
 	distances <- dplyr::group_by(lat_lon, upload_id) %>%
 	  dplyr::do(data.frame(distance = get_dists(.)))
