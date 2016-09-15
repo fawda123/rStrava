@@ -74,8 +74,6 @@ head(myinfo)
 
 An example creating a heat map of activities:
 ```{r message = F, fig.height = 6, fig.width = 7, cache = TRUE}
-library(dplyr)
-
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach') 
@@ -86,7 +84,7 @@ get_heat_map(my_acts, acts = 2, alpha = 1, add_ele = T, key = mykey, size = 2, c
 ```
 
 Get elevation profiles for activities:
-```{r message = F, fig.height = 4, fig.width = 7, cache = TRUE}
+```{r message = F, fig.height = 4.5, fig.width = 7, cache = TRUE}
 # get activities
 my_acts <- get_activity_list(stoken) 
 

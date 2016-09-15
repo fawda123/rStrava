@@ -259,9 +259,7 @@ head(myinfo)</code></pre>
 ## $city
 ## [1] &quot;Pensacola&quot;</code></pre>
 <p>An example creating a heat map of activities:</p>
-<pre class="r"><code>library(dplyr)
-
-# get activities, get activities by location, plot
+<pre class="r"><code># get activities, get activities by location, plot
 my_acts &lt;- get_activity_list(stoken)
 acts &lt;- lapply(my_acts, function(x) x$location_city) %in% c(&#39;Pensacola&#39;, &#39;Pensacola Beach&#39;) 
 get_heat_map(my_acts, acts = which(acts))</code></pre>

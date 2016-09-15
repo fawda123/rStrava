@@ -170,8 +170,6 @@ head(myinfo)
 An example creating a heat map of activities:
 
 ```r
-library(dplyr)
-
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach') 
