@@ -182,23 +182,23 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ## 
 ## $`2527465`$current_month
 ##  Distance      Time Elevation 
-## 233.60000  13.33333 853.00000 
+##     263.9      15.2    1033.0 
 ## 
 ## $`2527465`$monthly
 ##   Sep 2015        Oct        Nov        Dec   Jan 2016        Feb 
-##   50.05714  300.34286  266.97143  383.77143   33.37143  183.54286 
+##   49.48125  296.88750  263.90000  379.35625   32.98750  181.43125 
 ##        Mar        Apr        May        Jun        Jul        Aug 
-##  400.45714  400.45714  650.74286  350.40000  417.14286 1618.51429 
+##  395.85000  395.85000  643.25625  346.36875  412.34375 1599.89375 
 ##        Sep 
-##  233.60000 
+##  263.90000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      4385.4000       235.2333     42212.0000       102.0000 
+##         4415.7          237.1        42391.0          103.0 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      12249.3000        668.6833     161874.0000        438.0000 
+##        12279.60          670.55       162053.00          439.00 
 ## 
 ## 
 ## $`2140248`
@@ -267,7 +267,7 @@ get_heat_map(my_acts, acts = which(acts), f = 0.1, size = 1)</code></pre>
 get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, key = mykey, size = 2, col = &#39;Spectral&#39;)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-2.png" /><!-- --></p>
 <pre class="r"><code># plot % gradient along a single ride
-get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;)</code></pre>
+get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;, expand = 5)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-3.png" /><!-- --></p>
 <p>Get elevation profiles for activities:</p>
 <pre class="r"><code># get activities

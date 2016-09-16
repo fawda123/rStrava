@@ -37,7 +37,7 @@
 #' mykey <- 'Get Google API key'
 #' get_heat_map(my_acts[1], alpha = 1, key = mykey, add_grad = TRUE)
 #' }
-get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 5, maptype = 'terrain'){
+get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain'){
 	
 	if(is.null(alpha)) alpha <- 0.5
 	
@@ -80,6 +80,7 @@ get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, ad
 		
 		# get elevation
 		temp$`Elevation (m)` <- rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
+		temp$`Elevation (m)` <- pmax(0, temp$`Elevation (m)`)
 		temp <- dplyr::mutate(temp, EleDiff = c(0, diff(`Elevation (m)`)),
 									 distdiff = c(0, diff(rStrava::get_dists(temp))),
 									 grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
