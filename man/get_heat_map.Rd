@@ -4,8 +4,9 @@
 \alias{get_heat_map}
 \title{Makes a heat map from your activity data}
 \usage{
-get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, add_grad = FALSE,
-  key = NULL, size = 0.5, col = "red")
+get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, key = NULL,
+  add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
+  expand = 5, maptype = "terrain")
 }
 \arguments{
 \item{act_data}{a dataframe of Strava activities derived from \code{\link{compile_activities}}}
@@ -16,13 +17,19 @@ get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, add_grad = FALSE,
 
 \item{f}{number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}}
 
-\item{add_grad}{logical indicating if gradient is overlayed by color shading on the activity lines}
-
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
+
+\item{add_elev}{logical indicating if elevation is overlayed by color shading on the activity lines}
+
+\item{as_grad}{logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}}
 
 \item{size}{numeric indicating width of activity lines}
 
 \item{col}{chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}}
+
+\item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.}
+
+\item{maptype}{chr string indicating the type of base map obtained from Google maps, values are \code{terrain} (default), \code{satellite}, \code{roadmap}, or \code{hybrid}}
 }
 \value{
 plot of activity on a Google map

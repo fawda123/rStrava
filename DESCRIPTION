@@ -19,7 +19,6 @@ Imports:
     magrittr,
     ggmap,
     rgbif,
-    ggplot2,
     geosphere
 Depends:
     R (>= 3.1.1)

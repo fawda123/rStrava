@@ -50,22 +50,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Pensacola, FL"
 ## 
 ## $`2837007`$current_month
-##   Distance       Time  Elevation 
-##  193.90000   13.16667 1352.00000 
+##  Distance      Time Elevation 
+##     216.4      14.6    1386.0 
 ## 
 ## $`2837007`$monthly
 ## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
-##  540.150  678.650  422.425  394.725  436.275  339.325  457.050  457.050 
+## 544.4903 684.1032 425.8194 397.8968 439.7806 342.0516 460.7226 460.7226 
 ##      May      Jun      Jul      Aug      Sep 
-##  360.100  457.050  463.975  318.550  193.900 
+## 362.9935 460.7226 467.7032 321.1097 216.4000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      3354.1000       208.4167     18816.0000       255.0000 
+##        3376.60         209.85       18848.00         257.00 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         16114.2           956.2        103350.0          1173.0 
+##        16136.70          957.65       103383.00         1175.00 
 ## 
 ## 
 ## $`2527465`
@@ -104,16 +104,14 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Falmouth, England, United Kingdom"
 ## 
 ## $`2140248`$current_month
-##   Distance       Time  Elevation 
-##  318.10000   13.58333 3724.00000 
+##  Distance      Time Elevation 
+##      0.00      0.65      0.00 
 ## 
 ## $`2140248`$monthly
-##   Sep 2015        Oct        Nov        Dec   Jan 2016        Feb 
-## 342.107547 534.167925  66.020755   0.000000 138.043396   6.001887 
-##        Mar        Apr        May        Jun        Jul        Aug 
-##  78.024528 396.124528 240.075472 306.096226 558.175472 318.100000 
-##        Sep 
-##   0.000000 
+## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
+##        0        0        0        0        0        0        0        0 
+##      May      Jun      Jul      Aug      Sep 
+##        0        0        0        0        0 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
@@ -141,6 +139,9 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret)
 
 The API retrieval functions can be used after the token is created.
 
+```
+## Loading rStrava
+```
 
 ```r
 myinfo <- get_athlete(stoken, id = '2837007')
@@ -172,18 +173,25 @@ An example creating a heat map of activities:
 ```r
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
-acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach') 
-get_heat_map(my_acts, acts = which(acts))
+acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
+get_heat_map(my_acts, acts = which(acts), f = 0.1, size = 1)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ```r
 # plot elevation along a single ride
-get_heat_map(my_acts, acts = 2, alpha = 1, add_ele = T, key = mykey, size = 2, col = 'Reds')
+get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, key = mykey, size = 2, col = 'Spectral')
 ```
 
 ![](README_files/figure-html/unnamed-chunk-8-2.png)<!-- -->
+
+```r
+# plot % gradient along a single ride
+get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = 'Spectral')
+```
+
+![](README_files/figure-html/unnamed-chunk-8-3.png)<!-- -->
 
 Get elevation profiles for activities:
 
