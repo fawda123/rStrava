@@ -2,17 +2,17 @@
 % Please edit documentation in R/get_elev_prof.R
 \name{get_elev_prof}
 \alias{get_elev_prof}
-\alias{get_elev_prof.actlist}
-\alias{get_elev_prof.default}
+\alias{get_elev_prof.actframe}
+\alias{get_elev_prof.list}
 \title{Create elevation profiles from activity data}
 \usage{
 get_elev_prof(act_data, ...)
 
-\method{get_elev_prof}{actlist}(act_data, acts = 1, key, total = FALSE,
+\method{get_elev_prof}{list}(act_data, acts = 1, key, total = FALSE,
   expand = 10, units = "metric", ...)
 
-\method{get_elev_prof}{default}(act_data, key, total = FALSE, expand = 10,
-  units = "metric", ...)
+\method{get_elev_prof}{actframe}(act_data, key, total = FALSE, expand = 10,
+  ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -48,8 +48,8 @@ my_acts <- get_activity_list(stoken)
 mykey <- 'Get Google API key'
 get_elev_prof(my_acts, acts = 1:2, key = mykey)
 
-# compile first
-my_acts <- compile_activities(my_acts, acts = c(1:2))
+# compile first, change units
+my_acts <- compile_activities(my_acts, acts = c(1:2), units = 'imperial')
 get_elev_prof(my_acts, key = mykey)
 }
 }

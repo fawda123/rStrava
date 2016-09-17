@@ -32,8 +32,8 @@
 #' mykey <- 'Get Google API key'
 #' get_elev_prof(my_acts, acts = 1:2, key = mykey)
 #' 
-#' # compile first
-#' my_acts <- compile_activities(my_acts, acts = c(1:2))
+#' # compile first, change units
+#' my_acts <- compile_activities(my_acts, acts = c(1:2), units = 'imperial')
 #' get_elev_prof(my_acts, key = mykey)
 #' }
 #' @export
@@ -43,13 +43,13 @@ get_elev_prof <- function(act_data, ...) UseMethod('get_elev_prof')
 #'
 #' @export
 #'
-#' @method get_elev_prof actlist
-get_elev_prof.actlist <- function(act_data, acts = 1, key, total = FALSE, expand = 10, units = 'metric', ...){
+#' @method get_elev_prof list
+get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 10, units = 'metric', ...){
 
 	# compile
-	act_data <- compile_activities(act_data, acts = acts)
+	act_data <- compile_activities(act_data, acts = acts, units = units)
 	
-	get_elev_prof.default(act_data, key = key, total = total, expand = expand, units = units, ...)
+	get_elev_prof.actframe(act_data, key = key, total = total, expand = expand, ...)
 	
 }
 
@@ -57,13 +57,13 @@ get_elev_prof.actlist <- function(act_data, acts = 1, key, total = FALSE, expand
 #'
 #' @export
 #'
-#' @method get_elev_prof default
-get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, units = 'metric', ...){
+#' @method get_elev_prof actframe
+get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ...){
 	
-	# check units
-	if(!units %in% c('metric', 'imperial')) 
-		stop('units must be metric or imperial')
-		
+	# get unit types and values attributes
+	unit_type <- attr(act_data, 'unit_type')
+	unit_vals <- attr(act_data, 'unit_vals')
+	
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = act_data) %>%
 	  dplyr::full_join(., act_data, by = 'upload_id') %>%
@@ -99,18 +99,15 @@ get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, uni
 	lat_lon$ele <- pmax(0, lat_lon$ele)
 	
 	# axis labels
-	ylab <- 'Elevation (m)'
-	xlab <- 'Distance (km)'
-
+	ylab <- paste0('Elevation (', unit_vals['elevation'], ')')
+	xlab <- paste0('Distance (', unit_vals['distance'], ')')
+	
 	# change units if imperial
-	if(units %in% 'imperial'){
+	if(unit_type %in% 'imperial'){
 
-		ylab <- gsub('m', 'ft', ylab)
-		xlab <- gsub('km', 'mi', xlab)
 		lat_lon <- dplyr::mutate(lat_lon, 
 			ele = ele * 3.28084, 
-			distance = distance * 0.621371, 
-			total_elevation_gain = round(total_elevation_gain * 3.28084, 1)
+			distance = distance * 0.621371
 		)
 		
 	}

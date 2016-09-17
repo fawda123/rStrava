@@ -16,7 +16,7 @@ get_activity_list(stoken, id = NULL, club = FALSE, friends = FALSE)
 \item{friends}{logical if you want friends' activities of the authenticated user}
 }
 \value{
-An \code{actlist} object that is a list of activities for further processing or plotting.
+A list of activities for further processing or plotting.
 }
 \description{
 Get an activities list of the desired type (club, friends, user)

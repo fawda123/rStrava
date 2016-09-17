@@ -2,19 +2,19 @@
 % Please edit documentation in R/get_heat_map.R
 \name{get_heat_map}
 \alias{get_heat_map}
-\alias{get_heat_map.actlist}
-\alias{get_heat_map.default}
+\alias{get_heat_map.actframe}
+\alias{get_heat_map.list}
 \title{Makes a heat map from your activity data}
 \usage{
 get_heat_map(act_data, ...)
 
-\method{get_heat_map}{actlist}(act_data, acts = 1, alpha = NULL, f = 1,
+\method{get_heat_map}{list}(act_data, acts = 1, alpha = NULL, f = 1,
   key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5,
   col = "red", expand = 10, maptype = "terrain", units = "metric", ...)
 
-\method{get_heat_map}{default}(act_data, alpha = NULL, f = 1, key = NULL,
+\method{get_heat_map}{actframe}(act_data, alpha = NULL, f = 1, key = NULL,
   add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", units = "metric", ...)
+  expand = 10, maptype = "terrain", ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -65,9 +65,9 @@ get_heat_map(my_acts, acts = 1, alpha = 1)
 mykey <- 'Get Google API key'
 get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
 
-# compile first
-my_acts <- compile_activities(my_acts, acts = 1)
-get_heat_map(my_acts, key = mykey)
+# compile first, change units
+my_acts <- compile_activities(my_acts, acts = 1, units = 'imperial')
+get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2)
 }
 }
 \author{

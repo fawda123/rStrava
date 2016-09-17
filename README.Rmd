@@ -93,7 +93,7 @@ my_acts <- get_activity_list(stoken)
 
 get_elev_prof(my_acts, acts = 1:2, key = mykey)
 get_elev_prof(my_acts, acts = 1:2, key = mykey, total = T)
-```
+```  
 
 ### License
 

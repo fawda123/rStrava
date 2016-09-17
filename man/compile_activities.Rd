@@ -2,22 +2,21 @@
 % Please edit documentation in R/compile_activities.R
 \name{compile_activities}
 \alias{compile_activities}
-\alias{compile_activities.actlist}
 \title{converts a list of activities into a dataframe}
 \usage{
-compile_activities(actlist, ...)
-
-\method{compile_activities}{actlist}(actlist, acts = NULL, ...)
+compile_activities(actlist, acts = NULL, units = "metric")
 }
 \arguments{
-\item{actlist}{an \code{actlist} object returned by \code{\link{compile_activities}}}
-
-\item{...}{arguments passed to or from other methods}
+\item{actlist}{an activities list returned by \code{\link{get_activity_list}}}
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
+
+\item{units}{chr string indicating metric or imperial}
+
+\item{...}{arguments passed to or from other methods}
 }
 \value{
-dataframe where each row is a different activity
+An actitities frame object (\code{actframe} that includes a data frame for the data and attributes for the distance, speed, and elevation units
 }
 \description{
 converts a list of activities into a dataframe
@@ -33,6 +32,7 @@ stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret
 acts <- get_activity_list(stoken)
 
 acts_data <- compile_activities(acts)
+
 }
 }
 \author{

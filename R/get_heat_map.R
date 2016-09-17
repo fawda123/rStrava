@@ -39,9 +39,9 @@
 #' mykey <- 'Get Google API key'
 #' get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
 #' 
-#' # compile first
-#' my_acts <- compile_activities(my_acts, acts = 1)
-#' get_heat_map(my_acts, key = mykey)
+#' # compile first, change units
+#' my_acts <- compile_activities(my_acts, acts = 1, units = 'imperial')
+#' get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2)
 #' }
 get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 
@@ -49,13 +49,13 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #'
 #' @export
 #'
-#' @method get_heat_map actlist
-get_heat_map.actlist <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', units = 'metric', ...){
+#' @method get_heat_map list
+get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', units = 'metric', ...){
 	
 	# compile
-	act_data <- compile_activities(act_data, acts = acts)
+	act_data <- compile_activities(act_data, acts = acts, units = units)
 	 
-	get_heat_map.default(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, units = units, ...)	
+	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, ...)	
 	
 }
 	
@@ -63,12 +63,12 @@ get_heat_map.actlist <- function(act_data, acts = 1, alpha = NULL, f = 1, key = 
 #'
 #' @export
 #'
-#' @method get_heat_map default
-get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', units = 'metric', ...){
-	
-	# check units
-	if(!units %in% c('metric', 'imperial')) 
-		stop('units must be metric or imperial')
+#' @method get_heat_map actframe
+get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
+
+	# get unit types and values attributes
+	unit_type <- attr(act_data, 'unit_type')
+	unit_vals <- attr(act_data, 'unit_vals')
 	
 	if(is.null(alpha)) alpha <- 0.5
 	
@@ -125,13 +125,12 @@ get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_
 		} else {
 			
 			# legend label for elevation
-			leglab <- 'Elevation (m)'
+			leglab <- paste0('Elevation (', unit_vals['elevation'], ')')
 		
 			# change units if imperial
-			if(units %in% 'imperial'){
+			if(unit_type %in% 'imperial'){
 			
 				temp$ele <- temp$ele *  3.28084
-				leglab <- gsub('m', 'ft', leglab)
 			
 			}
 			
