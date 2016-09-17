@@ -64,7 +64,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret)
 ```
 
 The API retrieval functions can be used after the token is created.
-```{r echo = FALSE}
+```{r echo = FALSE, message = FALSE}
 source('extra.R')
 ```
 ```{r}
@@ -73,21 +73,21 @@ head(myinfo)
 ```
 
 An example creating a heat map of activities:
-```{r message = F, fig.height = 5, fig.width = 7, cache = TRUE}
+```{r message = F, fig.height = 5.5, fig.width = 7, cache = TRUE}
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
 get_heat_map(my_acts, acts = which(acts), f = 0.1, size = 1)
 
 # plot elevation along a single ride
-get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, key = mykey, size = 2, col = 'Spectral')
+get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, key = mykey, size = 2, col = 'Spectral')
 
 # plot % gradient along a single ride
-get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5)
+get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5)
 ```
 
 Get elevation profiles for activities:
-```{r message = F, fig.height = 4, fig.width = 7, cache = TRUE}
+```{r message = F, fig.height = 4.4, fig.width = 7, cache = TRUE}
 # get activities
 my_acts <- get_activity_list(stoken) 
 

@@ -9,7 +9,7 @@
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
 #' 
-#' @return The set url.
+#' @return An \code{actlist} object that is a list of activities for further processing or plotting.
 #' 
 #' @export
 #' 
@@ -41,5 +41,12 @@ get_activity_list <- function(stoken, id = NULL, club = FALSE, friends = FALSE){
 		dataRaw <- get_pages(url_activities(), stoken, All=TRUE)
 	}
 	
+	# create actlist object
+	dataRaw <- structure(
+    .Data = dataRaw, 
+    class = c('actlist', 'list')
+	)
+	
 	return(dataRaw)
+	
 }

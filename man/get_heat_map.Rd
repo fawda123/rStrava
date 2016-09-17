@@ -2,16 +2,21 @@
 % Please edit documentation in R/get_heat_map.R
 \name{get_heat_map}
 \alias{get_heat_map}
+\alias{get_heat_map.actlist}
 \title{Makes a heat map from your activity data}
 \usage{
-get_heat_map(act_data, acts = 1, alpha = NULL, f = 1, key = NULL,
-  add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
-  expand = 5, maptype = "terrain")
+get_heat_map(actlist, ...)
+
+\method{get_heat_map}{actlist}(actlist, acts = 1, alpha = NULL, f = 1,
+  key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5,
+  col = "red", expand = 10, maptype = "terrain", ...)
 }
 \arguments{
-\item{act_data}{a dataframe of Strava activities derived from \code{\link{compile_activities}}}
+\item{actlist}{an \code{actlist} object returned by \code{\link{compile_activities}}}
 
-\item{acts}{numeric indicating which activities to plot based on index in \code{act_data}, defaults to most recent}
+\item{...}{arguments passed to or from other methods}
+
+\item{acts}{numeric indicating which activities to plot based on index in \code{actlist}, defaults to most recent}
 
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 

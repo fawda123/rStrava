@@ -6,11 +6,12 @@
 #' 
 #' @concept token
 #' 
-#' @param act_data a list of Strava activities derived from \code{\link{get_activity_list}}
+#' @param actlist an \code{actlist} object returned by \code{\link{compile_activities}}
 #' @param acts numeric value indicating which elements of \code{act_data} to plot, defaults to most recent
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
-#' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
+#' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.  
+#' @param ... arguments passed to or from other methods
 #' 
 #' @details The Google API key is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 #' 
@@ -31,10 +32,17 @@
 #' get_elev_prof(my_acts, acts = 1:2, key = mykey)
 #' }
 #' @export
-get_elev_prof <- function(act_data, acts = 1, key, total = FALSE, expand = 10){
+get_elev_prof <- function(actlist, ...) UseMethod('get_elev_prof')
+
+#' @rdname get_elev_prof
+#'
+#' @export
+#'
+#' @method get_elev_prof actlist
+get_elev_prof.actlist <- function(actlist, acts = 1, key, total = FALSE, expand = 10, ...){
 
 	# compile
-	MyActs <- compile_activities(act_data[acts])
+	MyActs <- compile_activities(actlist[acts])
 	
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = MyActs) %>%

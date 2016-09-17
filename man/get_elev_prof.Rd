@@ -2,18 +2,26 @@
 % Please edit documentation in R/get_elev_prof.R
 \name{get_elev_prof}
 \alias{get_elev_prof}
+\alias{get_elev_prof.actlist}
 \title{Create elevation profiles from activitiy data}
 \usage{
-get_elev_prof(act_data, acts = 1, key, total = FALSE)
+get_elev_prof(actlist, ...)
+
+\method{get_elev_prof}{actlist}(actlist, acts = 1, key, total = FALSE,
+  expand = 10, ...)
 }
 \arguments{
-\item{act_data}{a list of Strava activities derived from \code{\link{get_activity_list}}}
+\item{actlist}{an \code{actlist} object returned by \code{\link{compile_activities}}}
+
+\item{...}{arguments passed to or from other methods}
 
 \item{acts}{numeric value indicating which elements of \code{act_data} to plot, defaults to most recent}
 
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
 
 \item{total}{logical indicating if elevations are plotted as cumulative climbed by distance}
+
+\item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.}
 }
 \value{
 A \code{ggplot} of elevation profiles, facetted by activity id, date

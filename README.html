@@ -155,22 +155,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ## [1] &quot;Pensacola, FL&quot;
 ## 
 ## $`2837007`$current_month
-##  Distance      Time Elevation 
-##     216.4      14.6    1386.0 
+##   Distance       Time  Elevation 
+##  227.60000   15.26667 1420.00000 
 ## 
 ## $`2837007`$monthly
 ## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
-## 544.4903 684.1032 425.8194 397.8968 439.7806 342.0516 460.7226 460.7226 
+## 537.9636 675.9030 420.7152 393.1273 434.5091 337.9515 455.2000 455.2000 
 ##      May      Jun      Jul      Aug      Sep 
-## 362.9935 460.7226 467.7032 321.1097 216.4000 
+## 358.6424 455.2000 462.0970 317.2606 227.6000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##        3376.60         209.85       18848.00         257.00 
+##      3387.8000       210.5167     18881.0000       258.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##        16136.70          957.65       103383.00         1175.00 
+##      16147.8000        958.3167     103415.0000       1176.0000 
 ## 
 ## 
 ## $`2527465`
@@ -237,7 +237,6 @@ app_secret &lt;- &#39;xxxxxxxx&#39; # an alphanumeric secret, assigned by Strava
 # create the authentication token
 stoken &lt;- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))</code></pre>
 <p>The API retrieval functions can be used after the token is created.</p>
-<pre><code>## Loading rStrava</code></pre>
 <pre class="r"><code>myinfo &lt;- get_athlete(stoken, id = &#39;2837007&#39;)
 head(myinfo)</code></pre>
 <pre><code>## $id
@@ -264,10 +263,10 @@ acts &lt;- lapply(my_acts, function(x) x$location_city) %in% c(&#39;Pensacola&#3
 get_heat_map(my_acts, acts = which(acts), f = 0.1, size = 1)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
 <pre class="r"><code># plot elevation along a single ride
-get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, key = mykey, size = 2, col = &#39;Spectral&#39;)</code></pre>
+get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, key = mykey, size = 2, col = &#39;Spectral&#39;)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-2.png" /><!-- --></p>
 <pre class="r"><code># plot % gradient along a single ride
-get_heat_map(my_acts, acts = 4, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;, expand = 5)</code></pre>
+get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;, expand = 5)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-3.png" /><!-- --></p>
 <p>Get elevation profiles for activities:</p>
 <pre class="r"><code># get activities

@@ -6,8 +6,8 @@
 #' 
 #' @concept token
 #' 
-#' @param act_data a dataframe of Strava activities derived from \code{\link{compile_activities}}
-#' @param acts numeric indicating which activities to plot based on index in \code{act_data}, defaults to most recent
+#' @param actlist an \code{actlist} object returned by \code{\link{compile_activities}}
+#' @param acts numeric indicating which activities to plot based on index in \code{actlist}, defaults to most recent
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
 #' @param add_elev logical indicating if elevation is overlayed by color shading on the activity lines
@@ -17,6 +17,7 @@
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
 #' @param maptype chr string indicating the type of base map obtained from Google maps, values are \code{terrain} (default), \code{satellite}, \code{roadmap}, or \code{hybrid} 
+#' @param ... arguments passed to or from other methods
 #' 
 #' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses {ggmap} to produce map and ggplot2 it
 #' 
@@ -37,12 +38,19 @@
 #' mykey <- 'Get Google API key'
 #' get_heat_map(my_acts[1], alpha = 1, key = mykey, add_grad = TRUE)
 #' }
-get_heat_map <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain'){
+get_heat_map <- function(actlist, ...) UseMethod('get_heat_map')
+
+#' @rdname get_heat_map
+#'
+#' @export
+#'
+#' @method get_heat_map actlist
+get_heat_map.actlist <- function(actlist, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
 	
 	if(is.null(alpha)) alpha <- 0.5
 	
 	# compile
-	act_data <- compile_activities(act_data[acts])
+	act_data <- compile_activities(actlist[acts])
 	
 	# data to plot
 	temp <- get_all_LatLon('map.summary_polyline', act_data)
