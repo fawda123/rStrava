@@ -2,7 +2,7 @@
 #' 
 #' Makes a heat map from your activity data
 #' 
-#' @author Daniel Padfield
+#' @author Daniel Padfield, Marcus Beck
 #' 
 #' @concept token
 #' 
@@ -17,6 +17,7 @@
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
 #' @param maptype chr string indicating the type of base map obtained from Google maps, values are \code{terrain} (default), \code{satellite}, \code{roadmap}, or \code{hybrid} 
+#' @param units chr string indicating plot units as either metric or imperial
 #' @param ... arguments passed to or from other methods
 #' 
 #' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses {ggmap} to produce map and ggplot2 it
@@ -49,12 +50,12 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map actlist
-get_heat_map.actlist <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
+get_heat_map.actlist <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts)
 	 
-	get_heat_map.default(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, ...)	
+	get_heat_map.default(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, units = units, ...)	
 	
 }
 	
@@ -63,7 +64,11 @@ get_heat_map.actlist <- function(act_data, acts = 1, alpha = NULL, f = 1, key = 
 #' @export
 #'
 #' @method get_heat_map default
-get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
+get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', units = 'metric', ...){
+	
+	# check units
+	if(!units %in% c('metric', 'imperial')) 
+		stop('units must be metric or imperial')
 	
 	if(is.null(alpha)) alpha <- 0.5
 	
@@ -102,12 +107,11 @@ get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_
 		temp <- do.call('rbind', temp)
 		
 		# get elevation
-		temp$`Elevation (m)` <- rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
-		temp$`Elevation (m)` <- pmax(0, temp$`Elevation (m)`)
-		temp <- dplyr::mutate(temp, EleDiff = c(0, diff(`Elevation (m)`)),
+		temp$ele <- rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
+		temp$ele <- pmax(0, temp$ele)
+		temp <- dplyr::mutate(temp, EleDiff = c(0, diff(ele)),
 									 distdiff = c(0, diff(rStrava::get_dists(temp))),
 									 grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
-		
 		
 		# plot gradient 
 		if(as_grad){
@@ -120,10 +124,21 @@ get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_
 		# plot elevation			
 		} else {
 			
+			# legend label for elevation
+			leglab <- 'Elevation (m)'
+		
+			# change units if imperial
+			if(units %in% 'imperial'){
+			
+				temp$ele <- temp$ele *  3.28084
+				leglab <- gsub('m', 'ft', leglab)
+			
+			}
+			
 			p <- pbase +
-				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = `Elevation (m)`), 
+				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = ele), 
 													 alpha = alpha, data = temp, size = size) +
-				ggplot2::scale_colour_distiller('Elevation (m)', palette = col)
+				ggplot2::scale_colour_distiller(leglab, palette = col)
 			
 		}
 			

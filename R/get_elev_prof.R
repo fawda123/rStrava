@@ -1,8 +1,8 @@
-#' Create elevation profiles from activitiy data
+#' Create elevation profiles from activity data
 #' 
-#' Create elevation profiles from activitiy data
+#' Create elevation profiles from activity data
 #' 
-#' @author Daniel Padfield
+#' @author Daniel Padfield, Marcus Beck
 #' 
 #' @concept token
 #' 
@@ -11,6 +11,7 @@
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.  
+#' @param units chr string indicating plot units as either metric or imperial
 #' @param ... arguments passed to or from other methods
 #' 
 #' @details The Google API key is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
@@ -43,12 +44,12 @@ get_elev_prof <- function(act_data, ...) UseMethod('get_elev_prof')
 #' @export
 #'
 #' @method get_elev_prof actlist
-get_elev_prof.actlist <- function(act_data, acts = 1, key, total = FALSE, expand = 10, ...){
+get_elev_prof.actlist <- function(act_data, acts = 1, key, total = FALSE, expand = 10, units = 'metric', ...){
 
 	# compile
 	act_data <- compile_activities(act_data, acts = acts)
 	
-	get_elev_prof.default(act_data, key = key, total = total, expand = expand, ...)
+	get_elev_prof.default(act_data, key = key, total = total, expand = expand, units = units, ...)
 	
 }
 
@@ -57,13 +58,16 @@ get_elev_prof.actlist <- function(act_data, acts = 1, key, total = FALSE, expand
 #' @export
 #'
 #' @method get_elev_prof default
-get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, ...){
+get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, units = 'metric', ...){
 	
+	# check units
+	if(!units %in% c('metric', 'imperial')) 
+		stop('units must be metric or imperial')
+		
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = act_data) %>%
 	  dplyr::full_join(., act_data, by = 'upload_id') %>%
-	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain) %>% 
-		mutate(total_elevation_gain = paste('Elev. gain', total_elevation_gain))
+	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain)
 
 	# expand lat/lon for each activity
 	lat_lon <- split(lat_lon, lat_lon$upload_id)
@@ -82,6 +86,9 @@ get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, ...
 	})
 	lat_lon <- do.call('rbind', lat_lon)
 	
+	# total elevation gain needs to be numeric for unit conversion
+	lat_lon$total_elevation_gain <- as.numeric(as.character(lat_lon$total_elevation_gain))
+	
 	# get distances
 	distances <- dplyr::group_by(lat_lon, upload_id) %>%
 	  dplyr::do(data.frame(distance = get_dists(.)))
@@ -91,11 +98,30 @@ get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, ...
 	lat_lon$ele <- rgbif::elevation(latitude = lat_lon$lat, longitude = lat_lon$lon, key = key)$elevation
 	lat_lon$ele <- pmax(0, lat_lon$ele)
 	
-	lat_lon$start_date <- gsub('T.*$', '', lat_lon$start_date) %>% 
-		as.Date(format = '%Y-%m-%d')
-	lat_lon <- tidyr::unite(lat_lon, 'facets', upload_id, start_date, total_elevation_gain, sep = ', ')
-
+	# axis labels
 	ylab <- 'Elevation (m)'
+	xlab <- 'Distance (km)'
+
+	# change units if imperial
+	if(units %in% 'imperial'){
+
+		ylab <- gsub('m', 'ft', ylab)
+		xlab <- gsub('km', 'mi', xlab)
+		lat_lon <- dplyr::mutate(lat_lon, 
+			ele = ele * 3.28084, 
+			distance = distance * 0.621371, 
+			total_elevation_gain = round(total_elevation_gain * 3.28084, 1)
+		)
+		
+	}
+	
+	# format date, total_elevation_gain, create facet labels
+	lat_lon <- dplyr::mutate(lat_lon,
+		start_date = gsub('T.*$', '', start_date),  
+		start_date = as.Date(start_date, format = '%Y-%m-%d'),
+		total_elevation_gain = paste('Elev. gain', total_elevation_gain)
+		) %>% 
+		tidyr::unite('facets', upload_id, start_date, total_elevation_gain, sep = ', ')
 	
 	# get total climbed over distance
 	if(total){
@@ -103,6 +129,7 @@ get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, ...
 		lat_lon <- dplyr::group_by(lat_lon, facets) %>% 
 			dplyr::mutate(ele = c(0, cumsum(pmax(0, diff(ele)))))
 		ylab <- paste('Total', ylab)
+		
 	}
 		
 	p <- ggplot2::ggplot(data = lat_lon, ggplot2::aes(x = distance)) +
@@ -110,7 +137,7 @@ get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, ...
 	  ggplot2::theme_bw() +
 		ggplot2::facet_wrap(~facets, ncol = 1) + 
 	  ggplot2::ylab(ylab) +
-	  ggplot2::xlab('Distance (km)')
+	  ggplot2::xlab(xlab)
 	
 	return(p)
 	

@@ -4,15 +4,15 @@
 \alias{get_elev_prof}
 \alias{get_elev_prof.actlist}
 \alias{get_elev_prof.default}
-\title{Create elevation profiles from activitiy data}
+\title{Create elevation profiles from activity data}
 \usage{
 get_elev_prof(act_data, ...)
 
 \method{get_elev_prof}{actlist}(act_data, acts = 1, key, total = FALSE,
-  expand = 10, ...)
+  expand = 10, units = "metric", ...)
 
 \method{get_elev_prof}{default}(act_data, key, total = FALSE, expand = 10,
-  ...)
+  units = "metric", ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -26,12 +26,14 @@ get_elev_prof(act_data, ...)
 \item{total}{logical indicating if elevations are plotted as cumulative climbed by distance}
 
 \item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.}
+
+\item{units}{chr string indicating plot units as either metric or imperial}
 }
 \value{
 A \code{ggplot} of elevation profiles, facetted by activity id, date
 }
 \description{
-Create elevation profiles from activitiy data
+Create elevation profiles from activity data
 }
 \details{
 The Google API key is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
@@ -52,7 +54,7 @@ get_elev_prof(my_acts, key = mykey)
 }
 }
 \author{
-Daniel Padfield
+Daniel Padfield, Marcus Beck
 }
 \seealso{
 \code{\link{get_dists}}

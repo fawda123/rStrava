@@ -10,11 +10,11 @@ get_heat_map(act_data, ...)
 
 \method{get_heat_map}{actlist}(act_data, acts = 1, alpha = NULL, f = 1,
   key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5,
-  col = "red", expand = 10, maptype = "terrain", ...)
+  col = "red", expand = 10, maptype = "terrain", units = "metric", ...)
 
 \method{get_heat_map}{default}(act_data, alpha = NULL, f = 1, key = NULL,
   add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", ...)
+  expand = 10, maptype = "terrain", units = "metric", ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -40,6 +40,8 @@ get_heat_map(act_data, ...)
 \item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.}
 
 \item{maptype}{chr string indicating the type of base map obtained from Google maps, values are \code{terrain} (default), \code{satellite}, \code{roadmap}, or \code{hybrid}}
+
+\item{units}{chr string indicating plot units as either metric or imperial}
 }
 \value{
 plot of activity on a Google map
@@ -69,7 +71,7 @@ get_heat_map(my_acts, key = mykey)
 }
 }
 \author{
-Daniel Padfield
+Daniel Padfield, Marcus Beck
 }
 \concept{
 token
