@@ -6,7 +6,7 @@
 #' 
 #' @concept token
 #' 
-#' @param actlist an \code{actlist} object returned by \code{\link{compile_activities}}
+#' @param act_data an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric indicating which activities to plot based on index in \code{actlist}, defaults to most recent
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
@@ -36,21 +36,36 @@
 #' 
 #' # plot elevation on locations, requires key
 #' mykey <- 'Get Google API key'
-#' get_heat_map(my_acts[1], alpha = 1, key = mykey, add_grad = TRUE)
+#' get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
+#' 
+#' # compile first
+#' my_acts <- compile_activities(my_acts, acts = 1)
+#' get_heat_map(my_acts, key = mykey)
 #' }
-get_heat_map <- function(actlist, ...) UseMethod('get_heat_map')
+get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 
 #' @rdname get_heat_map
 #'
 #' @export
 #'
 #' @method get_heat_map actlist
-get_heat_map.actlist <- function(actlist, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
-	
-	if(is.null(alpha)) alpha <- 0.5
+get_heat_map.actlist <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
 	
 	# compile
-	act_data <- compile_activities(actlist[acts])
+	act_data <- compile_activities(act_data, acts = acts)
+	 
+	get_heat_map.default(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, ...)	
+	
+}
+	
+#' @rdname get_heat_map
+#'
+#' @export
+#'
+#' @method get_heat_map default
+get_heat_map.default <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
+	
+	if(is.null(alpha)) alpha <- 0.5
 	
 	# data to plot
 	temp <- get_all_LatLon('map.summary_polyline', act_data)

@@ -44,7 +44,7 @@ get_activity_list <- function(stoken, id = NULL, club = FALSE, friends = FALSE){
 	# create actlist object
 	dataRaw <- structure(
     .Data = dataRaw, 
-    class = c('actlist', 'list')
+    class = c('actlist')
 	)
 	
 	return(dataRaw)

@@ -3,16 +3,21 @@
 \name{get_heat_map}
 \alias{get_heat_map}
 \alias{get_heat_map.actlist}
+\alias{get_heat_map.default}
 \title{Makes a heat map from your activity data}
 \usage{
-get_heat_map(actlist, ...)
+get_heat_map(act_data, ...)
 
-\method{get_heat_map}{actlist}(actlist, acts = 1, alpha = NULL, f = 1,
+\method{get_heat_map}{actlist}(act_data, acts = 1, alpha = NULL, f = 1,
   key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5,
   col = "red", expand = 10, maptype = "terrain", ...)
+
+\method{get_heat_map}{default}(act_data, alpha = NULL, f = 1, key = NULL,
+  add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
+  expand = 10, maptype = "terrain", ...)
 }
 \arguments{
-\item{actlist}{an \code{actlist} object returned by \code{\link{compile_activities}}}
+\item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
 
 \item{...}{arguments passed to or from other methods}
 
@@ -56,7 +61,11 @@ get_heat_map(my_acts, acts = 1, alpha = 1)
 
 # plot elevation on locations, requires key
 mykey <- 'Get Google API key'
-get_heat_map(my_acts[1], alpha = 1, key = mykey, add_grad = TRUE)
+get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
+
+# compile first
+my_acts <- compile_activities(my_acts, acts = 1)
+get_heat_map(my_acts, key = mykey)
 }
 }
 \author{

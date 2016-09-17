@@ -2,12 +2,19 @@
 % Please edit documentation in R/compile_activities.R
 \name{compile_activities}
 \alias{compile_activities}
+\alias{compile_activities.actlist}
 \title{converts a list of activities into a dataframe}
 \usage{
-compile_activities(list)
+compile_activities(actlist, ...)
+
+\method{compile_activities}{actlist}(actlist, acts = NULL, ...)
 }
 \arguments{
-\item{list}{a list of all the activities you want compiling. Generally produced by \code{\link{compile_activity}}}
+\item{actlist}{an \code{actlist} object returned by \code{\link{compile_activities}}}
+
+\item{...}{arguments passed to or from other methods}
+
+\item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 }
 \value{
 dataframe where each row is a different activity
@@ -25,7 +32,8 @@ stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret
 
 acts <- get_activity_list(stoken)
 
-acts_data <- compile_activities(acts)}
+acts_data <- compile_activities(acts)
+}
 }
 \author{
 Daniel Padfield

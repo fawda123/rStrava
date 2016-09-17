@@ -3,15 +3,19 @@
 \name{get_elev_prof}
 \alias{get_elev_prof}
 \alias{get_elev_prof.actlist}
+\alias{get_elev_prof.default}
 \title{Create elevation profiles from activitiy data}
 \usage{
-get_elev_prof(actlist, ...)
+get_elev_prof(act_data, ...)
 
-\method{get_elev_prof}{actlist}(actlist, acts = 1, key, total = FALSE,
+\method{get_elev_prof}{actlist}(act_data, acts = 1, key, total = FALSE,
   expand = 10, ...)
+
+\method{get_elev_prof}{default}(act_data, key, total = FALSE, expand = 10,
+  ...)
 }
 \arguments{
-\item{actlist}{an \code{actlist} object returned by \code{\link{compile_activities}}}
+\item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
 
 \item{...}{arguments passed to or from other methods}
 
@@ -41,6 +45,10 @@ my_acts <- get_activity_list(stoken)
 # your unique key
 mykey <- 'Get Google API key'
 get_elev_prof(my_acts, acts = 1:2, key = mykey)
+
+# compile first
+my_acts <- compile_activities(my_acts, acts = c(1:2))
+get_elev_prof(my_acts, key = mykey)
 }
 }
 \author{

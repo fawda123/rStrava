@@ -6,7 +6,7 @@
 #' 
 #' @concept token
 #' 
-#' @param actlist an \code{actlist} object returned by \code{\link{compile_activities}}
+#' @param act_data an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric value indicating which elements of \code{act_data} to plot, defaults to most recent
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
@@ -30,23 +30,38 @@
 #' # your unique key
 #' mykey <- 'Get Google API key'
 #' get_elev_prof(my_acts, acts = 1:2, key = mykey)
+#' 
+#' # compile first
+#' my_acts <- compile_activities(my_acts, acts = c(1:2))
+#' get_elev_prof(my_acts, key = mykey)
 #' }
 #' @export
-get_elev_prof <- function(actlist, ...) UseMethod('get_elev_prof')
+get_elev_prof <- function(act_data, ...) UseMethod('get_elev_prof')
 
 #' @rdname get_elev_prof
 #'
 #' @export
 #'
 #' @method get_elev_prof actlist
-get_elev_prof.actlist <- function(actlist, acts = 1, key, total = FALSE, expand = 10, ...){
+get_elev_prof.actlist <- function(act_data, acts = 1, key, total = FALSE, expand = 10, ...){
 
 	# compile
-	MyActs <- compile_activities(actlist[acts])
+	act_data <- compile_activities(act_data, acts = acts)
+	
+	get_elev_prof.default(act_data, key = key, total = total, expand = expand, ...)
+	
+}
+
+#' @rdname get_elev_prof
+#'
+#' @export
+#'
+#' @method get_elev_prof default
+get_elev_prof.default <- function(act_data, key, total = FALSE, expand = 10, ...){
 	
 	# create a dataframe of long and latitudes
-	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = MyActs) %>%
-	  dplyr::full_join(., MyActs, by = 'upload_id') %>%
+	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = act_data) %>%
+	  dplyr::full_join(., act_data, by = 'upload_id') %>%
 	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain) %>% 
 		mutate(total_elevation_gain = paste('Elev. gain', total_elevation_gain))
 
