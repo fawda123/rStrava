@@ -41,7 +41,7 @@
 #' 
 #' # compile first, change units
 #' my_acts <- compile_activities(my_acts, acts = 1, units = 'imperial')
-#' get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2)
+#' get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2, maptype = 'satellite')
 #' }
 get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 

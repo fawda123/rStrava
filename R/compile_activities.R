@@ -21,10 +21,13 @@
 #' \dontrun{
 #' stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' 
-#' acts <- get_activity_list(stoken)
+#' my_acts <- get_activity_list(stoken)
 #' 
-#' acts_data <- compile_activities(acts)
+#' acts_data <- compile_activities(my_acts)
 #' 
+#' # show attributes
+#' attr(acts_data, 'unit_type')
+#' attr(acts_data, 'unit_vals')
 #' }
 compile_activities <- function(actlist, acts = NULL, units = 'metric'){
 	

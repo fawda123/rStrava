@@ -29,10 +29,13 @@ each activity has a value for every column present across all activities, with N
 \dontrun{
 stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 
-acts <- get_activity_list(stoken)
+my_acts <- get_activity_list(stoken)
 
-acts_data <- compile_activities(acts)
+acts_data <- compile_activities(my_acts)
 
+# show attributes
+attr(acts_data, 'unit_type')
+attr(acts_data, 'unit_vals')
 }
 }
 \author{
