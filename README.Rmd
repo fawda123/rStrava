@@ -77,13 +77,13 @@ An example creating a heat map of activities:
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
-get_heat_map(my_acts, acts = which(acts), f = 0.1, size = 1)
+get_heat_map(my_acts, acts = which(acts), source = 'osm', col = 'darkgreen', size = 2)
 
 # plot elevation along a single ride
-get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, key = mykey, size = 2, col = 'Spectral')
+get_heat_map(my_acts, acts = 6, alpha = 1, add_elev = T, f = 1, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite')
 
 # plot % gradient along a single ride
-get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5)
+get_heat_map(my_acts, acts = 6, alpha = 1, add_elev = T, f = 1, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite')
 ```
 
 Get elevation profiles for activities:

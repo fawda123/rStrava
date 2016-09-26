@@ -156,21 +156,21 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ## 
 ## $`2837007`$current_month
 ##   Distance       Time  Elevation 
-##  227.60000   15.26667 1420.00000 
+##  358.30000   24.41667 1920.00000 
 ## 
 ## $`2837007`$monthly
 ## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
-## 537.9636 675.9030 420.7152 393.1273 434.5091 337.9515 455.2000 455.2000 
+## 547.9882 688.4980 428.5549 400.4529 442.6059 344.2490 463.6824 463.6824 
 ##      May      Jun      Jul      Aug      Sep 
-## 358.6424 455.2000 462.0970 317.2606 227.6000 
+## 365.3255 463.6824 470.7078 323.1725 358.3000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      3387.8000       210.5167     18881.0000       258.0000 
+##      3515.3000       219.2333     19377.0000       268.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      16147.8000        958.3167     103415.0000       1176.0000 
+##      16275.4000        967.0167     103911.0000       1186.0000 
 ## 
 ## 
 ## $`2527465`
@@ -181,24 +181,24 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ## [1] &quot;Caracas, Distrito Metropolitano de Caracas, Venezuela&quot;
 ## 
 ## $`2527465`$current_month
-##  Distance      Time Elevation 
-##     263.9      15.2    1033.0 
+##   Distance       Time  Elevation 
+##  401.30000   22.61667 1633.00000 
 ## 
 ## $`2527465`$monthly
 ##   Sep 2015        Oct        Nov        Dec   Jan 2016        Feb 
-##   49.48125  296.88750  263.90000  379.35625   32.98750  181.43125 
+##   50.16250  300.97500  267.53333  384.57917   33.44167  183.92917 
 ##        Mar        Apr        May        Jun        Jul        Aug 
-##  395.85000  395.85000  643.25625  346.36875  412.34375 1599.89375 
+##  401.30000  401.30000  652.11250  351.13750  418.02083 1621.92083 
 ##        Sep 
-##  263.90000 
+##  401.30000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         4415.7          237.1        42391.0          103.0 
+##         4553.1          244.5        42993.0          110.0 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##        12279.60          670.55       162053.00          439.00 
+##        12417.10          677.95       162655.00          446.00 
 ## 
 ## 
 ## $`2140248`
@@ -209,22 +209,24 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ## [1] &quot;Falmouth, England, United Kingdom&quot;
 ## 
 ## $`2140248`$current_month
-##  Distance      Time Elevation 
-##      0.00      0.65      0.00 
+##   Distance       Time  Elevation 
+##  52.300000   2.633333 633.000000 
 ## 
 ## $`2140248`$monthly
-## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
-##        0        0        0        0        0        0        0        0 
-##      May      Jun      Jul      Aug      Sep 
-##        0        0        0        0        0 
+##   Sep 2015        Oct        Nov        Dec   Jan 2016        Feb 
+## 331.233333 517.188889  63.922222   0.000000 133.655556   5.811111 
+##        Mar        Apr        May        Jun        Jul        Aug 
+##  75.544444 383.533333 232.444444 296.366667 540.433333 307.988889 
+##        Sep 
+##  52.300000 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     1992.40000       83.13333    23422.00000       70.00000 
+##     2044.70000       85.11667    24055.00000       72.00000 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       6531.2000        277.0333      79752.0000        471.0000</code></pre>
+##       6583.5000        279.0167      80385.0000        473.0000</code></pre>
 </div>
 <div id="api-functions-token" class="section level4">
 <h4>API functions (token)</h4>
@@ -260,13 +262,13 @@ head(myinfo)</code></pre>
 <pre class="r"><code># get activities, get activities by location, plot
 my_acts &lt;- get_activity_list(stoken)
 acts &lt;- lapply(my_acts, function(x) x$location_city) %in% c(&#39;Pensacola&#39;, &#39;Pensacola Beach&#39;, &#39;Milton&#39;) 
-get_heat_map(my_acts, acts = which(acts), f = 0.1, size = 1)</code></pre>
+get_heat_map(my_acts, acts = which(acts), source = &#39;osm&#39;, col = &#39;darkgreen&#39;, size = 2)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
 <pre class="r"><code># plot elevation along a single ride
-get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, key = mykey, size = 2, col = &#39;Spectral&#39;)</code></pre>
+get_heat_map(my_acts, acts = 6, alpha = 1, add_elev = T, f = 1, key = mykey, size = 2, col = &#39;Spectral&#39;, maptype = &#39;satellite&#39;)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-2.png" /><!-- --></p>
 <pre class="r"><code># plot % gradient along a single ride
-get_heat_map(my_acts, acts = 5, alpha = 1, add_elev = T, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;, expand = 5)</code></pre>
+get_heat_map(my_acts, acts = 6, alpha = 1, add_elev = T, f = 1, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;, expand = 5, maptype = &#39;satellite&#39;)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-8-3.png" /><!-- --></p>
 <p>Get elevation profiles for activities:</p>
 <pre class="r"><code># get activities

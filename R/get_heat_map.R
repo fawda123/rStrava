@@ -16,7 +16,8 @@
 #' @param size numeric indicating width of activity lines
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
-#' @param maptype chr string indicating the type of base map obtained from Google maps, values are \code{terrain} (default), \code{satellite}, \code{roadmap}, or \code{hybrid} 
+#' @param maptype chr string indicating the base mape type, passed to \code{\link[ggmap]{get_map}}
+#' @param source chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported
 #' @param units chr string indicating plot units as either metric or imperial
 #' @param ... arguments passed to or from other methods
 #' 
@@ -40,7 +41,7 @@
 #' get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
 #' 
 #' # compile first, change units
-#' my_acts <- compile_activities(my_acts, acts = 1, units = 'imperial')
+#' my_acts <- compile_activities(my_acts, acts = 156, units = 'imperial')
 #' get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2, maptype = 'satellite')
 #' }
 get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
@@ -50,12 +51,12 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map list
-get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', units = 'metric', ...){
+get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
 	 
-	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, ...)	
+	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, source = source, ...)	
 	
 }
 	
@@ -64,7 +65,7 @@ get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 1, key = NUL
 #' @export
 #'
 #' @method get_heat_map actframe
-get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', ...){
+get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
@@ -76,16 +77,14 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	temp <- get_all_LatLon('map.summary_polyline', act_data)
 	temp$activity <- as.numeric(factor(temp$map.summary_polyline))
 	temp$map.summary_polyline <- NULL
-		
+
 	# xy lims
-	xlim <- c(min(temp$lon), max(temp$lon))
-	ylim <- c(min(temp$lat), max(temp$lat))
 	bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
 	
 	# map and base plot
-	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
+	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype, source = source)))
 	pbase <- ggmap::ggmap(map) +
-		ggplot2::coord_equal() +
+		ggplot2::coord_fixed(ratio = 1) +
 		ggplot2::theme(axis.title = ggplot2::element_blank())
 	
 	# add elevation to plot

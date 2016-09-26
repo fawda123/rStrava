@@ -8,13 +8,14 @@
 \usage{
 get_heat_map(act_data, ...)
 
-\method{get_heat_map}{list}(act_data, acts = 1, alpha = NULL, f = 1,
+\method{get_heat_map}{list}(act_data, acts = 1, alpha = NULL, f = 0.1,
   key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5,
-  col = "red", expand = 10, maptype = "terrain", units = "metric", ...)
+  col = "red", expand = 10, maptype = "terrain", source = "google",
+  units = "metric", ...)
 
 \method{get_heat_map}{actframe}(act_data, alpha = NULL, f = 1, key = NULL,
   add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", ...)
+  expand = 10, maptype = "terrain", source = "google", ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -39,7 +40,9 @@ get_heat_map(act_data, ...)
 
 \item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.}
 
-\item{maptype}{chr string indicating the type of base map obtained from Google maps, values are \code{terrain} (default), \code{satellite}, \code{roadmap}, or \code{hybrid}}
+\item{maptype}{chr string indicating the base mape type, passed to \code{\link[ggmap]{get_map}}}
+
+\item{source}{chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported}
 
 \item{units}{chr string indicating plot units as either metric or imperial}
 }
@@ -66,7 +69,7 @@ mykey <- 'Get Google API key'
 get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
 
 # compile first, change units
-my_acts <- compile_activities(my_acts, acts = 1, units = 'imperial')
+my_acts <- compile_activities(my_acts, acts = 156, units = 'imperial')
 get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2, maptype = 'satellite')
 }
 }
