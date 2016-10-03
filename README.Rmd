@@ -12,7 +12,13 @@ output:
 
 ##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk*
 
-### Overview and Installation
+Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
+
+Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
+
+![](api_logo_pwrdBy_strava_horiz_light.png)
+
+### Overview and installation
 
 This is the development repository for rStrava, an R package to access data from the Strava API.  The package can be installed and loaded as follows:
 
@@ -24,10 +30,6 @@ devtools::install_github('fawda123/rStrava')
 ### Issues and suggestions
 
 Please report any issues and suggestions on the [issues link](https://github.com/fawda123/rStrava/issues) for the repository.
-
-Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
-
-Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
 
 ### Package overview
 

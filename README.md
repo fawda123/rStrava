@@ -3,7 +3,13 @@
 
 ##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk*
 
-### Overview and Installation
+Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
+
+Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
+
+![](api_logo_pwrdBy_strava_horiz_light.png)
+
+### Overview and installation
 
 This is the development repository for rStrava, an R package to access data from the Strava API.  The package can be installed and loaded as follows:
 
@@ -16,10 +22,6 @@ devtools::install_github('fawda123/rStrava')
 ### Issues and suggestions
 
 Please report any issues and suggestions on the [issues link](https://github.com/fawda123/rStrava/issues) for the repository.
-
-Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
-
-Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
 
 ### Package overview
 
@@ -50,22 +52,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Pensacola, FL"
 ## 
 ## $`2837007`$current_month
-##   Distance       Time  Elevation 
-##  358.30000   24.41667 1920.00000 
+##  Distance      Time Elevation 
+##     11.20      0.65      0.00 
 ## 
 ## $`2837007`$monthly
-## Sep 2015      Oct      Nov      Dec Jan 2016      Feb      Mar      Apr 
-## 547.9882 688.4980 428.5549 400.4529 442.6059 344.2490 463.6824 463.6824 
-##      May      Jun      Jul      Aug      Sep 
-## 365.3255 463.6824 470.7078 323.1725 358.3000 
+## Oct 2015      Nov      Dec Jan 2016      Feb      Mar      Apr      May 
+##    548.8    341.6    319.2    352.8    274.4    369.6    369.6    291.2 
+##      Jun      Jul      Aug      Sep      Oct 
+##    369.6    375.2    257.6    358.4     11.2 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      3515.3000       219.2333     19377.0000       268.0000 
+##      3615.8000       226.0167     19757.0000       277.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      16275.4000        967.0167     103911.0000       1186.0000 
+##      16375.9000        973.8167     104291.0000       1195.0000 
 ## 
 ## 
 ## $`2527465`
@@ -80,12 +82,12 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ##  401.30000   22.61667 1633.00000 
 ## 
 ## $`2527465`$monthly
-##   Sep 2015        Oct        Nov        Dec   Jan 2016        Feb 
-##   50.16250  300.97500  267.53333  384.57917   33.44167  183.92917 
-##        Mar        Apr        May        Jun        Jul        Aug 
-##  401.30000  401.30000  652.11250  351.13750  418.02083 1621.92083 
-##        Sep 
-##  401.30000 
+##   Oct 2015        Nov        Dec   Jan 2016        Feb        Mar 
+##  300.97500  267.53333  384.57917   33.44167  183.92917  401.30000 
+##        Apr        May        Jun        Jul        Aug        Sep 
+##  401.30000  652.11250  351.13750  418.02083 1621.92083  401.30000 
+##        Oct 
+##    0.00000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
@@ -104,24 +106,24 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Falmouth, England, United Kingdom"
 ## 
 ## $`2140248`$current_month
-##   Distance       Time  Elevation 
-##  52.300000   2.633333 633.000000 
+##    Distance        Time   Elevation 
+##  167.100000    7.416667 2025.000000 
 ## 
 ## $`2140248`$monthly
-##   Sep 2015        Oct        Nov        Dec   Jan 2016        Feb 
-## 331.233333 517.188889  63.922222   0.000000 133.655556   5.811111 
-##        Mar        Apr        May        Jun        Jul        Aug 
-##  75.544444 383.533333 232.444444 296.366667 540.433333 307.988889 
-##        Sep 
-##  52.300000 
+##   Oct 2015        Nov        Dec   Jan 2016        Feb        Mar 
+## 531.139286  65.646429   0.000000 137.260714   5.967857  77.582143 
+##        Apr        May        Jun        Jul        Aug        Sep 
+## 393.878571 238.714286 304.360714 555.010714 316.296429  53.710714 
+##        Oct 
+## 167.100000 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     2044.70000       85.11667    24055.00000       72.00000 
+##        2211.90          92.55       26080.00          73.00 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       6583.5000        279.0167      80385.0000        473.0000
+##       6750.7000        286.4333      82410.0000        474.0000
 ```
 
 #### API functions (token)
