@@ -67,7 +67,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ..
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = act_data) %>%
 	  dplyr::full_join(., act_data, by = 'upload_id') %>%
-	  dplyr::select(., upload_id, type, start_date, lat, lon, location_city, total_elevation_gain)
+	  dplyr::select(., upload_id, type, start_date, lat, lon, total_elevation_gain)
 
 	# expand lat/lon for each activity
 	lat_lon <- split(lat_lon, lat_lon$upload_id)
