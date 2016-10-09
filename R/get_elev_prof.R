@@ -87,7 +87,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ..
 	lat_lon <- do.call('rbind', lat_lon)
 	
 	# total elevation gain needs to be numeric for unit conversion
-	lat_lon$total_elevation_gain <- as.numeric(as.character(lat_lon$total_elevation_gain))
+	lat_lon$total_elevation_gain <- round(as.numeric(as.character(lat_lon$total_elevation_gain)), 1)
 	
 	# get distances
 	distances <- dplyr::group_by(lat_lon, upload_id) %>%
