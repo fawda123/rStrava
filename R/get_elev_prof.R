@@ -48,7 +48,7 @@ get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 
 
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
-	
+
 	get_elev_prof.actframe(act_data, key = key, total = total, expand = expand, ...)
 	
 }
@@ -59,7 +59,7 @@ get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 
 #'
 #' @method get_elev_prof actframe
 get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ...){
-	
+
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
