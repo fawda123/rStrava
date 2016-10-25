@@ -40,11 +40,11 @@ get_heat_map(act_data, ...)
 
 \item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.}
 
-\item{maptype}{chr string indicating the base mape type, passed to \code{\link[ggmap]{get_map}}}
+\item{maptype}{chr string indicating the base map type relevant for the \code{source}, passed to \code{\link[ggmap]{get_map}}}
 
 \item{source}{chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported}
 
-\item{units}{chr string indicating plot units as either metric or imperial}
+\item{units}{chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}}
 }
 \value{
 plot of activity on a Google map
@@ -58,7 +58,7 @@ uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longit
 \examples{
 \dontrun{
 # get my activities
-stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 my_acts <- get_activity_list(stoken)
 
 # default

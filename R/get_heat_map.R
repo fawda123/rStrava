@@ -16,9 +16,9 @@
 #' @param size numeric indicating width of activity lines
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
-#' @param maptype chr string indicating the base mape type, passed to \code{\link[ggmap]{get_map}}
+#' @param maptype chr string indicating the base map type relevant for the \code{source}, passed to \code{\link[ggmap]{get_map}}
 #' @param source chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported
-#' @param units chr string indicating plot units as either metric or imperial
+#' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
 #' 
 #' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses {ggmap} to produce map and ggplot2 it
@@ -30,7 +30,7 @@
 #' @examples 
 #' \dontrun{
 #' # get my activities
-#' stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' my_acts <- get_activity_list(stoken)
 #' 
 #' # default
@@ -55,7 +55,7 @@ get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = N
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
-	 
+
 	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, size = size, col = col, expand = expand, maptype = maptype, source = source, ...)	
 	
 }
@@ -70,7 +70,13 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
-	
+
+	# warning if units conflict
+	args <- as.list(match.call())
+	if('units' %in% names(args))
+		if(args$units != unit_type)
+			warning('units does not match unit type, use compile_activities with different units')
+				
 	if(is.null(alpha)) alpha <- 0.5
 	
 	# data to plot

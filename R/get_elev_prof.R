@@ -11,7 +11,7 @@
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.  
-#' @param units chr string indicating plot units as either metric or imperial
+#' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
 #' 
 #' @details The Google API key is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
@@ -63,6 +63,12 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ..
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
+	
+	# warning if units conflict
+	args <- as.list(match.call())
+	if('units' %in% names(args))
+		if(args$units != unit_type)
+			warning('units does not match unit type, use compile_activities with different units')
 	
 	# create a dataframe of long and latitudes
 	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = act_data) %>%

@@ -27,7 +27,7 @@ get_elev_prof(act_data, ...)
 
 \item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.}
 
-\item{units}{chr string indicating plot units as either metric or imperial}
+\item{units}{chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}}
 }
 \value{
 A \code{ggplot} of elevation profiles, facetted by activity id, date
