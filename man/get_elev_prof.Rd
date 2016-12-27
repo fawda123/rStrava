@@ -41,7 +41,7 @@ The Google API key is easy to obtain, follow instructions here: https://develope
 \examples{
 \dontrun{
 # get my activities
-stoken <- httr::config(ttoken = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 my_acts <- get_activity_list(stoken)
 
 # your unique key

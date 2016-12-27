@@ -40,7 +40,7 @@ help.search('notoken', package = 'rStrava')
 help.search('token', package = 'rStrava')
 ```
 
-#### Scraping functions (no token)
+### Scraping functions (no token)
 
 An example using the scraping functions:
 ```{r echo = FALSE, message = FALSE, cache = F}
@@ -51,7 +51,9 @@ devtools::load_all('.')
 athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ```
 
-#### API functions (token)
+### API functions (token)
+
+#### Setup 
 
 These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieval function in the rStrava package requires an authentication token (called `stoken` in the help documents).  The following is a suggested workflow for using the API functions with rStrava.
 
@@ -65,7 +67,26 @@ app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))
 ```
 
-The API retrieval functions can be used after the token is created.
+Setting `cache = TRUE` for `strava_oauth` will create an authentication file in the working directory. This can be used in later sessions as follows:
+```{r, eval = FALSE}
+stoken <- httr::config(token = readRDS('.httr-oauth')[[1]])
+```
+
+Finally, the `get_heat_map` and `get_elev_prof` functions optionally retrieve elevation data from the Google Maps Elevation API. To use these features, an additional authentication key is required.  Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
+
+```{r eval = FALSE}
+# save the key, do only once
+cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
+    file=file.path(normalizePath("~/"), ".Renviron"),
+    append=TRUE)
+
+# retrieve the key, restart R if not found
+mykey <- Sys.getenv("google_key")
+```
+
+#### Using the functions
+
+The API retrieval functions are used with the token.
 ```{r echo = FALSE, message = FALSE}
 source('extra.R')
 ```

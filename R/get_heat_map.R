@@ -21,7 +21,9 @@
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
 #' 
-#' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses {ggmap} to produce map and ggplot2 it
+#' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
+#' 
+#' The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 #' 
 #' @return plot of activity on a Google map
 #' 

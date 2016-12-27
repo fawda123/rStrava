@@ -53,21 +53,21 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## 
 ## $`2837007`$current_month
 ##   Distance       Time  Elevation 
-##  177.80000   11.43333 3567.00000 
+##  336.30000   22.38333 1287.00000 
 ## 
 ## $`2837007`$monthly
-## Oct 2015      Nov      Dec Jan 2016      Feb      Mar      Apr      May 
-##  696.976  433.832  405.384  448.056  348.488  469.392  469.392  369.824 
-##      Jun      Jul      Aug      Sep      Oct 
-##  469.392  476.504  327.152  455.168  177.800 
+## Dec 2015 Jan 2016      Feb      Mar      Apr      May      Jun      Jul 
+## 401.5522 441.7075 346.3388 466.8045 466.8045 366.4164 461.7851 466.8045 
+##      Aug      Sep      Oct      Nov      Dec 
+## 326.2612 451.7463 441.7075 326.2612 336.3000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      3782.4000       236.8167     23323.0000       284.0000 
+##         4658.7          296.8        27723.0          362.0 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         16542.4           984.6        107858.0          1202.0 
+##       17418.800        1044.583      112257.000        1280.000 
 ## 
 ## 
 ## $`2527465`
@@ -75,25 +75,25 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "km" "h"  "m"  "m" 
 ## 
 ## $`2527465`$location
-## [1] "Caracas, Distrito Metropolitano de Caracas, Venezuela"
+## [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
 ## 
 ## $`2527465`$current_month
-##  Distance      Time Elevation 
-## 15.700000  1.466667 46.000000 
+##   Distance       Time  Elevation 
+##  703.40000   35.93333 2739.00000 
 ## 
 ## $`2527465`$monthly
-## Oct 2015      Nov      Dec Jan 2016      Feb      Mar      Apr      May 
-##    282.6    251.2    361.1     31.4    172.7    376.8    376.8    612.3 
-##      Jun      Jul      Aug      Sep      Oct 
-##    329.7    392.5   1522.9    376.8     15.7 
+##  Dec 2015  Jan 2016       Feb       Mar       Apr       May       Jun 
+##  394.5902   34.3122  188.7171  411.7463  411.7463  669.0878  360.2780 
+##       Jul       Aug       Sep       Oct       Nov       Dec 
+##  428.9024 1664.1415  411.7463  325.9659  548.9951  703.4000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      4568.9000       245.9833     43039.0000       111.0000 
+##      6130.8000       339.2667     49588.0000       163.0000 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      12432.8000        679.4333     162701.0000        447.0000 
+##      13994.8000        772.7167     169250.0000        499.0000 
 ## 
 ## 
 ## $`2140248`
@@ -105,26 +105,28 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## 
 ## $`2140248`$current_month
 ##  Distance      Time Elevation 
-##    254.00     11.25   3107.00 
+##    372.20     15.75   4459.00 
 ## 
 ## $`2140248`$monthly
-##   Oct 2015        Nov        Dec   Jan 2016        Feb        Mar 
-## 538.238095  66.523810   0.000000 139.095238   6.047619  78.619048 
-##        Apr        May        Jun        Jul        Aug        Sep 
-## 399.142857 241.904762 308.428571 562.428571 320.523810  54.428571 
-##        Oct 
-## 254.000000 
+##   Dec 2015   Jan 2016        Feb        Mar        Apr        May 
+##   0.000000 138.074194   6.003226  78.041935 396.212903 240.129032 
+##        Jun        Jul        Aug        Sep        Oct        Nov 
+## 306.164516 558.300000 318.170968  54.029032 372.200000   0.000000 
+##        Dec 
+##   0.000000 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     2298.80000       96.38333    27161.00000       76.00000 
+##      2417.0000       100.8833     28513.0000        79.0000 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       6837.6000        290.2833      83491.0000        477.0000
+##       6955.8000        294.7833      84843.0000        480.0000
 ```
 
 #### API functions (token)
+
+##### Setup 
 
 These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieval function in the rStrava package requires an authentication token (called `stoken` in the help documents).  The following is a suggested workflow for using the API functions with rStrava.
 
@@ -139,7 +141,28 @@ app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))
 ```
 
-The API retrieval functions can be used after the token is created.
+Setting `cache = TRUE` for `strava_oauth` will create an authentication file in the working directory. This can be used in later sessions as follows:
+
+```r
+stoken <- httr::config(token = readRDS('.httr-oauth')[[1]])
+```
+
+Finally, the `get_heat_map` and `fget_elev_prof` optionally retrieve elevation data from the Google elevation API. To use these features, an additional authentication key is required.  Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
+
+
+```r
+# save the key, do only once
+cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
+    file=file.path(normalizePath("~/"), ".Renviron"),
+    append=TRUE)
+
+# retrieve the key, restart R if not found
+mykey <- Sys.getenv("google_key")
+```
+
+##### Using the functions
+
+The API retrieval functions are used with the token.
 
 
 ```r
@@ -176,7 +199,7 @@ acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensac
 get_heat_map(my_acts, acts = which(acts), source = 'osm', col = 'darkgreen', size = 2)
 ```
 
-![](README_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 Plotting elevation and grade for a single ride:
 
@@ -185,14 +208,14 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.1, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
-![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.1, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
-![](README_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
 
 Get elevation profiles for activities:
 
@@ -203,13 +226,13 @@ my_acts <- get_activity_list(stoken)
 get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial')
 ```
 
-![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
 ```
 
-![](README_files/figure-html/unnamed-chunk-10-2.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
 
 ### License
 
