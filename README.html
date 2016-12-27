@@ -147,8 +147,9 @@ devtools::install_github(&#39;fawda123/rStrava&#39;)</code></pre>
 <p>The functions are in three categories depending on mode of use. The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions. The second category requires an authentication token. The help files for each category can be viewed using <code>help.search</code>:</p>
 <pre class="r"><code>help.search(&#39;notoken&#39;, package = &#39;rStrava&#39;)
 help.search(&#39;token&#39;, package = &#39;rStrava&#39;)</code></pre>
-<div id="scraping-functions-no-token" class="section level4">
-<h4>Scraping functions (no token)</h4>
+</div>
+<div id="scraping-functions-no-token" class="section level3">
+<h3>Scraping functions (no token)</h3>
 <p>An example using the scraping functions:</p>
 <pre class="r"><code># get athlete data for these guys
 athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
@@ -231,10 +232,10 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
 ##       6955.8000        294.7833      84843.0000        480.0000</code></pre>
 </div>
-<div id="api-functions-token" class="section level4">
-<h4>API functions (token)</h4>
-<div id="setup" class="section level5">
-<h5>Setup</h5>
+<div id="api-functions-token" class="section level3">
+<h3>API functions (token)</h3>
+<div id="setup" class="section level4">
+<h4>Setup</h4>
 <p>These functions require a Strava account and a personal API, both of which can be obtained on the Strava website. The user account can be created by following instructions on the <a href="https://www.strava.com/">Strava homepage</a>. After the account is created, a personal API can be created under API tab of <a href="https://www.strava.com/settings/api">profile settings</a>. The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token. Additional information about the personal API can be found <a href="https://strava.github.io/api/">here</a>. Every API retrieval function in the rStrava package requires an authentication token (called <code>stoken</code> in the help documents). The following is a suggested workflow for using the API functions with rStrava.</p>
 <p>First, create the authentication token using your personal information from your API. Replace the <code>app_name</code>, <code>app_client_id</code>, and <code>app_secret</code> objects with the relevant info from your account.</p>
 <pre class="r"><code>app_name &lt;- &#39;myappname&#39; # chosen by user
@@ -245,7 +246,7 @@ app_secret &lt;- &#39;xxxxxxxx&#39; # an alphanumeric secret, assigned by Strava
 stoken &lt;- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))</code></pre>
 <p>Setting <code>cache = TRUE</code> for <code>strava_oauth</code> will create an authentication file in the working directory. This can be used in later sessions as follows:</p>
 <pre class="r"><code>stoken &lt;- httr::config(token = readRDS(&#39;.httr-oauth&#39;)[[1]])</code></pre>
-<p>Finally, the <code>get_heat_map</code> and <code>fget_elev_prof</code> optionally retrieve elevation data from the Google elevation API. To use these features, an additional authentication key is required. Follow the instructions <a href="https://developers.google.com/maps/documentation/elevation/#api_key">here</a>. The key can be added to the R environment file for later use:</p>
+<p>Finally, the <code>get_heat_map</code> and <code>get_elev_prof</code> functions optionally retrieve elevation data from the Google Maps Elevation API. To use these features, an additional authentication key is required. Follow the instructions <a href="https://developers.google.com/maps/documentation/elevation/#api_key">here</a>. The key can be added to the R environment file for later use:</p>
 <pre class="r"><code># save the key, do only once
 cat(&quot;google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n&quot;,
     file=file.path(normalizePath(&quot;~/&quot;), &quot;.Renviron&quot;),
@@ -254,8 +255,8 @@ cat(&quot;google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n&quot;,
 # retrieve the key, restart R if not found
 mykey &lt;- Sys.getenv(&quot;google_key&quot;)</code></pre>
 </div>
-<div id="using-the-functions" class="section level5">
-<h5>Using the functions</h5>
+<div id="using-the-functions" class="section level4">
+<h4>Using the functions</h4>
 <p>The API retrieval functions are used with the token.</p>
 <pre class="r"><code>myinfo &lt;- get_athlete(stoken, id = &#39;2837007&#39;)
 head(myinfo)</code></pre>
@@ -280,7 +281,7 @@ head(myinfo)</code></pre>
 <pre class="r"><code># get activities, get activities by location, plot
 my_acts &lt;- get_activity_list(stoken)
 acts &lt;- lapply(my_acts, function(x) x$location_city) %in% c(&#39;Pensacola&#39;, &#39;Pensacola Beach&#39;, &#39;Milton&#39;) 
-get_heat_map(my_acts, acts = which(acts), source = &#39;osm&#39;, col = &#39;darkgreen&#39;, size = 2)</code></pre>
+get_heat_map(my_acts, acts = which(acts), source = &#39;osm&#39;, col = &#39;darkgreen&#39;, size = 2, dist = F)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-10-1.png" /><!-- --></p>
 <p>Plotting elevation and grade for a single ride:</p>
 <pre class="r"><code># plot elevation along a single ride
@@ -297,7 +298,6 @@ get_elev_prof(my_acts, acts = 1, key = mykey, units = &#39;imperial&#39;)</code>
 <p><img src="README_files/figure-html/unnamed-chunk-12-1.png" /><!-- --></p>
 <pre class="r"><code>get_elev_prof(my_acts, acts = 1, key = mykey, units = &#39;imperial&#39;, total = T)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-12-2.png" /><!-- --></p>
-</div>
 </div>
 </div>
 <div id="license" class="section level3">

@@ -12,6 +12,8 @@
 #' 
 #' @concept token
 #' 
+#' @import magrittr
+#' 
 #' @return A vector of distances with the length as the number of rows in \code{dat_in}
 #' 
 #' @examples
@@ -32,12 +34,22 @@
 #' @export
 get_dists <- function(dat_in, lon = 'lon', lat = 'lat'){
   
-	dat <- dat_in[,c(lon, lat)]
-  names(dat) <- c('lon', 'lat')
+	dat <- dat_in[,c('activity', lon, lat)]
+  names(dat) <- c('activity', 'lon', 'lat')
   
-	# column for distance
-  x <- sapply(2:nrow(dat_in), function(y){geosphere::distm(dat[y-1,], dat[y,])/1000})
+	# distances by activity
+  out <- split(dat, dat$activity)
+  out <- lapply(out, function(x){
+  	
+  	x <- x[, c('lon', 'lat')]
+  	x <- sapply(2:nrow(x), function(y){geosphere::distm(x[y-1,], x[y,])/1000})
   
-  return(c(0, cumsum(x)))
+  	return(c(0, cumsum(x)))
+  
+  })
+  	
+  out <- as.numeric(unlist(out))
+  
+  return(out)
   
 }

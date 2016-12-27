@@ -9,13 +9,14 @@
 get_heat_map(act_data, ...)
 
 \method{get_heat_map}{list}(act_data, acts = 1, alpha = NULL, f = 0.1,
-  key = NULL, add_elev = FALSE, as_grad = FALSE, size = 0.5,
-  col = "red", expand = 10, maptype = "terrain", source = "google",
-  units = "metric", ...)
+  key = NULL, add_elev = FALSE, as_grad = FALSE, dist = TRUE,
+  distval = 0, size = 0.5, col = "red", expand = 10,
+  maptype = "terrain", source = "google", units = "metric", ...)
 
 \method{get_heat_map}{actframe}(act_data, alpha = NULL, f = 1, key = NULL,
-  add_elev = FALSE, as_grad = FALSE, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", source = "google", ...)
+  add_elev = FALSE, as_grad = FALSE, dist = TRUE, distval = 0,
+  size = 0.5, col = "red", expand = 10, maptype = "terrain",
+  source = "google", ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -33,6 +34,10 @@ get_heat_map(act_data, ...)
 \item{add_elev}{logical indicating if elevation is overlayed by color shading on the activity lines}
 
 \item{as_grad}{logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}}
+
+\item{dist}{logical if distance is plotted along the route with \code{\link[ggrepel]{geom_label_repel}}}
+
+\item{distval}{numeric indicating rounding factor for distance labels which has direct control on label density, see details}
 
 \item{size}{numeric indicating width of activity lines}
 
@@ -56,6 +61,8 @@ Makes a heat map from your activity data
 uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
 
 The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
+
+The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequenc of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc.
 }
 \examples{
 \dontrun{
@@ -72,7 +79,8 @@ get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = '
 
 # compile first, change units
 my_acts <- compile_activities(my_acts, acts = 156, units = 'imperial')
-get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2, maptype = 'satellite')
+get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2, 
+  maptype = 'satellite')
 }
 }
 \author{

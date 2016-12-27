@@ -33,7 +33,7 @@ help.search('notoken', package = 'rStrava')
 help.search('token', package = 'rStrava')
 ```
 
-#### Scraping functions (no token)
+### Scraping functions (no token)
 
 An example using the scraping functions:
 
@@ -124,9 +124,9 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ##       6955.8000        294.7833      84843.0000        480.0000
 ```
 
-#### API functions (token)
+### API functions (token)
 
-##### Setup 
+#### Setup 
 
 These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieval function in the rStrava package requires an authentication token (called `stoken` in the help documents).  The following is a suggested workflow for using the API functions with rStrava.
 
@@ -147,7 +147,7 @@ Setting `cache = TRUE` for `strava_oauth` will create an authentication file in 
 stoken <- httr::config(token = readRDS('.httr-oauth')[[1]])
 ```
 
-Finally, the `get_heat_map` and `fget_elev_prof` optionally retrieve elevation data from the Google elevation API. To use these features, an additional authentication key is required.  Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
+Finally, the `get_heat_map` and `get_elev_prof` functions optionally retrieve elevation data from the Google Maps Elevation API. To use these features, an additional authentication key is required.  Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
 
 
 ```r
@@ -160,7 +160,7 @@ cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
 mykey <- Sys.getenv("google_key")
 ```
 
-##### Using the functions
+#### Using the functions
 
 The API retrieval functions are used with the token.
 
@@ -196,7 +196,7 @@ An example creating a heat map of activities:
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
-get_heat_map(my_acts, acts = which(acts), source = 'osm', col = 'darkgreen', size = 2)
+get_heat_map(my_acts, acts = which(acts), source = 'osm', col = 'darkgreen', size = 2, dist = F)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
