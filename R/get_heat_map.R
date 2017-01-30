@@ -113,7 +113,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
 	
 	# map and base plot
-	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype, source = source)))
+	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
 	pbase <- ggmap::ggmap(map) +
 		ggplot2::coord_fixed(ratio = 1) +
 		ggplot2::theme(axis.title = ggplot2::element_blank())

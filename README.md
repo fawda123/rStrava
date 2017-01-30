@@ -52,22 +52,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Pensacola, FL"
 ## 
 ## $`2837007`$current_month
-##   Distance       Time  Elevation 
-##  336.30000   22.38333 1287.00000 
+##  Distance      Time Elevation 
+##     336.7      23.6    2630.0 
 ## 
 ## $`2837007`$monthly
-## Dec 2015 Jan 2016      Feb      Mar      Apr      May      Jun      Jul 
-## 401.5522 441.7075 346.3388 466.8045 466.8045 366.4164 461.7851 466.8045 
-##      Aug      Sep      Oct      Nov      Dec 
-## 326.2612 451.7463 441.7075 326.2612 336.3000 
+## Jan 2016      Feb      Mar      Apr      May      Jun      Jul      Aug 
+## 442.2328 346.7507 467.3597 467.3597 366.8522 462.3343 467.3597 326.6493 
+##      Sep      Oct      Nov      Dec Jan 2017 
+## 452.2836 442.2328 326.6493 397.0045 336.7000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         4658.7          296.8        27723.0          362.0 
+##          301.7           19.0         2208.0           26.0 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       17418.800        1044.583      112257.000        1280.000 
+##       17776.600        1067.267      114915.000        1311.000 
 ## 
 ## 
 ## $`2527465`
@@ -78,22 +78,24 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
 ## 
 ## $`2527465`$current_month
-##   Distance       Time  Elevation 
-##  703.40000   35.93333 2739.00000 
+##  Distance      Time Elevation 
+##    504.80     24.15   2675.00 
 ## 
 ## $`2527465`$monthly
-##  Dec 2015  Jan 2016       Feb       Mar       Apr       May       Jun 
-##  394.5902   34.3122  188.7171  411.7463  411.7463  669.0878  360.2780 
-##       Jul       Aug       Sep       Oct       Nov       Dec 
-##  428.9024 1664.1415  411.7463  325.9659  548.9951  703.4000 
+##   Jan 2016        Feb        Mar        Apr        May        Jun 
+##   33.65333  185.09333  403.84000  403.84000  656.24000  353.36000 
+##        Jul        Aug        Sep        Oct        Nov        Dec 
+##  420.66667 1632.18667  403.84000  319.70667  538.45333 1009.60000 
+##   Jan 2017 
+##  504.80000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      6130.8000       339.2667     49588.0000       163.0000 
+##         504.80          24.15        2675.00          17.00 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      13994.8000        772.7167     169250.0000        499.0000 
+##         14815.3           813.3        173631.0           521.0 
 ## 
 ## 
 ## $`2140248`
@@ -104,24 +106,24 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Falmouth, England, United Kingdom"
 ## 
 ## $`2140248`$current_month
-##  Distance      Time Elevation 
-##    372.20     15.75   4459.00 
+##   Distance       Time  Elevation 
+##  267.80000   11.56667 3190.00000 
 ## 
 ## $`2140248`$monthly
-##   Dec 2015   Jan 2016        Feb        Mar        Apr        May 
-##   0.000000 138.074194   6.003226  78.041935 396.212903 240.129032 
-##        Jun        Jul        Aug        Sep        Oct        Nov 
-## 306.164516 558.300000 318.170968  54.029032 372.200000   0.000000 
-##        Dec 
-##   0.000000 
+##   Jan 2016        Feb        Mar        Apr        May        Jun 
+## 136.875556   5.951111  77.364444 392.773333 238.044444 303.506667 
+##        Jul        Aug        Sep        Oct        Nov        Dec 
+## 553.453333 315.408889  53.560000 368.968889   0.000000   0.000000 
+##   Jan 2017 
+## 267.800000 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      2417.0000       100.8833     28513.0000        79.0000 
+##      267.80000       11.56667     3190.00000        9.00000 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       6955.8000        294.7833      84843.0000        480.0000
+##         7223.70          306.35        88033.00          489.00
 ```
 
 ### API functions (token)
@@ -196,7 +198,7 @@ An example creating a heat map of activities:
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
-get_heat_map(my_acts, acts = which(acts), source = 'osm', col = 'darkgreen', size = 2, dist = F)
+get_heat_map(my_acts, acts = which(acts), col = 'darkgreen', size = 2, dist = F)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->

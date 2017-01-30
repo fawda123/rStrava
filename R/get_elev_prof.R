@@ -94,9 +94,11 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ..
 	
 	# total elevation gain needs to be numeric for unit conversion
 	lat_lon$total_elevation_gain <- round(as.numeric(as.character(lat_lon$total_elevation_gain)), 1)
+	lat_lon$activity <- as.numeric(as.character(lat_lon$upload_id))
+	lat_lon$upload_id <- NULL
 	
 	# get distances
-	distances <- dplyr::group_by(lat_lon, upload_id) %>%
+	distances <- dplyr::group_by(lat_lon, activity) %>%
 	  dplyr::do(data.frame(distance = get_dists(.)))
 	lat_lon$distance <- distances$distance
 	
@@ -124,7 +126,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ..
 		start_date = as.Date(start_date, format = '%Y-%m-%d'),
 		total_elevation_gain = paste('Elev. gain', total_elevation_gain)
 		) %>% 
-		tidyr::unite('facets', upload_id, start_date, total_elevation_gain, sep = ', ')
+		tidyr::unite('facets', activity, start_date, total_elevation_gain, sep = ', ')
 	
 	# get total climbed over distance
 	if(total){
