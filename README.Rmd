@@ -10,9 +10,15 @@ output:
 
 # rStrava
 
-##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com*
+##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk*
 
-### Overview and Installation
+Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
+
+Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
+
+![](api_logo_pwrdBy_strava_horiz_light.png)
+
+### Overview and installation
 
 This is the development repository for rStrava, an R package to access data from the Strava API.  The package can be installed and loaded as follows:
 
@@ -25,37 +31,34 @@ devtools::install_github('fawda123/rStrava')
 
 Please report any issues and suggestions on the [issues link](https://github.com/fawda123/rStrava/issues) for the repository.
 
-Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
-
-Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
-
 ### Package overview
 
-The functions are in two categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
+The functions are in three categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
 
-```{r eval = FALSE}
+```{r eval = F}
 help.search('notoken', package = 'rStrava')
 help.search('token', package = 'rStrava')
 ```
 
-#### Scraping functions
+### Scraping functions (no token)
 
 An example using the scraping functions:
-```{r echo = FALSE, message = FALSE}
+```{r echo = FALSE, message = FALSE, cache = F}
 devtools::load_all('.')
 ```
 ```{r message = FALSE}
 # get athlete data for these guys
-athl_fun(c(2837007, 2527465), trace = FALSE)
+athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ```
 
-#### API functions
+### API functions (token)
 
-These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instruction on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the peronsal API can be found [here](https://strava.github.io/api/).  Every API retrieveal function in the rStrava package requires an authentication token.  The following is a suggest workflow for using the API functions with rStrava.
+#### Setup 
 
-First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info.
+These functions require a Strava account and a personal API, both of which can be obtained on the Strava website.  The user account can be created by following instructions on the [Strava homepage](https://www.strava.com/).  After the account is created, a personal API can be created under API tab of [profile settings](https://www.strava.com/settings/api).  The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token.  Additional information about the personal API can be found [here](https://strava.github.io/api/).  Every API retrieval function in the rStrava package requires an authentication token (called `stoken` in the help documents).  The following is a suggested workflow for using the API functions with rStrava.
+
+First, create the authentication token using your personal information from your API.  Replace the `app_name`, `app_client_id`, and `app_secret` objects with the relevant info from your account.
 ```{r, eval = FALSE}
-
 app_name <- 'myappname' # chosen by user
 app_client_id  <- 'myid' # an integer, assigned by Strava
 app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
@@ -64,14 +67,59 @@ app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))
 ```
 
-The API retrieval functions can be used after the token is created.
-```{r echo = FALSE}
+Setting `cache = TRUE` for `strava_oauth` will create an authentication file in the working directory. This can be used in later sessions as follows:
+```{r, eval = FALSE}
+stoken <- httr::config(token = readRDS('.httr-oauth')[[1]])
+```
+
+Finally, the `get_heat_map` and `get_elev_prof` functions optionally retrieve elevation data from the Google Maps Elevation API. To use these features, an additional authentication key is required.  Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
+
+```{r eval = FALSE}
+# save the key, do only once
+cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
+    file=file.path(normalizePath("~/"), ".Renviron"),
+    append=TRUE)
+
+# retrieve the key, restart R if not found
+mykey <- Sys.getenv("google_key")
+```
+
+#### Using the functions
+
+The API retrieval functions are used with the token.
+```{r echo = FALSE, message = FALSE}
 source('extra.R')
 ```
 ```{r}
 myinfo <- get_athlete(stoken, id = '2837007')
 head(myinfo)
 ```
+
+An example creating a heat map of activities:
+```{r message = F, fig.height = 5.5, fig.width = 7, cache = TRUE}
+# get activities, get activities by location, plot
+my_acts <- get_activity_list(stoken)
+acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
+get_heat_map(my_acts, acts = which(acts), col = 'darkgreen', size = 2, dist = F)
+```
+
+Plotting elevation and grade for a single ride:
+```{r}
+# plot elevation along a single ride
+get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.1, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+
+# plot % gradient along a single ride
+get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.1, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+```
+
+Get elevation profiles for activities:
+```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
+# get activities
+my_acts <- get_activity_list(stoken) 
+
+get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial')
+get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
+```  
 
 ### License
 

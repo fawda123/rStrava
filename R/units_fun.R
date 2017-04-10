@@ -6,11 +6,13 @@
 #'
 #' @import XML
 #' 
+#' @export
+#' 
 #' @concept notoken
 units_fun <- function(xml_in){
-	
+
 	uni_val <- xpathSApply(xml_in, "//abbr[@class='unit']", xmlValue)
-	uni_val <- unique(uni_val)
+	uni_val <- uni_val[1:4]
 	
 	return(uni_val)
 	

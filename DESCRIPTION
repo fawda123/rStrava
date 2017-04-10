@@ -1,27 +1,38 @@
 Package: rStrava
 Type: Package
 Title: Access the Strava API
-Version: 0.3.9000
-Date: 2015-06-23
-Description: Functions to access data from Strava's v3 API. 
+Version: 0.12.9000
+Date: 2017-01-30
+Description: Functions to access data from Strava's v3 API.
 LazyData: TRUE
 BugReports: https://github.com/fawda123/rStrava/issues
 License: CC0
 Imports:
-		httr,
-		plyr,
-		RCurl,
-		XML
-Suggests:
-    ggplot2
+    bitops,
+    dplyr,
+		geosphere,
+    ggmap,
+    ggplot2,
+    ggrepel,
+    httr,
+    magrittr,
+    plyr,
+    RCurl,
+    rgbif,
+    tidyr,
+    XML
 Depends:
     R (>= 3.1.1)
 Authors@R: c(
 	person(given = "Marcus W.", family = "Beck",
-    role = c("aut","cre"),
+    role = c("cre"),
     email = "mbafs2012@gmail.com"),
-	person(given = c("Pedro", family = "Villarroel",
-    role = c("aut","cre"),
-    email = "pedrodvf@gmail.com")
-    )
-  )
+	person(given = "Pedro", family = "Villarroel",
+    role = c("aut"),
+    email = "pedrodvf@gmail.com"
+    ), 
+  person(given = "Daniel", family = "Padfield",
+  	role = c("aut"), 
+  	email = "dp323@exeter.ac.uk")
+  	)
+RoxygenNote: 5.0.1

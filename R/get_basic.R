@@ -10,9 +10,22 @@
 #' 
 #' @return Data from an API request.
 #' 
+#' @export
+#' 
 #' @concept token
 #' 
 #' @import httr
+#' 
+#' @examples 
+#' \dontrun{
+#' # create authentication token
+#' # requires user created app name, id, and secret from Strava website
+#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
+#' 	app_secret, cache = TRUE))
+#' 
+#' # get basic user info
+#' get_basic('https://strava.com/api/v3/athlete', stoken)
+#' }
 get_basic <- function(url_, stoken, queries = NULL){
 	
 	req <- GET(url_, stoken, query = queries)

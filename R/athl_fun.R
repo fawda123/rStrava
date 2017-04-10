@@ -11,7 +11,7 @@
 #' 
 #' @concept notoken
 #' 
-#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.
+#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.
 #' 
 #' @examples
 #' ## single athlete

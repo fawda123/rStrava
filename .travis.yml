@@ -4,6 +4,29 @@ language: r
 warnings_are_errors: true
 sudo: required
 
+requirements:
+  build:
+    - r
+    - r-ggmap
+    - r-V8
+    - r-geoaxe
+    - r-rgbif
+    - r-rgeos
+  run:
+    - r
+    - r-ggmap
+    - r-V8
+    - r-geoaxe
+    - r-rgbif
+    - r-rgeos
+
+addons:
+  apt:
+    packages:
+      - libwebp-dev
+      - libpoppler-cpp-dev
+      - valgrind
+      
 env:
  global:
    - CRAN: http://cran.rstudio.com

@@ -8,11 +8,13 @@
 #' 
 #' @concept notoken
 #' 
+#' @export
+#' 
 #' @return 	A list with elements for the athlete id, units of measurement, location, monthly data, year-to-date data, and an all-time summary.
 athlind_fun <- function(athl_num){
 	
 	# get unparsed url text using input
-	url_in <- paste0('http://www.strava.com/athletes/', athl_num)
+	url_in <- paste0('https://www.strava.com/athletes/', athl_num)
 	
 	athl_exists <- url.exists(url_in)
 	
@@ -23,7 +25,7 @@ athlind_fun <- function(athl_num){
 	
 	# url as HTMLInternalDoc
 	prsd <- htmlTreeParse(athl_url, useInternalNodes = TRUE)
-	
+
 	# get units of measurement
 	unts <- units_fun(prsd)
 	
@@ -37,11 +39,12 @@ athlind_fun <- function(athl_num){
 	
 	# year to date and all time summary
 	summ <- summ_fun(prsd)
-	
+
 	# output
 	out <- list(
 		units = unts, 
 		location = loc, 
+		current_month = summ[['current_month']],
 		monthly = monthly, 
 		year_to_date = summ[['year_to_date']],
 		all_time = summ[['all_time']]

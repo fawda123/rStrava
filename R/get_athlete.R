@@ -11,10 +11,17 @@
 #' 
 #' @concept token
 #' 
+#' @export
+#' 
 #' @import httr
 #' 
 #' @examples
 #' \dontrun{
+#' # create authentication token
+#' # requires user created app name, id, and secret from Strava website
+#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
+#' 	app_secret, cache = TRUE))
+#' 
 #' get_athlete(stoken, id = '2527465')
 #' }
 get_athlete <-function(stoken, id = NULL){

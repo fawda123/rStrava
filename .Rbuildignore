@@ -6,3 +6,9 @@ examples.r
 .httr-oauth
 ^\.travis\.yml$
 ^appveyor\.yml$
+^README.*
+^README_files/.*
+^README_cache/.*
+Thumbs.db 
+api_logo_pwrdBy_strava_horiz_light.png 
+ggmapTemp.png

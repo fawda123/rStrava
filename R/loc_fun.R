@@ -4,6 +4,8 @@
 #' 
 #' @param xml_in input HTMLInternalDocument from \code{\link[RCurl]{getURL}}
 #'
+#' @export
+#' 
 #' @import XML
 #' 
 #' @concept notoken
