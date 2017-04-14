@@ -4,7 +4,8 @@
 \alias{get_following}
 \title{Get followers, friends, or both-following}
 \usage{
-get_following(following, stoken, id = NULL)
+get_following(following, stoken, id = NULL, per_page = 200, page_id = 1,
+  page_max = 1, All = FALSE, ...)
 }
 \arguments{
 \item{following}{string equal to `friends', `followers', or `both-following'}
@@ -12,6 +13,16 @@ get_following(following, stoken, id = NULL)
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
 \item{id}{string or integer of athlete, taken from \code{stoken} if \code{NULL}}
+
+\item{per_page}{numeric for number of friends or followers to return from the request.}
+
+\item{page_id}{numeric indicating page id}
+
+\item{page_max}{numeric indicating maximum number of pages to return}
+
+\item{All}{logical for retrieving all the friends or followers when they are more than 200.}
+
+\item{...}{optional arguments to the \code{\link{get_pages}} function.}
 }
 \value{
 Data from an API request.
@@ -20,7 +31,7 @@ Data from an API request.
 Get followers or friends of the athlete or both-following relative to another user
 }
 \details{
-Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
+Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website. The default values will return the first page with up to 200 profiles. Use \code{All = TRUE} for retrieving all the profiles when having more than 200 friends or followers. You can pass other arguments to the \code{\link{get_pages}} function to have better control of the amount of users to download
 }
 \examples{
 \dontrun{
@@ -30,6 +41,12 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 	app_secret, cache = TRUE))
 
 get_following('friends', stoken)
+
+# retrieve up to 1000 followers
+get_following('followers', stoken, page_max=5)
+
+# retrieve all the friends. Be carefull with the API rate limits
+get_following('friends', stoken, All = TRUE)
 }
 }
 \concept{
