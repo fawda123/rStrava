@@ -33,7 +33,7 @@ Please report any issues and suggestions on the [issues link](https://github.com
 
 ### Package overview
 
-The functions are in three categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
+The functions are in two categories depending on mode of use.  The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions.  The second category requires an authentication token.  The help files for each category can be viewed using ```help.search```:
 
 ```{r eval = F}
 help.search('notoken', package = 'rStrava')
