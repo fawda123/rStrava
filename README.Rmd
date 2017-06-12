@@ -121,6 +121,12 @@ get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial')
 get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
 ```  
 
+Plot average speed per split (km or mile) for an activity:
+```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
+# plots for most recent activity
+get_spdsplits(my_acts, stoken, acts = 1)
+```
+
 ### License
 
 This package is released in the public domain under the creative commons license [CC0](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal). 

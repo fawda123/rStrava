@@ -53,21 +53,21 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## 
 ## $`2837007`$current_month
 ##  Distance      Time Elevation 
-##     219.5      17.6    1847.0 
+##     130.7       8.4    1782.0 
 ## 
 ## $`2837007`$monthly
-## May 2016      Jun      Jul      Aug      Sep      Oct      Nov      Dec 
-## 364.1705 458.9545 463.9432 324.2614 448.9773 439.0000 324.2614 394.1023 
-## Jan 2017      Feb      Mar      Apr      May 
-## 369.1591 219.5000 374.1477 374.1477 219.5000 
+## Jun 2016      Jul      Aug      Sep      Oct      Nov      Dec Jan 2017 
+## 462.4769 467.5038 326.7500 452.4231 442.3692 326.7500 397.1269 371.9923 
+##      Feb      Mar      Apr      May      Jun 
+## 221.1846 377.0192 377.0192 256.3731 130.7000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     1406.80000       91.38333    10919.00000      123.00000 
+##      1568.9000       101.7333     13156.0000       136.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       18881.800        1139.667      123625.000        1408.000 
+##         19043.9          1150.0        125863.0          1421.0 
 ## 
 ## 
 ## $`2527465`
@@ -82,10 +82,10 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ##  190.10000   12.46667 1014.00000 
 ## 
 ## $`2527465`$monthly
-##  May 2016       Jun       Jul       Aug       Sep       Oct       Nov 
-##  673.9909  362.9182  432.0455 1676.3364  414.7636  328.3545  553.0182 
-##       Dec  Jan 2017       Feb       Mar       Apr       May 
-## 1036.9091  570.3000  414.7636  449.3273  190.1000    0.0000 
+##  Jun 2016       Jul       Aug       Sep       Oct       Nov       Dec 
+##  362.9182  432.0455 1676.3364  414.7636  328.3545  553.0182 1036.9091 
+##  Jan 2017       Feb       Mar       Apr       May       Jun 
+##  570.3000  414.7636  449.3273  190.1000    0.0000    0.0000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
@@ -104,22 +104,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Falmouth, England, United Kingdom"
 ## 
 ## $`2140248`$current_month
-##   Distance       Time  Elevation 
-##  273.40000   14.41667 3187.00000 
+##    Distance        Time   Elevation 
+##   70.700000    4.366667 1278.000000 
 ## 
 ## $`2140248`$monthly
-##  May 2016       Jun       Jul       Aug       Sep       Oct       Nov 
-## 237.73913 303.11739 552.74348 315.00435  53.49130 368.49565   0.00000 
-##       Dec  Jan 2017       Feb       Mar       Apr       May 
-##   0.00000 267.45652  83.20870  71.32174 297.17391 273.40000 
+##  Jun 2016       Jul       Aug       Sep       Oct       Nov       Dec 
+## 300.47500 547.92500 312.25833  53.02500 365.28333   0.00000   0.00000 
+##  Jan 2017       Feb       Mar       Apr       May       Jun 
+## 265.12500  82.48333  70.70000 294.58333 276.90833  70.70000 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         842.40          35.75       10599.00          26.00 
+##      881.30000       37.63333    11262.00000       27.00000 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       7798.3000        330.5333      95442.0000        506.0000
+##       7837.1000        332.4167      96105.0000        507.0000
 ```
 
 ### API functions (token)
@@ -231,6 +231,15 @@ get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
+
+Plot average speed per split (km or mile) for an activity:
+
+```r
+# plots for most recent activity
+get_spdsplits(my_acts, stoken, acts = 1)
+```
+
+![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 ### License
 
