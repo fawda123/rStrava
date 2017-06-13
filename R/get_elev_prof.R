@@ -12,6 +12,7 @@
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.  
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
+#' @param fill chr string of fill color for profile
 #' @param ... arguments passed to or from other methods
 #' 
 #' @details The Google API key is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
@@ -44,12 +45,12 @@ get_elev_prof <- function(act_data, ...) UseMethod('get_elev_prof')
 #' @export
 #'
 #' @method get_elev_prof list
-get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 10, units = 'metric', ...){
+get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 10, units = 'metric', fill = 'darkblue', ...){
 
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
 
-	get_elev_prof.actframe(act_data, key = key, total = total, expand = expand, ...)
+	get_elev_prof.actframe(act_data, key = key, total = total, expand = expand, fill = fill, ...)
 	
 }
 
@@ -58,7 +59,7 @@ get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 
 #' @export
 #'
 #' @method get_elev_prof actframe
-get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ...){
+get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fill = 'darkblue', ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
@@ -138,7 +139,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, ..
 	}
 		
 	p <- ggplot2::ggplot(data = lat_lon, ggplot2::aes(x = distance)) +
-	  ggplot2::geom_ribbon(ggplot2::aes(ymax = ele, ymin = min (ele) - ((max(ele) - min(ele))/5)), fill = 'dark blue') +
+	  ggplot2::geom_ribbon(ggplot2::aes(ymax = ele, ymin = min (ele) - ((max(ele) - min(ele))/5)), fill = fill) +
 	  ggplot2::theme_bw() +
 		ggplot2::facet_wrap(~facets, ncol = 1) + 
 	  ggplot2::ylab(ylab) +

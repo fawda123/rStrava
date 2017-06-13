@@ -8,11 +8,11 @@
 \usage{
 get_spdsplits(act_data, ...)
 
-\method{get_spdsplits}{list}(act_data, stoken, acts = 1, col = "darkgrey",
-  units = "metric", ...)
+\method{get_spdsplits}{list}(act_data, stoken, acts = 1, units = "metric",
+  fill = "darkblue", ...)
 
-\method{get_spdsplits}{actframe}(act_data, stoken, col = "darkgrey",
-  units = "metric", ...)
+\method{get_spdsplits}{actframe}(act_data, stoken, units = "metric",
+  fill = "darkblue", ...)
 }
 \arguments{
 \item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -23,9 +23,9 @@ get_spdsplits(act_data, ...)
 
 \item{acts}{numeric indicating which activity to plot based on index in \code{actlist}, defaults to most recent}
 
-\item{col}{chr string indicating a color for the bars in the plot}
-
 \item{units}{chr string indicating plot units as either metric or imperial}
+
+\item{fill}{chr string of fill color for profile}
 }
 \value{
 plot of average distance for each split value in the activity
