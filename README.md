@@ -7,7 +7,7 @@ Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?bra
 
 Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
 
-[![DOI](https://zenodo.org/badge/22622714.svg)](https://zenodo.org/badge/latestdoi/22622714)
+[![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
 ![](api_logo_pwrdBy_strava_horiz_light.png)
 
