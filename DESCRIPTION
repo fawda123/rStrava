@@ -35,4 +35,4 @@ Authors@R: c(
   	role = c("aut"), 
   	email = "dp323@exeter.ac.uk")
   	)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
