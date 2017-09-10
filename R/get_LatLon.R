@@ -14,7 +14,9 @@
 #' }
 #' @export
 get_LatLon <- function(x, .id_col){
-	y <- decode_Polyline(x$map.summary_polyline)
+	if('map.summary_polyline' %in% names(x)){y <- decode_Polyline(x$map.summary_polyline)}
+	if('map.polyline' %in% names(x)){y <- decode_Polyline(x$map.polyline)}
+	
 	y[,.id_col] <- unique(x[,.id_col])
 	return(y)
 }
