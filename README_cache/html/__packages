@@ -2,3 +2,4 @@ base
 rStrava
 httr
 httpuv
+bindrcpp

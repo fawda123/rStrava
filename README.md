@@ -55,21 +55,21 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## 
 ## $`2837007`$current_month
 ##  Distance      Time Elevation 
-##    153.70      9.85   2135.00 
+##    173.10     12.15   2590.00 
 ## 
 ## $`2837007`$monthly
-## Jun 2016      Jul      Aug      Sep      Oct      Nov      Dec Jan 2017 
-## 456.1419 461.1000 322.2742 446.2258 436.3097 322.2742 391.6871 366.8968 
-##      Feb      Mar      Apr      May      Jun 
-## 218.1548 371.8548 371.8548 252.8613 153.7000 
+## Sep 2016      Oct      Nov      Dec Jan 2017      Feb      Mar      Apr 
+## 450.9711 446.4158 327.9789 400.8632 373.5316 223.2079 378.0868 378.0868 
+##      May      Jun      Jul      Aug      Sep 
+## 255.0947 318.8684 327.9789 173.1000   0.0000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      1591.9000       103.1667     13510.0000       138.0000 
+##         2207.4          145.0        25778.0          189.0 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##        19066.90         1151.45       126217.00         1423.00 
+##       19682.400        1193.283      138484.000        1474.000 
 ## 
 ## 
 ## $`2527465`
@@ -81,21 +81,21 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## 
 ## $`2527465`$current_month
 ##   Distance       Time  Elevation 
-##  190.10000   12.46667 1014.00000 
+##  207.00000   12.93333 2454.00000 
 ## 
 ## $`2527465`$monthly
-##  Jun 2016       Jul       Aug       Sep       Oct       Nov       Dec 
-##  362.9182  432.0455 1676.3364  414.7636  328.3545  553.0182 1036.9091 
-##  Jan 2017       Feb       Mar       Apr       May       Jun 
-##  570.3000  414.7636  449.3273  190.1000    0.0000    0.0000 
+## Sep 2016      Oct      Nov      Dec Jan 2017      Feb      Mar      Apr 
+##   393.30   320.85   538.20  1003.95   548.55   403.65   445.05   186.30 
+##      May      Jun      Jul      Aug      Sep 
+##     0.00     0.00    62.10   238.05   207.00 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##        1607.10          81.55        7485.00          51.00 
+##      2122.8000       113.8833     13398.0000        79.0000 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         15917.6           870.7        178441.0           555.0 
+##      16433.4000        903.0333     184354.0000        583.0000 
 ## 
 ## 
 ## $`2140248`
@@ -106,22 +106,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Falmouth, England, United Kingdom"
 ## 
 ## $`2140248`$current_month
-##    Distance        Time   Elevation 
-##   80.800000    5.183333 1442.000000 
+##   Distance       Time  Elevation 
+##  308.20000   15.88333 4819.00000 
 ## 
 ## $`2140248`$monthly
-##  Jun 2016       Jul       Aug       Sep       Oct       Nov       Dec 
-## 316.98462 578.03077 329.41538  55.93846 385.35385   0.00000   0.00000 
-##  Jan 2017       Feb       Mar       Apr       May       Jun 
-## 279.69231  87.01538  74.58462 310.76923 292.12308  80.80000 
+##  Sep 2016       Oct       Nov       Dec  Jan 2017       Feb       Mar 
+##  54.38824 374.67451   0.00000   0.00000 271.94118  84.60392  72.51765 
+##       Apr       May       Jun       Jul       Aug       Sep 
+## 302.15686 284.02745 181.29412 429.06275 555.96863 308.20000 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      881.30000       37.63333    11262.00000       27.00000 
+##     2064.20000       85.71667    28660.00000       94.00000 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       7837.1000        332.4167      96105.0000        507.0000
+##          9020.1           380.5        113503.0           574.0
 ```
 
 ### API functions (token)
@@ -238,7 +238,7 @@ Plot average speed per split (km or mile) for an activity:
 
 ```r
 # plots for most recent activity
-get_spdsplits(my_acts, stoken, acts = 1)
+get_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
 ```
 
 ![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
