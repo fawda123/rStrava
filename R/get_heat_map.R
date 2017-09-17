@@ -126,7 +126,12 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 			stop('Google API key is required if plotting elevation')
 
 		# get elevation
-		temp$ele <- rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
+		ele <- try({
+			rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
+		})
+		if(class(ele) %in% 'try-error')
+			stop('Elevation not retrieved, check API key')
+		temp$ele <- ele
 		temp$ele <- pmax(0, temp$ele)
 		
 		# change units if imperial

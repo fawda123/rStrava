@@ -104,7 +104,12 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 	lat_lon$distance <- distances$distance
 	
 	# adding elevation using rgbif
-	lat_lon$ele <- rgbif::elevation(latitude = lat_lon$lat, longitude = lat_lon$lon, key = key)$elevation
+	ele <- try({
+		rgbif::elevation(latitude = lat_lon$lat, longitude = lat_lon$lon, key = key)$elevation
+	})
+	if(class(ele) %in% 'try-error')
+		stop('Elevation not retrieved, check API key')
+	lat_lon$ele <- ele
 	lat_lon$ele <- pmax(0, lat_lon$ele)
 	
 	# axis labels
