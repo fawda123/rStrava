@@ -4,8 +4,7 @@
 #' 
 #' @param dat_in input data frame
 #' @param lon chr string indicating name of longitude column in \code{dat_in}
-#' @param lat chr string indicating name of latitude column in \code{dat_in}
-#' @param split_col chr string indicating the column with which to split the data in \code{dat_in}
+#' @param lat chr string indicating name of latitude column in \code{dat_in} in \code{dat_in}
 #' 
 #' @author Daniel Padfield
 #'
@@ -33,23 +32,13 @@
 #' get_dists(latlon)
 #' }
 #' @export
-get_dists <- function(dat_in, lon = 'lon', lat = 'lat', split_col = 'activity'){
+get_dists <- function(dat_in, lon = 'lon', lat = 'lat'){
   
-	dat <- dat_in[,c(activity, lon, lat)]
-  names(dat) <- c('activity', 'lon', 'lat')
+	dat <- dat_in[,c(lon, lat)]
+  names(dat) <- c('lon', 'lat')
   
 	# distances by activity
-  out <- split(dat, dat$activity)
-  out <- lapply(out, function(x){
-  	
-  	x <- x[, c('lon', 'lat')]
-  	x <- sapply(2:nrow(x), function(y){geosphere::distm(x[y-1,], x[y,])/1000})
-    
-  	return(c(0, cumsum(x)))
-  
-  })
-  	
-  out <- as.numeric(unlist(out))
+  out <- sapply(2:nrow(dat), function(y){geosphere::distm(dat[y-1,], dat[y,])/1000})
+  out <- 	c(0, cumsum(out))
   return(out)
-  
 }
