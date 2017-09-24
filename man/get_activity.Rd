@@ -35,4 +35,3 @@ get_activity(75861631, stoken)
 \concept{
 token
 }
-

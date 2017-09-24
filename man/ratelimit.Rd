@@ -21,4 +21,3 @@ Requests to the Strava API are rate-limited. The default rate limit allows 600 r
 \concept{
 token
 }
-

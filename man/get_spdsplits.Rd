@@ -2,39 +2,22 @@
 % Please edit documentation in R/get_spdsplits.R
 \name{get_spdsplits}
 \alias{get_spdsplits}
-\alias{get_spdsplits.actframe}
-\alias{get_spdsplits.list}
-\title{Plot speed by splits}
+\title{Get speed splits in a dataframe}
 \usage{
-get_spdsplits(act_data, ...)
-
-\method{get_spdsplits}{list}(act_data, stoken, acts = 1, units = "metric",
-  fill = "darkblue", ...)
-
-\method{get_spdsplits}{actframe}(act_data, stoken, units = "metric",
-  fill = "darkblue", ...)
+get_spdsplits(act_id, stoken, units = "metric")
 }
 \arguments{
-\item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
-
-\item{...}{arguments passed to other methods}
+\item{act_id}{a vector of activity IDs. These are easily found in the \code{data.frame} returned by \code{\link{compile_activities}}}
 
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{acts}{numeric indicating which activity to plot based on index in \code{actlist}, defaults to most recent}
-
 \item{units}{chr string indicating plot units as either metric or imperial}
-
-\item{fill}{chr string of fill color for profile}
 }
 \value{
-plot of average distance for each split value in the activity
+a data frame containing the splits of the activity or activities selected.
 }
 \description{
-Plot average speed by splits for a single activity
-}
-\details{
-The average speed per split is plotted, including a dashed line for the overall average.  The final split is typically not a complete km or mile.
+Allows the return of speed splits of multiple rides.
 }
 \examples{
 \dontrun{
@@ -42,8 +25,8 @@ The average speed per split is plotted, including a dashed line for the overall 
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 my_acts <- get_activity_list(stoken)
 
-# default
-get_spdsplits(my_acts, stoken, acts = 1)
+get spdsplits for all rides
+spd_splits <- purrr::map_df(my_acts$id, get_spdsplits, stoken = stoken, units = 'metric', .id = 'id')
 }
 }
 \author{
@@ -52,4 +35,3 @@ Marcus Beck
 \concept{
 token
 }
-

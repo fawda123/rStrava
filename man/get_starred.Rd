@@ -33,4 +33,3 @@ get_starred(stoken)
 \concept{
 token
 }
-

@@ -1,23 +1,15 @@
-#' Plot speed by splits
+#' Get speed splits in a dataframe
 #'
-#' Plot average speed by splits for a single activity
+#' Allows the return of speed splits of multiple rides.
 #'
 #' @author Marcus Beck
 #' 
 #' @concept token
 #' 
-#' @param act_data an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
+#' @param act_id a vector of activity IDs. These are easily found in the \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param acts numeric indicating which activity to plot based on index in \code{actlist}, defaults to most recent
 #' @param units chr string indicating plot units as either metric or imperial
-#' @param fill chr string of fill color for profile
-#' @param ... arguments passed to other methods
-#' 
-#' @details The average speed per split is plotted, including a dashed line for the overall average.  The final split is typically not a complete km or mile.  
-#' 
-#' @return plot of average distance for each split value in the activity
-#' 
-#' @export
+#' @return a data frame containing the splits of the activity or activities selected.
 #' 
 #' @import magrittr
 #' 
@@ -27,34 +19,15 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' my_acts <- get_activity_list(stoken)
 #' 
-#' # default
-#' get_spdsplits(my_acts, stoken, acts = 1)
+#' get spdsplits for all rides
+#' spd_splits <- purrr::map_df(my_acts$id, get_spdsplits, stoken = stoken, units = 'metric', .id = 'id')
 #' }
-get_spdsplits <- function(act_data, ...) UseMethod('get_spdsplits')
+#' @export get_spdsplits
 
-#' @rdname get_spdsplits
-#'
-#' @export
-#'
-#' @method get_spdsplits list
-get_spdsplits.list <- function(act_data, stoken, acts = 1, units = 'metric', fill = 'darkblue', ...){
-	
-	# compile
-	act_data <- compile_activities(act_data, acts = acts, units = units)
-
-	get_spdsplits.actframe(act_data, stoken, size = size, units = units, fill = fill, ...)	
-	
-}
-
-#' @rdname get_spdsplits
-#'
-#' @export
-#'
-#' @method get_spdsplits actframe
-get_spdsplits.actframe <- function(act_data, stoken, units = 'metric', fill = 'darkblue', ...){
+get_spdsplits <- function(act_id, stoken, units = 'metric'){
 	
 	# get the activity, split speeds are not in the actframe
-	act <- get_activity(act_data$id[1], stoken)
+	act <- rStrava::get_activity(act_id, stoken)
 	
 	# split type
 	sptyp <- paste0('splits_', units)
@@ -64,35 +37,13 @@ get_spdsplits.actframe <- function(act_data, stoken, units = 'metric', fill = 'd
 	splt <- lapply(act[[sptyp]], function(x) x[['average_speed']]) %>% 
 		do.call('rbind', .) %>% 
 		data.frame(spd = ., split = 1:length(.))
-	splt$spd <- 3.6 * splt$spd 
-	ave <- 3.6 * act$average_speed
-	
-	# ylabel
-	ylab <- 'Average Speed (km/hr)'
-	xlab <- 'Split (km)'
+	splt$spd <- 3.6 * splt$spd
+	splt2 <- lapply(act[[sptyp]], function(x) x[['elapsed_time']]) %>% 
+		do.call('rbind', .) %>% 
+		data.frame(elapsed_time = .)
 	if(units == 'imperial'){
-		
 		# m/s to mph
 		splt$spd <- splt$spd * 0.621371
-		ave <- 0.621371 * ave
-		
-		ylab <- gsub('km', 'mi', ylab)
-		xlab <- gsub('km', 'mi', xlab)
-		
 	}
-	
-	p <- ggplot2::ggplot(splt, ggplot2::aes(x = factor(split), y = spd)) + 
-		ggplot2::geom_bar(stat = 'identity', fill = fill) + 
-		ggplot2::theme_bw() +
-		# ggplot2::theme(
-		# 	panel.grid.major = ggplot2::element_blank(),
-		# 	panel.grid.minor = ggplot2::element_blank()
-		# ) +
-		ggplot2::scale_x_discrete(xlab) +
-		ggplot2::scale_y_continuous(ylab) +
-		ggplot2::geom_hline(ggplot2::aes(yintercept = ave), linetype = 'dashed')
-	
-	return(p)
-	
+	return(cbind(splt, splt2))
 }
-

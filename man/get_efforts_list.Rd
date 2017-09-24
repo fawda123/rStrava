@@ -40,4 +40,3 @@ get_efforts_list(stoken, id = 229781)
 \concept{
 token
 }
-

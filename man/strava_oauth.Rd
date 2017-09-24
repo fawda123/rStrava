@@ -27,4 +27,3 @@ The \code{app_name}, \code{app_client_id}, and \code{app_secret} are specific to
 \concept{
 token
 }
-

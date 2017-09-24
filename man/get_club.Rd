@@ -35,4 +35,3 @@ get_club(stoken)
 \concept{
 token
 }
-

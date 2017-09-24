@@ -4,16 +4,14 @@
 \alias{get_dists}
 \title{Get distance from longitude and latitude points}
 \usage{
-get_dists(dat_in, lon = "lon", lat = "lat", split_col = "activity")
+get_dists(dat_in, lon = "lon", lat = "lat")
 }
 \arguments{
 \item{dat_in}{input data frame}
 
 \item{lon}{chr string indicating name of longitude column in \code{dat_in}}
 
-\item{lat}{chr string indicating name of latitude column in \code{dat_in}}
-
-\item{split_col}{chr string indicating the column with which to split the data in \code{dat_in}}
+\item{lat}{chr string indicating name of latitude column in \code{dat_in} in \code{dat_in}}
 }
 \value{
 A vector of distances with the length as the number of rows in \code{dat_in}

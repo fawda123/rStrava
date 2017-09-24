@@ -2,8 +2,8 @@
 % Please edit documentation in R/get_heat_map.R
 \name{get_heat_map}
 \alias{get_heat_map}
-\alias{get_heat_map.actframe}
 \alias{get_heat_map.list}
+\alias{get_heat_map.actframe}
 \title{Makes a heat map from your activity data}
 \usage{
 get_heat_map(act_data, ...)
@@ -89,4 +89,3 @@ Daniel Padfield, Marcus Beck
 \concept{
 token
 }
-

@@ -22,13 +22,12 @@ When getting an activity using get_activity() a Google polyline is returned as o
 \dontrun{
 decode_Polyline()}
 }
-\author{
-Daniel Padfield
-}
 \references{
 Original code from : https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460
+}
+\author{
+Daniel Padfield
 }
 \concept{
 notoken
 }
-
