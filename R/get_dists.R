@@ -2,7 +2,6 @@
 #' 
 #' Get distance from longitude and latitude points
 #' 
-#' @param dat_in input data frame
 #' @param lon chr string indicating name of longitude column in \code{dat_in}
 #' @param lat chr string indicating name of latitude column in \code{dat_in} in \code{dat_in}
 #' 
@@ -10,7 +9,7 @@
 #'
 #' @details Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_all_LatLon}}
 #' 
-#' @concept token
+#' @concept notoken
 #' 
 #' @import magrittr
 #' 
@@ -29,12 +28,12 @@
 #' latlon <- get_all_LatLon('map.summary_polyline', acts_data)
 #' 
 #' # get distance
-#' get_dists(latlon)
+#' get_dists(latlon$lon, latlon$lat)
 #' }
 #' @export
-get_dists <- function(dat_in, lon = 'lon', lat = 'lat'){
+get_dists <- function(lon, lat){
   
-	dat <- dat_in[,c(lon, lat)]
+	dat <- data.frame(lon, lat)
   names(dat) <- c('lon', 'lat')
   
 	# distances by activity
