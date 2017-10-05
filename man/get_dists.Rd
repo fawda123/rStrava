@@ -4,11 +4,9 @@
 \alias{get_dists}
 \title{Get distance from longitude and latitude points}
 \usage{
-get_dists(dat_in, lon = "lon", lat = "lat")
+get_dists(lon, lat)
 }
 \arguments{
-\item{dat_in}{input data frame}
-
 \item{lon}{chr string indicating name of longitude column in \code{dat_in}}
 
 \item{lat}{chr string indicating name of latitude column in \code{dat_in} in \code{dat_in}}
@@ -35,12 +33,12 @@ acts_data <- compile_activities(my_acts)[1, ]
 latlon <- get_all_LatLon('map.summary_polyline', acts_data)
 
 # get distance
-get_dists(latlon)
+get_dists(latlon$lon, latlon$lat)
 }
 }
 \author{
 Daniel Padfield
 }
 \concept{
-token
+notoken
 }
