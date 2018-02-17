@@ -23,7 +23,7 @@
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
 #' 
-#' @details uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
+#' @details uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
 #' 
 #' The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 #' 
@@ -89,7 +89,9 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	if(is.null(alpha)) alpha <- 0.5
 	
 	# data to plot
-	temp <- get_all_LatLon('map.summary_polyline', act_data)
+	temp <- dplyr::group_by(act_data, map.summary_polyline) %>%
+		dplyr::do(get_latlon(.)) %>%
+		dplyr::ungroup()
 	temp$activity <- as.numeric(factor(temp$map.summary_polyline))
 	temp$map.summary_polyline <- NULL
 	
@@ -105,7 +107,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	temp <- do.call('rbind', temp)
 	
 	# get distances, default is km
-	temp <- dplyr::mutate(temp, distance = rStrava::get_dists(temp))
+	temp <- dplyr::mutate(temp, distance = get_dists(lat, lon))
 	if(unit_type %in% 'imperial')
 		temp$distance <- temp$distance * 0.621371
 

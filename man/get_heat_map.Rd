@@ -58,7 +58,7 @@ plot of activity on a Google map
 Makes a heat map from your activity data
 }
 \details{
-uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
+uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
 
 The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 
