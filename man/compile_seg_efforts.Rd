@@ -29,7 +29,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret,
 segments <- c(2269028, 5954625)
 
 # compile segment efforts
-segments \%>\% purrr::map_df(., .f = compile_segment_efforts, stoken = my_token, .id = 'id')
+segments \%>\% purrr::map_df(., .f = compile_seg_efforts, stoken = my_token, .id = 'id')
 }
 }
 \author{
