@@ -18,7 +18,7 @@ A vector of distances with the length as the number of rows in \code{dat_in}
 Get distance from longitude and latitude points
 }
 \details{
-Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_all_LatLon}}
+Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_latlon}}
 }
 \examples{
 \dontrun{

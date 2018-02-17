@@ -7,7 +7,7 @@
 #' 
 #' @author Daniel Padfield
 #'
-#' @details Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_all_LatLon}}
+#' @details Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_latlon}}
 #' 
 #' @concept notoken
 #' 
@@ -33,7 +33,7 @@
 #' @export
 get_dists <- function(lon, lat){
   
-	dat <- data.frame(lon, lat)
+	dat <- tibble::tibble(lon, lat)
   names(dat) <- c('lon', 'lat')
   
 	# distances by activity
