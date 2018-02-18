@@ -16,7 +16,7 @@ A vector of latitudes an longitudes in decimals separated by a comma
 Decodes Google's polyline that are given in get_activity() and get_activity_list()
 }
 \details{
-When getting an activity using get_activity() a Google polyline is returned as one of the outputs. This function converts the polyline into latitude and longitude coordinates suitable for plotting. Function is used internally within \code{\link{get_LatLon}} and \code{\link{get_all_LatLon}}.
+When getting an activity using get_activity() a Google polyline is returned as one of the outputs. This function converts the polyline into latitude and longitude coordinates suitable for plotting. Function is used internally within \code{\link{get_latlon}}.
 }
 \examples{
 \dontrun{
