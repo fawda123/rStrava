@@ -107,7 +107,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	temp <- do.call('rbind', temp)
 	
 	# get distances, default is km
-	temp <- dplyr::mutate(temp, distance = get_dists(lat, lon))
+	temp <- dplyr::mutate(temp, distance = get_dists(lon, lat))
 	if(unit_type %in% 'imperial')
 		temp$distance <- temp$distance * 0.621371
 

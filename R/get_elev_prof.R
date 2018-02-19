@@ -102,7 +102,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 	
 	# get distances
 	distances <- dplyr::group_by(lat_lon, activity) %>%
-	  dplyr::mutate(., distance = get_dists(lat, lon))
+	  dplyr::mutate(., distance = get_dists(lon, lat))
 	lat_lon$distance <- distances$distance
 	
 	# adding elevation using rgbif

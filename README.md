@@ -51,25 +51,25 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "mi" "h"  "m"  "ft"
 ## 
 ## $`2837007`$location
-## [1] "Pensacola, FL"
+## [1] "Irvine, California"
 ## 
 ## $`2837007`$current_month
 ##  Distance      Time Elevation 
-##    173.10     12.15   2590.00 
+##    180.70     12.65   2545.00 
 ## 
 ## $`2837007`$monthly
-## Sep 2016      Oct      Nov      Dec Jan 2017      Feb      Mar      Apr 
-## 450.9711 446.4158 327.9789 400.8632 373.5316 223.2079 378.0868 378.0868 
-##      May      Jun      Jul      Aug      Sep 
-## 255.0947 318.8684 327.9789 173.1000   0.0000 
+## Feb 2017      Mar      Apr      May      Jun      Jul      Aug      Sep 
+## 220.8556 373.4467 377.4622 256.9956 317.2289 325.2600 172.6689 108.4200 
+##      Oct      Nov      Dec Jan 2018      Feb 
+## 285.1044 224.8711 256.9956 281.0889 180.7000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         2207.4          145.0        25778.0          189.0 
+##         405.80          26.95        5318.00          38.00 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       19682.400        1193.283      138484.000        1474.000 
+##       20912.800        1275.283      155335.000        1588.000 
 ## 
 ## 
 ## $`2527465`
@@ -80,22 +80,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
 ## 
 ## $`2527465`$current_month
-##   Distance       Time  Elevation 
-##  207.00000   12.93333 2454.00000 
+##  Distance      Time Elevation 
+##     507.9      27.1    5351.0 
 ## 
 ## $`2527465`$monthly
-## Sep 2016      Oct      Nov      Dec Jan 2017      Feb      Mar      Apr 
-##   393.30   320.85   538.20  1003.95   548.55   403.65   445.05   186.30 
-##      May      Jun      Jul      Aug      Sep 
-##     0.00     0.00    62.10   238.05   207.00 
+##  Feb 2017       Mar       Apr       May       Jun       Jul       Aug 
+## 411.15714 451.46667 193.48571   0.00000   0.00000  64.49524 241.85714 
+##       Sep       Oct       Nov       Dec  Jan 2018       Feb 
+## 443.40476 370.84762 467.59048 790.06667 556.27143 507.90000 
 ## 
 ## $`2527465`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      2122.8000       113.8833     13398.0000        79.0000 
+##     1057.40000       57.26667    11719.00000       45.00000 
 ## 
 ## $`2527465`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      16433.4000        903.0333     184354.0000        583.0000 
+##        19340.40         1066.05       216764.00          713.00 
 ## 
 ## 
 ## $`2140248`
@@ -106,22 +106,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Falmouth, England, United Kingdom"
 ## 
 ## $`2140248`$current_month
-##   Distance       Time  Elevation 
-##  308.20000   15.88333 4819.00000 
+##    Distance        Time   Elevation 
+##   80.600000    4.216667 1041.000000 
 ## 
 ## $`2140248`$monthly
-##  Sep 2016       Oct       Nov       Dec  Jan 2017       Feb       Mar 
-##  54.38824 374.67451   0.00000   0.00000 271.94118  84.60392  72.51765 
-##       Apr       May       Jun       Jul       Aug       Sep 
-## 302.15686 284.02745 181.29412 429.06275 555.96863 308.20000 
+## Feb 2017      Mar      Apr      May      Jun      Jul      Aug      Sep 
+##     86.8     74.4    310.0    291.4    186.0    440.2    570.4    520.8 
+##      Oct      Nov      Dec Jan 2018      Feb 
+##    396.8    229.4     12.4    285.2     80.6 
 ## 
 ## $`2140248`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     2064.20000       85.71667    28660.00000       94.00000 
+##          315.6           13.2         4148.0            7.0 
 ## 
 ## $`2140248`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##          9020.1           380.5        113503.0           574.0
+##      10010.9000        420.7833     127040.0000        605.0000
 ```
 
 ### API functions (token)
@@ -187,7 +187,7 @@ head(myinfo)
 ## [1] "Beck"
 ## 
 ## $city
-## [1] "Pensacola"
+## [1] "Irvine"
 ```
 
 An example creating a heat map of activities:
@@ -196,7 +196,7 @@ An example creating a heat map of activities:
 # get activities, get activities by location, plot
 my_acts <- get_activity_list(stoken)
 acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
-get_heat_map(my_acts, acts = which(acts), col = 'darkgreen', size = 2, dist = F)
+get_heat_map(my_acts, acts = which(acts), col = 'darkgreen', size = 2, dist = F, f = 0.5)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
@@ -205,14 +205,14 @@ Plotting elevation and grade for a single ride:
 
 ```r
 # plot elevation along a single ride
-get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.1, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
 ![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
-get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.1, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
 ![](README_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
@@ -238,7 +238,7 @@ Plot average speed per split (km or mile) for an activity:
 
 ```r
 # plots for most recent activity
-get_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
+plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
 ```
 
 ![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->

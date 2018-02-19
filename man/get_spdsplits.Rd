@@ -25,7 +25,7 @@ Allows the return of speed splits of multiple rides.
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 my_acts <- get_activity_list(stoken)
 
-get spdsplits for all rides
+# get spdsplits for all rides
 spd_splits <- purrr::map_df(my_acts$id, get_spdsplits, stoken = stoken, units = 'metric', .id = 'id')
 }
 }
