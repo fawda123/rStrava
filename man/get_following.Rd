@@ -52,4 +52,3 @@ get_following('friends', stoken, All = TRUE)
 \concept{
 token
 }
-

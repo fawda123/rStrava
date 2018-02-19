@@ -2,15 +2,14 @@
 #' 
 #' Get distance from longitude and latitude points
 #' 
-#' @param dat_in input data frame
 #' @param lon chr string indicating name of longitude column in \code{dat_in}
-#' @param lat chr string indicating name of latitude column in \code{dat_in}
+#' @param lat chr string indicating name of latitude column in \code{dat_in} in \code{dat_in}
 #' 
 #' @author Daniel Padfield
 #'
-#' @details Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_all_LatLon}}
+#' @details Used internally in \code{\link{get_elev_prof}} on objects returned by \code{\link{get_latlon}}
 #' 
-#' @concept token
+#' @concept notoken
 #' 
 #' @import magrittr
 #' 
@@ -29,27 +28,16 @@
 #' latlon <- get_all_LatLon('map.summary_polyline', acts_data)
 #' 
 #' # get distance
-#' get_dists(latlon)
+#' get_dists(latlon$lon, latlon$lat)
 #' }
 #' @export
-get_dists <- function(dat_in, lon = 'lon', lat = 'lat'){
+get_dists <- function(lon, lat){
   
-	dat <- dat_in[,c('activity', lon, lat)]
-  names(dat) <- c('activity', 'lon', 'lat')
+	dat <- tibble::tibble(lon, lat)
+  names(dat) <- c('lon', 'lat')
   
 	# distances by activity
-  out <- split(dat, dat$activity)
-  out <- lapply(out, function(x){
-  	
-  	x <- x[, c('lon', 'lat')]
-  	x <- sapply(2:nrow(x), function(y){geosphere::distm(x[y-1,], x[y,])/1000})
-  
-  	return(c(0, cumsum(x)))
-  
-  })
-  	
-  out <- as.numeric(unlist(out))
-  
+  out <- sapply(2:nrow(dat), function(y){geosphere::distm(dat[y-1,], dat[y,])/1000})
+  out <- 	c(0, cumsum(out))
   return(out)
-  
 }

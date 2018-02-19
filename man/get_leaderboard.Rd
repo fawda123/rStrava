@@ -37,4 +37,3 @@ get_leaderboard(stoken, id = 229781)
 \concept{
 token
 }
-

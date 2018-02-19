@@ -33,4 +33,3 @@ get_athlete(stoken, id = '2527465')
 \concept{
 token
 }
-

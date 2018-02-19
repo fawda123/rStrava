@@ -37,4 +37,3 @@ get_activity_list(stoken)
 \concept{
 token
 }
-

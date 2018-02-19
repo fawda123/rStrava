@@ -41,4 +41,3 @@ get_explore(stoken, bnds)
 \concept{
 token
 }
-

@@ -72,7 +72,9 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 			warning('units does not match unit type, use compile_activities with different units')
 	
 	# create a dataframe of long and latitudes
-	lat_lon <- get_all_LatLon(id_col = 'upload_id', parent_data = act_data) %>%
+	lat_lon <- dplyr::group_by(act_data, upload_id) %>%
+		dplyr::do(get_latlon(.)) %>%
+		dplyr::ungroup() %>%
 	  dplyr::full_join(., act_data, by = 'upload_id') %>%
 	  dplyr::select(., upload_id, type, start_date, lat, lon, total_elevation_gain)
 
@@ -100,7 +102,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 	
 	# get distances
 	distances <- dplyr::group_by(lat_lon, activity) %>%
-	  dplyr::do(data.frame(distance = get_dists(.)))
+	  dplyr::mutate(., distance = get_dists(lat, lon))
 	lat_lon$distance <- distances$distance
 	
 	# adding elevation using rgbif

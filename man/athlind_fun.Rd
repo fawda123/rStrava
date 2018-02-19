@@ -18,4 +18,3 @@ Get data for a single athlete by web scraping, does not require authentication.
 \concept{
 notoken
 }
-

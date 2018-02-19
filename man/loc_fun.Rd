@@ -15,4 +15,3 @@ Get location of an athlete, used internally in \code{\link{athl_fun}}
 \concept{
 notoken
 }
-

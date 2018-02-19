@@ -16,19 +16,18 @@ A vector of latitudes an longitudes in decimals separated by a comma
 Decodes Google's polyline that are given in get_activity() and get_activity_list()
 }
 \details{
-When getting an activity using get_activity() a Google polyline is returned as one of the outputs. This function converts the polyline into latitude and longitude coordinates suitable for plotting. Function is used internally within \code{\link{get_LatLon}} and \code{\link{get_all_LatLon}}.
+When getting an activity using get_activity() a Google polyline is returned as one of the outputs. This function converts the polyline into latitude and longitude coordinates suitable for plotting. Function is used internally within \code{\link{get_latlon}}.
 }
 \examples{
 \dontrun{
 decode_Polyline()}
 }
-\author{
-Daniel Padfield
-}
 \references{
 Original code from : https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decoding-polylines-for.html?showComment=1473004506791#c3610119369153401460
+}
+\author{
+Daniel Padfield
 }
 \concept{
 notoken
 }
-

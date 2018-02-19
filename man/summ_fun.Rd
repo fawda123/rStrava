@@ -18,4 +18,3 @@ Get summary data for an athlete, year to date and total units of measurement. Us
 \concept{
 notoken
 }
-

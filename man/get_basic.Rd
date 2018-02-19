@@ -36,4 +36,3 @@ get_basic('https://strava.com/api/v3/athlete', stoken)
 \concept{
 token
 }
-

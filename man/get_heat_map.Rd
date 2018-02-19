@@ -2,8 +2,8 @@
 % Please edit documentation in R/get_heat_map.R
 \name{get_heat_map}
 \alias{get_heat_map}
-\alias{get_heat_map.actframe}
 \alias{get_heat_map.list}
+\alias{get_heat_map.actframe}
 \title{Makes a heat map from your activity data}
 \usage{
 get_heat_map(act_data, ...)
@@ -58,7 +58,7 @@ plot of activity on a Google map
 Makes a heat map from your activity data
 }
 \details{
-uses \code{\link{get_all_LatLon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
+uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
 
 The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 
@@ -89,4 +89,3 @@ Daniel Padfield, Marcus Beck
 \concept{
 token
 }
-

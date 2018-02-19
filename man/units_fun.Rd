@@ -15,4 +15,3 @@ Get units of measurement, used internally in \code{\link{athl_fun}}
 \concept{
 notoken
 }
-

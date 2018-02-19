@@ -2,8 +2,8 @@
 % Please edit documentation in R/get_elev_prof.R
 \name{get_elev_prof}
 \alias{get_elev_prof}
-\alias{get_elev_prof.actframe}
 \alias{get_elev_prof.list}
+\alias{get_elev_prof.actframe}
 \title{Create elevation profiles from activity data}
 \usage{
 get_elev_prof(act_data, ...)
@@ -55,13 +55,12 @@ my_acts <- compile_activities(my_acts, acts = c(1:2), units = 'imperial')
 get_elev_prof(my_acts, key = mykey)
 }
 }
-\author{
-Daniel Padfield, Marcus Beck
-}
 \seealso{
 \code{\link{get_dists}}
+}
+\author{
+Daniel Padfield, Marcus Beck
 }
 \concept{
 token
 }
-

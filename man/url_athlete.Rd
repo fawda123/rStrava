@@ -15,4 +15,3 @@ Set the url of the athlete to get data using an ID
 \details{
 used by other functions
 }
-

@@ -28,4 +28,3 @@ url_clubs(123, request = 'members')
 \concept{
 token
 }
-
