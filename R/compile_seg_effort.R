@@ -21,23 +21,30 @@
 #' segment <- 2269028
 #' 
 #' # get segment efforts
-#' efforts <- get_efforts_list(segment, stoken)
+#' efforts <- get_efforts_list(stoken, segment)
 #' 
 #' # compile efforts
 #' efforts <- compile_seg_effort(efforts)
 #' }
 #' @export
 compile_seg_effort <- function(x){
+
+	# categories to get from each effort
+	desired_cols <- c('athlete.id', 'distance', 'elapsed_time', 'moving_time', 'name', 'start_date', 'start_date_local') %>% 
+		data.frame(ColNames = ., stringsAsFactors = F)
 	
-	temp <- data.frame(unlist(x)) %>%
-		dplyr::mutate(ColNames = rownames(.)) %>%
-		tidyr::spread(., ColNames, unlist.x.)
-	desired_cols <- c('athlete.id', 'distance', 'elapsed_time', 'moving_time', 'name', 'start_date', 'start_date_local')
-	# check which columns arent present
-	cols_not_present <- desired_cols[! desired_cols %in% colnames(temp)] %>%
-		data.frame(cols = .) %>%
-		dplyr::mutate(., value = NA)
-	if(nrow(cols_not_present) >= 1){cols_not_present <- tidyr::spread(cols_not_present, cols, value)}
-	if(nrow(cols_not_present) == 1){temp <- cbind(temp, cols_not_present)}
+	# compile efforts
+	temp <- x %>% 
+		purrr::map(function(x){
+			
+			out <- data.frame(unlist(x)) %>%
+				dplyr::mutate(ColNames = rownames(.)) %>% 
+				left_join(desired_cols, ., by = 'ColNames') %>% 
+				spread(ColNames, unlist.x.)
+			
+		}) %>% 
+		do.call('rbind', .)
+
 	return(temp)
+	
 }

@@ -27,7 +27,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret,
 segment <- 2269028
 
 # get segment efforts
-efforts <- get_efforts_list(segment, stoken)
+efforts <- get_efforts_list(stoken, segment)
 
 # compile efforts
 efforts <- compile_seg_effort(efforts)
