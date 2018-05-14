@@ -1,0 +1,15 @@
+#' Set the url of the equipment item to get data
+#' 
+#' Set the url of the equipment item to get data using an ID
+#' 
+#' @param id string of gear id assigned by Strava
+#' 
+#' @export
+#' 
+#' @details used by other functions
+url_gear <- function(id){
+	url_ <- "https://www.strava.com/api/v3/gear/"
+	url_ <- paste(url_, id, sep = "")
+	return(url_)
+	
+}
