@@ -19,8 +19,11 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' my_acts <- get_activity_list(stoken)
 #' 
-#' # get spdsplits for all rides
-#' spd_splits <- purrr::map_df(my_acts$id, get_spdsplits, stoken = stoken, units = 'metric', .id = 'id')
+#' # compile activities
+#' acts_data <- compile_activities(my_acts)
+#' 
+#' # get spdsplits for all activities
+#' spd_splits <- purrr::map_df(acts_data$id, get_spdsplits, stoken = stoken, units = 'metric', .id = 'id')
 #' }
 #' @export get_spdsplits
 

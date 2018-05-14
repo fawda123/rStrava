@@ -17,7 +17,15 @@ get latitude and longitude from Google polyline
 }
 \examples{
 \dontrun{
-getlatlon(act, 'upload_id')
+
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+
+my_acts <- get_activity_list(stoken)
+acts_data <- compile_activities(my_acts)
+
+# get lat and lon for a single activity
+get_latlon(acts_data[1,])
+
 }
 }
 \author{
