@@ -1,12 +1,13 @@
-#' convert a set of streams of a single activity into a dataframe
+#' Convert a set of streams of a single activity into a dataframe
 #' 
-#' convert a set of streams of a single activity into a dataframe
+#' Convert a set of streams of a single activity into a dataframe
 #' @author Lorenzo Gaborini
-#' @details used internally in \code{\link{compile_streams}}
-#' @param streams a list containing details of the Strava streams of a single activity
+#' @details used internally in \code{\link{compile_activity_streams}}
+#' @param streams a list containing details of the Strava streams of a single activity (output of \code{\link{get_streams}})
 #' @param id if not missing, the activity id of the stream (will be appended to the data.frame, if non-empty)
-#' @return dataframe where every column is an item from a list. Any missing columns rom the total number of columns 
+#' @return data frame where every column is a stream of the retrieved types.
 #' @concept token
+#' @importFrom magrittr %>%
 #' @examples 
 #' \dontrun{
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
@@ -58,7 +59,7 @@ compile_stream <- function(streams, id = NULL){
    }
    
    if (!is.null(id)) {
-      df.stream %>% mutate(id = id)
+      df.stream %>% dplyr::mutate(id = id)
    } else {
       df.stream  
    }
