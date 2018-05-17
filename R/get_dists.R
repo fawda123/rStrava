@@ -25,7 +25,7 @@
 #' acts_data <- compile_activities(my_acts)[1, ]
 #' 
 #' # get lat, lon
-#' latlon <- get_all_LatLon('map.summary_polyline', acts_data)
+#' latlon <- get_latlon(acts_data)
 #' 
 #' # get distance
 #' get_dists(latlon$lon, latlon$lat)
