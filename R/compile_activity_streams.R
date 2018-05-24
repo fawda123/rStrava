@@ -2,7 +2,7 @@
 #' 
 #' Convert a set of streams of a single activity into a dataframe
 #' @author Lorenzo Gaborini
-#' @details used internally in \code{\link{compile_activity_streams}}
+#' @details used internally in \code{\link{get_activity_streams}}
 #' @param streams a list containing details of the Strava streams of a single activity (output of \code{\link{get_streams}})
 #' @param id if not missing, the activity id of the stream (will be appended to the data.frame, if non-empty)
 #' @return data frame where every column is a stream of the retrieved types.
@@ -15,10 +15,12 @@
 #' act_id <- 351217692
 #' streams <- get_streams(stoken, id = act_id, types = list('distance', 'latlng'))
 #' 
-#' compile_stream(streams, act_id)}
-#' @export
+#' compile_activity_streams(streams, act_id)}
+compile_activity_streams <- function(streams, id = NULL){
 
-compile_stream <- function(streams, id = NULL){
+   if (length(id) != 1) {
+      stop('id must be a scalar.')
+   }
    
    # Remove 'resolution', 'series_type', 'original_size' columns from stream contents
    tmp <- streams %>% 
