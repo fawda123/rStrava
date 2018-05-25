@@ -12,10 +12,10 @@ compile_activity_streams(streams, id = NULL)
 \item{id}{if not missing, the activity id of the stream (will be appended to the data.frame, if non-empty)}
 }
 \value{
-data frame where every column is a stream of the retrieved types.
+data frame where every column is the stream data for the retrieved types.
 }
 \description{
-Convert a set of streams of a single activity into a dataframe
+Convert a set of streams of a single activity into a dataframe, with the retrieved columns.
 }
 \details{
 used internally in \code{\link{get_activity_streams}}
@@ -27,7 +27,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret,
 act_id <- 351217692
 streams <- get_streams(stoken, id = act_id, types = list('distance', 'latlng'))
 
-compile_activity_streams(streams, act_id)}
+compile_activity_streams(streams, id = act_id)}
 }
 \author{
 Lorenzo Gaborini

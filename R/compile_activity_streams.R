@@ -1,6 +1,6 @@
 #' Convert a set of streams of a single activity into a dataframe
 #' 
-#' Convert a set of streams of a single activity into a dataframe
+#' Convert a set of streams of a single activity into a dataframe, with the retrieved columns.
 #' @author Lorenzo Gaborini
 #' @details used internally in \code{\link{get_activity_streams}}
 #' @param streams a list containing details of the Strava streams of a single activity (output of \code{\link{get_streams}})
@@ -18,8 +18,8 @@
 #' compile_activity_streams(streams, id = act_id)}
 compile_activity_streams <- function(streams, id = NULL){
 
-   if (length(id) != 1) {
-      stop('id must be a scalar.')
+   if (!is.null(id) && length(id) != 1) {
+      stop('id must be a scalar or NULL.')
    }
    
    # Remove 'resolution', 'series_type', 'original_size' columns from stream contents
