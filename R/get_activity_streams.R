@@ -5,14 +5,14 @@
 #' @param actframe an activity frame returned by \code{\link{compile_activities}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function 
-#' @param types list indicating which streams to get for each activity, defaults to all
+#' @param types list indicating which streams (lat/lng/time/...) to get for each activity, defaults to all available
 #' @inheritParams get_streams
 #' 
 #' @author Lorenzo Gaborini
 #' 
 #' @return A stream frame object (\code{str_act_frame} that includes a data frame for the stream data along with the units
 #' 
-#' @details each activity has a value for every column present across all activities, with NAs populating empty values
+#' @details Each activity has a value for every column present across all activities, with NAs populating missing values.
 #'
 #' @concept token
 #' 

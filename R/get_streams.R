@@ -35,7 +35,7 @@ get_streams  <- function(stoken, id, request = "activities",
 	}
 	
 	req <- GET(url_streams(id, request, types), stoken,
-						 query = list(resolution = resolution, series_type=series_type))
+						 query = list(resolution = resolution, series_type = series_type))
 	ratelimit(req)
 	stop_for_status(req)
 	dataRaw <- content(req)
