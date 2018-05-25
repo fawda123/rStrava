@@ -23,7 +23,7 @@
 #' 
 #' my_acts <- get_activity_list(stoken)
 #' 
-#' acts_data <- get_streams(my_acts, acts = 1:2)
+#' acts_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
 #' 
 #' }
 get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL){
@@ -50,11 +50,16 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL){
 	# Get all activity streams
 	streams <- purrr::map(list.ids, ~ get_streams(stoken, id = ., request = 'activities', types = types, resolution = 'high', series_type = 'distance'))
 	
-	# Compile all streams and row-bind, adding NAs to missing columns
+	# Compile all streams and row-bind
+	# NA columns are added if one activity is missing a requested stream
 	out <- purrr::map2_dfr(streams, list.ids, compile_activity_streams)
 	
-	# Prepare for unit transformation: 
-	# hackish, pad non-retrieved fields with NAs, fix the units, then remove the added columns
+	# Prepare dataframe for unit transformation
+	# Avoid representing unrequested streams with NA columns
+	# (Relevant if requesting a subset of stream types)
+	#
+	# Hackish:
+	# pad non-retrieved fields with NAs, fix the units, then remove the added columns
 	cols.out <- colnames(out)
 	
 	add_columns_if_not_exist <- function(x, cols_to_add) {
