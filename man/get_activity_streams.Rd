@@ -4,7 +4,8 @@
 \alias{get_activity_streams}
 \title{Retrieve streams for activities, and convert to a dataframe}
 \usage{
-get_activity_streams(actframe, stoken, acts = NULL, types = NULL)
+get_activity_streams(actframe, stoken, acts = NULL, types = NULL,
+  resolution = "high", series_type = "distance")
 }
 \arguments{
 \item{actframe}{an activity frame returned by \code{\link{compile_activities}}}
@@ -14,6 +15,10 @@ get_activity_streams(actframe, stoken, acts = NULL, types = NULL)
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 
 \item{types}{list indicating which streams to get for each activity, defaults to all}
+
+\item{resolution}{chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all}
+
+\item{series_type}{chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" (default) or "time".}
 }
 \value{
 A stream frame object (\code{str_act_frame} that includes a data frame for the stream data along with the units
@@ -31,7 +36,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret,
 
 my_acts <- get_activity_list(stoken)
 
-acts_data <- get_streams(my_acts, acts = 1:2)
+acts_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
 
 }
 }

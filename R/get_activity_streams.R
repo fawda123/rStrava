@@ -6,6 +6,7 @@
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function 
 #' @param types list indicating which streams to get for each activity, defaults to all
+#' @inheritParams get_streams
 #' 
 #' @author Lorenzo Gaborini
 #' 
@@ -26,7 +27,7 @@
 #' acts_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
 #' 
 #' }
-get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL){
+get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance'){
 	
 	# Setup default streams
 	types.all <- list("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
@@ -48,7 +49,7 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL){
 	list.ids <- as.list(actframe[acts,]$id)
 	
 	# Get all activity streams
-	streams <- purrr::map(list.ids, ~ get_streams(stoken, id = ., request = 'activities', types = types, resolution = 'high', series_type = 'distance'))
+	streams <- purrr::map(list.ids, ~ get_streams(stoken, id = ., request = 'activities', types = types, resolution = resolution, series_type = series_type))
 	
 	# Compile all streams and row-bind
 	# NA columns are added if one activity is missing a requested stream
