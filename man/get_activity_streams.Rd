@@ -14,20 +14,20 @@ get_activity_streams(actframe, stoken, acts = NULL, types = NULL,
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 
-\item{types}{list indicating which streams to get for each activity, defaults to all}
+\item{types}{list indicating which streams (lat/lng/time/...) to get for each activity, defaults to all available}
 
 \item{resolution}{chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all}
 
 \item{series_type}{chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" (default) or "time".}
 }
 \value{
-A stream frame object (\code{str_act_frame} that includes a data frame for the stream data along with the units
+A stream frame object (\code{strframe} that includes a data frame for the stream data along with the units
 }
 \description{
 Retrieve streams for activities, and convert to a dataframe.
 }
 \details{
-each activity has a value for every column present across all activities, with NAs populating empty values
+Each activity has a value for every column present across all activities, with NAs populating missing values.
 }
 \examples{
  
