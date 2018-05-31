@@ -10,7 +10,7 @@
 #' 
 #' @author Lorenzo Gaborini
 #' 
-#' @return A stream frame object (\code{str_act_frame} that includes a data frame for the stream data along with the units
+#' @return A stream frame object (\code{strframe} that includes a data frame for the stream data along with the units
 #' 
 #' @details Each activity has a value for every column present across all activities, with NAs populating missing values.
 #'
@@ -108,10 +108,10 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, re
 	out <- dplyr::select(out, one_of(cols.out))
 	
 	
-	# create str_act_frame object
+	# create strframe object
 	out <- structure(
       .Data = out, 
-      class = c('str_act_frame', 'data.frame'),
+      class = c('strframe', 'data.frame'),
       unit_type = unit_type, 
       unit_vals = unit_vals
 	)
