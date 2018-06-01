@@ -83,7 +83,7 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, re
 	                        velocity_smooth = velocity_smooth * 3.6
 	   )
 	   
-	   unit_vals <- c(distance = 'km', speed = 'km/hr', elevation = 'm', temperature = '°C')
+	   unit_vals <- c(distance = 'km', speed = 'km/hr', elevation = 'm', temperature = '\u00B0C')
 	   
 	}
 	
@@ -100,7 +100,7 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, re
 	                        temp = temp * 9/5 + 32
 	   )
 	   
-	   unit_vals <- c(distance = 'mi', speed = 'mi/hr', elevation = 'ft', temperature = '°F')
+	   unit_vals <- c(distance = 'mi', speed = 'mi/hr', elevation = 'ft', temperature = '\u00B0F')
 	   
 	}
 	
