@@ -39,8 +39,8 @@ compile_seg_effort <- function(x){
 			
 			out <- data.frame(unlist(x)) %>%
 				dplyr::mutate(ColNames = rownames(.)) %>% 
-				left_join(desired_cols, ., by = 'ColNames') %>% 
-				spread(ColNames, unlist.x.)
+				dplyr::left_join(desired_cols, ., by = 'ColNames') %>% 
+				tidyr::spread(ColNames, unlist.x.)
 			
 		}) %>% 
 		do.call('rbind', .)
