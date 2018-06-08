@@ -129,12 +129,13 @@ Plot average speed per split (km or mile) for an activity:
 plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
 ```
 
-Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.  There are two functions that can retrieve streams, both of which require the authentication token for your Strava API:
+Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
 
 Use `get_activity_streams` for detailed info about activites:
 ```{r, fig.height = 4, fig.with = 4}
 # get streams for the first activity in my_acts
 strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
+head(strms_data)
 
 # make a plot
 library(ggplot2)

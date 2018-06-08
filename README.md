@@ -208,14 +208,34 @@ plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
 
 ![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
-Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.  There are two functions that can retrieve streams, both of which require the authentication token for your Strava API:
+Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
 
 Use `get_activity_streams` for detailed info about activites:
 
 ```r
 # get streams for the first activity in my_acts
 strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
+head(strms_data)
+```
 
+```
+##   altitude distance grade_smooth moving time velocity_smooth      lat
+## 1      2.2   0.0000         -2.9  FALSE    0            0.00 30.41038
+## 2      1.9   0.0067         -2.1  FALSE   60            0.36 30.41002
+## 3      1.9   0.0104         -1.5   TRUE   62            0.72 30.41005
+## 4      1.9   0.0143          0.0   TRUE   64            0.72 30.41007
+## 5      1.9   0.0200          0.0   TRUE   66            7.92 30.41010
+## 6      1.9   0.0234          0.0   TRUE   67            9.36 30.41011
+##         lng        id
+## 1 -87.22191 849369847
+## 2 -87.22221 849369847
+## 3 -87.22219 849369847
+## 4 -87.22216 849369847
+## 5 -87.22211 849369847
+## 6 -87.22208 849369847
+```
+
+```r
 # make a plot
 library(ggplot2)
 ggplot(strms_data, aes(x = lng, y = lat, group = id, col = velocity_smooth)) + 
