@@ -29,7 +29,8 @@ my_acts <- get_activity_list(stoken)
 acts_data <- compile_activities(my_acts)
 
 # get spdsplits for all activities
-spd_splits <- purrr::map_df(acts_data$id, get_spdsplits, stoken = stoken, units = 'metric', .id = 'id')
+spd_splits <- purrr::map_df(acts_data$id, get_spdsplits, stoken = stoken, 
+     units = 'metric', .id = 'id')
 }
 }
 \author{

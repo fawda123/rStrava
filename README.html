@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>README.utf8</title>
 
 <script src="README_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,8 +20,8 @@
 <script src="README_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="README_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="README_files/navigation-1.1/tabsets.js"></script>
-<link href="README_files/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="README_files/highlightjs-1.1/highlight.js"></script>
+<link href="README_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="README_files/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -30,10 +30,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -126,10 +128,7 @@ $(document).ready(function () {
 <p>Linux: <a href="https://travis-ci.org/fawda123/rStrava"><img src="https://travis-ci.org/fawda123/rStrava.svg?branch=master" alt="Travis-CI Build Status" /></a></p>
 <p>Windows: <a href="https://ci.appveyor.com/project/fawda123/rStrava"><img src="https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master" alt="AppVeyor Build Status" /></a></p>
 <p><a href="https://zenodo.org/badge/latestdoi/23404183"><img src="https://zenodo.org/badge/23404183.svg" alt="DOI" /></a></p>
-<div class="figure">
-<img src="api_logo_pwrdBy_strava_horiz_light.png" />
-
-</div>
+<p><img src="api_logo_pwrdBy_strava_horiz_light.png" /></p>
 </div>
 <div id="overview-and-installation" class="section level3">
 <h3>Overview and installation</h3>
@@ -150,8 +149,8 @@ help.search(&#39;token&#39;, package = &#39;rStrava&#39;)</code></pre>
 <div id="scraping-functions-no-token" class="section level3">
 <h3>Scraping functions (no token)</h3>
 <p>An example using the scraping functions:</p>
-<pre class="r"><code># get athlete data for these guys
-athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
+<pre class="r"><code># get athlete data 
+athl_fun(2837007, trace = FALSE)</code></pre>
 <pre><code>## $`2837007`
 ## $`2837007`$units
 ## [1] &quot;mi&quot; &quot;h&quot;  &quot;m&quot;  &quot;ft&quot;
@@ -160,74 +159,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)</code></pre>
 ## [1] &quot;Irvine, California&quot;
 ## 
 ## $`2837007`$current_month
-##  Distance      Time Elevation 
-##    180.70     12.65   2545.00 
+##   Distance       Time  Elevation 
+##  64.200000   4.133333 827.000000 
 ## 
 ## $`2837007`$monthly
-## Feb 2017      Mar      Apr      May      Jun      Jul      Aug      Sep 
-## 220.8556 373.4467 377.4622 256.9956 317.2289 325.2600 172.6689 108.4200 
-##      Oct      Nov      Dec Jan 2018      Feb 
-## 285.1044 224.8711 256.9956 281.0889 180.7000 
+## Jun 2017      Jul      Aug      Sep      Oct      Nov      Dec Jan 2018 
+## 316.9875 325.0125 172.5375 108.3375 284.8875 224.7000 256.8000 280.8750 
+##      Feb      Mar      Apr      May      Jun 
+## 296.9250 361.1250 272.8500 304.9500  64.2000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         405.80          26.95        5318.00          38.00 
+##     1440.40000       94.38333    18780.00000      135.00000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       20912.800        1275.283      155335.000        1588.000 
-## 
-## 
-## $`2527465`
-## $`2527465`$units
-## [1] &quot;km&quot; &quot;h&quot;  &quot;m&quot;  &quot;m&quot; 
-## 
-## $`2527465`$location
-## [1] &quot;Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina&quot;
-## 
-## $`2527465`$current_month
-##  Distance      Time Elevation 
-##     507.9      27.1    5351.0 
-## 
-## $`2527465`$monthly
-##  Feb 2017       Mar       Apr       May       Jun       Jul       Aug 
-## 411.15714 451.46667 193.48571   0.00000   0.00000  64.49524 241.85714 
-##       Sep       Oct       Nov       Dec  Jan 2018       Feb 
-## 443.40476 370.84762 467.59048 790.06667 556.27143 507.90000 
-## 
-## $`2527465`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##     1057.40000       57.26667    11719.00000       45.00000 
-## 
-## $`2527465`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##        19340.40         1066.05       216764.00          713.00 
-## 
-## 
-## $`2140248`
-## $`2140248`$units
-## [1] &quot;km&quot; &quot;h&quot;  &quot;m&quot;  &quot;m&quot; 
-## 
-## $`2140248`$location
-## [1] &quot;Falmouth, England, United Kingdom&quot;
-## 
-## $`2140248`$current_month
-##    Distance        Time   Elevation 
-##   80.600000    4.216667 1041.000000 
-## 
-## $`2140248`$monthly
-## Feb 2017      Mar      Apr      May      Jun      Jul      Aug      Sep 
-##     86.8     74.4    310.0    291.4    186.0    440.2    570.4    520.8 
-##      Oct      Nov      Dec Jan 2018      Feb 
-##    396.8    229.4     12.4    285.2     80.6 
-## 
-## $`2140248`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##          315.6           13.2         4148.0            7.0 
-## 
-## $`2140248`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      10010.9000        420.7833     127040.0000        605.0000</code></pre>
+##       21947.400        1342.733      168796.000        1685.000</code></pre>
 </div>
 <div id="api-functions-token" class="section level3">
 <h3>API functions (token)</h3>
@@ -283,9 +230,11 @@ get_heat_map(my_acts, acts = which(acts), col = &#39;darkgreen&#39;, size = 2, d
 <p>Plotting elevation and grade for a single ride:</p>
 <pre class="r"><code># plot elevation along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = &#39;Spectral&#39;, maptype = &#39;satellite&#39;, units = &#39;imperial&#39;)</code></pre>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-11-1.png" /><!-- --></p>
 <pre class="r"><code># plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = &#39;Spectral&#39;, expand = 5, maptype = &#39;satellite&#39;, units = &#39;imperial&#39;)</code></pre>
+<pre><code>## Coordinate system already present. Adding new coordinate system, which will replace the existing one.</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-11-2.png" /><!-- --></p>
 <p>Get elevation profiles for activities:</p>
 <pre class="r"><code># get activities
@@ -299,6 +248,19 @@ get_elev_prof(my_acts, acts = 1, key = mykey, units = &#39;imperial&#39;)</code>
 <pre class="r"><code># plots for most recent activity
 plot_spdsplits(my_acts, stoken, acts = 1, units = &#39;imperial&#39;)</code></pre>
 <p><img src="README_files/figure-html/unnamed-chunk-13-1.png" /><!-- --></p>
+<p>Additional functions are provided to get “stream” information for individual activities. Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity. There are two functions that can retrieve streams, both of which require the authentication token for your Strava API:</p>
+<p>Use <code>get_activity_streams</code> for detailed info about activites:</p>
+<pre class="r"><code># get streams for the first activity in my_acts
+strms_data &lt;- get_activity_streams(my_acts, stoken, acts = 1)
+
+# make a plot
+library(ggplot2)
+ggplot(strms_data, aes(x = lng, y = lat, group = id, col = velocity_smooth)) + 
+    geom_path(size = 2) +
+    coord_equal() + 
+    theme_void() +
+    scale_colour_distiller(&#39;Speed (km/hr)&#39;, palette = &#39;Spectral&#39;)</code></pre>
+<p><img src="README_files/figure-html/unnamed-chunk-14-1.png" /><!-- --></p>
 </div>
 </div>
 <div id="license" class="section level3">

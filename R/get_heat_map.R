@@ -6,8 +6,8 @@
 #' 
 #' @concept token
 #' 
-#' @param act_data an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
-#' @param acts numeric indicating which activities to plot based on index in \code{actlist}, defaults to most recent
+#' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
+#' @param acts numeric indicating which activities to plot based on index in the activities list, defaults to most recent
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
 #' @param add_elev logical indicating if elevation is overlayed by color shading on the activity lines

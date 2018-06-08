@@ -28,11 +28,13 @@
 #' get_streams(stoken, id = 351217692, types = list('distance', 'latlng'))
 #' }
 get_streams  <- function(stoken, id, request = "activities",
-												 types, resolution = NULL, series_type = NULL){
+												 types = NULL, resolution = NULL, series_type = NULL){
 
 	if (length(id) != 1){
 		stop('id must be a scalar.')
 	}
+	if(is.null(types))
+		types <- c("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
 	
 	req <- GET(url_streams(id, request, types), stoken,
 						 query = list(resolution = resolution, series_type = series_type))

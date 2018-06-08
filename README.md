@@ -1,3 +1,12 @@
+---
+output:
+  html_document:
+    keep_md: yes
+    toc: no
+    self_contained: no
+  pdf_document:
+    toc: yes
+---
 
 # rStrava
 
@@ -41,8 +50,8 @@ An example using the scraping functions:
 
 
 ```r
-# get athlete data for these guys
-athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
+# get athlete data 
+athl_fun(2837007, trace = FALSE)
 ```
 
 ```
@@ -54,74 +63,22 @@ athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
 ## [1] "Irvine, California"
 ## 
 ## $`2837007`$current_month
-##  Distance      Time Elevation 
-##    180.70     12.65   2545.00 
+##   Distance       Time  Elevation 
+##  64.200000   4.133333 827.000000 
 ## 
 ## $`2837007`$monthly
-## Feb 2017      Mar      Apr      May      Jun      Jul      Aug      Sep 
-## 220.8556 373.4467 377.4622 256.9956 317.2289 325.2600 172.6689 108.4200 
-##      Oct      Nov      Dec Jan 2018      Feb 
-## 285.1044 224.8711 256.9956 281.0889 180.7000 
+## Jun 2017      Jul      Aug      Sep      Oct      Nov      Dec Jan 2018 
+## 316.9875 325.0125 172.5375 108.3375 284.8875 224.7000 256.8000 280.8750 
+##      Feb      Mar      Apr      May      Jun 
+## 296.9250 361.1250 272.8500 304.9500  64.2000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         405.80          26.95        5318.00          38.00 
+##     1440.40000       94.38333    18780.00000      135.00000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       20912.800        1275.283      155335.000        1588.000 
-## 
-## 
-## $`2527465`
-## $`2527465`$units
-## [1] "km" "h"  "m"  "m" 
-## 
-## $`2527465`$location
-## [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
-## 
-## $`2527465`$current_month
-##  Distance      Time Elevation 
-##     507.9      27.1    5351.0 
-## 
-## $`2527465`$monthly
-##  Feb 2017       Mar       Apr       May       Jun       Jul       Aug 
-## 411.15714 451.46667 193.48571   0.00000   0.00000  64.49524 241.85714 
-##       Sep       Oct       Nov       Dec  Jan 2018       Feb 
-## 443.40476 370.84762 467.59048 790.06667 556.27143 507.90000 
-## 
-## $`2527465`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##     1057.40000       57.26667    11719.00000       45.00000 
-## 
-## $`2527465`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##        19340.40         1066.05       216764.00          713.00 
-## 
-## 
-## $`2140248`
-## $`2140248`$units
-## [1] "km" "h"  "m"  "m" 
-## 
-## $`2140248`$location
-## [1] "Falmouth, England, United Kingdom"
-## 
-## $`2140248`$current_month
-##    Distance        Time   Elevation 
-##   80.600000    4.216667 1041.000000 
-## 
-## $`2140248`$monthly
-## Feb 2017      Mar      Apr      May      Jun      Jul      Aug      Sep 
-##     86.8     74.4    310.0    291.4    186.0    440.2    570.4    520.8 
-##      Oct      Nov      Dec Jan 2018      Feb 
-##    396.8    229.4     12.4    285.2     80.6 
-## 
-## $`2140248`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##          315.6           13.2         4148.0            7.0 
-## 
-## $`2140248`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##      10010.9000        420.7833     127040.0000        605.0000
+##       21947.400        1342.733      168796.000        1685.000
 ```
 
 ### API functions (token)
@@ -208,11 +165,19 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
+```
+## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
+```
+
 ![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+```
+
+```
+## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 ![](README_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
@@ -242,6 +207,25 @@ plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
 ```
 
 ![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+
+Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.  There are two functions that can retrieve streams, both of which require the authentication token for your Strava API:
+
+Use `get_activity_streams` for detailed info about activites:
+
+```r
+# get streams for the first activity in my_acts
+strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
+
+# make a plot
+library(ggplot2)
+ggplot(strms_data, aes(x = lng, y = lat, group = id, col = velocity_smooth)) + 
+	geom_path(size = 2) +
+	coord_equal() + 
+	theme_void() +
+	scale_colour_distiller('Speed (km/hr)', palette = 'Spectral')
+```
+
+![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 ### License
 

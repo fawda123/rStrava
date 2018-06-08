@@ -19,11 +19,11 @@ get_heat_map(act_data, ...)
   source = "google", ...)
 }
 \arguments{
-\item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
+\item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
 
 \item{...}{arguments passed to or from other methods}
 
-\item{acts}{numeric indicating which activities to plot based on index in \code{actlist}, defaults to most recent}
+\item{acts}{numeric indicating which activities to plot based on index in the activities list, defaults to most recent}
 
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 

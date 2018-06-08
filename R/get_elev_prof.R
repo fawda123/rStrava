@@ -6,7 +6,7 @@
 #' 
 #' @concept token
 #' 
-#' @param act_data an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
+#' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric value indicating which elements of \code{act_data} to plot, defaults to most recent
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance

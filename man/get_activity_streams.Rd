@@ -2,13 +2,22 @@
 % Please edit documentation in R/get_activity_streams.R
 \name{get_activity_streams}
 \alias{get_activity_streams}
+\alias{get_activity_streams.list}
+\alias{get_activity_streams.actframe}
 \title{Retrieve streams for activities, and convert to a dataframe}
 \usage{
-get_activity_streams(actframe, stoken, acts = NULL, types = NULL,
-  resolution = "high", series_type = "distance")
+get_activity_streams(act_data, ...)
+
+\method{get_activity_streams}{list}(act_data, stoken, acts = NULL,
+  types = NULL, resolution = "high", series_type = "distance", ...)
+
+\method{get_activity_streams}{actframe}(act_data, stoken, acts = NULL,
+  types = NULL, resolution = "high", series_type = "distance", ...)
 }
 \arguments{
-\item{actframe}{an activity frame returned by \code{\link{compile_activities}}}
+\item{act_data}{an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
+
+\item{...}{arguments passed to or from other methods}
 
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
@@ -34,9 +43,9 @@ Each activity has a value for every column present across all activities, with N
 \dontrun{
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 
-my_acts <- get_activity_list(stoken)
+my_acts <- get_activity_list(stoken) 
 
-acts_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
+strms_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
 
 }
 }

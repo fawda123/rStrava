@@ -15,7 +15,7 @@ get_elev_prof(act_data, ...)
   fill = "darkblue", ...)
 }
 \arguments{
-\item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
+\item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
 
 \item{...}{arguments passed to or from other methods}
 

@@ -2,10 +2,11 @@
 #' 
 #' Retrieve streams for activities, and convert to a dataframe.
 #' 
-#' @param actframe an activity frame returned by \code{\link{compile_activities}}
+#' @param act_data an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function 
 #' @param types list indicating which streams (lat/lng/time/...) to get for each activity, defaults to all available
+#' @param ... arguments passed to or from other methods
 #' @inheritParams get_streams
 #' 
 #' @author Lorenzo Gaborini
@@ -22,12 +23,32 @@
 #' \dontrun{
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' 
-#' my_acts <- get_activity_list(stoken)
+#' my_acts <- get_activity_list(stoken) 
 #' 
-#' acts_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
+#' strms_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
 #' 
 #' }
-get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance'){
+get_activity_streams <- function(act_data, ...) UseMethod('get_activity_streams')
+
+#' @rdname get_activity_streams
+#'
+#' @export
+#'
+#' @method get_activity_streams list
+get_activity_streams.list <- function(act_data, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance', ...){
+	
+	act_data <- compile_activities(act_data)
+	
+	get_activity_streams.actframe(act_data, stoken, acts = acts, types = types, resolution = resolution, series_type = series_type)
+	
+}
+
+#' @rdname get_activity_streams
+#'
+#' @export
+#'
+#' @method get_activity_streams actframe
+get_activity_streams.actframe <- function(act_data, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance', ...){
 	
 	# Setup default streams
 	types.all <- list("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
@@ -41,12 +62,12 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, re
 	}
 
 	# Get unit types and values attributes
-	unit_type <- attr(actframe, 'unit_type')
-	unit_vals <- attr(actframe, 'unit_vals')
+	unit_type <- attr(act_data, 'unit_type')
+	unit_vals <- attr(act_data, 'unit_vals')
 	
 	# Setup requested ids
-	if (is.null(acts)) acts <- 1:nrow(actframe)
-	list.ids <- as.list(actframe[acts,]$id)
+	if (is.null(acts)) acts <- 1:nrow(act_data)
+	list.ids <- as.list(act_data[acts,]$id)
 	
 	# Get all activity streams
 	streams <- purrr::map(list.ids, ~ get_streams(stoken, id = ., request = 'activities', types = types, resolution = resolution, series_type = series_type))
@@ -105,7 +126,7 @@ get_activity_streams <- function(actframe, stoken, acts = NULL, types = NULL, re
 	}
 	
 	# Drop added columns
-	out <- dplyr::select(out, one_of(cols.out))
+	out <- dplyr::select(out, dplyr::one_of(cols.out))
 	
 	
 	# create strframe object

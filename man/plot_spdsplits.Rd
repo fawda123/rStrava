@@ -15,13 +15,13 @@ plot_spdsplits(act_data, ...)
   fill = "darkblue", ...)
 }
 \arguments{
-\item{act_data}{an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
+\item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
 
 \item{...}{arguments passed to other methods}
 
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{acts}{numeric indicating which activity to plot based on index in \code{actlist}, defaults to most recent}
+\item{acts}{numeric indicating which activity to plot based on index in the activities list, defaults to most recent}
 
 \item{units}{chr string indicating plot units as either metric or imperial}
 

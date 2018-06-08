@@ -49,8 +49,8 @@ An example using the scraping functions:
 devtools::load_all('.')
 ```
 ```{r message = FALSE}
-# get athlete data for these guys
-athl_fun(c(2837007, 2527465, 2140248), trace = FALSE)
+# get athlete data 
+athl_fun(2837007, trace = FALSE)
 ```
 
 ### API functions (token)
@@ -127,6 +127,22 @@ Plot average speed per split (km or mile) for an activity:
 ```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
 # plots for most recent activity
 plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
+```
+
+Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.  There are two functions that can retrieve streams, both of which require the authentication token for your Strava API:
+
+Use `get_activity_streams` for detailed info about activites:
+```{r, fig.height = 4, fig.with = 4}
+# get streams for the first activity in my_acts
+strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
+
+# make a plot
+library(ggplot2)
+ggplot(strms_data, aes(x = lng, y = lat, group = id, col = velocity_smooth)) + 
+	geom_path(size = 2) +
+	coord_equal() + 
+	theme_void() +
+	scale_colour_distiller('Speed (km/hr)', palette = 'Spectral')
 ```
 
 ### License

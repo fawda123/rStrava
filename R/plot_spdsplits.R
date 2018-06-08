@@ -6,9 +6,9 @@
 #' 
 #' @concept token
 #' 
-#' @param act_data an \code{actlist} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
+#' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param acts numeric indicating which activity to plot based on index in \code{actlist}, defaults to most recent
+#' @param acts numeric indicating which activity to plot based on index in the activities list, defaults to most recent
 #' @param units chr string indicating plot units as either metric or imperial
 #' @param fill chr string of fill color for profile
 #' @param ... arguments passed to other methods

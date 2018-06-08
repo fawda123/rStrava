@@ -1,8 +1,8 @@
 Package: rStrava
 Type: Package
 Title: Access the Strava API
-Version: 0.15.9000
-Date: 2018-03-18
+Version: 0.16
+Date: 2018-06-08
 Description: Functions to access data from Strava's v3 API.
 LazyData: TRUE
 BugReports: https://github.com/fawda123/rStrava/issues
@@ -35,6 +35,10 @@ Authors@R: c(
     ), 
   person(given = "Daniel", family = "Padfield",
   	role = c("aut"), 
-  	email = "dp323@exeter.ac.uk")
+  	email = "dp323@exeter.ac.uk"
+  	),
+  person(given = "Lorenzo", family = "Gaborini",
+  	role = c("aut")
   	)
+  )
 RoxygenNote: 6.0.1
