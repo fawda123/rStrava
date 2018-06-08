@@ -1,6 +1,7 @@
-#' Retrieve a Strava data stream
+#' Retrieve a Strava data stream for a single activity
 #' 
-#' Retrieve a Strava data stream
+#' Retrieve a Strava data stream for a single activity.
+#' Internally called by \code{\link{get_activity_streams}}.
 #'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
 #' @param id numeric for id of the request
@@ -12,9 +13,7 @@
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website. From the API documentation, 'streams' is the Strava term for the raw data associated with an activity.
 #' 
 #' @return Data from an API request.
-#' 
-#' @export 
-#' 
+#' @export
 #' @concept token
 #' 
 #' @import httr
@@ -30,9 +29,13 @@
 #' }
 get_streams  <- function(stoken, id, request = "activities",
 												 types, resolution = NULL, series_type = NULL){
+
+	if (length(id) != 1){
+		stop('id must be a scalar.')
+	}
 	
 	req <- GET(url_streams(id, request, types), stoken,
-						 query = list(resolution = resolution, series_type=series_type))
+						 query = list(resolution = resolution, series_type = series_type))
 	ratelimit(req)
 	stop_for_status(req)
 	dataRaw <- content(req)
