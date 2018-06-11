@@ -1,16 +1,6 @@
----
-output:
-  html_document:
-    keep_md: yes
-    toc: no
-    self_contained: no
-  pdf_document:
-    toc: yes
----
-
 # rStrava
 
-##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk*
+##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk, Lorenzo Gaborini, lorenzo.gaborini@unil.ch*
 
 Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
 
@@ -63,22 +53,22 @@ athl_fun(2837007, trace = FALSE)
 ## [1] "Irvine, California"
 ## 
 ## $`2837007`$current_month
-##   Distance       Time  Elevation 
-##  64.200000   4.133333 827.000000 
+##    Distance        Time   Elevation 
+##   76.600000    5.516667 1410.000000 
 ## 
 ## $`2837007`$monthly
 ## Jun 2017      Jul      Aug      Sep      Oct      Nov      Dec Jan 2018 
-## 316.9875 325.0125 172.5375 108.3375 284.8875 224.7000 256.8000 280.8750 
+## 318.4947 326.5579 173.3579 108.8526 286.2421 225.7684 258.0211 282.2105 
 ##      Feb      Mar      Apr      May      Jun 
-## 296.9250 361.1250 272.8500 304.9500  64.2000 
+## 298.3368 362.8421 274.1474 306.4000  76.6000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     1440.40000       94.38333    18780.00000      135.00000 
+##     1451.00000       95.01667    18878.00000      136.00000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       21947.400        1342.733      168796.000        1685.000
+##       21958.000        1343.367      168894.000        1686.000
 ```
 
 ### API functions (token)
