@@ -19,6 +19,7 @@ This is a wrapper function to dplyr::filter which can be applied to an actframe 
 }
 \examples{
 \dontrun{
+library(dplyr)
 
 # get actframe, all activities
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))

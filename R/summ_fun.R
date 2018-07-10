@@ -4,7 +4,8 @@
 #' 
 #' @param prsd parsed \code{\link[XML]{htmlTreeParse}} list
 #'
-#' @import plyr XML
+#' @import XML
+#' @importFrom plyr laply
 #' 
 #' @export
 #' 

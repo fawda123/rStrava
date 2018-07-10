@@ -40,6 +40,10 @@ Authors@R: c(
   person(given = "Lorenzo", family = "Gaborini",
   	role = c("aut"), 
   	email = "lorenzo.gaborini@unil.ch"
+  	),
+  person(given = "Niklas", family = "von Maltzahn",
+  	role = c("aut"), 
+  	email = "niklasv@gmail.com"
   	)
   )
 RoxygenNote: 6.0.1

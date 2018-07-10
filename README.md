@@ -1,6 +1,6 @@
 # rStrava
 
-##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk, Lorenzo Gaborini, lorenzo.gaborini@unil.ch*
+##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk, Lorenzo Gaborini, lorenzo.gaborini@unil.ch, Niklas von Maltzahn, niklasvm@gmail.com*
 
 Linux: [![Travis-CI Build Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
 
@@ -54,21 +54,21 @@ athl_fun(2837007, trace = FALSE)
 ## 
 ## $`2837007`$current_month
 ##    Distance        Time   Elevation 
-##   76.600000    5.516667 1410.000000 
+##  119.100000    8.466667 1695.000000 
 ## 
 ## $`2837007`$monthly
-## Jun 2017      Jul      Aug      Sep      Oct      Nov      Dec Jan 2018 
-## 318.4947 326.5579 173.3579 108.8526 286.2421 225.7684 258.0211 282.2105 
-##      Feb      Mar      Apr      May      Jun 
-## 298.3368 362.8421 274.1474 306.4000  76.6000 
+## Jul 2017      Aug      Sep      Oct      Nov      Dec Jan 2018      Feb 
+##   321.57   170.71   107.19   281.87   222.32   254.08   277.90   293.78 
+##      Mar      Apr      May      Jun      Jul 
+##   357.30   269.96   301.72   230.26   119.10 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##     1451.00000       95.01667    18878.00000      136.00000 
+##         1698.3          111.2        22129.0          159.0 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       21958.000        1343.367      168894.000        1686.000
+##       22205.400        1359.533      172146.000        1709.000
 ```
 
 ### API functions (token)
@@ -155,19 +155,11 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
-```
-## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
-```
-
 ![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
-```
-
-```
-## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 ![](README_files/figure-html/unnamed-chunk-11-2.png)<!-- -->

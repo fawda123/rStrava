@@ -4,7 +4,7 @@
 \alias{mutate.actframe}
 \title{Mutate}
 \usage{
-mutate.actframe(.data, ...)
+\method{mutate}{actframe}(.data, ...)
 }
 \arguments{
 \item{.data}{an actframe object}
@@ -19,6 +19,7 @@ This is a wrapper function to dplyr::mutate which can be applied to an actframe 
 }
 \examples{
 \dontrun{
+library(dplyr)
 
 # get actframe, all activities
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))

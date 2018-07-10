@@ -8,10 +8,10 @@
 #' @importFrom dplyr filter
 #'
 #' @return an actframe object
-
 #'
 #' @examples
 #' \dontrun{
+#' library(dplyr)
 #' 
 #' # get actframe, all activities
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
@@ -58,6 +58,7 @@ filter.actframe <- function(.data,...) {
 #'
 #' @examples
 #' \dontrun{
+#' library(dplyr)
 #' 
 #' # get actframe, all activities
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))

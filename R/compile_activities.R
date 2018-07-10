@@ -13,6 +13,8 @@
 #' 
 #' @details each activity has a value for every column present across all activities, with NAs populating empty values
 #'
+#' @importFrom plyr ldply
+#'
 #' @concept token
 #' 
 #' @export
@@ -39,7 +41,7 @@ compile_activities <- function(actlist, acts = NULL, units = 'metric'){
 	actlist <- actlist[acts]
 	temp <- unlist(actlist)
 	att <- unique(attributes(temp)$names)
-	out <- plyr::ldply(actlist, compile_activity, columns = att)
+	out <- ldply(actlist, compile_activity, columns = att)
 
 	# convert relevant columns to numeric
 	cols <- c('id', 'achievement_count', 'athlete.resource_state', 'athlete_count', 'average_speed', 'average_watts', 'comment_count', 'distance', 'elapsed_time', 'elev_high', 'elev_low', 'end_latlng1', 'end_latlng2', 'kilojoules', 'kudos_count', 'map.resource_state', 'max_speed', 'moving_time', 'photo_count', 'resource_state', 'start_latitude', 'start_latlng1', 'start_latlng2', 'start_longitude', 'total_elevation_gain', 'total_photo_count')
