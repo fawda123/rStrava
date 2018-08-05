@@ -96,11 +96,15 @@ head(myinfo)
 ```
 
 An example creating a heat map of activities:
-```{r message = F, fig.height = 5.5, fig.width = 7, cache = TRUE}
-# get activities, get activities by location, plot
+```{r message = F, fig.height = 5.5, fig.width = 7, cache = TRUE, message = F, warning = F}
+library(dplyr)
+
+# get activities, get activities by lat/lon, plot
 my_acts <- get_activity_list(stoken)
-acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
-get_heat_map(my_acts, acts = which(acts), col = 'darkgreen', size = 2, dist = F, f = 0.5)
+act_data <- compile_activities(my_acts) %>% 
+	filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
+	filter(start_latitude < 31.5 & start_latitude > 30)
+get_heat_map(act_data, col = 'darkgreen', size = 2, dist = F, f = 0.4)
 ```
 
 Plotting elevation and grade for a single ride:

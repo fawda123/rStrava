@@ -1,3 +1,4 @@
+
 # rStrava
 
 ##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk, Lorenzo Gaborini, lorenzo.gaborini@unil.ch, Niklas von Maltzahn, niklasvm@gmail.com*
@@ -53,22 +54,22 @@ athl_fun(2837007, trace = FALSE)
 ## [1] "Irvine, California"
 ## 
 ## $`2837007`$current_month
-##    Distance        Time   Elevation 
-##  119.100000    8.466667 1695.000000 
+##   Distance       Time  Elevation 
+##  46.100000   3.283333 696.000000 
 ## 
 ## $`2837007`$monthly
-## Jul 2017      Aug      Sep      Oct      Nov      Dec Jan 2018      Feb 
-##   321.57   170.71   107.19   281.87   222.32   254.08   277.90   293.78 
-##      Mar      Apr      May      Jun      Jul 
-##   357.30   269.96   301.72   230.26   119.10 
+## Aug 2017      Sep      Oct      Nov      Dec Jan 2018      Feb      Mar 
+## 165.1917 103.7250 272.7583 215.1333 245.8667 268.9167 284.2833 345.7500 
+##      Apr      May      Jun      Jul      Aug 
+## 261.2333 291.9667 222.8167 368.8000  46.1000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##         1698.3          111.2        22129.0          159.0 
+##        1965.90         128.75       25623.00         184.00 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       22205.400        1359.533      172146.000        1709.000
+##         22472.9          1377.1        175640.0          1734.0
 ```
 
 ### API functions (token)
@@ -140,10 +141,14 @@ head(myinfo)
 An example creating a heat map of activities:
 
 ```r
-# get activities, get activities by location, plot
+library(dplyr)
+
+# get activities, get activities by lat/lon, plot
 my_acts <- get_activity_list(stoken)
-acts <- lapply(my_acts, function(x) x$location_city) %in% c('Pensacola', 'Pensacola Beach', 'Milton') 
-get_heat_map(my_acts, acts = which(acts), col = 'darkgreen', size = 2, dist = F, f = 0.5)
+act_data <- compile_activities(my_acts) %>% 
+	filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
+	filter(start_latitude < 31.5 & start_latitude > 30)
+get_heat_map(act_data, col = 'darkgreen', size = 2, dist = F, f = 0.4)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
