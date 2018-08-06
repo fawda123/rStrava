@@ -148,7 +148,7 @@ my_acts <- get_activity_list(stoken)
 act_data <- compile_activities(my_acts) %>% 
 	filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
 	filter(start_latitude < 31.5 & start_latitude > 30)
-get_heat_map(act_data, col = 'darkgreen', size = 2, dist = F, f = 0.4)
+get_heat_map(act_data, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
@@ -222,17 +222,55 @@ head(strms_data)
 ## 6 -87.22208 849369847
 ```
 
+Stream data can be plotted using any of the plotting functions.
+
 ```r
-# make a plot
-library(ggplot2)
-ggplot(strms_data, aes(x = lng, y = lat, group = id, col = velocity_smooth)) + 
-	geom_path(size = 2) +
-	coord_equal() + 
-	theme_void() +
-	scale_colour_distiller('Speed (km/hr)', palette = 'Spectral')
+# heat map
+get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
 ```
 
-![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+```
+## Called from: get_heat_map.strframe(strms_data, alpha = 1, filltype = "speed", 
+##     f = 0.3, size = 2, col = "Spectral", distlab = F)
+## debug at C:\proj\rStrava/R/get_heat_map.R#238: temp <- strms_data
+## debug at C:\proj\rStrava/R/get_heat_map.R#239: temp <- split(temp, temp$id)
+## debug at C:\proj\rStrava/R/get_heat_map.R#240: temp <- lapply(temp, function(x) {
+##     xint <- stats::approx(x = x$lng, n = expand * nrow(x))$y
+##     yint <- stats::approx(x = x$lat, n = expand * nrow(x))$y
+##     dist <- stats::approx(x = x$distance, n = expand * nrow(x))$y
+##     alti <- stats::approx(x = x$altitude, n = expand * nrow(x))$y
+##     grds <- stats::approx(x = x$grade_smooth, n = expand * nrow(x))$y
+##     vels <- stats::approx(x = x$velocity_smooth, n = expand * 
+##         nrow(x))$y
+##     data.frame(id = unique(x$id), lat = yint, lng = xint, distance = dist, 
+##         elevation = alti, slope = grds, speed = vels)
+## })
+## debug at C:\proj\rStrava/R/get_heat_map.R#251: temp <- do.call("rbind", temp)
+## debug at C:\proj\rStrava/R/get_heat_map.R#254: bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
+## debug at C:\proj\rStrava/R/get_heat_map.R#257: map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, 
+##     maptype = maptype)))
+## debug at C:\proj\rStrava/R/get_heat_map.R#258: pbase <- ggmap::ggmap(map) + ggplot2::coord_fixed(ratio = 1) + 
+##     ggplot2::theme(axis.title = ggplot2::element_blank())
+## debug at C:\proj\rStrava/R/get_heat_map.R#263: if (filltype == "slope") leglab <- "%" else leglab <- unit_vals[filltype]
+## debug at C:\proj\rStrava/R/get_heat_map.R#263: leglab <- unit_vals[filltype]
+## debug at C:\proj\rStrava/R/get_heat_map.R#265: p <- pbase + ggplot2::geom_path(ggplot2::aes_string(x = "lng", 
+##     y = "lat", group = "id", colour = filltype), alpha = alpha, 
+##     data = temp, size = size) + ggplot2::scale_colour_distiller(leglab, 
+##     palette = col)
+## debug at C:\proj\rStrava/R/get_heat_map.R#271: if (distlab) {
+##     disttemp <- temp %>% dplyr::mutate(tosel = round(distance, 
+##         distval), diffdist = abs(distance - tosel)) %>% dplyr::group_by(id, 
+##         tosel) %>% dplyr::filter(diffdist == min(diffdist)) %>% 
+##         dplyr::ungroup(.) %>% dplyr::select(-tosel, -diffdist) %>% 
+##         dplyr::mutate(distance = as.character(round(distance)))
+##     p <- p + ggrepel::geom_label_repel(data = disttemp, ggplot2::aes(x = lng, 
+##         y = lat, label = distance), point.padding = grid::unit(0.4, 
+##         "lines"))
+## }
+## debug at C:\proj\rStrava/R/get_heat_map.R#298: return(p)
+```
+
+![](README_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 ### License
 

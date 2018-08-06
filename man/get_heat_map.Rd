@@ -4,19 +4,25 @@
 \alias{get_heat_map}
 \alias{get_heat_map.list}
 \alias{get_heat_map.actframe}
+\alias{get_heat_map.strframe}
 \title{Makes a heat map from your activity data}
 \usage{
 get_heat_map(act_data, ...)
 
 \method{get_heat_map}{list}(act_data, acts = 1, alpha = NULL, f = 0.1,
-  key = NULL, add_elev = FALSE, as_grad = FALSE, dist = TRUE,
+  key = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE,
   distval = 0, size = 0.5, col = "red", expand = 10,
   maptype = "terrain", source = "google", units = "metric", ...)
 
 \method{get_heat_map}{actframe}(act_data, alpha = NULL, f = 1, key = NULL,
-  add_elev = FALSE, as_grad = FALSE, dist = TRUE, distval = 0,
+  add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0,
   size = 0.5, col = "red", expand = 10, maptype = "terrain",
   source = "google", ...)
+
+\method{get_heat_map}{strframe}(strms_data, alpha = NULL, f = 1,
+  filltype = c("altitude", "distance", "grade_smooth", "velocity_smooth"),
+  distlab = TRUE, distval = 0, size = 0.5, col = "red", expand = 10,
+  maptype = "terrain", source = "google", ...)
 }
 \arguments{
 \item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -35,7 +41,7 @@ get_heat_map(act_data, ...)
 
 \item{as_grad}{logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}}
 
-\item{dist}{logical if distance is plotted along the route with \code{\link[ggrepel]{geom_label_repel}}}
+\item{distlab}{logical if distance labels are plotted along the route with \code{\link[ggrepel]{geom_label_repel}}}
 
 \item{distval}{numeric indicating rounding factor for distance labels which has direct control on label density, see details}
 
@@ -50,6 +56,8 @@ get_heat_map(act_data, ...)
 \item{source}{chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported}
 
 \item{units}{chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}}
+
+\item{filltype}{chr string specifying which stream variable to use for filling line segments, applies only to \code{strmdata} objects, acceptable values are \code{"altitude"}, \code{"distance"}, \code{"grade_smooth"}, or \code{"velocity_smooth"}}
 }
 \value{
 plot of activity on a Google map

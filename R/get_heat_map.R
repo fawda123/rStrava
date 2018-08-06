@@ -12,7 +12,8 @@
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
 #' @param add_elev logical indicating if elevation is overlayed by color shading on the activity lines
 #' @param as_grad logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}
-#' @param dist logical if distance is plotted along the route with \code{\link[ggrepel]{geom_label_repel}}
+#' @param filltype chr string specifying which stream variable to use for filling line segments, applies only to \code{strmdata} objects, acceptable values are \code{"altitude"}, \code{"distance"}, \code{"grade_smooth"}, or \code{"velocity_smooth"}
+#' @param distlab logical if distance labels are plotted along the route with \code{\link[ggrepel]{geom_label_repel}}
 #' @param distval numeric indicating rounding factor for distance labels which has direct control on label density, see details 
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param size numeric indicating width of activity lines
@@ -60,12 +61,12 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map list
-get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = NULL, add_elev = FALSE, as_grad = FALSE, dist = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
+get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
 
-	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, dist = dist, distval = distval, size = size, col = col, expand = expand, maptype = maptype, source = source, ...)	
+	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, distlab = distlab, distval = distval, size = size, col = col, expand = expand, maptype = maptype, source = source, ...)	
 	
 }
 	
@@ -74,7 +75,7 @@ get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = N
 #' @export
 #'
 #' @method get_heat_map actframe
-get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, dist = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
+get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
@@ -179,7 +180,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	}
 	
 	# plot distances
-	if(dist){
+	if(distlab){
 		
 		# get distances closes to integers, add final distance
 		disttemp <- temp %>% 
@@ -203,6 +204,94 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 				ggplot2::aes(x = lon, y = lat, label = distance),
 				point.padding = grid::unit(0.4, "lines")
 				)
+		
+	}
+	
+	return(p)
+	
+}
+
+#' @rdname get_heat_map
+#'
+#' @export
+#'
+#' @method get_heat_map strframe
+get_heat_map.strframe <- function(strms_data, alpha = NULL, f = 1, filltype = c('elevation', 'distance', 'slope', 'speed'), distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
+
+	# get unit types and values attributes
+	unit_type <- attr(strms_data, 'unit_type')
+	unit_vals <- attr(strms_data, 'unit_vals')
+	
+	# warning if units conflict
+	args <- as.list(match.call())
+	if('units' %in% names(args))
+		if(args$units != unit_type)
+			warning('units argument ignored for strframe objects')
+	
+	# get filltype
+	filltype <- match.arg(filltype)
+	
+	if(is.null(alpha)) alpha <- 0.5
+
+	# data to plot
+	# expand values for each activity
+	temp <- strms_data
+	temp <- split(temp, temp$id)
+	temp <- lapply(temp, function(x) {
+
+		xint <- stats::approx(x = x$lng, n = expand * nrow(x))$y
+		yint <- stats::approx(x = x$lat, n = expand * nrow(x))$y
+		dist <- stats::approx(x= x$distance, n = expand * nrow(x))$y
+		alti <- stats::approx(x= x$altitude, n = expand * nrow(x))$y
+		grds <- stats::approx(x= x$grade_smooth, n = expand * nrow(x))$y
+		vels <- stats::approx(x= x$velocity_smooth, n = expand * nrow(x))$y
+		data.frame(id = unique(x$id), lat = yint, lng = xint, distance = dist, elevation = alti, slope = grds, speed = vels)
+		
+	})
+	temp <- do.call('rbind', temp)
+	
+	# xy lims
+	bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
+	
+	# map and base plot
+	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
+	pbase <- ggmap::ggmap(map) +
+		ggplot2::coord_fixed(ratio = 1) +
+		ggplot2::theme(axis.title = ggplot2::element_blank())
+
+	# legend and plot
+	if(filltype == 'slope') leglab <- '%'
+	else leglab <- unit_vals[filltype]
+	p <- pbase +
+		ggplot2::geom_path(ggplot2::aes_string(x = 'lng', y = 'lat', group = 'id', colour = filltype), 
+											 alpha = alpha, data = temp, size = size) +
+		ggplot2::scale_colour_distiller(leglab, palette = col)
+
+	# plot distances
+	if(distlab){
+		
+		# get distances closes to integers, add final distance
+		disttemp <- temp %>% 
+			dplyr::mutate(
+				tosel = round(distance, distval), 
+				diffdist = abs(distance - tosel)
+			) %>% 
+			dplyr::group_by(id, tosel) %>% 
+			dplyr::filter(diffdist == min(diffdist)) %>% 
+			dplyr::ungroup(.) %>% 
+			dplyr::select(-tosel, -diffdist) %>% 
+			dplyr::mutate(distance = as.character(round(distance)))
+		# final <- temp[nrow(temp), ] 
+		# final$distance <- format(final$distance, nsmall = 1, digits = 1)
+		# disttemp <- rbind(disttemp, final)
+		
+		# add to plot
+		p <- p + 
+			ggrepel::geom_label_repel(
+				data = disttemp, 
+				ggplot2::aes(x = lng, y = lat, label = distance),
+				point.padding = grid::unit(0.4, "lines")
+			)
 		
 	}
 	
