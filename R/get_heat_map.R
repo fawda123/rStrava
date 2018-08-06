@@ -6,13 +6,13 @@
 #' 
 #' @concept token
 #' 
-#' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
+#' @param act_data an activities list object returned by \code{\link{get_activity_list}}, an \code{actframe} returned by \code{\link{compile_activities}}, or a \code{strfame} returned by \code{\link{get_activity_streams}} 
 #' @param acts numeric indicating which activities to plot based on index in the activities list, defaults to most recent
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
 #' @param add_elev logical indicating if elevation is overlayed by color shading on the activity lines
 #' @param as_grad logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}
-#' @param filltype chr string specifying which stream variable to use for filling line segments, applies only to \code{strmdata} objects, acceptable values are \code{"altitude"}, \code{"distance"}, \code{"grade_smooth"}, or \code{"velocity_smooth"}
+#' @param filltype chr string specifying which stream variable to use for filling line segments, applies only to \code{strframe} objects, acceptable values are \code{"elevation"}, \code{"distance"}, \code{"slope"}, or \code{"speed"}
 #' @param distlab logical if distance labels are plotted along the route with \code{\link[ggrepel]{geom_label_repel}}
 #' @param distval numeric indicating rounding factor for distance labels which has direct control on label density, see details 
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
@@ -216,11 +216,11 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 #' @export
 #'
 #' @method get_heat_map strframe
-get_heat_map.strframe <- function(strms_data, alpha = NULL, f = 1, filltype = c('elevation', 'distance', 'slope', 'speed'), distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
+get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('elevation', 'distance', 'slope', 'speed'), distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
 
 	# get unit types and values attributes
-	unit_type <- attr(strms_data, 'unit_type')
-	unit_vals <- attr(strms_data, 'unit_vals')
+	unit_type <- attr(act_data, 'unit_type')
+	unit_vals <- attr(act_data, 'unit_vals')
 	
 	# warning if units conflict
 	args <- as.list(match.call())
@@ -235,7 +235,7 @@ get_heat_map.strframe <- function(strms_data, alpha = NULL, f = 1, filltype = c(
 
 	# data to plot
 	# expand values for each activity
-	temp <- strms_data
+	temp <- act_data
 	temp <- split(temp, temp$id)
 	temp <- lapply(temp, function(x) {
 

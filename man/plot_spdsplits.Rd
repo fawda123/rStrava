@@ -3,7 +3,7 @@
 \name{plot_spdsplits}
 \alias{plot_spdsplits}
 \alias{plot_spdsplits.list}
-\alias{plot_spdsplits.actframe}
+\alias{plot_spdsplits.default}
 \title{Plot speed by splits}
 \usage{
 plot_spdsplits(act_data, ...)
@@ -11,7 +11,7 @@ plot_spdsplits(act_data, ...)
 \method{plot_spdsplits}{list}(act_data, stoken, acts = 1, units = "metric",
   fill = "darkblue", ...)
 
-\method{plot_spdsplits}{actframe}(act_data, stoken, units = "metric",
+\method{plot_spdsplits}{default}(act_data, stoken, units = "metric",
   fill = "darkblue", ...)
 }
 \arguments{

@@ -141,9 +141,15 @@ head(strms_data)
 ```
 
 Stream data can be plotted using any of the plotting functions.
-```{r}
+```{r, warning = F, message = F}
 # heat map
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
+
+# elevation profile
+get_elev_prof(strms_data)
+
+# speed splits
+plot_spdsplits(strms_data, stoken)
 ```
 
 ### License

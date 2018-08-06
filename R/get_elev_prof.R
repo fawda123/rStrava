@@ -155,3 +155,70 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 	return(p)
 	
 }
+
+#' @rdname get_elev_prof
+#'
+#' @export
+#'
+#' @method get_elev_prof strframe
+get_elev_prof.strframe <- function(act_data, total = FALSE, expand = 10, fill = 'darkblue', ...){
+
+	# get unit types and values attributes
+	unit_type <- attr(act_data, 'unit_type')
+	unit_vals <- attr(act_data, 'unit_vals')
+	
+	# warning if units conflict
+	args <- as.list(match.call())
+	if('units' %in% names(args))
+		if(args$units != unit_type)
+			warning('units argument ignored for strframe objects')
+	
+	# expand lat/lon for each activity
+	act_data <- split(act_data, act_data$id)
+	act_data <- lapply(act_data, function(x) {
+
+		xint <- stats::approx(x = x$lng, n = expand * nrow(x))$y
+		yint <- stats::approx(x = x$lat, n = expand * nrow(x))$y
+		elev <- stats::approx(x = x$altitude, n = expand * nrow(x))$y
+		dist <- stats::approx(x = x$distance, n = expand * nrow(x))$y
+		data.frame(
+			activity = unique(x$id), 
+			lat = yint, 
+			lon = xint, 
+			distance = dist,
+			ele = pmax(0, elev), 
+			total_elevation_gain = round(max(cumsum(diff(elev))))
+		)
+		
+	})
+	act_data <- do.call("rbind", act_data)
+
+	# axis labels
+	ylab <- paste0('Elevation (', unit_vals['elevation'], ')')
+	xlab <- paste0('Distance (', unit_vals['distance'], ')')
+	
+	# format date, total_elevation_gain, create facet labels
+	act_data <- dplyr::mutate(act_data,
+													 total_elevation_gain = paste('Elev. gain', total_elevation_gain)
+	) %>% 
+		tidyr::unite('facets', activity, total_elevation_gain, sep = ', ')
+
+	# get total climbed over distance
+	if(total){
+		
+		act_data <- dplyr::group_by(act_data, facets) %>% 
+			dplyr::mutate(ele = c(0, cumsum(pmax(0, diff(ele)))))
+		ylab <- paste('Total', ylab)
+		
+	}
+	
+	p <- ggplot2::ggplot(data = act_data, ggplot2::aes(x = distance)) +
+		ggplot2::geom_ribbon(ggplot2::aes(ymax = ele, ymin = min (ele) - ((max(ele) - min(ele))/5)), fill = fill) +
+		ggplot2::theme_bw() +
+		ggplot2::facet_wrap(~facets, ncol = 1) + 
+		ggplot2::ylab(ylab) +
+		ggplot2::xlab(xlab)
+	
+	return(p)
+	
+}

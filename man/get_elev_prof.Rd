@@ -4,6 +4,7 @@
 \alias{get_elev_prof}
 \alias{get_elev_prof.list}
 \alias{get_elev_prof.actframe}
+\alias{get_elev_prof.strframe}
 \title{Create elevation profiles from activity data}
 \usage{
 get_elev_prof(act_data, ...)
@@ -12,6 +13,9 @@ get_elev_prof(act_data, ...)
   expand = 10, units = "metric", fill = "darkblue", ...)
 
 \method{get_elev_prof}{actframe}(act_data, key, total = FALSE, expand = 10,
+  fill = "darkblue", ...)
+
+\method{get_elev_prof}{strframe}(act_data, total = FALSE, expand = 10,
   fill = "darkblue", ...)
 }
 \arguments{

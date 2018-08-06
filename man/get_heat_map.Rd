@@ -19,13 +19,13 @@ get_heat_map(act_data, ...)
   size = 0.5, col = "red", expand = 10, maptype = "terrain",
   source = "google", ...)
 
-\method{get_heat_map}{strframe}(strms_data, alpha = NULL, f = 1,
-  filltype = c("altitude", "distance", "grade_smooth", "velocity_smooth"),
-  distlab = TRUE, distval = 0, size = 0.5, col = "red", expand = 10,
+\method{get_heat_map}{strframe}(act_data, alpha = NULL, f = 1,
+  filltype = c("elevation", "distance", "slope", "speed"), distlab = TRUE,
+  distval = 0, size = 0.5, col = "red", expand = 10,
   maptype = "terrain", source = "google", ...)
 }
 \arguments{
-\item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
+\item{act_data}{an activities list object returned by \code{\link{get_activity_list}}, an \code{actframe} returned by \code{\link{compile_activities}}, or a \code{strfame} returned by \code{\link{get_activity_streams}}}
 
 \item{...}{arguments passed to or from other methods}
 
@@ -57,7 +57,7 @@ get_heat_map(act_data, ...)
 
 \item{units}{chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}}
 
-\item{filltype}{chr string specifying which stream variable to use for filling line segments, applies only to \code{strmdata} objects, acceptable values are \code{"altitude"}, \code{"distance"}, \code{"grade_smooth"}, or \code{"velocity_smooth"}}
+\item{filltype}{chr string specifying which stream variable to use for filling line segments, applies only to \code{strframe} objects, acceptable values are \code{"elevation"}, \code{"distance"}, \code{"slope"}, or \code{"speed"}}
 }
 \value{
 plot of activity on a Google map

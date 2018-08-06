@@ -42,7 +42,7 @@ plot_spdsplits.list <- function(act_data, stoken, acts = 1, units = 'metric', fi
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
 
-	plot_spdsplits.actframe(act_data, stoken, size = size, units = units, fill = fill, ...)	
+	plot_spdsplits.default(act_data, stoken, size = size, units = units, fill = fill, ...)	
 	
 }
 
@@ -50,8 +50,8 @@ plot_spdsplits.list <- function(act_data, stoken, acts = 1, units = 'metric', fi
 #'
 #' @export
 #'
-#' @method plot_spdsplits actframe
-plot_spdsplits.actframe <- function(act_data, stoken, units = 'metric', fill = 'darkblue', ...){
+#' @method plot_spdsplits default
+plot_spdsplits.default <- function(act_data, stoken, units = 'metric', fill = 'darkblue', ...){
 	
 	# get the activity, split speeds are not in the actframe
 	act <- get_activity(act_data$id[1], stoken)
@@ -95,4 +95,3 @@ plot_spdsplits.actframe <- function(act_data, stoken, units = 'metric', fill = '
 	return(p)
 	
 }
-

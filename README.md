@@ -55,21 +55,21 @@ athl_fun(2837007, trace = FALSE)
 ## 
 ## $`2837007`$current_month
 ##   Distance       Time  Elevation 
-##  46.100000   3.283333 696.000000 
+##  60.400000   4.483333 950.000000 
 ## 
 ## $`2837007`$monthly
 ## Aug 2017      Sep      Oct      Nov      Dec Jan 2018      Feb      Mar 
-## 165.1917 103.7250 272.7583 215.1333 245.8667 268.9167 284.2833 345.7500 
+## 173.1467 108.7200 285.8933 225.4933 257.7067 281.8667 297.9733 362.4000 
 ##      Apr      May      Jun      Jul      Aug 
-## 261.2333 291.9667 222.8167 368.8000  46.1000 
+## 273.8133 306.0267 233.5467 386.5600  60.4000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##        1965.90         128.75       25623.00         184.00 
+##      1976.6000       129.4333     25719.0000       185.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         22472.9          1377.1        175640.0          1734.0
+##       22483.600        1377.783      175735.000        1735.000
 ```
 
 ### API functions (token)
@@ -160,11 +160,19 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
+```
+## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
+```
+
 ![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+```
+
+```
+## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
 ![](README_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
@@ -229,48 +237,21 @@ Stream data can be plotted using any of the plotting functions.
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
 ```
 
-```
-## Called from: get_heat_map.strframe(strms_data, alpha = 1, filltype = "speed", 
-##     f = 0.3, size = 2, col = "Spectral", distlab = F)
-## debug at C:\proj\rStrava/R/get_heat_map.R#238: temp <- strms_data
-## debug at C:\proj\rStrava/R/get_heat_map.R#239: temp <- split(temp, temp$id)
-## debug at C:\proj\rStrava/R/get_heat_map.R#240: temp <- lapply(temp, function(x) {
-##     xint <- stats::approx(x = x$lng, n = expand * nrow(x))$y
-##     yint <- stats::approx(x = x$lat, n = expand * nrow(x))$y
-##     dist <- stats::approx(x = x$distance, n = expand * nrow(x))$y
-##     alti <- stats::approx(x = x$altitude, n = expand * nrow(x))$y
-##     grds <- stats::approx(x = x$grade_smooth, n = expand * nrow(x))$y
-##     vels <- stats::approx(x = x$velocity_smooth, n = expand * 
-##         nrow(x))$y
-##     data.frame(id = unique(x$id), lat = yint, lng = xint, distance = dist, 
-##         elevation = alti, slope = grds, speed = vels)
-## })
-## debug at C:\proj\rStrava/R/get_heat_map.R#251: temp <- do.call("rbind", temp)
-## debug at C:\proj\rStrava/R/get_heat_map.R#254: bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
-## debug at C:\proj\rStrava/R/get_heat_map.R#257: map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, 
-##     maptype = maptype)))
-## debug at C:\proj\rStrava/R/get_heat_map.R#258: pbase <- ggmap::ggmap(map) + ggplot2::coord_fixed(ratio = 1) + 
-##     ggplot2::theme(axis.title = ggplot2::element_blank())
-## debug at C:\proj\rStrava/R/get_heat_map.R#263: if (filltype == "slope") leglab <- "%" else leglab <- unit_vals[filltype]
-## debug at C:\proj\rStrava/R/get_heat_map.R#263: leglab <- unit_vals[filltype]
-## debug at C:\proj\rStrava/R/get_heat_map.R#265: p <- pbase + ggplot2::geom_path(ggplot2::aes_string(x = "lng", 
-##     y = "lat", group = "id", colour = filltype), alpha = alpha, 
-##     data = temp, size = size) + ggplot2::scale_colour_distiller(leglab, 
-##     palette = col)
-## debug at C:\proj\rStrava/R/get_heat_map.R#271: if (distlab) {
-##     disttemp <- temp %>% dplyr::mutate(tosel = round(distance, 
-##         distval), diffdist = abs(distance - tosel)) %>% dplyr::group_by(id, 
-##         tosel) %>% dplyr::filter(diffdist == min(diffdist)) %>% 
-##         dplyr::ungroup(.) %>% dplyr::select(-tosel, -diffdist) %>% 
-##         dplyr::mutate(distance = as.character(round(distance)))
-##     p <- p + ggrepel::geom_label_repel(data = disttemp, ggplot2::aes(x = lng, 
-##         y = lat, label = distance), point.padding = grid::unit(0.4, 
-##         "lines"))
-## }
-## debug at C:\proj\rStrava/R/get_heat_map.R#298: return(p)
+![](README_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+
+```r
+# elevation profile
+get_elev_prof(strms_data)
 ```
 
-![](README_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-15-2.png)<!-- -->
+
+```r
+# speed splits
+plot_spdsplits(strms_data, stoken)
+```
+
+![](README_files/figure-html/unnamed-chunk-15-3.png)<!-- -->
 
 ### License
 
