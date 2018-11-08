@@ -1,3 +1,10 @@
+---
+output:
+  html_document:
+    keep_md: yes
+    toc: no
+    self_contained: yes
+---
 
 # rStrava
 
@@ -54,22 +61,22 @@ athl_fun(2837007, trace = FALSE)
 ## [1] "Irvine, California"
 ## 
 ## $`2837007`$current_month
-##   Distance       Time  Elevation 
-##  60.400000   4.483333 950.000000 
+##    Distance        Time   Elevation 
+##  113.500000    7.633333 1230.000000 
 ## 
 ## $`2837007`$monthly
-## Aug 2017      Sep      Oct      Nov      Dec Jan 2018      Feb      Mar 
-## 173.1467 108.7200 285.8933 225.4933 257.7067 281.8667 297.9733 362.4000 
-##      Apr      May      Jun      Jul      Aug 
-## 273.8133 306.0267 233.5467 386.5600  60.4000 
+## Nov 2017      Dec Jan 2018      Feb      Mar      Apr      May      Jun 
+## 227.0000 259.4286 283.7500 299.9643 364.8214 275.6429 308.0714 235.1071 
+##      Jul      Aug      Sep      Oct      Nov 
+## 389.1429 287.8036 360.7679 332.3929 113.5000 
 ## 
 ## $`2837007`$year_to_date
 ##       Distance           Time Elevation Gain          Rides 
-##      1976.6000       129.4333     25719.0000       185.0000 
+##      2886.0000       188.0667     37730.0000       269.0000 
 ## 
 ## $`2837007`$all_time
 ##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##       22483.600        1377.783      175735.000        1735.000
+##         23393.0          1436.4        187746.0          1819.0
 ```
 
 ### API functions (token)
@@ -108,10 +115,18 @@ cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
 mykey <- Sys.getenv("google_key")
 ```
 
+The `get_heat_map` function uses [ggmap](https://github.com/dkahle/ggmap) to create base maps.  A Google API key is needed if using any map services where `source = "google"` for the argument to `get_heat_map`.  The same key used for the Elevation API can be used but must be registered externally with the ggmap package using `register_google()` before executing `get_heat_map`.
+
+
+
+```r
+library(ggmap)
+register_google(mykey)
+```
+
 #### Using the functions
 
 The API retrieval functions are used with the token.
-
 
 ```r
 myinfo <- get_athlete(stoken, id = '2837007')
@@ -151,7 +166,7 @@ act_data <- compile_activities(my_acts) %>%
 get_heat_map(act_data, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
-![](README_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 Plotting elevation and grade for a single ride:
 
@@ -160,22 +175,14 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
-```
-## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
-```
-
-![](README_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
-```
-## Coordinate system already present. Adding new coordinate system, which will replace the existing one.
-```
-
-![](README_files/figure-html/unnamed-chunk-11-2.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
 
 Get elevation profiles for activities:
 
@@ -186,13 +193,13 @@ my_acts <- get_activity_list(stoken)
 get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial')
 ```
 
-![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 ```r
 get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
 ```
 
-![](README_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-13-2.png)<!-- -->
 
 Plot average speed per split (km or mile) for an activity:
 
@@ -201,7 +208,7 @@ Plot average speed per split (km or mile) for an activity:
 plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
 ```
 
-![](README_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
 
@@ -215,19 +222,19 @@ head(strms_data)
 
 ```
 ##   altitude distance grade_smooth moving time velocity_smooth      lat
-## 1      2.2   0.0000         -2.9  FALSE    0            0.00 30.41038
-## 2      1.9   0.0067         -2.1  FALSE   60            0.36 30.41002
-## 3      1.9   0.0104         -1.5   TRUE   62            0.72 30.41005
-## 4      1.9   0.0143          0.0   TRUE   64            0.72 30.41007
-## 5      1.9   0.0200          0.0   TRUE   66            7.92 30.41010
-## 6      1.9   0.0234          0.0   TRUE   67            9.36 30.41011
-##         lng        id
-## 1 -87.22191 849369847
-## 2 -87.22221 849369847
-## 3 -87.22219 849369847
-## 4 -87.22216 849369847
-## 5 -87.22211 849369847
-## 6 -87.22208 849369847
+## 1     35.3   0.0000          0.8  FALSE    0            0.00 33.72606
+## 2     35.3   0.0063          0.6   TRUE    3            7.56 33.72603
+## 3     35.4   0.0133          0.4   TRUE    6            7.92 33.72598
+## 4     35.4   0.0173          0.5   TRUE    8            7.92 33.72595
+## 5     35.4   0.0230          0.0   TRUE   10            8.64 33.72591
+## 6     35.4   0.0262          0.0   TRUE   11            9.36 33.72588
+##         lng         id
+## 1 -117.7823 1953105389
+## 2 -117.7822 1953105389
+## 3 -117.7822 1953105389
+## 4 -117.7822 1953105389
+## 5 -117.7821 1953105389
+## 6 -117.7821 1953105389
 ```
 
 Stream data can be plotted using any of the plotting functions.
@@ -237,21 +244,22 @@ Stream data can be plotted using any of the plotting functions.
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
 ```
 
-![](README_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+
 
 ```r
 # elevation profile
 get_elev_prof(strms_data)
 ```
 
-![](README_files/figure-html/unnamed-chunk-15-2.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 ```r
 # speed splits
 plot_spdsplits(strms_data, stoken)
 ```
 
-![](README_files/figure-html/unnamed-chunk-15-3.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-17-2.png)<!-- -->
 
 ### License
 

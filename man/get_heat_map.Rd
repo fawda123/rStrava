@@ -71,6 +71,8 @@ uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes
 
 The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 
+A Google API key is needed if using any map services where \code{source = "google"}.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using \code{\link[ggmap]{register_google}} before executing \code{get_heat_map()}.  See the examples.
+
 The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequenc of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc.
 }
 \examples{
@@ -78,6 +80,10 @@ The \code{distval} argument is passed to the \code{digits} argument of \code{rou
 # get my activities
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 my_acts <- get_activity_list(stoken)
+
+# register Google maps API key
+library(ggmap)
+register_google('xxxxxxxxxxx') # enter your key here
 
 # default
 get_heat_map(my_acts, acts = 1, alpha = 1)

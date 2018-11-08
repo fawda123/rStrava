@@ -84,12 +84,19 @@ cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
 mykey <- Sys.getenv("google_key")
 ```
 
-#### Using the functions
+The `get_heat_map` function uses [ggmap](https://github.com/dkahle/ggmap) to create base maps.  A Google API key is needed if using any map services where `source = "google"` for the argument to `get_heat_map`.  The same key used for the Elevation API can be used but must be registered externally with the ggmap package using `register_google()` before executing `get_heat_map`.
 
-The API retrieval functions are used with the token.
 ```{r echo = FALSE, message = FALSE}
 source('extra.R')
 ```
+```{r, message = F, warning = F}
+library(ggmap)
+register_google(mykey)
+```
+
+#### Using the functions
+
+The API retrieval functions are used with the token.
 ```{r}
 myinfo <- get_athlete(stoken, id = '2837007')
 head(myinfo)
@@ -105,6 +112,7 @@ act_data <- compile_activities(my_acts) %>%
 	filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
 	filter(start_latitude < 31.5 & start_latitude > 30)
 get_heat_map(act_data, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
+
 ```
 
 Plotting elevation and grade for a single ride:
@@ -141,10 +149,12 @@ head(strms_data)
 ```
 
 Stream data can be plotted using any of the plotting functions.
-```{r, warning = F, message = F}
+```{r, warning = F, message = F, cache = TRUE}
 # heat map
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
+```
 
+```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
 # elevation profile
 get_elev_prof(strms_data)
 
