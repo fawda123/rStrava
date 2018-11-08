@@ -120,12 +120,12 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 
 	# xy lims
 	bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
-	
+
 	# map and base plot
 	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
-	pbase <- ggmap::ggmap(map) +
-		ggplot2::coord_fixed(ratio = 1) +
-		ggplot2::theme(axis.title = ggplot2::element_blank())
+	pbase <- suppressMessages(ggmap::ggmap(map) +
+		coord_map() + 
+		ggplot2::theme(axis.title = ggplot2::element_blank()))
 	
 	# add elevation to plot
 	if(add_elev){
@@ -202,7 +202,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 		# final <- temp[nrow(temp), ] 
 		# final$distance <- format(final$distance, nsmall = 1, digits = 1)
 		# disttemp <- rbind(disttemp, final)
-	
+
 		# add to plot
 		p <- p + 
 			ggrepel::geom_label_repel(
@@ -213,7 +213,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 		
 	}
 	
-	return(p)
+	return(suppressWarnings(p))
 	
 }
 
