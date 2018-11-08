@@ -36,6 +36,4 @@ spd_splits <- purrr::map_df(acts_data$id, get_spdsplits, stoken = stoken,
 \author{
 Marcus Beck
 }
-\concept{
-token
-}
+\concept{token}

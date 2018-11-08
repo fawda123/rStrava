@@ -20,6 +20,4 @@ Compile generation information on a segment
 \details{
 compiles information a segment by calling \code{\link{get_segment}} internally
 }
-\concept{
-token
-}
+\concept{token}

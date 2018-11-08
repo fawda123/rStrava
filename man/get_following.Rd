@@ -4,8 +4,8 @@
 \alias{get_following}
 \title{Get followers, friends, or both-following}
 \usage{
-get_following(following, stoken, id = NULL, per_page = 200, page_id = 1,
-  page_max = 1, All = FALSE, ...)
+get_following(following, stoken, id = NULL, per_page = 200,
+  page_id = 1, page_max = 1, All = FALSE, ...)
 }
 \arguments{
 \item{following}{string equal to `friends', `followers', or `both-following'}
@@ -49,6 +49,4 @@ get_following('followers', stoken, page_max=5)
 get_following('friends', stoken, All = TRUE)
 }
 }
-\concept{
-token
-}
+\concept{token}

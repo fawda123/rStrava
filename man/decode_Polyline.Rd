@@ -28,6 +28,4 @@ Original code from : https://s4rdd.blogspot.co.uk/2012/12/google-maps-api-decodi
 \author{
 Daniel Padfield
 }
-\concept{
-notoken
-}
+\concept{notoken}

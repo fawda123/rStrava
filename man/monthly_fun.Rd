@@ -12,6 +12,4 @@ monthly_fun(prsd)
 \description{
 Get distances for last twelve months, used internally in \code{\link{athl_fun}}
 }
-\concept{
-notoken
-}
+\concept{notoken}

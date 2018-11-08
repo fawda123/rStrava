@@ -12,6 +12,4 @@ loc_fun(xml_in)
 \description{
 Get location of an athlete, used internally in \code{\link{athl_fun}}
 }
-\concept{
-notoken
-}
+\concept{notoken}

@@ -25,6 +25,4 @@ url_segment()
 
 url_segment(id = 123, request = 'leaderboard')
 }
-\concept{
-token
-}
+\concept{token}

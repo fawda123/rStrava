@@ -36,7 +36,7 @@ compile_activities <- function(actlist, acts = NULL, units = 'metric'){
 	# check units
 	if(!units %in% c('metric', 'imperial')) 
 		stop('units must be metric or imperial')
-	
+
 	if(is.null(acts)) acts <- 1:length(actlist)
 	actlist <- actlist[acts]
 	temp <- unlist(actlist)

@@ -36,6 +36,4 @@ efforts <- compile_seg_effort(efforts)
 \author{
 Daniel Padfield
 }
-\concept{
-notoken
-}
+\concept{notoken}

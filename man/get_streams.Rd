@@ -40,6 +40,4 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 get_streams(stoken, id = 351217692, types = list('distance', 'latlng'))
 }
 }
-\concept{
-token
-}
+\concept{token}

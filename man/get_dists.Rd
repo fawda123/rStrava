@@ -39,6 +39,4 @@ get_dists(latlon$lon, latlon$lat)
 \author{
 Daniel Padfield
 }
-\concept{
-notoken
-}
+\concept{notoken}

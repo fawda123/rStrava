@@ -8,8 +8,8 @@
 \usage{
 plot_spdsplits(act_data, ...)
 
-\method{plot_spdsplits}{list}(act_data, stoken, acts = 1, units = "metric",
-  fill = "darkblue", ...)
+\method{plot_spdsplits}{list}(act_data, stoken, acts = 1,
+  units = "metric", fill = "darkblue", ...)
 
 \method{plot_spdsplits}{default}(act_data, stoken, units = "metric",
   fill = "darkblue", ...)
@@ -49,6 +49,4 @@ plot_spdsplits(my_acts, stoken, acts = 1)
 \author{
 Marcus Beck
 }
-\concept{
-token
-}
+\concept{token}

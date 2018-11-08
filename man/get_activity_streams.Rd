@@ -52,6 +52,4 @@ strms_data <- get_activity_streams(my_acts, stoken, acts = 1:2)
 \author{
 Lorenzo Gaborini
 }
-\concept{
-token
-}
+\concept{token}

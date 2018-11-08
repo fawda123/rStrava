@@ -31,6 +31,4 @@ compile_activity(acts[1])}
 \author{
 Daniel Padfield
 }
-\concept{
-token
-}
+\concept{token}

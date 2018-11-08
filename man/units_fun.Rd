@@ -12,6 +12,4 @@ units_fun(xml_in)
 \description{
 Get units of measurement, used internally in \code{\link{athl_fun}}
 }
-\concept{
-notoken
-}
+\concept{notoken}

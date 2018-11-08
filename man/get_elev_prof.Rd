@@ -12,8 +12,8 @@ get_elev_prof(act_data, ...)
 \method{get_elev_prof}{list}(act_data, acts = 1, key, total = FALSE,
   expand = 10, units = "metric", fill = "darkblue", ...)
 
-\method{get_elev_prof}{actframe}(act_data, key, total = FALSE, expand = 10,
-  fill = "darkblue", ...)
+\method{get_elev_prof}{actframe}(act_data, key, total = FALSE,
+  expand = 10, fill = "darkblue", ...)
 
 \method{get_elev_prof}{strframe}(act_data, total = FALSE, expand = 10,
   fill = "darkblue", ...)
@@ -65,6 +65,4 @@ get_elev_prof(my_acts, key = mykey)
 \author{
 Daniel Padfield, Marcus Beck
 }
-\concept{
-token
-}
+\concept{token}

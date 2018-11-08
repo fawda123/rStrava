@@ -38,6 +38,4 @@ bnds <- "37.821362, -122.505373, 37.842038, -122.465977"
 get_explore(stoken, bnds)
 }
 }
-\concept{
-token
-}
+\concept{token}

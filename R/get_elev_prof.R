@@ -71,6 +71,9 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 		if(args$units != unit_type)
 			warning('units does not match unit type, use compile_activities with different units')
 	
+	# remove rows without polylines
+	act_data <- chk_nopolyline(act_data)
+	
 	# create a dataframe of long and latitudes
 	lat_lon <- dplyr::group_by(act_data, upload_id) %>%
 		dplyr::do(get_latlon(.)) %>%

@@ -44,6 +44,4 @@ get_pages('https://strava.com/api/v3/activities', stoken)
 
 }
 }
-\concept{
-token
-}
+\concept{token}

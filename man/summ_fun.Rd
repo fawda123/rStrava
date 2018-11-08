@@ -15,6 +15,4 @@ two-element list
 \description{
 Get summary data for an athlete, year to date and total units of measurement. Used internally in \code{\link{athl_fun}}.
 }
-\concept{
-notoken
-}
+\concept{notoken}

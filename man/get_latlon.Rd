@@ -29,6 +29,4 @@ get_latlon(acts_data[1,])
 \author{
 Daniel Padfield
 }
-\concept{
-token
-}
+\concept{token}

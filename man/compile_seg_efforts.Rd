@@ -35,6 +35,4 @@ segments \%>\% purrr::map_df(., .f = compile_seg_efforts, stoken = my_token, .id
 \author{
 Daniel Padfield
 }
-\concept{
-token
-}
+\concept{token}

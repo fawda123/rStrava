@@ -27,6 +27,4 @@ athl_fun(2837007)
 ## multiple athletes
 athl_fun(c(2837007, 2527465))
 }
-\concept{
-notoken
-}
+\concept{notoken}

@@ -24,6 +24,4 @@ Generate a token for the user and the desired scope. The user is sent to the str
 \details{
 The \code{app_name}, \code{app_client_id}, and \code{app_secret} are specific to the user and can be obtained by registering an app on the Strava API authentication page: \url{http://strava.github.io/api/v3/oauth/}.  This requires a personal Strava account.
 }
-\concept{
-token
-}
+\concept{token}

@@ -88,6 +88,9 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 			warning('units does not match unit type, use compile_activities with different units')
 				
 	if(is.null(alpha)) alpha <- 0.5
+
+	# remove rows without polylines
+	act_data <- chk_nopolyline(act_data)
 	
 	# data to plot
 	temp <- dplyr::group_by(act_data, map.summary_polyline) %>%
@@ -181,7 +184,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	
 	# plot distances
 	if(distlab){
-		
+
 		# get distances closes to integers, add final distance
 		disttemp <- temp %>% 
 			dplyr::mutate(

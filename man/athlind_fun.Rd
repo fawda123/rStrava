@@ -15,6 +15,4 @@ A list with elements for the athlete id, units of measurement, location, monthly
 \description{
 Get data for a single athlete by web scraping, does not require authentication.
 }
-\concept{
-notoken
-}
+\concept{notoken}

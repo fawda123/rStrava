@@ -30,6 +30,4 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 get_KOMs(2837007, stoken)
 }
 }
-\concept{
-token
-}
+\concept{token}

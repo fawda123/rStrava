@@ -25,6 +25,4 @@ Function is used internally within \code{\link{get_streams}}. From the API docum
 \examples{
 url_streams(123)
 }
-\concept{
-token
-}
+\concept{token}

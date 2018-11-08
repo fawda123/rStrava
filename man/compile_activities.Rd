@@ -41,6 +41,4 @@ attr(acts_data, 'unit_vals')
 \author{
 Daniel Padfield
 }
-\concept{
-token
-}
+\concept{token}

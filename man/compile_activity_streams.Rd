@@ -32,6 +32,4 @@ compile_activity_streams(streams, id = act_id)}
 \author{
 Lorenzo Gaborini
 }
-\concept{
-token
-}
+\concept{token}

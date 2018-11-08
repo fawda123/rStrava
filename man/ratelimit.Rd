@@ -18,6 +18,4 @@ Checks the ratelimit values after the last request and stores the left requests 
 \details{
 Requests to the Strava API are rate-limited. The default rate limit allows 600 requests every 15 minutes, with up to 30,000 requests per day.  See the documentation at \url{https://strava.github.io/api/#access}.
 }
-\concept{
-token
-}
+\concept{token}
