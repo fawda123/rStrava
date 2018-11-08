@@ -28,7 +28,7 @@
 #' 
 #' The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 #' 
-#' A Google API key is needed if using any map services where \code{source = "google"}.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using \code{\link[ggmap]{register_google}} before executing \code{get_heat_map()}.  See the examples.
+#' A Google API key is needed if using any map services where \code{source = "google"}.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using \code{register_google()} before executing \code{get_heat_map()}.  See the examples.
 #'
 #' The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequenc of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc. 
 #' 
