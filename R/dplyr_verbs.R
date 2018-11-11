@@ -4,11 +4,9 @@
 #'
 #' @param .data an actframe object
 #' @param ... Logical predicates defined in terms of the variables in .data
-#'
-#' @importFrom dplyr filter
-#' 
-#' @export
 #'  
+#' @export
+#' 
 #' @return an actframe object
 #'
 #' @examples
@@ -55,10 +53,7 @@ filter.actframe <- function(.data,...) {
 #' 
 #' @export
 #' 
-#' @importFrom dplyr mutate
-#'
 #' @return an actframe object
-
 #'
 #' @examples
 #' \dontrun{

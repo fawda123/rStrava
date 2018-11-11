@@ -118,7 +118,7 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	
 	# get distances, default is km
 	temp <- dplyr::group_by(temp, activity) %>%
-		mutate(distance = get_dists(lon, lat)) %>% 
+		dplyr::mutate(distance = get_dists(lon, lat)) %>% 
 		dplyr::ungroup()
 
 	if(unit_type %in% 'imperial')
