@@ -32,7 +32,7 @@ athl_fun <- function(athl_num, trace = TRUE){
 		if(trace) cat(val, which(val == athl_num), 'of', length(athl_num), '\n')
 		
 		# get data
-		try_athl <- try(athlind_fun(val), silent = TRUE)
+		try_athl <- try(athlind_fun(val))
 		
 		# output data, NA if doesn't exist
 		if('try-error' %in% class(try_athl)) 
