@@ -37,7 +37,7 @@ help.search('token', package = 'rStrava')
 
 ### Scraping functions (no token)
 
-An example using the scraping functions:
+An example using the scraping functions is below. Some users may have privacy settings that block public access to account data.
 
 
 ```r

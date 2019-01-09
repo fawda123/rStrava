@@ -17,7 +17,7 @@ athlind_fun <- function(athl_num){
 	url_in <- paste0('https://www.strava.com/athletes/', athl_num)
 	
 	athl_exists <- url.exists(url_in)
-	
+	# browser()
 	if(!athl_exists) stop('Athlete does not exist')
 	
 	# get page data for athlete

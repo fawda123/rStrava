@@ -12,13 +12,13 @@ athl_fun(athl_num, trace = TRUE)
 \item{trace}{logical indicating if output is returned to console}
 }
 \value{
-A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.
+A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
 }
 \description{
 Get data for an athlete by web scraping, does not require authentication.
 }
 \details{
-The athlete id is assigned to the user during registration with Strava and this must be known to use the function.
+The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (\code{NA} will be returned).
 }
 \examples{
 ## single athlete

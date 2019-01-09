@@ -7,11 +7,11 @@
 #' 
 #' @export
 #' 
-#' @details The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  
+#' @details The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (\code{NA} will be returned).
 #' 
 #' @concept notoken
 #' 
-#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.
+#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
 #' 
 #' @examples
 #' ## single athlete
@@ -32,7 +32,7 @@ athl_fun <- function(athl_num, trace = TRUE){
 		if(trace) cat(val, which(val == athl_num), 'of', length(athl_num), '\n')
 		
 		# get data
-		try_athl <- try(athlind_fun(val))
+		try_athl <- try(athlind_fun(val), silent = TRUE)
 		
 		# output data, NA if doesn't exist
 		if('try-error' %in% class(try_athl)) 
