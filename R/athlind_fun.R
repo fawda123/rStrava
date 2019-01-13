@@ -16,13 +16,9 @@ athlind_fun <- function(athl_num){
 	# get unparsed url text using input
 	url_in <- paste0('https://www.strava.com/athletes/', athl_num)
 	
-	athl_exists <- url.exists(url_in)
-	
-	if(!athl_exists) stop('Athlete does not exist')
-	
 	# get page data for athlete
-	athl_url <- getURL(url_in)
-	
+	athl_url <- try(GET(url_in), silent = TRUE)
+
 	# url as HTMLInternalDoc
 	prsd <- htmlTreeParse(athl_url, useInternalNodes = TRUE)
 
