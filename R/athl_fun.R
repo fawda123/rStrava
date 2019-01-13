@@ -7,11 +7,11 @@
 #' 
 #' @export
 #' 
-#' @details The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  The function scrapes data from \url{https://www.strava.com/athletes/} with the appended athlete id, e.g., \url{https://www.strava.com/athletes/2837007}.  Opening the URL in a web browser can verify if the data can be scraped.  Logging in to the Strava account on the website may also be required before using this function. 
+#' @details The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (\code{NA} will be returned). The function scrapes data from \url{https://www.strava.com/athletes/} with the appended athlete id, e.g., \url{https://www.strava.com/athletes/2837007}.  Opening the URL in a web browser can verify if the data can be scraped.  Logging in to the Strava account on the website may also be required before using this function.
 #' 
 #' @concept notoken
 #' 
-#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.
+#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
 #' 
 #' @examples
 #' ## single athlete
