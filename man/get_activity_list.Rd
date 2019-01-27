@@ -22,7 +22,7 @@ A list of activities for further processing or plotting.
 Get an activities list of the desired type (club, friends, user)
 }
 \details{
-Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
+Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.  If retrieving activities using individual \code{id} values, the output list returned contains additional information from the API and the results have not been tested with the functions in this package.  It is better practice to retrieve all activities (as in the example below), use \code{\link{compile_activities}}, and then filter by individual activities.
 }
 \examples{
 \dontrun{

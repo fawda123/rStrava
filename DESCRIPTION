@@ -1,8 +1,8 @@
 Package: rStrava
 Type: Package
 Title: Access the Strava API
-Version: 0.17
-Date: 2019-01-09
+Version: 0.18
+Date: 2019-01-27
 Description: Functions to access data from Strava's v3 API.
 LazyData: TRUE
 BugReports: https://github.com/fawda123/rStrava/issues
