@@ -4,7 +4,7 @@
 \alias{get_activity_list}
 \title{Get an activities list}
 \usage{
-get_activity_list(stoken, id = NULL, club = FALSE, friends = FALSE)
+get_activity_list(stoken, id = NULL, club = FALSE)
 }
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
@@ -12,14 +12,12 @@ get_activity_list(stoken, id = NULL, club = FALSE, friends = FALSE)
 \item{id}{string for id of the activity or club if \code{club = TRUE}}
 
 \item{club}{logical if you want the activities of a club}
-
-\item{friends}{logical if you want friends' activities of the authenticated user}
 }
 \value{
 A list of activities for further processing or plotting.
 }
 \description{
-Get an activities list of the desired type (club, friends, user)
+Get an activities list of the desired type (club, user)
 }
 \details{
 Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.  If retrieving activities using individual \code{id} values, the output list returned contains additional information from the API and the results have not been tested with the functions in this package.  It is better practice to retrieve all activities (as in the example below), use \code{\link{compile_activities}}, and then filter by individual activities.

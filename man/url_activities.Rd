@@ -4,12 +4,10 @@
 \alias{url_activities}
 \title{Set the url of activities for different activity lists}
 \usage{
-url_activities(id = NULL, friends = FALSE, club = FALSE)
+url_activities(id = NULL, club = FALSE)
 }
 \arguments{
 \item{id}{string for id of the activity or club if \code{club = TRUE}}
-
-\item{friends}{logical if you want friends' activities of the authenticated user}
 
 \item{club}{logical if you want the activities of a club}
 }
