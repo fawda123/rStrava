@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.17</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.19</span>
       </span>
     </div>
 
@@ -137,7 +137,7 @@
 <span class='no'>acts_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='compile_activities.html'>compile_activities</a></span>(<span class='no'>my_acts</span>)
 
 <span class='co'># get spdsplits for all activities</span>
-<span class='no'>spd_splits</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/map'>map_df</a></span>(<span class='no'>acts_data</span>$<span class='no'>id</span>, <span class='no'>get_spdsplits</span>, <span class='kw'>stoken</span> <span class='kw'>=</span> <span class='no'>stoken</span>,
+<span class='no'>spd_splits</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map_df</a></span>(<span class='no'>acts_data</span>$<span class='no'>id</span>, <span class='no'>get_spdsplits</span>, <span class='kw'>stoken</span> <span class='kw'>=</span> <span class='no'>stoken</span>,
      <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>'metric'</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='st'>'id'</span>)
 <span class='co'># }</span></pre>
   </div>

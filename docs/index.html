@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rStrava</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.17</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.19</span>
       </span>
     </div>
 
@@ -70,16 +70,14 @@
 <p>Linux: <a href="https://travis-ci.org/fawda123/rStrava"><img src="https://travis-ci.org/fawda123/rStrava.svg?branch=master" alt="Travis-CI Build Status"></a></p>
 <p>Windows: <a href="https://ci.appveyor.com/project/fawda123/rStrava"><img src="https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master" alt="AppVeyor Build Status"></a></p>
 <p><a href="https://zenodo.org/badge/latestdoi/23404183"><img src="https://zenodo.org/badge/23404183.svg" alt="DOI"></a></p>
-<div class="figure">
-<img src="api_logo_pwrdBy_strava_horiz_light.png">
-</div>
+<p><img src="api_logo_pwrdBy_strava_horiz_light.png"></p>
 </div>
 <div id="overview-and-installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview-and-installation" class="anchor"></a>Overview and installation</h3>
 <p>This is the development repository for rStrava, an R package to access data from the Strava API. The package can be installed and loaded as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'devtools'</span>)
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'fawda123/rStrava'</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'devtools'</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'fawda123/rStrava'</span>)</a></code></pre></div>
 </div>
 <div id="issues-and-suggestions" class="section level3">
 <h3 class="hasAnchor">
@@ -90,39 +88,17 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <h3 class="hasAnchor">
 <a href="#package-overview" class="anchor"></a>Package overview</h3>
 <p>The functions are in two categories depending on mode of use. The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions. The second category requires an authentication token. The help files for each category can be viewed using <code>help.search</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help.search</span>(<span class="st">'notoken'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)
-<span class="kw">help.search</span>(<span class="st">'token'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">help.search</span>(<span class="st">'notoken'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">help.search</span>(<span class="st">'token'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</a></code></pre></div>
 </div>
 <div id="scraping-functions-no-token" class="section level3">
 <h3 class="hasAnchor">
 <a href="#scraping-functions-no-token" class="anchor"></a>Scraping functions (no token)</h3>
-<p>An example using the scraping functions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get athlete data </span>
-<span class="kw"><a href="reference/athl_fun.html">athl_fun</a></span>(<span class="dv">2837007</span>, <span class="dt">trace =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>An example using the scraping functions is below. Some users may have privacy settings that block public access to account data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># get athlete data </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/athl_fun.html">athl_fun</a></span>(<span class="dv">2837007</span>, <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## $`2837007`
-## $`2837007`$units
-## [1] "mi" "h"  "m"  "ft"
-## 
-## $`2837007`$location
-## [1] "Irvine, California"
-## 
-## $`2837007`$current_month
-##    Distance        Time   Elevation 
-##  136.900000    9.666667 1676.000000 
-## 
-## $`2837007`$monthly
-## Nov 2017      Dec Jan 2018      Feb      Mar      Apr      May      Jun 
-## 225.4824 257.6941 281.8529 297.9588 362.3824 273.8000 306.0118 233.5353 
-##      Jul      Aug      Sep      Oct      Nov 
-## 386.5412 285.8794 358.3559 330.1706 136.9000 
-## 
-## $`2837007`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##        2907.30         189.45       37930.00         271.00 
-## 
-## $`2837007`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         23414.3          1437.8        187946.0          1821.0</code></pre>
+## [1] NA</code></pre>
 </div>
 <div id="api-functions-token" class="section level3">
 <h3 class="hasAnchor">
@@ -132,32 +108,32 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <a href="#setup" class="anchor"></a>Setup</h4>
 <p>These functions require a Strava account and a personal API, both of which can be obtained on the Strava website. The user account can be created by following instructions on the <a href="https://www.strava.com/">Strava homepage</a>. After the account is created, a personal API can be created under API tab of <a href="https://www.strava.com/settings/api">profile settings</a>. The user must have an application name (chosen by the user), client id (different from the athlete id), and an application secret to create the authentication token. Additional information about the personal API can be found <a href="https://strava.github.io/api/">here</a>. Every API retrieval function in the rStrava package requires an authentication token (called <code>stoken</code> in the help documents). The following is a suggested workflow for using the API functions with rStrava.</p>
 <p>First, create the authentication token using your personal information from your API. Replace the <code>app_name</code>, <code>app_client_id</code>, and <code>app_secret</code> objects with the relevant info from your account.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app_name &lt;-<span class="st"> 'myappname'</span> <span class="co"># chosen by user</span>
-app_client_id  &lt;-<span class="st"> 'myid'</span> <span class="co"># an integer, assigned by Strava</span>
-app_secret &lt;-<span class="st"> 'xxxxxxxx'</span> <span class="co"># an alphanumeric secret, assigned by Strava</span>
-
-<span class="co"># create the authentication token</span>
-stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="reference/strava_oauth.html">strava_oauth</a></span>(app_name, app_client_id, app_secret))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">app_name &lt;-<span class="st"> 'myappname'</span> <span class="co"># chosen by user</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">app_client_id  &lt;-<span class="st"> 'myid'</span> <span class="co"># an integer, assigned by Strava</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">app_secret &lt;-<span class="st"> 'xxxxxxxx'</span> <span class="co"># an alphanumeric secret, assigned by Strava</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co"># create the authentication token</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="reference/strava_oauth.html">strava_oauth</a></span>(app_name, app_client_id, app_secret))</a></code></pre></div>
 <p>Setting <code>cache = TRUE</code> for <code>strava_oauth</code> will create an authentication file in the working directory. This can be used in later sessions as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">token =</span> <span class="kw">readRDS</span>(<span class="st">'.httr-oauth'</span>)[[<span class="dv">1</span>]])</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">token =</span> <span class="kw">readRDS</span>(<span class="st">'.httr-oauth'</span>)[[<span class="dv">1</span>]])</a></code></pre></div>
 <p>Finally, the <code>get_heat_map</code> and <code>get_elev_prof</code> functions optionally retrieve elevation data from the Google Maps Elevation API. To use these features, an additional authentication key is required. Follow the instructions <a href="https://developers.google.com/maps/documentation/elevation/#api_key">here</a>. The key can be added to the R environment file for later use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># save the key, do only once</span>
-<span class="kw">cat</span>(<span class="st">"google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="ch">\n</span><span class="st">"</span>,
-    <span class="dt">file=</span><span class="kw">file.path</span>(<span class="kw">normalizePath</span>(<span class="st">"~/"</span>), <span class="st">".Renviron"</span>),
-    <span class="dt">append=</span><span class="ot">TRUE</span>)
-
-<span class="co"># retrieve the key, restart R if not found</span>
-mykey &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">"google_key"</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># save the key, do only once</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">cat</span>(<span class="st">"google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="ch">\n</span><span class="st">"</span>,</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    <span class="dt">file=</span><span class="kw">file.path</span>(<span class="kw">normalizePath</span>(<span class="st">"~/"</span>), <span class="st">".Renviron"</span>),</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    <span class="dt">append=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co"># retrieve the key, restart R if not found</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">mykey &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">"google_key"</span>)</a></code></pre></div>
 <p>The <code>get_heat_map</code> function uses <a href="https://github.com/dkahle/ggmap">ggmap</a> to create base maps. A Google API key is needed if using any map services where <code>source = "google"</code> for the argument to <code>get_heat_map</code>. The same key used for the Elevation API can be used but must be registered externally with the ggmap package using <code>register_google()</code> before executing <code>get_heat_map</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggmap)
-<span class="kw">register_google</span>(mykey)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(ggmap)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">register_google</span>(mykey)</a></code></pre></div>
 </div>
 <div id="using-the-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#using-the-functions" class="anchor"></a>Using the functions</h4>
 <p>The API retrieval functions are used with the token.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myinfo &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_athlete.html">get_athlete</a></span>(stoken, <span class="dt">id =</span> <span class="st">'2837007'</span>)
-<span class="kw">head</span>(myinfo)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">myinfo &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_athlete.html">get_athlete</a></span>(stoken, <span class="dt">id =</span> <span class="st">'2837007'</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">head</span>(myinfo)</a></code></pre></div>
 <pre><code>## $id
 ## [1] 2837007
 ## 
@@ -176,39 +152,39 @@ mykey &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span cla
 ## $city
 ## [1] "Irvine"</code></pre>
 <p>An example creating a heat map of activities:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-
-<span class="co"># get activities, get activities by lat/lon, plot</span>
-my_acts &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_list.html">get_activity_list</a></span>(stoken)
-act_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/compile_activities.html">compile_activities</a></span>(my_acts) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">filter</span>(start_longitude <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="fl">86.5</span> <span class="op">&amp;</span><span class="st"> </span>start_longitude <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="fl">88.5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">filter</span>(start_latitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">31.5</span> <span class="op">&amp;</span><span class="st"> </span>start_latitude <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)
-<span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(act_data, <span class="dt">col =</span> <span class="st">'darkgreen'</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">distlab =</span> F, <span class="dt">f =</span> <span class="fl">0.4</span>)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># get activities, get activities by lat/lon, plot</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">my_acts &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_list.html">get_activity_list</a></span>(stoken)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">act_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/compile_activities.html">compile_activities</a></span>(my_acts) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">    </span><span class="kw">filter</span>(start_longitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">-86.5</span> <span class="op">&amp;</span><span class="st"> </span>start_longitude <span class="op">&gt;</span><span class="st"> </span><span class="fl">-88.5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">    </span><span class="kw">filter</span>(start_latitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">31.5</span> <span class="op">&amp;</span><span class="st"> </span>start_latitude <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(act_data, <span class="dt">col =</span> <span class="st">'darkgreen'</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">distlab =</span> F, <span class="dt">f =</span> <span class="fl">0.4</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 <p>Plotting elevation and grade for a single ride:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot elevation along a single ride</span>
-<span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">add_elev =</span> T, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">key =</span> mykey, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">maptype =</span> <span class="st">'satellite'</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># plot elevation along a single ride</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">add_elev =</span> T, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">key =</span> mykey, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">maptype =</span> <span class="st">'satellite'</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot % gradient along a single ride</span>
-<span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">add_elev =</span> T, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">as_grad =</span> T, <span class="dt">key =</span> mykey, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">expand =</span> <span class="dv">5</span>, <span class="dt">maptype =</span> <span class="st">'satellite'</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># plot % gradient along a single ride</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">add_elev =</span> T, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">as_grad =</span> T, <span class="dt">key =</span> mykey, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">expand =</span> <span class="dv">5</span>, <span class="dt">maptype =</span> <span class="st">'satellite'</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-12-2.png" width="700"></p>
 <p>Get elevation profiles for activities:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get activities</span>
-my_acts &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_list.html">get_activity_list</a></span>(stoken) 
-
-<span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">key =</span> mykey, <span class="dt">units =</span> <span class="st">'imperial'</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># get activities</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">my_acts &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_list.html">get_activity_list</a></span>(stoken) </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">key =</span> mykey, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="864"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">key =</span> mykey, <span class="dt">units =</span> <span class="st">'imperial'</span>, <span class="dt">total =</span> T)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">key =</span> mykey, <span class="dt">units =</span> <span class="st">'imperial'</span>, <span class="dt">total =</span> T)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-13-2.png" width="864"></p>
 <p>Plot average speed per split (km or mile) for an activity:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plots for most recent activity</span>
-<span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># plots for most recent activity</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="864"></p>
 <p>Additional functions are provided to get “stream” information for individual activities. Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.</p>
 <p>Use <code>get_activity_streams</code> for detailed info about activites:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get streams for the first activity in my_acts</span>
-strms_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_streams.html">get_activity_streams</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>)
-<span class="kw">head</span>(strms_data)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># get streams for the first activity in my_acts</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">strms_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_streams.html">get_activity_streams</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">head</span>(strms_data)</a></code></pre></div>
 <pre><code>##   altitude distance grade_smooth moving time velocity_smooth      lat
 ## 1    289.3   0.0000          1.3  FALSE    0            0.00 33.67501
 ## 2    289.3   0.0040          3.7   TRUE    3            4.68 33.67498
@@ -224,14 +200,14 @@ strms_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get
 ## 5 -117.6419 1957434123
 ## 6 -117.6419 1957434123</code></pre>
 <p>Stream data can be plotted using any of the plotting functions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># heat map</span>
-<span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(strms_data, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">filltype =</span> <span class="st">'speed'</span>, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">distlab =</span> F)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># heat map</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(strms_data, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">filltype =</span> <span class="st">'speed'</span>, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">distlab =</span> F)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># elevation profile</span>
-<span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(strms_data)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># elevation profile</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(strms_data)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="864"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># speed splits</span>
-<span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(strms_data, stoken)</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># speed splits</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(strms_data, stoken)</a></code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-17-2.png" width="864"></p>
 </div>
 </div>

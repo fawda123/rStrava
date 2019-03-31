@@ -15,6 +15,7 @@ Imports:
     ggplot2,
     ggrepel,
     httr,
+    httpuv, 
     magrittr,
     plyr,
     RCurl,

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.17</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.19</span>
       </span>
     </div>
 
@@ -120,94 +120,25 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.</p>
+    <p>A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.  <code>NA</code> will be returned if the data for an athlete could not be accessed.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The athlete id is assigned to the user during registration with Strava and this must be known to use the function.</p>
+    <p>The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (<code>NA</code> will be returned). The function scrapes data from <a href='https://www.strava.com/athletes/'>https://www.strava.com/athletes/</a> with the appended athlete id, e.g., <a href='https://www.strava.com/athletes/2837007'>https://www.strava.com/athletes/2837007</a>.  Opening the URL in a web browser can verify if the data can be scraped.  Logging in to the Strava account on the website may also be required before using this function.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## single athlete</span>
 <span class='fu'>athl_fun</span>(<span class='fl'>2837007</span>)</div><div class='output co'>#&gt; 2837007 1 of 1 </div><div class='output co'>#&gt; $`2837007`
-#&gt; $`2837007`$units
-#&gt; [1] "mi" "h"  "m"  "ft"
-#&gt; 
-#&gt; $`2837007`$location
-#&gt; [1] "Irvine, California"
-#&gt; 
-#&gt; $`2837007`$current_month
-#&gt;    Distance        Time   Elevation 
-#&gt;  136.900000    9.666667 1676.000000 
-#&gt; 
-#&gt; $`2837007`$monthly
-#&gt; Nov 2017      Dec Jan 2018      Feb      Mar      Apr      May      Jun 
-#&gt; 225.4824 257.6941 281.8529 297.9588 362.3824 273.8000 306.0118 233.5353 
-#&gt;      Jul      Aug      Sep      Oct      Nov 
-#&gt; 386.5412 285.8794 358.3559 330.1706 136.9000 
-#&gt; 
-#&gt; $`2837007`$year_to_date
-#&gt;       Distance           Time Elevation Gain          Rides 
-#&gt;        2907.30         189.45       37930.00         271.00 
-#&gt; 
-#&gt; $`2837007`$all_time
-#&gt;  Total Distance      Total Time Total Elev Gain     Total Rides 
-#&gt;         23414.3          1437.8        187946.0          1821.0 
-#&gt; 
+#&gt; [1] NA
 #&gt; </div><div class='input'>
 <span class='co'>## multiple athletes</span>
 <span class='fu'>athl_fun</span>(<span class='fu'>c</span>(<span class='fl'>2837007</span>, <span class='fl'>2527465</span>))</div><div class='output co'>#&gt; 2837007 1 of 2 
-#&gt; 2527465 2 of 2 </div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='output co'>#&gt; <span class='warning'>Warning: NAs introduced by coercion</span></div><div class='output co'>#&gt; $`2837007`
-#&gt; $`2837007`$units
-#&gt; [1] "mi" "h"  "m"  "ft"
-#&gt; 
-#&gt; $`2837007`$location
-#&gt; [1] "Irvine, California"
-#&gt; 
-#&gt; $`2837007`$current_month
-#&gt;    Distance        Time   Elevation 
-#&gt;  136.900000    9.666667 1676.000000 
-#&gt; 
-#&gt; $`2837007`$monthly
-#&gt; Nov 2017      Dec Jan 2018      Feb      Mar      Apr      May      Jun 
-#&gt; 225.4824 257.6941 281.8529 297.9588 362.3824 273.8000 306.0118 233.5353 
-#&gt;      Jul      Aug      Sep      Oct      Nov 
-#&gt; 386.5412 285.8794 358.3559 330.1706 136.9000 
-#&gt; 
-#&gt; $`2837007`$year_to_date
-#&gt;       Distance           Time Elevation Gain          Rides 
-#&gt;        2907.30         189.45       37930.00         271.00 
-#&gt; 
-#&gt; $`2837007`$all_time
-#&gt;  Total Distance      Total Time Total Elev Gain     Total Rides 
-#&gt;         23414.3          1437.8        187946.0          1821.0 
-#&gt; 
+#&gt; 2527465 2 of 2 </div><div class='output co'>#&gt; $`2837007`
+#&gt; [1] NA
 #&gt; 
 #&gt; $`2527465`
-#&gt; $`2527465`$units
-#&gt; [1] "h" "m" "h" "m"
-#&gt; 
-#&gt; $`2527465`$location
-#&gt; [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
-#&gt; 
-#&gt; $`2527465`$current_month
-#&gt;  Distance      Time Elevation 
-#&gt;     67.40      3.65    762.00 
-#&gt; 
-#&gt; $`2527465`$monthly
-#&gt; Nov 2017      Dec Jan 2018      Feb      Mar      Apr      May      Jun 
-#&gt;       NA       NA       NA       NA       NA       NA       NA       NA 
-#&gt;      Jul      Aug      Sep      Oct      Nov 
-#&gt;       NA       NA       NA       NA       NA 
-#&gt; 
-#&gt; $`2527465`$year_to_date
-#&gt;       Distance           Time Elevation Gain          Rides 
-#&gt;             NA          340.2        70066.0          263.0 
-#&gt; 
-#&gt; $`2527465`$all_time
-#&gt;  Total Distance      Total Time Total Elev Gain     Total Rides 
-#&gt;              NA        1348.967      275111.000         931.000 
-#&gt; 
+#&gt; [1] NA
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

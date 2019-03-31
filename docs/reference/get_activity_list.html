@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Get an activities list — get_activity_list" />
 
-<meta property="og:description" content="Get an activities list of the desired type (club, friends, user)" />
+<meta property="og:description" content="Get an activities list of the desired type (club, user)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.17</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.19</span>
       </span>
     </div>
 
@@ -99,11 +99,11 @@
 
     <div class="ref-description">
     
-    <p>Get an activities list of the desired type (club, friends, user)</p>
+    <p>Get an activities list of the desired type (club, user)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>club</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>friends</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>club</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,10 +120,6 @@
       <th>club</th>
       <td><p>logical if you want the activities of a club</p></td>
     </tr>
-    <tr>
-      <th>friends</th>
-      <td><p>logical if you want friends' activities of the authenticated user</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -132,7 +128,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Requires authentication stoken using the <code><a href='strava_oauth.html'>strava_oauth</a></code> function and a user-created API on the strava website.</p>
+    <p>Requires authentication stoken using the <code><a href='strava_oauth.html'>strava_oauth</a></code> function and a user-created API on the strava website.  If retrieving activities using individual <code>id</code> values, the output list returned contains additional information from the API and the results have not been tested with the functions in this package.  It is better practice to retrieve all activities (as in the example below), use <code><a href='compile_activities.html'>compile_activities</a></code>, and then filter by individual activities.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
