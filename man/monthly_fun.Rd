@@ -7,7 +7,7 @@
 monthly_fun(prsd)
 }
 \arguments{
-\item{prsd}{parsed \code{\link[XML]{htmlTreeParse}} list}
+\item{prsd}{parsed input list}
 }
 \description{
 Get distances for last twelve months, used internally in \code{\link{athl_fun}}

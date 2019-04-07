@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.19</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.0</span>
       </span>
     </div>
 
@@ -130,15 +130,111 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## single athlete</span>
 <span class='fu'>athl_fun</span>(<span class='fl'>2837007</span>)</div><div class='output co'>#&gt; 2837007 1 of 1 </div><div class='output co'>#&gt; $`2837007`
-#&gt; [1] NA
+#&gt; $`2837007`$name
+#&gt; [1] "Marcus Beck"
+#&gt; 
+#&gt; $`2837007`$location
+#&gt; [1] "Irvine, California"
+#&gt; 
+#&gt; $`2837007`$units
+#&gt; [1] "mi" "ft"
+#&gt; 
+#&gt; $`2837007`$monthly
+#&gt;        month     miles hours elev_gain
+#&gt; 1 2018-10-01 329.08191    23      1521
+#&gt; 2 2018-11-01 248.76223    18       955
+#&gt; 3 2018-12-01 161.58634    14       964
+#&gt; 4 2019-01-01 391.10905    28      1110
+#&gt; 5 2019-02-01 247.53005    18       679
+#&gt; 6 2019-03-01 343.69594    24      1039
+#&gt; 7 2019-04-01  71.33776     5       206
+#&gt; 
+#&gt; $`2837007`$recent
+#&gt;           id           name type startDateLocal distance elevation movingTime
+#&gt; 1 2267959317    Evening Run  run     2019-04-05      3.2       100      24:29
+#&gt; 2 2264428002    Morning Run  run     2019-04-03      3.2        72      25:25
+#&gt; 3 2263514943 Afternoon Ride ride     2019-04-03     10.8       117      41:44
+#&gt; 
+#&gt; $`2837007`$achievements
+#&gt;                        description             timeago
+#&gt; 1    2nd best estimated 10k effort 2019-03-24 21:22:17
+#&gt; 2  PR on Race the Northbound Train 2019-03-31 19:34:15
+#&gt; 3     PR on Main St. Mortal Kombat 2019-03-30 00:45:08
+#&gt; 4           PR on NB Warner to ICD 2019-03-23 00:48:20
+#&gt; 5 PR on Harvard - Warner to Walnut 2019-03-23 00:48:20
+#&gt; 
 #&gt; </div><div class='input'>
 <span class='co'>## multiple athletes</span>
 <span class='fu'>athl_fun</span>(<span class='fu'>c</span>(<span class='fl'>2837007</span>, <span class='fl'>2527465</span>))</div><div class='output co'>#&gt; 2837007 1 of 2 
 #&gt; 2527465 2 of 2 </div><div class='output co'>#&gt; $`2837007`
-#&gt; [1] NA
+#&gt; $`2837007`$name
+#&gt; [1] "Marcus Beck"
+#&gt; 
+#&gt; $`2837007`$location
+#&gt; [1] "Irvine, California"
+#&gt; 
+#&gt; $`2837007`$units
+#&gt; [1] "mi" "ft"
+#&gt; 
+#&gt; $`2837007`$monthly
+#&gt;        month     miles hours elev_gain
+#&gt; 1 2018-10-01 329.08191    23      1521
+#&gt; 2 2018-11-01 248.76223    18       955
+#&gt; 3 2018-12-01 161.58634    14       964
+#&gt; 4 2019-01-01 391.10905    28      1110
+#&gt; 5 2019-02-01 247.53005    18       679
+#&gt; 6 2019-03-01 343.69594    24      1039
+#&gt; 7 2019-04-01  71.33776     5       206
+#&gt; 
+#&gt; $`2837007`$recent
+#&gt;           id           name type startDateLocal distance elevation movingTime
+#&gt; 1 2267959317    Evening Run  run     2019-04-05      3.2       100      24:29
+#&gt; 2 2264428002    Morning Run  run     2019-04-03      3.2        72      25:25
+#&gt; 3 2263514943 Afternoon Ride ride     2019-04-03     10.8       117      41:44
+#&gt; 
+#&gt; $`2837007`$achievements
+#&gt;                        description             timeago
+#&gt; 1    2nd best estimated 10k effort 2019-03-24 21:22:17
+#&gt; 2  PR on Race the Northbound Train 2019-03-31 19:34:15
+#&gt; 3     PR on Main St. Mortal Kombat 2019-03-30 00:45:08
+#&gt; 4           PR on NB Warner to ICD 2019-03-23 00:48:20
+#&gt; 5 PR on Harvard - Warner to Walnut 2019-03-23 00:48:20
+#&gt; 
 #&gt; 
 #&gt; $`2527465`
-#&gt; [1] NA
+#&gt; $`2527465`$name
+#&gt; [1] "Pedro Villarroel"
+#&gt; 
+#&gt; $`2527465`$location
+#&gt; [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
+#&gt; 
+#&gt; $`2527465`$units
+#&gt; [1] "km" "m" 
+#&gt; 
+#&gt; $`2527465`$monthly
+#&gt;        month   miles hours elev_gain
+#&gt; 1 2018-10-01 347.297    19      3867
+#&gt; 2 2018-11-01 198.066    10      2193
+#&gt; 3 2018-12-01 257.459    15      3370
+#&gt; 4 2019-01-01 210.299    10      2560
+#&gt; 5 2019-02-01 258.484    14      3013
+#&gt; 6 2019-03-01 387.058    23      4521
+#&gt; 7 2019-04-01  32.964     1       344
+#&gt; 
+#&gt; $`2527465`$recent
+#&gt;           id   name type startDateLocal distance elevation movingTime
+#&gt; 1 2267763985 Vitius ride     2019-04-05     11.4       113      44:47
+#&gt; 2 2265404061 Vitius ride     2019-04-04     10.8       115      33:22
+#&gt; 3 2263448234 Vitius ride     2019-04-03     10.5       117      33:57
+#&gt; 
+#&gt; $`2527465`$achievements
+#&gt;                                     description             timeago
+#&gt; 1             PR on Sprint Austria - Pueyrredon 2019-03-30 16:46:21
+#&gt; 2 PR on Dorrego - Palacio Bosch x Av Libertador 2019-03-30 16:46:21
+#&gt; 3         PR on Sprint Campo de Polo Libertador 2019-03-30 16:46:21
+#&gt; 4                           PR on Campo de Polo 2019-03-30 16:46:21
+#&gt; 5       PR on Libertador (Olleros - Pueyrredón) 2019-03-30 16:46:21
+#&gt; 
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -2,17 +2,18 @@
 #'
 #' Get units of measurement, used internally in \code{\link{athl_fun}}
 #' 
-#' @param xml_in input HTMLInternalDocument from \code{\link[RCurl]{getURL}}
-#'
-#' @import XML
+#' @param prsd parsed input list
 #' 
 #' @export
 #' 
 #' @concept notoken
-units_fun <- function(xml_in){
+units_fun <- function(prsd){
 
-	uni_val <- xpathSApply(xml_in, "//abbr[@class='unit']", xmlValue)
-	uni_val <- uni_val[1:4]
+	dist <- prsd$recentActivities$distance
+	dist <- unique(gsub('^.*\\s(.*)$', '\\1', dist))
+	elev <- prsd$recentActivities$elevation
+	elev <- unique(gsub('^.*\\s(.*)$', '\\1', elev))
+	uni_val <- c(dist, elev)
 	
 	return(uni_val)
 	

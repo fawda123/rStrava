@@ -4,10 +4,10 @@
 \alias{units_fun}
 \title{Get units of measurement}
 \usage{
-units_fun(xml_in)
+units_fun(prsd)
 }
 \arguments{
-\item{xml_in}{input HTMLInternalDocument from \code{\link[RCurl]{getURL}}}
+\item{prsd}{parsed input list}
 }
 \description{
 Get units of measurement, used internally in \code{\link{athl_fun}}

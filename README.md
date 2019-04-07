@@ -1,3 +1,10 @@
+---
+output:
+  html_document:
+    keep_md: yes
+    toc: no
+    self_contained: yes
+---
 
 # rStrava
 
@@ -40,6 +47,7 @@ help.search('token', package = 'rStrava')
 An example using the scraping functions is below. Some users may have privacy settings that block public access to account data.
 
 
+
 ```r
 # get athlete data 
 athl_fun(2837007, trace = FALSE)
@@ -47,29 +55,42 @@ athl_fun(2837007, trace = FALSE)
 
 ```
 ## $`2837007`
-## $`2837007`$units
-## [1] "mi" "h"  "m"  "ft"
+## $`2837007`$name
+## [1] "Marcus Beck"
 ## 
 ## $`2837007`$location
 ## [1] "Irvine, California"
 ## 
-## $`2837007`$current_month
-##    Distance        Time   Elevation 
-##  113.500000    7.633333 1230.000000 
+## $`2837007`$units
+## [1] "mi" "ft"
 ## 
 ## $`2837007`$monthly
-## Nov 2017      Dec Jan 2018      Feb      Mar      Apr      May      Jun 
-## 227.0000 259.4286 283.7500 299.9643 364.8214 275.6429 308.0714 235.1071 
-##      Jul      Aug      Sep      Oct      Nov 
-## 389.1429 287.8036 360.7679 332.3929 113.5000 
+##        month     miles hours elev_gain
+## 1 2018-10-01 329.08191    23      1521
+## 2 2018-11-01 248.76223    18       955
+## 3 2018-12-01 161.58634    14       964
+## 4 2019-01-01 391.10905    28      1110
+## 5 2019-02-01 247.53005    18       679
+## 6 2019-03-01 343.69594    24      1039
+## 7 2019-04-01  71.33776     5       206
 ## 
-## $`2837007`$year_to_date
-##       Distance           Time Elevation Gain          Rides 
-##      2886.0000       188.0667     37730.0000       269.0000 
+## $`2837007`$recent
+##           id           name type startDateLocal distance elevation
+## 1 2267959317    Evening Run  run     2019-04-05      3.2       100
+## 2 2264428002    Morning Run  run     2019-04-03      3.2        72
+## 3 2263514943 Afternoon Ride ride     2019-04-03     10.8       117
+##   movingTime
+## 1      24:29
+## 2      25:25
+## 3      41:44
 ## 
-## $`2837007`$all_time
-##  Total Distance      Total Time Total Elev Gain     Total Rides 
-##         23393.0          1436.4        187746.0          1819.0
+## $`2837007`$achievements
+##                        description             timeago
+## 1    2nd best estimated 10k effort 2019-03-24 21:22:17
+## 2  PR on Race the Northbound Train 2019-03-31 19:34:15
+## 3     PR on Main St. Mortal Kombat 2019-03-30 00:45:08
+## 4           PR on NB Warner to ICD 2019-03-23 00:48:20
+## 5 PR on Harvard - Warner to Walnut 2019-03-23 00:48:20
 ```
 
 ### API functions (token)
@@ -168,11 +189,25 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
+```
+## Warning: Removed 46 rows containing missing values (geom_path).
+```
+
+```
+## Warning: Removed 2 rows containing missing values (geom_label_repel).
+```
+
 ![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+```
+
+```
+## Warning: Removed 24 rows containing missing values (geom_path).
+
+## Warning: Removed 2 rows containing missing values (geom_label_repel).
 ```
 
 ![](README_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
@@ -215,19 +250,19 @@ head(strms_data)
 
 ```
 ##   altitude distance grade_smooth moving time velocity_smooth      lat
-## 1     35.3   0.0000          0.8  FALSE    0            0.00 33.72606
-## 2     35.3   0.0063          0.6   TRUE    3            7.56 33.72603
-## 3     35.4   0.0133          0.4   TRUE    6            7.92 33.72598
-## 4     35.4   0.0173          0.5   TRUE    8            7.92 33.72595
-## 5     35.4   0.0230          0.0   TRUE   10            8.64 33.72591
-## 6     35.4   0.0262          0.0   TRUE   11            9.36 33.72588
+## 1     34.0   0.0000         -2.6  FALSE    0            0.00 33.72670
+## 2     33.9   0.0047         -2.1   TRUE    2            8.64 33.72666
+## 3     33.8   0.0077         -1.7   TRUE    4            6.84 33.72665
+## 4     33.7   0.0141         -1.2   TRUE    6            8.64 33.72666
+## 5     33.7   0.0179         -0.6   TRUE    7            9.36 33.72667
+## 6     33.7   0.0213          0.0   TRUE    8           10.08 33.72668
 ##         lng         id
-## 1 -117.7823 1953105389
-## 2 -117.7822 1953105389
-## 3 -117.7822 1953105389
-## 4 -117.7822 1953105389
-## 5 -117.7821 1953105389
-## 6 -117.7821 1953105389
+## 1 -117.7838 2267959317
+## 2 -117.7838 2267959317
+## 3 -117.7838 2267959317
+## 4 -117.7839 2267959317
+## 5 -117.7839 2267959317
+## 6 -117.7839 2267959317
 ```
 
 Stream data can be plotted using any of the plotting functions.
