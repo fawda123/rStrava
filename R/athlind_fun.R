@@ -27,7 +27,7 @@ athlind_fun <- function(athl_num){
 	name <- prsd$athlete$name
 
 	# get athlete location
-	loc <- prsd$athlete$location
+	loc <- location_fun(prsd)
 	
 	# get units of measurement
 	unts <- units_fun(prsd)

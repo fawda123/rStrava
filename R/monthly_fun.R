@@ -8,8 +8,12 @@
 #' 
 #' @concept notoken
 monthly_fun <- function(prsd){
-	
+
 	out <- prsd$stats$chartData
+	
+	if(is.null(out)) 
+		return(NA)
+	
 	out$month <- as.Date(out$month, format = '%Y-%m-%d')
 	
 	return(out)
