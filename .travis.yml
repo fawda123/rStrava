@@ -12,6 +12,7 @@ requirements:
     - r-geoaxe
     - r-rgbif
     - r-rgeos
+    - r-tibble
   run:
     - r
     - r-ggmap
@@ -19,6 +20,7 @@ requirements:
     - r-geoaxe
     - r-rgbif
     - r-rgeos
+    - r-tibble
 
 addons:
   apt:
