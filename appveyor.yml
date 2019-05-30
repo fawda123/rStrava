@@ -10,6 +10,16 @@ init:
 install:
   ps: Bootstrap
 
+cache:
+  - C:\RLibrary
+
+environment:
+  NOT_CRAN: true
+  USE_RTOOLS: true
+  # env vars that may need to be set, at least temporarily, from time to time
+  # see https://github.com/krlmlr/r-appveyor#readme for details
+  # R_REMOTES_STANDALONE: true
+
 # Adapt as necessary starting from here
 
 build_script:
@@ -19,7 +29,8 @@ test_script:
   - travis-tool.sh run_tests
 
 on_failure:
-  - travis-tool.sh dump_logs
+  - 7z a failure.zip *.Rcheck\*
+  - appveyor PushArtifact failure.zip
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
