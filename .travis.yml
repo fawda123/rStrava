@@ -26,6 +26,7 @@ addons:
       - libwebp-dev
       - libpoppler-cpp-dev
       - valgrind
+      - libv8-dev
       
 env:
  global:
