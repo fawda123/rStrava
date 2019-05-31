@@ -12,3 +12,4 @@ examples.r
 ^Thumbs\.db$
 ^api_logo_pwrdBy_strava_horiz_light.png$
 ggmapTemp.png
+^docs$

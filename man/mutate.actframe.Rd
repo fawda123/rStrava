@@ -4,7 +4,7 @@
 \alias{mutate.actframe}
 \title{Mutate}
 \usage{
-mutate.actframe(.data, ...)
+\method{mutate}{actframe}(.data, ...)
 }
 \arguments{
 \item{.data}{an actframe object}

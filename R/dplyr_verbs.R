@@ -5,7 +5,9 @@
 #' @param .data an actframe object
 #' @param ... Logical predicates defined in terms of the variables in .data
 #'  
-#' @export
+#' @exportMethod filter actframe
+#' 
+#' @importFrom dplyr filter
 #' 
 #' @return an actframe object
 #'
@@ -51,7 +53,9 @@ filter.actframe <- function(.data,...) {
 #' @param .data an actframe object
 #' @param ... Name-value pairs of expressions. Use NULL to drop a variable.
 #' 
-#' @export
+#' @exportMethod mutate actframe
+#' 
+#' @importFrom dplyr mutate
 #' 
 #' @return an actframe object
 #'

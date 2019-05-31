@@ -9,13 +9,15 @@
 #' 
 #' @author Daniel Padfield
 #' 
-#' @return An actitities frame object (\code{actframe} that includes a data frame for the data and attributes for the distance, speed, and elevation units
+#' @return An activities frame object (\code{actframe} that includes a data frame for the data and attributes for the distance, speed, and elevation units
 #' 
 #' @details each activity has a value for every column present across all activities, with NAs populating empty values
 #'
 #' @importFrom plyr ldply
 #'
 #' @concept token
+#' 
+#' @seealso \code{\link{compile_club_activities}} for compiling an activities list for club activities
 #' 
 #' @export
 #' 
@@ -36,7 +38,10 @@ compile_activities <- function(actlist, acts = NULL, units = 'metric'){
 	# check units
 	if(!units %in% c('metric', 'imperial')) 
 		stop('units must be metric or imperial')
-
+	
+	if(identical(names(actlist[[1]]), c("resource_state", "athlete", "name", "distance", "moving_time", "elapsed_time", "total_elevation_gain", "type", "workout_type")))
+		stop('use "compile_club_activities" for club activities')
+	
 	if(is.null(acts)) acts <- 1:length(actlist)
 	actlist <- actlist[acts]
 	temp <- unlist(actlist)

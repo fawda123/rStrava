@@ -16,7 +16,7 @@ compile_activities(actlist, acts = NULL, units = "metric")
 \item{...}{arguments passed to or from other methods}
 }
 \value{
-An actitities frame object (\code{actframe} that includes a data frame for the data and attributes for the distance, speed, and elevation units
+An activities frame object (\code{actframe} that includes a data frame for the data and attributes for the distance, speed, and elevation units
 }
 \description{
 converts a list of activities into a dataframe
@@ -37,6 +37,9 @@ acts_data <- compile_activities(my_acts)
 attr(acts_data, 'unit_type')
 attr(acts_data, 'unit_vals')
 }
+}
+\seealso{
+\code{\link{compile_club_activities}} for compiling an activities list for club activities
 }
 \author{
 Daniel Padfield

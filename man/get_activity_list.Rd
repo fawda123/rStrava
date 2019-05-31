@@ -21,6 +21,8 @@ Get an activities list of the desired type (club, user)
 }
 \details{
 Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.  If retrieving activities using individual \code{id} values, the output list returned contains additional information from the API and the results have not been tested with the functions in this package.  It is better practice to retrieve all activities (as in the example below), use \code{\link{compile_activities}}, and then filter by individual activities.
+
+If retrieving club activities, the user for the API must be a member of the club.
 }
 \examples{
 \dontrun{
