@@ -24,20 +24,20 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' # get segment details
+#' # get segment info
 #' get_segment(stoken, id = 229781)
 #' 
-#' # get leaderboard
-#' get_segment(stoken, id = 229781, request = 'leaderboard')
+#' # get top ten leaderboard for the segment
+#' get_segment(stoken, id = 229781, request = "leaderboard")
 #' 
-#' # get starred segments for the authenticated user
-#' get_segment(stoken, request = 'starred')
+#' # get all efforts for the authenticated user on the segment
+#' get_segment(stoken, id = 4483903, request = 'all_efforts')
+#'
+#' # get the starred segments for the user
+#' get_segment(stoken, request = 'starred') 
 #' }
 get_segment <- function(stoken, id = NULL, request = NULL){
 
-	if(!is.null(id) & request == 'starred')
-		stop('id must be NULL if request = "starred"')
-	
 	dataRaw <- get_basic(url_segment(id, request = request), stoken)
 	return(dataRaw)
 	
