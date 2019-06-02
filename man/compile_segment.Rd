@@ -4,12 +4,10 @@
 \alias{compile_segment}
 \title{Compile information on a segment}
 \usage{
-compile_segment(segment_id, stoken)
+compile_segment(seglist)
 }
 \arguments{
-\item{segment_id}{a Strava segment id}
-
-\item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
+\item{seglist}{a Strava segment list returned by \code{\link{get_segment}}}
 }
 \value{
 dataframe of all information given in a call from \code{\link{get_segment}}
@@ -18,6 +16,18 @@ dataframe of all information given in a call from \code{\link{get_segment}}
 Compile generation information on a segment
 }
 \details{
-compiles information a segment by calling \code{\link{get_segment}} internally
+compiles information for a segment
+}
+\examples{
+\dontrun{
+# create authentication token
+# requires user created app name, id, and secret from Strava website
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
+	app_secret, cache = TRUE))
+
+get_segment(stoken, id = 229781) \%>\% compile_segment
+
+get_segment(stoken, id = 229781, request = "leaderboard") \%>\% compile_segment
+}
 }
 \concept{token}

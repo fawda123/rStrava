@@ -11,7 +11,7 @@ get_segment(stoken, id = NULL, request = NULL)
 
 \item{id}{numeric for id of the segment}
 
-\item{request}{chr string, must be "starred", "all_efforts", "leaderboard", "explore" or NULL for segment details}
+\item{request}{chr string, must be "starred", "leaderboard", "all_efforts", or NULL for segment details}
 }
 \value{
 Data from an API request.
@@ -20,7 +20,7 @@ Data from an API request.
 Retreive details about a specific segment
 }
 \details{
-Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
+Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.  The authenticated user must have an entry for a segment to return all efforts if \code{request = "all_efforts"}. For \code{request = "starred"}, set \code{id = NULL}.
 }
 \examples{
 \dontrun{
@@ -29,8 +29,17 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
+# get segment details
 get_segment(stoken, id = 229781)
+
+# get leaderboard
 get_segment(stoken, id = 229781, request = 'leaderboard')
+
+# get starred segments for the authenticated user
+get_segment(stoken, request = 'starred')
 }
+}
+\seealso{
+\code{\link{compile_segment}} for converting the \code{list} output to \code{data.frame}
 }
 \concept{token}
