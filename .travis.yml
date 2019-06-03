@@ -29,6 +29,7 @@ addons:
       - libpoppler-cpp-dev
       - valgrind
       - libv8-dev
+      - libjq-dev
       
 env:
  global:
