@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get basic data for an athlete — get_athlete • rStrava</title>
+<title>converts a list of club activities into a dataframe — compile_club_activities • rStrava</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Get basic data for an athlete — get_athlete" />
+<meta property="og:title" content="converts a list of club activities into a dataframe — compile_club_activities" />
 
-<meta property="og:description" content="Get basic athlete data for an athlete using an API request" />
+<meta property="og:description" content="converts a list of club activities into a dataframe" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -94,49 +94,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get basic data for an athlete</h1>
+    <h1>converts a list of club activities into a dataframe</h1>
     
-    <div class="hidden name"><code>get_athlete.Rd</code></div>
+    <div class="hidden name"><code>compile_club_activities.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get basic athlete data for an athlete using an API request</p>
+    <p>converts a list of club activities into a dataframe</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_athlete</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>compile_club_activities</span>(<span class='no'>actlist</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stoken</th>
-      <td><p>A <code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></code> object created using the <code>strava_oauth</code> function</p></td>
+      <th>actlist</th>
+      <td><p>a club activities list returned by <code>get_activity_list</code></p></td>
     </tr>
     <tr>
-      <th>id</th>
-      <td><p>string or integer of athlete</p></td>
+      <th>acts</th>
+      <td><p>numeric indicating which activities to compile starting with most recent, defaults to all</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Data from an API request to <a href='https://strava.com/api/v3/athlete'>https://strava.com/api/v3/athlete</a>.  Specifically, a list of athlete information including athlete name, location, followers, etc. as described here: <a href='https://strava.github.io/api/v3/athlete/'>https://strava.github.io/api/v3/athlete/</a>.</p>
+    <p>An <code>data.frame</code> of the compiled activities from <code>actlist</code></p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Requires authentication stoken using the <code>strava_oauth</code> function and a user-created API on the strava website.</p>
+    <p>each activity has a value for every column present across all activities, with NAs populating empty values</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># create authentication token</span>
-<span class='co'># requires user created app name, id, and secret from Strava website</span>
-<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>,
-        <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+    <pre class="examples"><div class='input'> 
+</div><span class='co'># NOT RUN {</span>
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 
-<span class='fu'>get_athlete</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>'2527465'</span>)
+<span class='no'>club_acts</span> <span class='kw'>&lt;-</span> <span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>'13502'</span>, <span class='kw'>club</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='no'>acts_data</span> <span class='kw'>&lt;-</span> <span class='fu'>compile_club_activities</span>(<span class='no'>club_acts</span>)
+
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -151,6 +152,8 @@
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Marcus Beck</p>
   </div>
 </div>
 

@@ -7,6 +7,7 @@
 #' @concept token
 #' 
 #' @param act_data an activities list object returned by \code{\link{get_activity_list}}, an \code{actframe} returned by \code{\link{compile_activities}}, or a \code{strfame} returned by \code{\link{get_activity_streams}} 
+#' @param key chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}} for polyline decoding, see details
 #' @param acts numeric indicating which activities to plot based on index in the activities list, defaults to most recent
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
 #' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
@@ -15,7 +16,6 @@
 #' @param filltype chr string specifying which stream variable to use for filling line segments, applies only to \code{strframe} objects, acceptable values are \code{"elevation"}, \code{"distance"}, \code{"slope"}, or \code{"speed"}
 #' @param distlab logical if distance labels are plotted along the route with \code{\link[ggrepel]{geom_label_repel}}
 #' @param distval numeric indicating rounding factor for distance labels which has direct control on label density, see details 
-#' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
 #' @param size numeric indicating width of activity lines
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
@@ -67,7 +67,7 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map list
-get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
+get_heat_map.list <- function(act_data, key, acts = 1, alpha = NULL, f = 0.1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, units = units)
@@ -81,7 +81,7 @@ get_heat_map.list <- function(act_data, acts = 1, alpha = NULL, f = 0.1, key = N
 #' @export
 #'
 #' @method get_heat_map actframe
-get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
+get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
@@ -97,32 +97,26 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 
 	# remove rows without polylines
 	act_data <- chk_nopolyline(act_data)
-	
+
 	# data to plot
-	temp <- dplyr::group_by(act_data, map.summary_polyline) %>%
-		dplyr::do(get_latlon(.)) %>%
-		dplyr::ungroup()
-	temp$activity <- as.numeric(factor(temp$map.summary_polyline))
-	temp$map.summary_polyline <- NULL
-	
-	# expand lat/lon for each activity
-	temp <- split(temp, temp$activity)
-	temp <- lapply(temp, function(x) {
-	
-		xint <- stats::approx(x = x$lon, n = expand * nrow(x))$y
-		yint <- stats::approx(x = x$lat, n = expand * nrow(x))$y
-		data.frame(activity = unique(x$activity), lat = yint, lon = xint)
-		
-	})
-	temp <- do.call('rbind', temp)
-	
+	temp <- act_data %>% 
+		dplyr::group_by(upload_id) %>%
+		tidyr::nest() %>% 
+		mutate(locs = purrr::map(data, function(x) get_latlon(x$map.summary_polyline, key = key))) %>% 
+		dplyr::select(-data) %>%
+		dplyr::ungroup() %>% 
+		tidyr::unnest() %>% 
+		dplyr::rename(activity = upload_id)
+
 	# get distances, default is km
 	temp <- dplyr::group_by(temp, activity) %>%
 		dplyr::mutate(distance = get_dists(lon, lat)) %>% 
 		dplyr::ungroup()
 
-	if(unit_type %in% 'imperial')
+	if(unit_type %in% 'imperial'){
 		temp$distance <- temp$distance * 0.621371
+		temp$ele <- temp$ele *  3.28084
+	}
 
 	# xy lims
 	bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
@@ -136,33 +130,13 @@ get_heat_map.actframe <- function(act_data, alpha = NULL, f = 1, key = NULL, add
 	# add elevation to plot
 	if(add_elev){
 		
-		# check if key provided
-		if(is.null(key))
-			stop('Google API key is required if plotting elevation')
-
-		# get elevation
-		ele <- try({
-			rgbif::elevation(latitude = temp$lat, longitude = temp$lon, key = key)$elevation
-		})
-		if(class(ele) %in% 'try-error')
-			stop('Elevation not retrieved, check API key')
-		temp$ele <- ele
-		temp$ele <- pmax(0, temp$ele)
-		
-		# change units if imperial
-		if(unit_type %in% 'imperial'){
-		
-			temp$ele <- temp$ele *  3.28084
-		
-		}
-		
-		# get gradient
-		temp <- dplyr::mutate(temp, EleDiff = c(0, diff(ele)),
-									 distdiff = c(0, diff(distance)),
-									 grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
-		
 		# plot gradient 
 		if(as_grad){
+			
+			# get gradient
+			temp <- dplyr::mutate(temp, EleDiff = c(0, diff(ele)),
+														distdiff = c(0, diff(distance)),
+														grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
 			
 			p <- pbase +
 				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = grad), 

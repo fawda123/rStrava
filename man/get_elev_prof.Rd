@@ -25,7 +25,7 @@ get_elev_prof(act_data, ...)
 
 \item{acts}{numeric value indicating which elements of \code{act_data} to plot, defaults to most recent}
 
-\item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
+\item{key}{chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}}, see details}
 
 \item{total}{logical indicating if elevations are plotted as cumulative climbed by distance}
 

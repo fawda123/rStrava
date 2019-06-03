@@ -9,16 +9,15 @@
 \usage{
 get_heat_map(act_data, ...)
 
-\method{get_heat_map}{list}(act_data, acts = 1, alpha = NULL,
-  f = 0.1, key = NULL, add_elev = FALSE, as_grad = FALSE,
-  distlab = TRUE, distval = 0, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", source = "google",
-  units = "metric", ...)
-
-\method{get_heat_map}{actframe}(act_data, alpha = NULL, f = 1,
-  key = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE,
+\method{get_heat_map}{list}(act_data, key, acts = 1, alpha = NULL,
+  f = 0.1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE,
   distval = 0, size = 0.5, col = "red", expand = 10,
-  maptype = "terrain", source = "google", ...)
+  maptype = "terrain", source = "google", units = "metric", ...)
+
+\method{get_heat_map}{actframe}(act_data, key, alpha = NULL, f = 1,
+  add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0,
+  size = 0.5, col = "red", expand = 10, maptype = "terrain",
+  source = "google", ...)
 
 \method{get_heat_map}{strframe}(act_data, alpha = NULL, f = 1,
   filltype = c("elevation", "distance", "slope", "speed"),
@@ -30,13 +29,13 @@ get_heat_map(act_data, ...)
 
 \item{...}{arguments passed to or from other methods}
 
+\item{key}{chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}} for polyline decoding, see details}
+
 \item{acts}{numeric indicating which activities to plot based on index in the activities list, defaults to most recent}
 
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 
 \item{f}{number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}}
-
-\item{key}{chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details}
 
 \item{add_elev}{logical indicating if elevation is overlayed by color shading on the activity lines}
 

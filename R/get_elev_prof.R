@@ -8,7 +8,7 @@
 #' 
 #' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric value indicating which elements of \code{act_data} to plot, defaults to most recent
-#' @param key chr string of Google API key for elevation data, passed to \code{\link[rgbif]{elevation}}, see details
+#' @param key chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.  
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
@@ -70,33 +70,20 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 	if('units' %in% names(args))
 		if(args$units != unit_type)
 			warning('units does not match unit type, use compile_activities with different units')
-	
+
 	# remove rows without polylines
 	act_data <- chk_nopolyline(act_data)
 	
 	# create a dataframe of long and latitudes
-	lat_lon <- dplyr::group_by(act_data, upload_id) %>%
-		dplyr::do(get_latlon(.)) %>%
-		dplyr::ungroup() %>%
-	  dplyr::full_join(., act_data, by = 'upload_id') %>%
-	  dplyr::select(., upload_id, type, start_date, lat, lon, total_elevation_gain)
-
-	# expand lat/lon for each activity
-	lat_lon <- split(lat_lon, lat_lon$upload_id)
-	lat_lon <- lapply(lat_lon, function(x) {
-	
-		xint <- stats::approx(x = x$lon, n = expand * nrow(x))$y
-		yint <- stats::approx(x = x$lat, n = expand * nrow(x))$y
-		data.frame(
-			upload_id = unique(x$upload_id), 
-			start_date = unique(x$start_date), 
-			total_elevation_gain = unique(x$total_elevation_gain),
-			lat = yint, 
-			lon = xint
-			)
-		
-	})
-	lat_lon <- do.call('rbind', lat_lon)
+	lat_lon <- act_data %>% 
+		dplyr::group_by(upload_id) %>%
+		tidyr::nest() %>% 
+		mutate(locs = purrr::map(data, function(x) get_latlon(x$map.summary_polyline, key = key))) %>% 
+		dplyr::select(-data) %>%
+		dplyr::ungroup() %>% 
+		tidyr::unnest() %>%
+		dplyr::full_join(., act_data, by = 'upload_id') %>%
+		dplyr::select(., upload_id, type, start_date, lat, lon, ele, total_elevation_gain)
 	
 	# total elevation gain needs to be numeric for unit conversion
 	lat_lon$total_elevation_gain <- round(as.numeric(as.character(lat_lon$total_elevation_gain)), 1)
@@ -107,15 +94,6 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 	distances <- dplyr::group_by(lat_lon, activity) %>%
 	  dplyr::mutate(., distance = get_dists(lon, lat))
 	lat_lon$distance <- distances$distance
-	
-	# adding elevation using rgbif
-	ele <- try({
-		rgbif::elevation(latitude = lat_lon$lat, longitude = lat_lon$lon, key = key)$elevation
-	})
-	if(class(ele) %in% 'try-error')
-		stop('Elevation not retrieved, check API key')
-	lat_lon$ele <- ele
-	lat_lon$ele <- pmax(0, lat_lon$ele)
 	
 	# axis labels
 	ylab <- paste0('Elevation (', unit_vals['elevation'], ')')

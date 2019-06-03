@@ -1,3 +1,11 @@
+---
+output:
+  html_document:
+    keep_md: yes
+    toc: no
+    self_contained: yes
+---
+
 # rStrava
 
 ##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk, Lorenzo Gaborini, lorenzo.gaborini@unil.ch, Niklas von Maltzahn, niklasvm@gmail.com*
@@ -58,31 +66,31 @@ athl_fun(2837007, trace = FALSE)
 ## 
 ## $`2837007`$monthly
 ##        month     miles hours elev_gain
-## 1 2018-10-01 329.08191    23      1521
-## 2 2018-11-01 248.76223    18       955
-## 3 2018-12-01 161.58634    14       964
-## 4 2019-01-01 391.10905    28      1110
-## 5 2019-02-01 247.53005    18       679
-## 6 2019-03-01 343.69594    24      1039
-## 7 2019-04-01  71.33776     5       206
+## 1 2018-12-01 161.58634    14       964
+## 2 2019-01-01 391.10905    28      1110
+## 3 2019-02-01 247.53005    18       679
+## 4 2019-03-01 343.69594    24      1039
+## 5 2019-04-01 332.47584    23       990
+## 6 2019-05-01 351.16172    25      1266
+## 7 2019-06-01  15.70267     1        83
 ## 
 ## $`2837007`$recent
 ##           id           name type startDateLocal distance elevation
-## 1 2267959317    Evening Run  run     2019-04-05      3.2       100
-## 2 2264428002    Morning Run  run     2019-04-03      3.2        72
-## 3 2263514943 Afternoon Ride ride     2019-04-03     10.8       117
+## 1 2420187776   Morning Ride ride     2019-06-02     10.6        51
+## 2 2419088213  Afternoon Run  run     2019-06-02      5.0       223
+## 3 2419088214 Afternoon Ride ride     2019-05-31     10.8       117
 ##   movingTime
-## 1      24:29
-## 2      25:25
+## 1      39:40
+## 2      36:55
 ## 3      41:44
 ## 
 ## $`2837007`$achievements
-##                        description             timeago
-## 1    2nd best estimated 10k effort 2019-03-24 21:22:17
-## 2  PR on Race the Northbound Train 2019-03-31 19:34:15
-## 3     PR on Main St. Mortal Kombat 2019-03-30 00:45:08
-## 4           PR on NB Warner to ICD 2019-03-23 00:48:20
-## 5 PR on Harvard - Warner to Walnut 2019-03-23 00:48:20
+##                      description             timeago
+## 1 2nd best estimated 400m effort 2019-05-22 22:43:09
+## 2           PR on Trailwood down 2019-06-02 23:19:02
+## 3   PR on State Street Ramp Down 2019-05-23 13:36:00
+## 4      PR on Capital Hill Repeat 2019-05-23 13:36:00
+## 5        PR on State Street Ramp 2019-05-23 13:36:00
 ```
 
 ### API functions (token)
@@ -181,25 +189,11 @@ Plotting elevation and grade for a single ride:
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
-```
-## Warning: Removed 46 rows containing missing values (geom_path).
-```
-
-```
-## Warning: Removed 2 rows containing missing values (geom_label_repel).
-```
-
 ![](README_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 ```r
 # plot % gradient along a single ride
 get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
-```
-
-```
-## Warning: Removed 24 rows containing missing values (geom_path).
-
-## Warning: Removed 2 rows containing missing values (geom_label_repel).
 ```
 
 ![](README_files/figure-html/unnamed-chunk-12-2.png)<!-- -->
@@ -242,19 +236,19 @@ head(strms_data)
 
 ```
 ##   altitude distance grade_smooth moving time velocity_smooth      lat
-## 1     34.0   0.0000         -2.6  FALSE    0            0.00 33.72670
-## 2     33.9   0.0047         -2.1   TRUE    2            8.64 33.72666
-## 3     33.8   0.0077         -1.7   TRUE    4            6.84 33.72665
-## 4     33.7   0.0141         -1.2   TRUE    6            8.64 33.72666
-## 5     33.7   0.0179         -0.6   TRUE    7            9.36 33.72667
-## 6     33.7   0.0213          0.0   TRUE    8           10.08 33.72668
+## 1     34.6   0.0000         -1.4  FALSE    0            0.00 33.72592
+## 2     34.6   0.0036         -2.0   TRUE    7            1.80 33.72594
+## 3     34.5   0.0074         -1.5   TRUE   12            2.16 33.72591
+## 4     34.3   0.0149         -0.9   TRUE   14            5.76 33.72584
+## 5     34.3   0.0204         -0.4   TRUE   15            7.56 33.72580
+## 6     34.4   0.0259          0.9   TRUE   16            9.00 33.72576
 ##         lng         id
-## 1 -117.7838 2267959317
-## 2 -117.7838 2267959317
-## 3 -117.7838 2267959317
-## 4 -117.7839 2267959317
-## 5 -117.7839 2267959317
-## 6 -117.7839 2267959317
+## 1 -117.7833 2420187776
+## 2 -117.7834 2420187776
+## 3 -117.7834 2420187776
+## 4 -117.7834 2420187776
+## 5 -117.7833 2420187776
+## 6 -117.7833 2420187776
 ```
 
 Stream data can be plotted using any of the plotting functions.

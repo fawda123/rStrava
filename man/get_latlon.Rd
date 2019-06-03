@@ -4,10 +4,12 @@
 \alias{get_latlon}
 \title{get latitude and longitude from Google polyline}
 \usage{
-get_latlon(x)
+get_latlon(polyline, key)
 }
 \arguments{
-\item{x}{the dataframe that contains the Strava activity data}
+\item{polyline}{a map polyline returned for an activity from the API}
+
+\item{key}{chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}}}
 }
 \value{
 dataframe of latitude and longitudes with a column for the unique identifier
@@ -23,10 +25,10 @@ my_acts <- get_activity_list(stoken)
 acts_data <- compile_activities(my_acts)
 
 # get lat and lon for a single activity
-get_latlon(acts_data[1,])
+get_latlon(acts_data[1,], key = mykey)
 }
 }
 \author{
-Daniel Padfield
+Daniel Padfield, Marcus Beck
 }
 \concept{token}
