@@ -1,9 +1,5 @@
 ---
-output:
-  html_document:
-    keep_md: yes
-    toc: no
-    self_contained: yes
+output: github_document
 ---
 
 # rStrava
@@ -73,7 +69,7 @@ Setting `cache = TRUE` for `strava_oauth` will create an authentication file in 
 stoken <- httr::config(token = readRDS('.httr-oauth')[[1]])
 ```
 
-Finally, the `get_heat_map` and `get_elev_prof` functions optionally retrieve elevation data from the Google Maps Elevation API. To use these features, an additional authentication key is required.  Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
+Finally, the `get_heat_map` and `get_elev_prof` functions require a key from the Google API. Follow the instructions [here](https://developers.google.com/maps/documentation/elevation/#api_key).  The key can be added to the R environment file for later use:
 
 ```{r eval = FALSE}
 # save the key, do only once
@@ -85,7 +81,7 @@ cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
 mykey <- Sys.getenv("google_key")
 ```
 
-The `get_heat_map` function uses [ggmap](https://github.com/dkahle/ggmap) to create base maps.  A Google API key is needed if using any map services where `source = "google"` for the argument to `get_heat_map`.  The same key used for the Elevation API can be used but must be registered externally with the ggmap package using `register_google()` before executing `get_heat_map`.
+The `get_heat_map` function uses [ggmap](https://github.com/dkahle/ggmap) to create base maps.  A Google API key is needed to use the function.  This key must be registered externally with the ggmap package using `register_google()` before executing `get_heat_map`.
 
 ```{r echo = FALSE, message = FALSE}
 source('extra.R')
@@ -112,7 +108,7 @@ my_acts <- get_activity_list(stoken)
 act_data <- compile_activities(my_acts) %>% 
 	filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
 	filter(start_latitude < 31.5 & start_latitude > 30)
-get_heat_map(act_data, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
+get_heat_map(act_data, key = mykey, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 
 ```
 
