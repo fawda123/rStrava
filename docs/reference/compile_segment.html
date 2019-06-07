@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -112,13 +112,13 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>seglist</th>
-      <td><p>a Strava segment list returned by <code>get_segment</code></p></td>
+      <td><p>a Strava segment list returned by <code><a href='get_segment.html'>get_segment</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>dataframe of all information given in a call from <code>get_segment</code></p>
+    <p>dataframe of all information given in a call from <code><a href='get_segment.html'>get_segment</a></code></p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -129,20 +129,20 @@
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># create authentication token</span>
 <span class='co'># requires user created app name, id, and secret from Strava website</span>
-<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>,
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>,
         <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 
 <span class='co'># compile segment info</span>
-<span class='fu'>get_segment</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>229781</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
+<span class='fu'><a href='get_segment.html'>get_segment</a></span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>229781</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
 
 <span class='co'># compile top ten leaderboard for the segment</span>
-<span class='fu'>get_segment</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>229781</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>"leaderboard"</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
+<span class='fu'><a href='get_segment.html'>get_segment</a></span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>229781</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>"leaderboard"</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
 
 <span class='co'># compile all efforts for the authenticated user on the segment</span>
-<span class='fu'>get_segment</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>4483903</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>'all_efforts'</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
+<span class='fu'><a href='get_segment.html'>get_segment</a></span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>4483903</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>'all_efforts'</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
 
 <span class='co'># compile the starred segments for the user</span>
-<span class='fu'>get_segment</span>(<span class='no'>stoken</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>'starred'</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
+<span class='fu'><a href='get_segment.html'>get_segment</a></span>(<span class='no'>stoken</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>'starred'</span>) <span class='kw'>%&gt;%</span> <span class='no'>compile_segment</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>actlist</th>
-      <td><p>an activities list returned by <code>get_activity_list</code></p></td>
+      <td><p>an activities list returned by <code><a href='get_activity_list.html'>get_activity_list</a></code></p></td>
     </tr>
     <tr>
       <th>acts</th>
@@ -138,15 +138,15 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>compile_club_activities</code> for compiling an activities list for club activities</p></div>
+    <div class='dont-index'><p><code><a href='compile_club_activities.html'>compile_club_activities</a></code> for compiling an activities list for club activities</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> 
 </div><span class='co'># NOT RUN {</span>
-<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 
-<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>)
+<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_activity_list.html'>get_activity_list</a></span>(<span class='no'>stoken</span>)
 
 <span class='no'>acts_data</span> <span class='kw'>&lt;-</span> <span class='fu'>compile_activities</span>(<span class='no'>my_acts</span>)
 

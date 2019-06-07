@@ -12,7 +12,7 @@ Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/g
 
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
-![](api_logo_pwrdBy_strava_horiz_light.png)
+![](www/api_logo_pwrdBy_strava_horiz_light.png)
 
 ### Overview and installation
 
@@ -158,6 +158,11 @@ get_elev_prof(strms_data)
 # speed splits
 plot_spdsplits(strms_data, stoken)
 ```
+
+
+### Contributing
+
+Please view our [contributing](.github/CONTRIBUTING.md) guidelines for any changes or pull requests.
 
 ### License
 

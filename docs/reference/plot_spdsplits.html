@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>act_data</th>
-      <td><p>an activities list object returned by <code>get_activity_list</code> or a <code>data.frame</code> returned by <code>compile_activities</code></p></td>
+      <td><p>an activities list object returned by <code><a href='get_activity_list.html'>get_activity_list</a></code> or a <code>data.frame</code> returned by <code><a href='compile_activities.html'>compile_activities</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -128,7 +128,7 @@
     </tr>
     <tr>
       <th>stoken</th>
-      <td><p>A <code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></code> object created using the <code>strava_oauth</code> function</p></td>
+      <td><p>A <code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></code> object created using the <code><a href='strava_oauth.html'>strava_oauth</a></code> function</p></td>
     </tr>
     <tr>
       <th>acts</th>
@@ -156,8 +156,8 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># get my activities</span>
-<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>)
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_activity_list.html'>get_activity_list</a></span>(<span class='no'>stoken</span>)
 
 <span class='co'># default</span>
 <span class='fu'>plot_spdsplits</span>(<span class='no'>my_acts</span>, <span class='no'>stoken</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='fl'>1</span>)

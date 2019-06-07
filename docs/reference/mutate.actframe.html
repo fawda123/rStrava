@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -131,9 +131,9 @@
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)
 
 <span class='co'># get actframe, all activities</span>
-<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>)
-<span class='no'>act_data</span> <span class='kw'>&lt;-</span> <span class='fu'>compile_activities</span>(<span class='no'>my_acts</span>)
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_activity_list.html'>get_activity_list</a></span>(<span class='no'>stoken</span>)
+<span class='no'>act_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='compile_activities.html'>compile_activities</a></span>(<span class='no'>my_acts</span>)
 
 <span class='co'># mutate</span>
 <span class='no'>act_data</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>is_run</span><span class='kw'>=</span><span class='no'>type</span><span class='kw'>==</span><span class='st'>'Run'</span>)

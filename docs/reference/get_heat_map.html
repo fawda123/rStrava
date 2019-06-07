@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>act_data</th>
-      <td><p>an activities list object returned by <code>get_activity_list</code>, an <code>actframe</code> returned by <code>compile_activities</code>, or a <code>strfame</code> returned by <code>get_activity_streams</code></p></td>
+      <td><p>an activities list object returned by <code><a href='get_activity_list.html'>get_activity_list</a></code>, an <code>actframe</code> returned by <code><a href='compile_activities.html'>compile_activities</a></code>, or a <code>strfame</code> returned by <code><a href='get_activity_streams.html'>get_activity_streams</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -190,7 +190,7 @@
     </tr>
     <tr>
       <th>units</th>
-      <td><p>chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with <code>compile_activities</code></p></td>
+      <td><p>chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with <code><a href='compile_activities.html'>compile_activities</a></code></p></td>
     </tr>
     <tr>
       <th>filltype</th>
@@ -204,7 +204,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>uses <code>get_latlon</code> to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.</p>
+    <p>uses <code><a href='get_latlon.html'>get_latlon</a></code> to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.</p>
 <p>The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key</p>
 <p>A Google API key is needed if using any map services where <code>source = "google"</code>.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using <code><a href='https://www.rdocumentation.org/packages/ggmap/topics/register_google'>register_google()</a></code> before executing <code>get_heat_map()</code>.  See the examples.</p>
 <p>The <code>distval</code> argument is passed to the <code>digits</code> argument of <code>round</code>. This controls the density of the distance labels, e.g., 1 will plot all distances in sequenc of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc.</p>
@@ -213,8 +213,8 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># get my activities</span>
-<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>strava_oauth</span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'>get_activity_list</span>(<span class='no'>stoken</span>)
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_activity_list.html'>get_activity_list</a></span>(<span class='no'>stoken</span>)
 
 <span class='co'># register Google maps API key</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggmap</span>)
@@ -228,7 +228,7 @@
 <span class='fu'>get_heat_map</span>(<span class='no'>my_acts</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='no'>mykey</span>, <span class='kw'>add_elev</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>'Spectral'</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'># compile first, change units</span>
-<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'>compile_activities</span>(<span class='no'>my_acts</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='fl'>156</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>'imperial'</span>)
+<span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='compile_activities.html'>compile_activities</a></span>(<span class='no'>my_acts</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='fl'>156</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>'imperial'</span>)
 <span class='fu'>get_heat_map</span>(<span class='no'>my_acts</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='no'>mykey</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>add_elev</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>'Spectral'</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>maptype</span> <span class='kw'>=</span> <span class='st'>'satellite'</span>)
 <span class='co'># }</span></pre>

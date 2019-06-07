@@ -11,7 +11,7 @@ Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?bran
 
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
-![](api_logo_pwrdBy_strava_horiz_light.png)
+![](www/api_logo_pwrdBy_strava_horiz_light.png)
 
 ### Overview and installation
 
@@ -70,25 +70,31 @@ athl_fun(2837007, trace = FALSE)
     ## 4 2019-03-01 343.69594    24      1039
     ## 5 2019-04-01 332.47584    23       990
     ## 6 2019-05-01 351.16172    25      1266
-    ## 7 2019-06-01  15.70267     1        83
+    ## 7 2019-06-01  79.16518     5       375
     ## 
     ## $`2837007`$recent
     ##           id           name type startDateLocal distance elevation
-    ## 1 2420187776   Morning Ride ride     2019-06-02     10.6        51
-    ## 2 2419088213  Afternoon Run  run     2019-06-02      5.0       223
-    ## 3 2419088214 Afternoon Ride ride     2019-05-31     10.8       117
+    ## 1 2430862993   Morning Ride ride     2019-06-06     10.6        51
+    ## 2 2428239554    Morning Run  run     2019-06-05      3.2        71
+    ## 3 2428239599 Afternoon Ride ride     2019-06-05     10.8       117
     ##   movingTime
-    ## 1      39:40
-    ## 2      36:55
-    ## 3      41:44
+    ## 1      40:43
+    ## 2      25:40
+    ## 3      41:42
     ## 
     ## $`2837007`$achievements
-    ##                      description             timeago
-    ## 1 2nd best estimated 400m effort 2019-05-22 22:43:09
-    ## 2           PR on Trailwood down 2019-06-02 23:19:02
-    ## 3   PR on State Street Ramp Down 2019-05-23 13:36:00
-    ## 4      PR on Capital Hill Repeat 2019-05-23 13:36:00
-    ## 5        PR on State Street Ramp 2019-05-23 13:36:00
+    ##                                                 description
+    ## 1                     PR on El Camino to Irvine Blvd Sprint
+    ## 2                     2nd fastest time on Lower PC to Bryan
+    ## 3                           2nd fastest time on Start it up
+    ## 4                         2nd fastest time on Back on track
+    ## 5 2nd fastest time on Walnut Trail - Jeffrey to Sand Canyon
+    ##               timeago
+    ## 1 2019-06-04 23:28:48
+    ## 2 2019-06-04 23:28:48
+    ## 3 2019-06-04 23:28:48
+    ## 4 2019-06-04 23:28:48
+    ## 5 2019-06-04 14:03:04
 
 ### API functions (token)
 
@@ -289,6 +295,11 @@ plot_spdsplits(strms_data, stoken)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-17-2.png)<!-- -->
+
+### Contributing
+
+Please view our [contributing](.github/CONTRIBUTING.md) guidelines for
+any changes or pull requests.
 
 ### License
 
