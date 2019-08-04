@@ -3,15 +3,14 @@
 
 ##### *Marcus W. Beck, <mbafs2012@gmail.com>, Pedro Villarroel, <pedrodvf@gmail.com>, Daniel Padfield, <dp323@exeter.ac.uk>, Lorenzo Gaborini, <lorenzo.gaborini@unil.ch>, Niklas von Maltzahn, <niklasvm@gmail.com>*
 
-Linux: [![Travis-CI Build
+[![Travis-CI Build
 Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
-
-Windows: [![AppVeyor Build
+[![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
-
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
-![](www/api_logo_pwrdBy_strava_horiz_light.png)
+<img src="man/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300" />
+<br></br> <br></br>
 
 ### Overview and installation
 
@@ -64,37 +63,29 @@ athl_fun(2837007, trace = FALSE)
     ## 
     ## $`2837007`$monthly
     ##        month     miles hours elev_gain
-    ## 1 2018-12-01 161.58634    14       964
-    ## 2 2019-01-01 391.10905    28      1110
-    ## 3 2019-02-01 247.53005    18       679
-    ## 4 2019-03-01 343.69594    24      1039
-    ## 5 2019-04-01 332.47584    23       990
-    ## 6 2019-05-01 351.16172    25      1266
-    ## 7 2019-06-01  79.16518     5       375
+    ## 1 2019-02-01 247.53005    18       679
+    ## 2 2019-03-01 343.69594    24      1039
+    ## 3 2019-04-01 332.47584    23       990
+    ## 4 2019-05-01 351.16172    25      1266
+    ## 5 2019-06-01 283.40678    21      1132
+    ## 6 2019-07-01 273.54686    20       893
+    ## 7 2019-08-01  24.84863     1        75
     ## 
     ## $`2837007`$recent
     ##           id           name type startDateLocal distance elevation
-    ## 1 2430862993   Morning Ride ride     2019-06-06     10.6        51
-    ## 2 2428239554    Morning Run  run     2019-06-05      3.2        71
-    ## 3 2428239599 Afternoon Ride ride     2019-06-05     10.8       117
+    ## 1 2584096258    Morning Run  run     2019-08-01      3.2        72
+    ## 2 2583013926 Afternoon Ride ride     2019-08-01     10.9       126
+    ## 3 2581426804   Morning Ride ride     2019-07-31     10.6        51
     ##   movingTime
-    ## 1      40:43
-    ## 2      25:40
-    ## 3      41:42
+    ## 1      25:52
+    ## 2      41:55
+    ## 3      40:06
     ## 
     ## $`2837007`$achievements
-    ##                                                 description
-    ## 1                     PR on El Camino to Irvine Blvd Sprint
-    ## 2                     2nd fastest time on Lower PC to Bryan
-    ## 3                           2nd fastest time on Start it up
-    ## 4                         2nd fastest time on Back on track
-    ## 5 2nd fastest time on Walnut Trail - Jeffrey to Sand Canyon
-    ##               timeago
-    ## 1 2019-06-04 23:28:48
-    ## 2 2019-06-04 23:28:48
-    ## 3 2019-06-04 23:28:48
-    ## 4 2019-06-04 23:28:48
-    ## 5 2019-06-04 14:03:04
+    ##                           description             timeago
+    ## 1       2nd fastest time on Park Push 2019-07-27 00:41:33
+    ## 2    2nd fastest time on Bryan bridge 2019-07-24 00:44:12
+    ## 3 2nd fastest time on Pitchin' A Tent 2019-07-18 00:42:44
 
 ### API functions (token)
 
