@@ -12,7 +12,7 @@ athl_fun(athl_num, trace = TRUE)
 \item{trace}{logical indicating if output is returned to console}
 }
 \value{
-A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
+A list for each athlete, where each element is an additional list with elements for the athlete name, location, units of measurement, monthly data, recent activities, and achievements.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
 }
 \description{
 Get data for an athlete by web scraping, does not require authentication.

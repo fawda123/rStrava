@@ -10,7 +10,7 @@
 #' 
 #' @export
 #' 
-#' @return 	A list with elements for the athlete id, units of measurement, location, monthly data, year-to-date data, and an all-time summary.
+#' @return 	A list with elements for the athlete name, location, units of measurement, monthly data, recent activities, and achievements.
 athlind_fun <- function(athl_num){
 	
 	# get unparsed url text using input

@@ -11,7 +11,7 @@
 #' 
 #' @concept notoken
 #' 
-#' @return 	A list for each athlete, where each element is an additional list with elements for the units of measurement, location, current month data, monthly data, year-to-date data, and an all-time summary.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
+#' @return 	A list for each athlete, where each element is an additional list with elements for the athlete name, location, units of measurement, monthly data, recent activities, and achievements.  The list elements are named using the athlete id numbers.  \code{NA} will be returned if the data for an athlete could not be accessed.
 #' 
 #' @examples
 #' ## single athlete

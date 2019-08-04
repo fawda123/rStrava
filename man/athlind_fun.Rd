@@ -10,7 +10,7 @@ athlind_fun(athl_num)
 \item{athl_num}{numeric athlete id used by Strava}
 }
 \value{
-A list with elements for the athlete id, units of measurement, location, monthly data, year-to-date data, and an all-time summary.
+A list with elements for the athlete name, location, units of measurement, monthly data, recent activities, and achievements.
 }
 \description{
 Get data for a single athlete by web scraping, does not require authentication.
