@@ -136,7 +136,7 @@
     </tr>
     <tr>
       <th>types</th>
-      <td><p>list indicating which streams (lat/lng/time/...) to get for each activity, defaults to all available</p></td>
+      <td><p>list indicating which streams to get for each activity, defaults to all available, see details.</p></td>
     </tr>
     <tr>
       <th>resolution</th>
@@ -155,6 +155,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Each activity has a value for every column present across all activities, with NAs populating missing values.</p>
+<p>For the <code>types</code> argument, the default is <code>type = NULL</code> which will retrieve all available stream types.  The available stream types can be any of <code>time</code>, <code>latlng</code>, <code>distance</code>, <code>altitude</code>, <code>velocity_smooth</code>, <code>heartrate</code>, <code>cadence</code>, <code>watts</code>, <code>temp</code>, <code>moving</code>, or <code>grade_smooth</code>.  To retrieve only a subset of the types, pass a list argument with the appropriate character strings to <code>type</code>, e.g., <code>type = list("time", "latlng", "distance")</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
