@@ -5,7 +5,7 @@
 #' @param act_data an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function 
-#' @param types list indicating which streams (lat/lng/time/...) to get for each activity, defaults to all available
+#' @param types list indicating which streams to get for each activity, defaults to all available, see details.
 #' @param ... arguments passed to or from other methods
 #' @inheritParams get_streams
 #' 
@@ -13,7 +13,11 @@
 #' 
 #' @return A stream frame object (\code{strframe} that includes a data frame for the stream data along with the units
 #' 
-#' @details Each activity has a value for every column present across all activities, with NAs populating missing values.
+#' @details 
+#' 
+#' Each activity has a value for every column present across all activities, with NAs populating missing values.
+#' 
+#' For the \code{types} argument, the default is \code{type = NULL} which will retrieve all available stream types.  The available stream types can be any of \code{time}, \code{latlng}, \code{distance}, \code{altitude}, \code{velocity_smooth}, \code{heartrate}, \code{cadence}, \code{watts}, \code{temp}, \code{moving}, or \code{grade_smooth}.  To retrieve only a subset of the types, pass a list argument with the appropriate character strings to \code{type}, e.g., \code{type = list("time", "latlng", "distance")}.
 #'
 #' @concept token
 #' 
@@ -49,7 +53,7 @@ get_activity_streams.list <- function(act_data, stoken, acts = NULL, types = NUL
 #'
 #' @method get_activity_streams actframe
 get_activity_streams.actframe <- function(act_data, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance', ...){
-	
+
 	# Setup default streams
 	types.all <- list("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
 	force(types)

@@ -23,7 +23,7 @@ get_activity_streams(act_data, ...)
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 
-\item{types}{list indicating which streams (lat/lng/time/...) to get for each activity, defaults to all available}
+\item{types}{list indicating which streams to get for each activity, defaults to all available, see details.}
 
 \item{resolution}{chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all}
 
@@ -37,6 +37,8 @@ Retrieve streams for activities, and convert to a dataframe.
 }
 \details{
 Each activity has a value for every column present across all activities, with NAs populating missing values.
+
+For the \code{types} argument, the default is \code{type = NULL} which will retrieve all available stream types.  The available stream types can be any of \code{time}, \code{latlng}, \code{distance}, \code{altitude}, \code{velocity_smooth}, \code{heartrate}, \code{cadence}, \code{watts}, \code{temp}, \code{moving}, or \code{grade_smooth}.  To retrieve only a subset of the types, pass a list argument with the appropriate character strings to \code{type}, e.g., \code{type = list("time", "latlng", "distance")}.
 }
 \examples{
  
