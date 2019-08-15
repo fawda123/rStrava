@@ -27,7 +27,18 @@ compile_activity_streams <- function(streams, id = NULL){
       purrr::transpose(.) %>% 
       tibble::as.tibble() %>% 
       dplyr::select(type, data) %>% 
-      dplyr::mutate(type = unlist(type))
+      dplyr::mutate(
+      	type = unlist(type), 
+      	data = purrr::map(data, function(x){
+      			
+      		# replace numeric(0) values with NA
+      		idx <- !sapply(x, length)
+      		x[idx] <- NA
+      		
+      		return(x)
+      		
+      	})
+      )
    
    # Expand data column to columns removing one layer of lists
    tmp.wide <- tmp %>% 
@@ -36,7 +47,7 @@ compile_activity_streams <- function(streams, id = NULL){
    
    # Or:
    # tmp.wide <- x %>% map_dfc(~ tibble(data = pluck(.x, 'data')) %>% set_names(pluck(.x, 'type')))
-   
+
    # Deal with latitude-longitude field separately
    if ('latlng' %in% colnames(tmp.wide)) {
       
