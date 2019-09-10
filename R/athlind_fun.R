@@ -22,7 +22,13 @@ athlind_fun <- function(athl_num){
 		rvest::html_nodes("[data-react-class]") %>%
 		xml_attr('data-react-props') %>%
 		V8::v8()$get(.)
-
+	
+	# exit if nothing found
+	if(is.null(prsd)){
+		out <- paste0('No data for athlete ', athl_num, ', sharing permissions likely set to private.')
+		return(out)
+	}
+	
 	# name
 	name <- prsd$athlete$name
 

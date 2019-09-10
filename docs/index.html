@@ -108,31 +108,31 @@
 ## 
 ## $`2837007`$monthly
 ##        month     miles hours elev_gain
-## 1 2019-02-01 247.53005    18       679
-## 2 2019-03-01 343.69594    24      1039
-## 3 2019-04-01 332.47584    23       990
-## 4 2019-05-01 351.16172    25      1266
-## 5 2019-06-01 283.40678    21      1132
-## 6 2019-07-01 273.54686    20       893
-## 7 2019-08-01  40.49787     3       135
+## 1 2019-03-01 343.69594    24      1039
+## 2 2019-04-01 332.47584    23       990
+## 3 2019-05-01 351.16172    25      1266
+## 4 2019-06-01 283.40678    21      1132
+## 5 2019-07-01 273.54686    20       893
+## 6 2019-08-01 342.39727    25      1126
+## 7 2019-09-01  33.18619     2       161
 ## 
 ## $`2837007`$recent
-##           id          name type startDateLocal distance elevation
-## 1 2592904647  Morning Ride ride     2019-08-04     10.5        51
-## 2 2591491838 Afternoon Run  run     2019-08-04      5.0       144
-## 3 2584096258   Morning Run  run     2019-08-01      3.2        72
+##           id           name type startDateLocal distance elevation
+## 1 2696111354    Morning Run  run     2019-09-09      3.2        72
+## 2 2677940354 Afternoon Ride ride     2019-09-03     11.0       140
+## 3 2676188481   Morning Ride ride     2019-09-02     10.6        52
 ##   movingTime
-## 1      40:19
-## 2      38:21
-## 3      25:52
+## 1      27:14
+## 2      42:08
+## 3      40:39
 ## 
 ## $`2837007`$achievements
-##                           description             timeago
-## 1     PR on Race the Northbound Train 2019-08-04 20:55:45
-## 2     PR on Race the Southbound Train 2019-08-04 20:55:45
-## 3       2nd fastest time on Park Push 2019-07-27 00:41:33
-## 4    2nd fastest time on Bryan bridge 2019-07-24 00:44:12
-## 5 2nd fastest time on Pitchin' A Tent 2019-07-18 00:42:44</code></pre>
+##                             description             timeago
+## 1 PR on El Camino to Irvine Blvd Sprint 2019-09-04 00:43:26
+## 2       PR on Race the Northbound Train 2019-08-11 21:58:14
+## 3 2nd fastest time on Lower PC to Bryan 2019-08-13 01:19:13
+## 4       2nd fastest time on Start it up 2019-08-13 01:19:13
+## 5         2nd fastest time on Park Push 2019-08-13 01:19:13</code></pre>
 </div>
 <div id="api-functions-token" class="section level3">
 <h3 class="hasAnchor">
@@ -147,9 +147,9 @@
 <a class="sourceLine" id="cb5-3" title="3">app_secret &lt;-<span class="st"> 'xxxxxxxx'</span> <span class="co"># an alphanumeric secret, assigned by Strava</span></a>
 <a class="sourceLine" id="cb5-4" title="4"></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co"># create the authentication token</span></a>
-<a class="sourceLine" id="cb5-6" title="6">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="reference/strava_oauth.html">strava_oauth</a></span>(app_name, app_client_id, app_secret))</a></code></pre></div>
+<a class="sourceLine" id="cb5-6" title="6">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="reference/strava_oauth.html">strava_oauth</a></span>(app_name, app_client_id, app_secret))</a></code></pre></div>
 <p>Setting <code>cache = TRUE</code> for <code>strava_oauth</code> will create an authentication file in the working directory. This can be used in later sessions as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">readRDS</a></span>(<span class="st">'.httr-oauth'</span>)[[<span class="dv">1</span>]])</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">readRDS</a></span>(<span class="st">'.httr-oauth'</span>)[[<span class="dv">1</span>]])</a></code></pre></div>
 <p>Finally, the <code>get_heat_map</code> and <code>get_elev_prof</code> functions require a key from the Google API. Follow the instructions <a href="https://developers.google.com/maps/documentation/elevation/#api_key">here</a>. The key can be added to the R environment file for later use:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># save the key, do only once</span></a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">"google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="ch">\n</span><span class="st">"</span>,</a>

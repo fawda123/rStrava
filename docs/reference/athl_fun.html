@@ -126,7 +126,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (<code>NA</code> will be returned). The function scrapes data from <a href='https://www.strava.com/athletes/'>https://www.strava.com/athletes/</a> with the appended athlete id, e.g., <a href='https://www.strava.com/athletes/2837007'>https://www.strava.com/athletes/2837007</a>.  Opening the URL in a web browser can verify if the data can be scraped.  Logging in to the Strava account on the website may also be required before using this function.</p>
+    <p>The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (a message indicating as such will be returned by the function). The function scrapes data from <a href='https://www.strava.com/athletes/'>https://www.strava.com/athletes/</a> with the appended athlete id, e.g., <a href='https://www.strava.com/athletes/2837007'>https://www.strava.com/athletes/2837007</a>.  Opening the URL in a web browser can verify if the data can be scraped.  Logging in to the Strava account on the website may also be required before using this function.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -143,27 +143,27 @@
 #&gt; 
 #&gt; $`2837007`$monthly
 #&gt;        month     miles hours elev_gain
-#&gt; 1 2019-02-01 247.53005    18       679
-#&gt; 2 2019-03-01 343.69594    24      1039
-#&gt; 3 2019-04-01 332.47584    23       990
-#&gt; 4 2019-05-01 351.16172    25      1266
-#&gt; 5 2019-06-01 283.40678    21      1132
-#&gt; 6 2019-07-01 273.54686    20       893
-#&gt; 7 2019-08-01  40.49787     3       135
+#&gt; 1 2019-03-01 343.69594    24      1039
+#&gt; 2 2019-04-01 332.47584    23       990
+#&gt; 3 2019-05-01 351.16172    25      1266
+#&gt; 4 2019-06-01 283.40678    21      1132
+#&gt; 5 2019-07-01 273.54686    20       893
+#&gt; 6 2019-08-01 342.39727    25      1126
+#&gt; 7 2019-09-01  33.18619     2       161
 #&gt; 
 #&gt; $`2837007`$recent
-#&gt;           id          name type startDateLocal distance elevation movingTime
-#&gt; 1 2592904647  Morning Ride ride     2019-08-04     10.5        51      40:19
-#&gt; 2 2591491838 Afternoon Run  run     2019-08-04      5.0       144      38:21
-#&gt; 3 2584096258   Morning Run  run     2019-08-01      3.2        72      25:52
+#&gt;           id           name type startDateLocal distance elevation movingTime
+#&gt; 1 2696111354    Morning Run  run     2019-09-09      3.2        72      27:14
+#&gt; 2 2677940354 Afternoon Ride ride     2019-09-03     11.0       140      42:08
+#&gt; 3 2676188481   Morning Ride ride     2019-09-02     10.6        52      40:39
 #&gt; 
 #&gt; $`2837007`$achievements
-#&gt;                           description             timeago
-#&gt; 1     PR on Race the Northbound Train 2019-08-04 20:55:45
-#&gt; 2     PR on Race the Southbound Train 2019-08-04 20:55:45
-#&gt; 3       2nd fastest time on Park Push 2019-07-27 00:41:33
-#&gt; 4    2nd fastest time on Bryan bridge 2019-07-24 00:44:12
-#&gt; 5 2nd fastest time on Pitchin' A Tent 2019-07-18 00:42:44
+#&gt;                             description             timeago
+#&gt; 1 PR on El Camino to Irvine Blvd Sprint 2019-09-04 00:43:26
+#&gt; 2       PR on Race the Northbound Train 2019-08-11 21:58:14
+#&gt; 3 2nd fastest time on Lower PC to Bryan 2019-08-13 01:19:13
+#&gt; 4       2nd fastest time on Start it up 2019-08-13 01:19:13
+#&gt; 5         2nd fastest time on Park Push 2019-08-13 01:19:13
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'>## multiple athletes</span>
@@ -180,27 +180,27 @@
 #&gt; 
 #&gt; $`2837007`$monthly
 #&gt;        month     miles hours elev_gain
-#&gt; 1 2019-02-01 247.53005    18       679
-#&gt; 2 2019-03-01 343.69594    24      1039
-#&gt; 3 2019-04-01 332.47584    23       990
-#&gt; 4 2019-05-01 351.16172    25      1266
-#&gt; 5 2019-06-01 283.40678    21      1132
-#&gt; 6 2019-07-01 273.54686    20       893
-#&gt; 7 2019-08-01  40.49787     3       135
+#&gt; 1 2019-03-01 343.69594    24      1039
+#&gt; 2 2019-04-01 332.47584    23       990
+#&gt; 3 2019-05-01 351.16172    25      1266
+#&gt; 4 2019-06-01 283.40678    21      1132
+#&gt; 5 2019-07-01 273.54686    20       893
+#&gt; 6 2019-08-01 342.39727    25      1126
+#&gt; 7 2019-09-01  33.18619     2       161
 #&gt; 
 #&gt; $`2837007`$recent
-#&gt;           id          name type startDateLocal distance elevation movingTime
-#&gt; 1 2592904647  Morning Ride ride     2019-08-04     10.5        51      40:19
-#&gt; 2 2591491838 Afternoon Run  run     2019-08-04      5.0       144      38:21
-#&gt; 3 2584096258   Morning Run  run     2019-08-01      3.2        72      25:52
+#&gt;           id           name type startDateLocal distance elevation movingTime
+#&gt; 1 2696111354    Morning Run  run     2019-09-09      3.2        72      27:14
+#&gt; 2 2677940354 Afternoon Ride ride     2019-09-03     11.0       140      42:08
+#&gt; 3 2676188481   Morning Ride ride     2019-09-02     10.6        52      40:39
 #&gt; 
 #&gt; $`2837007`$achievements
-#&gt;                           description             timeago
-#&gt; 1     PR on Race the Northbound Train 2019-08-04 20:55:45
-#&gt; 2     PR on Race the Southbound Train 2019-08-04 20:55:45
-#&gt; 3       2nd fastest time on Park Push 2019-07-27 00:41:33
-#&gt; 4    2nd fastest time on Bryan bridge 2019-07-24 00:44:12
-#&gt; 5 2nd fastest time on Pitchin' A Tent 2019-07-18 00:42:44
+#&gt;                             description             timeago
+#&gt; 1 PR on El Camino to Irvine Blvd Sprint 2019-09-04 00:43:26
+#&gt; 2       PR on Race the Northbound Train 2019-08-11 21:58:14
+#&gt; 3 2nd fastest time on Lower PC to Bryan 2019-08-13 01:19:13
+#&gt; 4       2nd fastest time on Start it up 2019-08-13 01:19:13
+#&gt; 5         2nd fastest time on Park Push 2019-08-13 01:19:13
 #&gt; 
 #&gt; 
 #&gt; $`2527465`
@@ -215,19 +215,19 @@
 #&gt; 
 #&gt; $`2527465`$monthly
 #&gt;        month   miles hours elev_gain
-#&gt; 1 2019-02-01 258.484    14      3013
-#&gt; 2 2019-03-01 387.058    23      4521
-#&gt; 3 2019-04-01 361.513    18      3578
-#&gt; 4 2019-05-01 593.138    30      5881
-#&gt; 5 2019-06-01 335.506    18      3265
-#&gt; 6 2019-07-01  95.858     5      1057
-#&gt; 7 2019-08-01   0.000     0         0
+#&gt; 1 2019-03-01 387.058    23      4521
+#&gt; 2 2019-04-01 361.513    18      3578
+#&gt; 3 2019-05-01 593.138    30      5881
+#&gt; 4 2019-06-01 335.506    18      3265
+#&gt; 5 2019-07-01  95.858     5      1057
+#&gt; 6 2019-08-01   6.859     0        54
+#&gt; 7 2019-09-01   0.000     0         0
 #&gt; 
 #&gt; $`2527465`$recent
-#&gt;           id   name type startDateLocal distance elevation movingTime
-#&gt; 1 2554963755 Vitius ride     2019-07-22     11.3       129      40:28
-#&gt; 2 2543953790 Vitius ride     2019-07-18     10.8       119      35:16
-#&gt; 3 2541352625 Vitius ride     2019-07-17     10.7       119      34:48
+#&gt;           id                    name type startDateLocal distance elevation
+#&gt; 1 2648467472 Curso de Bicis de Bambú ride     2019-08-24      6.8        54
+#&gt;   movingTime
+#&gt; 1      30:01
 #&gt; 
 #&gt; $`2527465`$achievements
 #&gt; list()
