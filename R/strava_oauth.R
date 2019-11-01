@@ -5,7 +5,7 @@
 #' @param app_name chr string for name of the app
 #' @param app_client_id chr string for ID received when the app was registered
 #' @param app_secret chr string for secret received when the app was registered
-#' @param app_scope chr string for scope of authentication, Must be "public", "write", "view_private", or "view_private,write"
+#' @param app_scope chr string for scope of authentication, Must be "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all" or "activity:write"
 #' @param cache logical to cache the token
 #'
 #' @details The \code{app_name}, \code{app_client_id}, and \code{app_secret} are specific to the user and can be obtained by registering an app on the Strava API authentication page: \url{http://strava.github.io/api/v3/oauth/}.  This requires a personal Strava account.

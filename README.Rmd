@@ -61,7 +61,7 @@ app_client_id  <- 'myid' # an integer, assigned by Strava
 app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
 
 # create the authentication token
-stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret))
+stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
 ```
 
 Setting `cache = TRUE` for `strava_oauth` will create an authentication file in the working directory. This can be used in later sessions as follows:
