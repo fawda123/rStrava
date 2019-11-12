@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Access the Strava API • rStrava</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Access the Strava API">
 <meta property="og:description" content="Functions to access data from Strava's v3 API.">
 <meta name="twitter:card" content="summary">
@@ -18,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -55,18 +56,15 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
+      </header><div class="row">
+  <div class="contents col-md-9">
 <div id="rstrava" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rstrava" class="anchor"></a>rStrava</h1></div>
-<div id="marcus-w--beck-mbafs2012gmail-com-pedro-villarroel-pedrodvfgmail-com-daniel-padfield-dp323exeter-ac-uk-lorenzo-gaborini-lorenzo-gaboriniunil-ch-niklas-von-maltzahn-niklasvmgmail-com" class="section level5">
+<div id="marcus-w-beck-mbafs2012gmailcom-pedro-villarroel-pedrodvfgmailcom-daniel-padfield-dp323exeteracuk-lorenzo-gaborini-lorenzogaboriniunilch-niklas-von-maltzahn-niklasvmgmailcom" class="section level5">
 <h5 class="hasAnchor">
-<a href="#marcus-w--beck-mbafs2012gmail-com-pedro-villarroel-pedrodvfgmail-com-daniel-padfield-dp323exeter-ac-uk-lorenzo-gaborini-lorenzo-gaboriniunil-ch-niklas-von-maltzahn-niklasvmgmail-com" class="anchor"></a><em>Marcus W. Beck, <a href="mailto:mbafs2012@gmail.com" class="email">mbafs2012@gmail.com</a>, Pedro Villarroel, <a href="mailto:pedrodvf@gmail.com" class="email">pedrodvf@gmail.com</a>, Daniel Padfield, <a href="mailto:dp323@exeter.ac.uk" class="email">dp323@exeter.ac.uk</a>, Lorenzo Gaborini, <a href="mailto:lorenzo.gaborini@unil.ch" class="email">lorenzo.gaborini@unil.ch</a>, Niklas von Maltzahn, <a href="mailto:niklasvm@gmail.com" class="email">niklasvm@gmail.com</a></em>
+<a href="#marcus-w-beck-mbafs2012gmailcom-pedro-villarroel-pedrodvfgmailcom-daniel-padfield-dp323exeteracuk-lorenzo-gaborini-lorenzogaboriniunilch-niklas-von-maltzahn-niklasvmgmailcom" class="anchor"></a><em>Marcus W. Beck, <a href="mailto:mbafs2012@gmail.com" class="email">mbafs2012@gmail.com</a>, Pedro Villarroel, <a href="mailto:pedrodvf@gmail.com" class="email">pedrodvf@gmail.com</a>, Daniel Padfield, <a href="mailto:dp323@exeter.ac.uk" class="email">dp323@exeter.ac.uk</a>, Lorenzo Gaborini, <a href="mailto:lorenzo.gaborini@unil.ch" class="email">lorenzo.gaborini@unil.ch</a>, Niklas von Maltzahn, <a href="mailto:niklasvm@gmail.com" class="email">niklasvm@gmail.com</a></em>
 </h5>
 
 <p><img src="reference/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300"><br><br></p>
@@ -75,8 +73,8 @@
 <h3 class="hasAnchor">
 <a href="#overview-and-installation" class="anchor"></a>Overview and installation</h3>
 <p>This is the development repository for rStrava, an R package to access data from the Strava API. The package can be installed and loaded as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">'devtools'</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'fawda123/rStrava'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'devtools'</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">'fawda123/rStrava'</span>)</a></code></pre></div>
 </div>
 <div id="issues-and-suggestions" class="section level3">
 <h3 class="hasAnchor">
@@ -87,8 +85,8 @@
 <h3 class="hasAnchor">
 <a href="#package-overview" class="anchor"></a>Package overview</h3>
 <p>The functions are in two categories depending on mode of use. The first category of functions scrape data from the public Strava website and the second category uses the API functions or relies on data from the API functions. The second category requires an authentication token. The help files for each category can be viewed using <code>help.search</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/help.search">help.search</a></span>(<span class="st">'notoken'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/help.search">help.search</a></span>(<span class="st">'token'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/help.search.html">help.search</a></span>(<span class="st">'notoken'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/help.search.html">help.search</a></span>(<span class="st">'token'</span>, <span class="dt">package =</span> <span class="st">'rStrava'</span>)</a></code></pre></div>
 </div>
 <div id="scraping-functions-no-token" class="section level3">
 <h3 class="hasAnchor">
@@ -96,43 +94,43 @@
 <p>An example using the scraping functions is below. Some users may have privacy settings that block public access to account data.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># get athlete data </span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="reference/athl_fun.html">athl_fun</a></span>(<span class="dv">2837007</span>, <span class="dt">trace =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>## $`2837007`
-## $`2837007`$name
-## [1] "Marcus Beck"
-## 
-## $`2837007`$location
-## [1] "Irvine, California"
-## 
-## $`2837007`$units
-## [1] "mi" "ft"
-## 
-## $`2837007`$monthly
-##        month     miles hours elev_gain
-## 1 2019-03-01 343.69594    24      1039
-## 2 2019-04-01 332.47584    23       990
-## 3 2019-05-01 351.16172    25      1266
-## 4 2019-06-01 283.40678    21      1132
-## 5 2019-07-01 273.54686    20       893
-## 6 2019-08-01 342.39727    25      1126
-## 7 2019-09-01  33.18619     2       161
-## 
-## $`2837007`$recent
-##           id           name type startDateLocal distance elevation
-## 1 2696111354    Morning Run  run     2019-09-09      3.2        72
-## 2 2677940354 Afternoon Ride ride     2019-09-03     11.0       140
-## 3 2676188481   Morning Ride ride     2019-09-02     10.6        52
-##   movingTime
-## 1      27:14
-## 2      42:08
-## 3      40:39
-## 
-## $`2837007`$achievements
-##                             description             timeago
-## 1 PR on El Camino to Irvine Blvd Sprint 2019-09-04 00:43:26
-## 2       PR on Race the Northbound Train 2019-08-11 21:58:14
-## 3 2nd fastest time on Lower PC to Bryan 2019-08-13 01:19:13
-## 4       2nd fastest time on Start it up 2019-08-13 01:19:13
-## 5         2nd fastest time on Park Push 2019-08-13 01:19:13</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">## $`2837007`</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">## $`2837007`$name</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co">## [1] "Marcus Beck"</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">## </span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">## $`2837007`$location</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">## [1] "Irvine, California"</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">## </span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">## $`2837007`$units</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">## [1] "mi" "ft"</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">## $`2837007`$monthly</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">##        month     miles hours elev_gain</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">## 1 2019-05-01 351.16172    25      1266</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">## 2 2019-06-01 283.40678    21      1132</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">## 3 2019-07-01 273.54686    20       893</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">## 4 2019-08-01 342.39727    25      1126</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">## 5 2019-09-01 284.57744    20      1041</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">## 6 2019-10-01  48.97586     7       773</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">## 7 2019-11-01  56.55658     4       147</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">## </span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">## $`2837007`$recent</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co">##           id           name type startDateLocal distance elevation</span></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="co">## 1 2859540960   Morning Ride ride     2019-11-11      3.5        18</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="co">## 2 2858493438 Afternoon Ride ride     2019-11-11     36.2       339</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">## 3 2858170842    Morning Run  run     2019-11-08      3.2        47</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">##   movingTime</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">## 1      16:29</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">## 2    2:21:55</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">## 3      23:36</span></a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">## </span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">## $`2837007`$achievements</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">##                          description             timeago</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">## 1   2nd best estimated 1 mile effort 2019-11-09 12:01:09</span></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">## 2       3rd best estimated 1k effort 2019-11-09 12:01:09</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co">## 3 3rd best estimated 1/2 mile effort 2019-11-09 12:01:09</span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="co">## 4     3rd best estimated 400m effort 2019-11-09 12:01:09</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">## 5  2nd fastest time on 21-9st Sprint 2019-11-12 12:10:31</span></a></code></pre></div>
 </div>
 <div id="api-functions-token" class="section level3">
 <h3 class="hasAnchor">
@@ -147,19 +145,19 @@
 <a class="sourceLine" id="cb5-3" title="3">app_secret &lt;-<span class="st"> 'xxxxxxxx'</span> <span class="co"># an alphanumeric secret, assigned by Strava</span></a>
 <a class="sourceLine" id="cb5-4" title="4"></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co"># create the authentication token</span></a>
-<a class="sourceLine" id="cb5-6" title="6">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="reference/strava_oauth.html">strava_oauth</a></span>(app_name, app_client_id, app_secret))</a></code></pre></div>
+<a class="sourceLine" id="cb5-6" title="6">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="reference/strava_oauth.html">strava_oauth</a></span>(app_name, app_client_id, app_secret, <span class="dt">app_scope=</span><span class="st">"activity:read_all"</span>))</a></code></pre></div>
 <p>Setting <code>cache = TRUE</code> for <code>strava_oauth</code> will create an authentication file in the working directory. This can be used in later sessions as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/readRDS">readRDS</a></span>(<span class="st">'.httr-oauth'</span>)[[<span class="dv">1</span>]])</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">stoken &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">token =</span> <span class="kw"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span>(<span class="st">'.httr-oauth'</span>)[[<span class="dv">1</span>]])</a></code></pre></div>
 <p>Finally, the <code>get_heat_map</code> and <code>get_elev_prof</code> functions require a key from the Google API. Follow the instructions <a href="https://developers.google.com/maps/documentation/elevation/#api_key">here</a>. The key can be added to the R environment file for later use:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># save the key, do only once</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cat">cat</a></span>(<span class="st">"google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="ch">\n</span><span class="st">"</span>,</a>
-<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">file=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/normalizePath">normalizePath</a></span>(<span class="st">"~/"</span>), <span class="st">".Renviron"</span>),</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span><span class="ch">\n</span><span class="st">"</span>,</a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">file=</span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath</a></span>(<span class="st">"~/"</span>), <span class="st">".Renviron"</span>),</a>
 <a class="sourceLine" id="cb7-4" title="4">    <span class="dt">append=</span><span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb7-5" title="5"></a>
 <a class="sourceLine" id="cb7-6" title="6"><span class="co"># retrieve the key, restart R if not found</span></a>
-<a class="sourceLine" id="cb7-7" title="7">mykey &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.getenv">Sys.getenv</a></span>(<span class="st">"google_key"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb7-7" title="7">mykey &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"google_key"</span>)</a></code></pre></div>
 <p>The <code>get_heat_map</code> function uses <a href="https://github.com/dkahle/ggmap">ggmap</a> to create base maps. A Google API key is needed to use the function. This key must be registered externally with the ggmap package using <code>register_google()</code> before executing <code>get_heat_map</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggmap)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggmap)</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="kw">register_google</span>(mykey)</a></code></pre></div>
 </div>
 <div id="using-the-functions" class="section level4">
@@ -167,82 +165,92 @@
 <a href="#using-the-functions" class="anchor"></a>Using the functions</h4>
 <p>The API retrieval functions are used with the token.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">myinfo &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_athlete.html">get_athlete</a></span>(stoken, <span class="dt">id =</span> <span class="st">'2837007'</span>)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(myinfo)</a></code></pre></div>
-<pre><code>## $id
-## [1] 2837007
-## 
-## $username
-## [1] "beck_marcus"
-## 
-## $resource_state
-## [1] 3
-## 
-## $firstname
-## [1] "Marcus"
-## 
-## $lastname
-## [1] "Beck"
-## 
-## $city
-## [1] "Irvine"</code></pre>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(myinfo)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">## $id</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co">## [1] 2837007</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co">## </span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">## $username</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">## [1] "beck_marcus"</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">## </span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">## $resource_state</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">## [1] 2</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">## </span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">## $firstname</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">## [1] "Marcus"</span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="co">## </span></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="co">## $lastname</span></a>
+<a class="sourceLine" id="cb10-14" title="14"><span class="co">## [1] "Beck"</span></a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="co">## </span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="co">## $city</span></a>
+<a class="sourceLine" id="cb10-17" title="17"><span class="co">## [1] "Irvine"</span></a></code></pre></div>
 <p>An example creating a heat map of activities:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb11-2" title="2"></a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co"># get activities, get activities by lat/lon, plot</span></a>
 <a class="sourceLine" id="cb11-4" title="4">my_acts &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_list.html">get_activity_list</a></span>(stoken)</a>
 <a class="sourceLine" id="cb11-5" title="5">act_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/compile_activities.html">compile_activities</a></span>(my_acts) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(start_longitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">-86.5</span> <span class="op">&amp;</span><span class="st"> </span>start_longitude <span class="op">&gt;</span><span class="st"> </span><span class="fl">-88.5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(start_latitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">31.5</span> <span class="op">&amp;</span><span class="st"> </span>start_latitude <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(start_longitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">-86.5</span> <span class="op">&amp;</span><span class="st"> </span>start_longitude <span class="op">&gt;</span><span class="st"> </span><span class="fl">-88.5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(start_latitude <span class="op">&lt;</span><span class="st"> </span><span class="fl">31.5</span> <span class="op">&amp;</span><span class="st"> </span>start_latitude <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</a>
 <a class="sourceLine" id="cb11-8" title="8"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(act_data, <span class="dt">key =</span> mykey, <span class="dt">col =</span> <span class="st">'darkgreen'</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">distlab =</span> F, <span class="dt">f =</span> <span class="fl">0.4</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-11-1.png"><!-- --></p>
 <p>Plotting elevation and grade for a single ride:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># plot elevation along a single ride</span></a>
 <a class="sourceLine" id="cb12-2" title="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">add_elev =</span> T, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">key =</span> mykey, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">maptype =</span> <span class="st">'satellite'</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-12-1.png"><!-- --></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># plot % gradient along a single ride</span></a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">add_elev =</span> T, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">as_grad =</span> T, <span class="dt">key =</span> mykey, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">expand =</span> <span class="dv">5</span>, <span class="dt">maptype =</span> <span class="st">'satellite'</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-12-2.png" width="700"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-12-2.png"><!-- --></p>
 <p>Get elevation profiles for activities:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># get activities</span></a>
 <a class="sourceLine" id="cb14-2" title="2">my_acts &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_list.html">get_activity_list</a></span>(stoken) </a>
 <a class="sourceLine" id="cb14-3" title="3"></a>
 <a class="sourceLine" id="cb14-4" title="4"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">key =</span> mykey, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="864"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-13-1.png"><!-- --></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(my_acts, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">key =</span> mykey, <span class="dt">units =</span> <span class="st">'imperial'</span>, <span class="dt">total =</span> T)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-13-2.png" width="864"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-13-2.png"><!-- --></p>
 <p>Plot average speed per split (km or mile) for an activity:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># plots for most recent activity</span></a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>, <span class="dt">units =</span> <span class="st">'imperial'</span>)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="864"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-14-1.png"><!-- --></p>
 <p>Additional functions are provided to get “stream” information for individual activities. Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.</p>
 <p>Use <code>get_activity_streams</code> for detailed info about activites:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># get streams for the first activity in my_acts</span></a>
-<a class="sourceLine" id="cb17-2" title="2">strms_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_streams.html">get_activity_streams</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(strms_data)</a></code></pre></div>
-<pre><code>##   altitude distance grade_smooth moving time velocity_smooth      lat
-## 1     34.6   0.0000          1.3  FALSE    0            0.00 33.72592
-## 2     34.7   0.0033          2.4   TRUE    9            1.44 33.72593
-## 3     34.7   0.0075          0.6   TRUE   10            2.88 33.72590
-## 4     34.9   0.0125          0.0   TRUE   11            3.96 33.72586
-## 5     34.7   0.0178          0.0   TRUE   12            5.40 33.72582
-## 6     34.7   0.0231          0.0   TRUE   13            6.48 33.72579
-##         lng         id
-## 1 -117.7833 2430862993
-## 2 -117.7833 2430862993
-## 3 -117.7833 2430862993
-## 4 -117.7833 2430862993
-## 5 -117.7832 2430862993
-## 6 -117.7832 2430862993</code></pre>
+<a class="sourceLine" id="cb17-2" title="2">strms_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_activity_streams.html">get_activity_streams</a></span>(my_acts, stoken, <span class="dt">acts =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co">## Warning: `cols` is now required.</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co">## Please use `cols = c(altitude, distance, grade_smooth, latlng, moving, time, velocity_smooth)`</span></a>
+<a class="sourceLine" id="cb18-3" title="3"></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="co">## Warning: The `.preserve` argument of `unnest()` is deprecated as of tidyr 1.0.0.</span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="co">## All list-columns are now preserved</span></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="co">## This warning is displayed once per session.</span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="co">## Call `lifecycle::last_warnings()` to see where this warning was generated.</span></a>
+<a class="sourceLine" id="cb18-8" title="8"></a>
+<a class="sourceLine" id="cb18-9" title="9"><span class="co">## Warning: `cols` is now required.</span></a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="co">## Please use `cols = c(altitude, distance, grade_smooth, moving, time, velocity_smooth)`</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(strms_data)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co">##   altitude distance grade_smooth      lat       lng moving time</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="co">## 1     34.6   0.0000         -1.4 33.72592 -117.7833  FALSE    0</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="co">## 2     34.6   0.0036         -2.0 33.72594 -117.7834   TRUE    7</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="co">## 3     34.5   0.0074         -1.5 33.72591 -117.7834   TRUE   12</span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="co">## 4     34.3   0.0149         -0.9 33.72584 -117.7834   TRUE   14</span></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="co">## 5     34.3   0.0204         -0.4 33.72580 -117.7833   TRUE   15</span></a>
+<a class="sourceLine" id="cb20-7" title="7"><span class="co">## 6     34.4   0.0259          0.9 33.72576 -117.7833   TRUE   16</span></a>
+<a class="sourceLine" id="cb20-8" title="8"><span class="co">##   velocity_smooth         id</span></a>
+<a class="sourceLine" id="cb20-9" title="9"><span class="co">## 1            0.00 2420187776</span></a>
+<a class="sourceLine" id="cb20-10" title="10"><span class="co">## 2            1.80 2420187776</span></a>
+<a class="sourceLine" id="cb20-11" title="11"><span class="co">## 3            2.16 2420187776</span></a>
+<a class="sourceLine" id="cb20-12" title="12"><span class="co">## 4            5.76 2420187776</span></a>
+<a class="sourceLine" id="cb20-13" title="13"><span class="co">## 5            7.56 2420187776</span></a>
+<a class="sourceLine" id="cb20-14" title="14"><span class="co">## 6            9.00 2420187776</span></a></code></pre></div>
 <p>Stream data can be plotted using any of the plotting functions.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># heat map</span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(strms_data, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">filltype =</span> <span class="st">'speed'</span>, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">distlab =</span> F)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># elevation profile</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(strms_data)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="864"></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># speed splits</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(strms_data, stoken)</a></code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-17-2.png" width="864"></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># heat map</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw"><a href="reference/get_heat_map.html">get_heat_map</a></span>(strms_data, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">filltype =</span> <span class="st">'speed'</span>, <span class="dt">f =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">'Spectral'</span>, <span class="dt">distlab =</span> F)</a></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-16-1.png"><!-- --></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># elevation profile</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw"><a href="reference/get_elev_prof.html">get_elev_prof</a></span>(strms_data)</a></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-17-1.png"><!-- --></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># speed splits</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw"><a href="reference/plot_spdsplits.html">plot_spdsplits</a></span>(strms_data, stoken)</a></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-17-2.png"><!-- --></p>
 </div>
 </div>
 <div id="contributing" class="section level3">
@@ -272,6 +280,12 @@
 <li>CC0</li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -283,7 +297,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/fawda123/rStrava"><img src="https://travis-ci.org/fawda123/rStrava.svg?branch=master" alt="Travis-CI Build Status"></a></li>
@@ -292,7 +306,6 @@
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -301,12 +314,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

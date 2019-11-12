@@ -16,13 +16,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -47,6 +49,7 @@
 <![endif]-->
 
 
+
   </head>
 
   <body>
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -71,7 +74,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -89,6 +92,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -121,7 +125,7 @@
 
 <span class='co'># S3 method for strframe</span>
 <span class='fu'>get_heat_map</span>(<span class='no'>act_data</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>filltype</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"elevation"</span>, <span class='st'>"distance"</span>, <span class='st'>"slope"</span>, <span class='st'>"speed"</span>),
+  <span class='kw'>filltype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"elevation"</span>, <span class='st'>"distance"</span>, <span class='st'>"slope"</span>, <span class='st'>"speed"</span>),
   <span class='kw'>distlab</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distval</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>maptype</span> <span class='kw'>=</span> <span class='st'>"terrain"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"google"</span>, <span class='no'>...</span>)</pre>
     
@@ -138,7 +142,7 @@
     </tr>
     <tr>
       <th>key</th>
-      <td><p>chr string of Google API key for elevation data, passed to <code><a href='https://www.rdocumentation.org/packages/googleway/topics/google_elevation'>google_elevation</a></code> for polyline decoding, see details</p></td>
+      <td><p>chr string of Google API key for elevation data, passed to <code><a href='https://rdrr.io/pkg/googleway/man/google_elevation.html'>google_elevation</a></code> for polyline decoding, see details</p></td>
     </tr>
     <tr>
       <th>acts</th>
@@ -150,7 +154,7 @@
     </tr>
     <tr>
       <th>f</th>
-      <td><p>number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to <code><a href='https://www.rdocumentation.org/packages/ggmap/topics/make_bbox'>make_bbox</a></code></p></td>
+      <td><p>number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to <code><a href='https://rdrr.io/pkg/ggmap/man/make_bbox.html'>make_bbox</a></code></p></td>
     </tr>
     <tr>
       <th>add_elev</th>
@@ -162,7 +166,7 @@
     </tr>
     <tr>
       <th>distlab</th>
-      <td><p>logical if distance labels are plotted along the route with <code><a href='https://www.rdocumentation.org/packages/ggrepel/topics/geom_text_repel'>geom_label_repel</a></code></p></td>
+      <td><p>logical if distance labels are plotted along the route with <code><a href='https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html'>geom_label_repel</a></code></p></td>
     </tr>
     <tr>
       <th>distval</th>
@@ -182,11 +186,11 @@
     </tr>
     <tr>
       <th>maptype</th>
-      <td><p>chr string indicating the base map type relevant for the <code>source</code>, passed to <code><a href='https://www.rdocumentation.org/packages/ggmap/topics/get_map'>get_map</a></code></p></td>
+      <td><p>chr string indicating the base map type relevant for the <code>source</code>, passed to <code><a href='https://rdrr.io/pkg/ggmap/man/get_map.html'>get_map</a></code></p></td>
     </tr>
     <tr>
       <th>source</th>
-      <td><p>chr string indicating map source, passed to <code><a href='https://www.rdocumentation.org/packages/ggmap/topics/get_map'>get_map</a></code>, currently only <code>"google"</code> and <code>"osm"</code> are supported</p></td>
+      <td><p>chr string indicating map source, passed to <code><a href='https://rdrr.io/pkg/ggmap/man/get_map.html'>get_map</a></code>, currently only <code>"google"</code> and <code>"osm"</code> are supported</p></td>
     </tr>
     <tr>
       <th>units</th>
@@ -206,19 +210,19 @@
 
     <p>uses <code><a href='get_latlon.html'>get_latlon</a></code> to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.</p>
 <p>The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key</p>
-<p>A Google API key is needed if using any map services where <code>source = "google"</code>.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using <code><a href='https://www.rdocumentation.org/packages/ggmap/topics/register_google'>register_google()</a></code> before executing <code>get_heat_map()</code>.  See the examples.</p>
+<p>A Google API key is needed if using any map services where <code>source = "google"</code>.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using <code><a href='https://rdrr.io/pkg/ggmap/man/register_google.html'>register_google()</a></code> before executing <code>get_heat_map()</code>.  See the examples.</p>
 <p>The <code>distval</code> argument is passed to the <code>digits</code> argument of <code>round</code>. This controls the density of the distance labels, e.g., 1 will plot all distances in sequenc of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># get my activities</span>
 <span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://httr.r-lib.org/reference/config.html'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>, <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 <span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_activity_list.html'>get_activity_list</a></span>(<span class='no'>stoken</span>)
 
 <span class='co'># register Google maps API key</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggmap</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggmap/topics/register_google'>register_google</a></span>(<span class='st'>'xxxxxxxxxxx'</span>) <span class='co'># enter your key here</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggmap</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/ggmap/man/register_google.html'>register_google</a></span>(<span class='st'>'xxxxxxxxxxx'</span>) <span class='co'># enter your key here</span>
 
 <span class='co'># default</span>
 <span class='fu'>get_heat_map</span>(<span class='no'>my_acts</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)
@@ -231,7 +235,7 @@
 <span class='no'>my_acts</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='compile_activities.html'>compile_activities</a></span>(<span class='no'>my_acts</span>, <span class='kw'>acts</span> <span class='kw'>=</span> <span class='fl'>156</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='st'>'imperial'</span>)
 <span class='fu'>get_heat_map</span>(<span class='no'>my_acts</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='no'>mykey</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>add_elev</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>'Spectral'</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>maptype</span> <span class='kw'>=</span> <span class='st'>'satellite'</span>)
-<span class='co'># }</span></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -250,19 +254,23 @@
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Marcus W. Beck, Pedro Villarroel, Daniel Padfield, Lorenzo Gaborini, Niklas von Maltzahn.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
