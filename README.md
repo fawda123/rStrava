@@ -63,29 +63,31 @@ athl_fun(2837007, trace = FALSE)
     ## 
     ## $`2837007`$monthly
     ##        month     miles hours elev_gain
-    ## 1 2019-02-01 247.53005    18       679
-    ## 2 2019-03-01 343.69594    24      1039
-    ## 3 2019-04-01 332.47584    23       990
-    ## 4 2019-05-01 351.16172    25      1266
-    ## 5 2019-06-01 283.40678    21      1132
-    ## 6 2019-07-01 273.54686    20       893
-    ## 7 2019-08-01  24.84863     1        75
+    ## 1 2019-05-01 351.16172    25      1266
+    ## 2 2019-06-01 283.40678    21      1132
+    ## 3 2019-07-01 273.54686    20       893
+    ## 4 2019-08-01 342.39727    25      1126
+    ## 5 2019-09-01 284.57744    20      1041
+    ## 6 2019-10-01  48.97586     7       773
+    ## 7 2019-11-01  56.55658     4       147
     ## 
     ## $`2837007`$recent
     ##           id           name type startDateLocal distance elevation
-    ## 1 2584096258    Morning Run  run     2019-08-01      3.2        72
-    ## 2 2583013926 Afternoon Ride ride     2019-08-01     10.9       126
-    ## 3 2581426804   Morning Ride ride     2019-07-31     10.6        51
+    ## 1 2859540960   Morning Ride ride     2019-11-11      3.5        18
+    ## 2 2858493438 Afternoon Ride ride     2019-11-11     36.2       339
+    ## 3 2858170842    Morning Run  run     2019-11-08      3.2        47
     ##   movingTime
-    ## 1      25:52
-    ## 2      41:55
-    ## 3      40:06
+    ## 1      16:29
+    ## 2    2:21:55
+    ## 3      23:36
     ## 
     ## $`2837007`$achievements
-    ##                           description             timeago
-    ## 1       2nd fastest time on Park Push 2019-07-27 00:41:33
-    ## 2    2nd fastest time on Bryan bridge 2019-07-24 00:44:12
-    ## 3 2nd fastest time on Pitchin' A Tent 2019-07-18 00:42:44
+    ##                          description             timeago
+    ## 1   2nd best estimated 1 mile effort 2019-11-09 12:01:09
+    ## 2       3rd best estimated 1k effort 2019-11-09 12:01:09
+    ## 3 3rd best estimated 1/2 mile effort 2019-11-09 12:01:09
+    ## 4     3rd best estimated 400m effort 2019-11-09 12:01:09
+    ## 5  2nd fastest time on 21-9st Sprint 2019-11-12 12:10:31
 
 ### API functions (token)
 
@@ -168,7 +170,7 @@ head(myinfo)
     ## [1] "beck_marcus"
     ## 
     ## $resource_state
-    ## [1] 3
+    ## [1] 2
     ## 
     ## $firstname
     ## [1] "Marcus"
@@ -246,23 +248,37 @@ Use `get_activity_streams` for detailed info about activites:
 ``` r
 # get streams for the first activity in my_acts
 strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
+```
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(altitude, distance, grade_smooth, latlng, moving, time, velocity_smooth)`
+
+    ## Warning: The `.preserve` argument of `unnest()` is deprecated as of tidyr 1.0.0.
+    ## All list-columns are now preserved
+    ## This warning is displayed once per session.
+    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(altitude, distance, grade_smooth, moving, time, velocity_smooth)`
+
+``` r
 head(strms_data)
 ```
 
-    ##   altitude distance grade_smooth moving time velocity_smooth      lat
-    ## 1     34.6   0.0000         -1.4  FALSE    0            0.00 33.72592
-    ## 2     34.6   0.0036         -2.0   TRUE    7            1.80 33.72594
-    ## 3     34.5   0.0074         -1.5   TRUE   12            2.16 33.72591
-    ## 4     34.3   0.0149         -0.9   TRUE   14            5.76 33.72584
-    ## 5     34.3   0.0204         -0.4   TRUE   15            7.56 33.72580
-    ## 6     34.4   0.0259          0.9   TRUE   16            9.00 33.72576
-    ##         lng         id
-    ## 1 -117.7833 2420187776
-    ## 2 -117.7834 2420187776
-    ## 3 -117.7834 2420187776
-    ## 4 -117.7834 2420187776
-    ## 5 -117.7833 2420187776
-    ## 6 -117.7833 2420187776
+    ##   altitude distance grade_smooth      lat       lng moving time
+    ## 1     34.6   0.0000         -1.4 33.72592 -117.7833  FALSE    0
+    ## 2     34.6   0.0036         -2.0 33.72594 -117.7834   TRUE    7
+    ## 3     34.5   0.0074         -1.5 33.72591 -117.7834   TRUE   12
+    ## 4     34.3   0.0149         -0.9 33.72584 -117.7834   TRUE   14
+    ## 5     34.3   0.0204         -0.4 33.72580 -117.7833   TRUE   15
+    ## 6     34.4   0.0259          0.9 33.72576 -117.7833   TRUE   16
+    ##   velocity_smooth         id
+    ## 1            0.00 2420187776
+    ## 2            1.80 2420187776
+    ## 3            2.16 2420187776
+    ## 4            5.76 2420187776
+    ## 5            7.56 2420187776
+    ## 6            9.00 2420187776
 
 Stream data can be plotted using any of the plotting functions.
 

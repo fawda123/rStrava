@@ -21,7 +21,13 @@
 #' @export
 get_latlon <- function(polyline, key){
 
-	out <- googleway::google_elevation(polyline = polyline, key = key) %>% 
+	out <- googleway::google_elevation(polyline = polyline, key = key)
+	
+	# sanity check
+	if('error_message' %in% names(out))
+		stop(out$error_message)
+	
+	out <- out %>% 
 		.[['results']] %>% 
 		dplyr::mutate(
 			lat = location$lat, 
