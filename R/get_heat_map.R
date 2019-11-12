@@ -48,11 +48,11 @@
 #' library(ggmap)
 #' register_google('xxxxxxxxxxx') # enter your key here
 #' 
-#' # default
-#' get_heat_map(my_acts, acts = 1, alpha = 1)
+#' # default, requires Google key
+#' mykey <- 'Get Google API key'
+#' get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey)
 #' 
 #' # plot elevation on locations, requires key
-#' mykey <- 'Get Google API key'
 #' get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
 #' 
 #' # compile first, change units
@@ -105,7 +105,7 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 		mutate(locs = purrr::map(data, function(x) get_latlon(x$map.summary_polyline, key = key))) %>% 
 		dplyr::select(-data) %>%
 		dplyr::ungroup() %>% 
-		tidyr::unnest() %>% 
+		tidyr::unnest(locs) %>% 
 		dplyr::rename(activity = upload_id)
 
 	# get distances, default is km

@@ -81,7 +81,7 @@ get_elev_prof.actframe <- function(act_data, key, total = FALSE, expand = 10, fi
 		mutate(locs = purrr::map(data, function(x) get_latlon(x$map.summary_polyline, key = key))) %>% 
 		dplyr::select(-data) %>%
 		dplyr::ungroup() %>% 
-		tidyr::unnest() %>%
+		tidyr::unnest(locs) %>%
 		dplyr::full_join(., act_data, by = 'upload_id') %>%
 		dplyr::select(., upload_id, type, start_date, lat, lon, ele, total_elevation_gain)
 	
