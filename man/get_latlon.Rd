@@ -25,7 +25,8 @@ my_acts <- get_activity_list(stoken)
 acts_data <- compile_activities(my_acts)
 
 # get lat and lon for a single activity
-get_latlon(acts_data[1,], key = mykey)
+polyline <- acts_data$map.summary_polyline[[1]]
+get_latlon(polyline, key = mykey)
 }
 }
 \author{

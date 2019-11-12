@@ -14,7 +14,7 @@ strava_oauth(app_name, app_client_id, app_secret, app_scope = "public",
 
 \item{app_secret}{chr string for secret received when the app was registered}
 
-\item{app_scope}{chr string for scope of authentication, Must be "public", "write", "view_private", or "view_private,write"}
+\item{app_scope}{chr string for scope of authentication, Must be "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all" or "activity:write"}
 
 \item{cache}{logical to cache the token}
 }
