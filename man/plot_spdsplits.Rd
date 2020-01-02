@@ -8,7 +8,7 @@
 \usage{
 plot_spdsplits(act_data, ...)
 
-\method{plot_spdsplits}{list}(act_data, stoken, acts = 1,
+\method{plot_spdsplits}{list}(act_data, stoken, acts = 1, id = NULL,
   units = "metric", fill = "darkblue", ...)
 
 \method{plot_spdsplits}{default}(act_data, stoken, units = "metric",
@@ -22,6 +22,8 @@ plot_spdsplits(act_data, ...)
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
 \item{acts}{numeric indicating which activity to plot based on index in the activities list, defaults to most recent}
+
+\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{units}{chr string indicating plot units as either metric or imperial}
 

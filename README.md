@@ -63,31 +63,26 @@ athl_fun(2837007, trace = FALSE)
     ## 
     ## $`2837007`$monthly
     ##        month     miles hours elev_gain
-    ## 1 2019-05-01 351.16172    25      1266
-    ## 2 2019-06-01 283.40678    21      1132
-    ## 3 2019-07-01 273.54686    20       893
-    ## 4 2019-08-01 342.39727    25      1126
-    ## 5 2019-09-01 284.57744    20      1041
-    ## 6 2019-10-01  48.97586     7       773
-    ## 7 2019-11-01  56.55658     4       147
+    ## 1 2019-07-01 273.54686    20       893
+    ## 2 2019-08-01 342.39727    25      1126
+    ## 3 2019-09-01 284.57744    20      1041
+    ## 4 2019-10-01  48.97586     7       773
+    ## 5 2019-11-01 165.17040    14       545
+    ## 6 2019-12-01 124.46997    11       553
+    ## 7 2020-01-01   0.00000     0         0
     ## 
     ## $`2837007`$recent
-    ##           id           name type startDateLocal distance elevation
-    ## 1 2859540960   Morning Ride ride     2019-11-11      3.5        18
-    ## 2 2858493438 Afternoon Ride ride     2019-11-11     36.2       339
-    ## 3 2858170842    Morning Run  run     2019-11-08      3.2        47
-    ##   movingTime
-    ## 1      16:29
-    ## 2    2:21:55
-    ## 3      23:36
+    ##           id          name type startDateLocal distance elevation movingTime
+    ## 1 2960494076     Lunch Run  run     2019-12-27      3.2       158      24:51
+    ## 2 2958411997 Afternoon Run  run     2019-12-26      3.2       160      24:57
+    ## 3 2955825575   Morning Run  run     2019-12-25      3.2       161      24:50
     ## 
     ## $`2837007`$achievements
-    ##                          description             timeago
-    ## 1   2nd best estimated 1 mile effort 2019-11-09 12:01:09
-    ## 2       3rd best estimated 1k effort 2019-11-09 12:01:09
-    ## 3 3rd best estimated 1/2 mile effort 2019-11-09 12:01:09
-    ## 4     3rd best estimated 400m effort 2019-11-09 12:01:09
-    ## 5  2nd fastest time on 21-9st Sprint 2019-11-12 12:10:31
+    ##                         description             timeago
+    ## 1             PR on Snell Bridge up 2019-12-15 18:04:34
+    ## 2               PR on 21-9st Sprint 2019-12-05 15:09:05
+    ## 3 2nd fastest time on 21-9st Sprint 2019-12-10 11:44:20
+    ## 4 2nd fastest time on 9-21st Sprint 2019-12-05 21:40:46
 
 ### API functions (token)
 
@@ -186,31 +181,36 @@ An example creating a heat map of activities:
 ``` r
 library(dplyr)
 
-# get activities, get activities by lat/lon, plot
+# get activities, get activities by lat/lon, distance, plot
 my_acts <- get_activity_list(stoken)
 act_data <- compile_activities(my_acts) %>% 
     filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
-    filter(start_latitude < 31.5 & start_latitude > 30)
+    filter(start_latitude < 31.5 & start_latitude > 30) %>% 
+    filter(distance > 20)
+    
 get_heat_map(act_data, key = mykey, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 Plotting elevation and grade for a single ride:
 
 ``` r
+# actitivy id
+id <- 1784292574
+
 # plot elevation along a single ride
-get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
 # plot % gradient along a single ride
-get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->
+![](man/figures/unnamed-chunk-13-2.png)<!-- -->
 
 Get elevation profiles for activities:
 
@@ -218,25 +218,25 @@ Get elevation profiles for activities:
 # get activities
 my_acts <- get_activity_list(stoken) 
 
-get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial')
+get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
-get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
+get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial', total = T)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-2.png)<!-- -->
+![](man/figures/unnamed-chunk-14-2.png)<!-- -->
 
 Plot average speed per split (km or mile) for an activity:
 
 ``` r
 # plots for most recent activity
-plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
+plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
 Additional functions are provided to get “stream” information for
 individual activities. Streams provide detailed information about
@@ -247,38 +247,24 @@ Use `get_activity_streams` for detailed info about activites:
 
 ``` r
 # get streams for the first activity in my_acts
-strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
-```
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(altitude, distance, grade_smooth, latlng, moving, time, velocity_smooth)`
-
-    ## Warning: The `.preserve` argument of `unnest()` is deprecated as of tidyr 1.0.0.
-    ## All list-columns are now preserved
-    ## This warning is displayed once per session.
-    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(altitude, distance, grade_smooth, moving, time, velocity_smooth)`
-
-``` r
+strms_data <- get_activity_streams(my_acts, stoken, id = id)
 head(strms_data)
 ```
 
-    ##   altitude distance grade_smooth      lat       lng moving time
-    ## 1     34.6   0.0000         -1.4 33.72592 -117.7833  FALSE    0
-    ## 2     34.6   0.0036         -2.0 33.72594 -117.7834   TRUE    7
-    ## 3     34.5   0.0074         -1.5 33.72591 -117.7834   TRUE   12
-    ## 4     34.3   0.0149         -0.9 33.72584 -117.7834   TRUE   14
-    ## 5     34.3   0.0204         -0.4 33.72580 -117.7833   TRUE   15
-    ## 6     34.4   0.0259          0.9 33.72576 -117.7833   TRUE   16
-    ##   velocity_smooth         id
-    ## 1            0.00 2420187776
-    ## 2            1.80 2420187776
-    ## 3            2.16 2420187776
-    ## 4            5.76 2420187776
-    ## 5            7.56 2420187776
-    ## 6            9.00 2420187776
+    ##   altitude distance grade_smooth      lat       lng moving time velocity_smooth
+    ## 1    310.0   0.0000         -1.2 33.60582 -117.8021  FALSE    0            0.00
+    ## 2    310.1   0.0034         -2.1 33.60582 -117.8021   TRUE    9            1.44
+    ## 3    309.9   0.0082         -2.2 33.60581 -117.8020   TRUE   11            2.52
+    ## 4    309.7   0.0141         -3.2 33.60580 -117.8020   TRUE   13            3.96
+    ## 5    309.6   0.0180         -1.6 33.60580 -117.8019   TRUE   14           10.44
+    ## 6    309.5   0.0223          0.0 33.60580 -117.8019   TRUE   15           11.52
+    ##           id
+    ## 1 1784292574
+    ## 2 1784292574
+    ## 3 1784292574
+    ## 4 1784292574
+    ## 5 1784292574
+    ## 6 1784292574
 
 Stream data can be plotted using any of the plotting functions.
 
@@ -287,21 +273,21 @@ Stream data can be plotted using any of the plotting functions.
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/unnamed-chunk-17-1.png)<!-- -->
 
 ``` r
 # elevation profile
 get_elev_prof(strms_data)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
 # speed splits
 plot_spdsplits(strms_data, stoken)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-17-2.png)<!-- -->
+![](man/figures/unnamed-chunk-18-2.png)<!-- -->
 
 ### Contributing
 

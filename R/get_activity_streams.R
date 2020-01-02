@@ -4,6 +4,7 @@
 #' 
 #' @param act_data an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
+#' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function 
 #' @param types list indicating which streams to get for each activity, defaults to all available, see details.
 #' @param ... arguments passed to or from other methods
@@ -39,11 +40,11 @@ get_activity_streams <- function(act_data, ...) UseMethod('get_activity_streams'
 #' @export
 #'
 #' @method get_activity_streams list
-get_activity_streams.list <- function(act_data, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance', ...){
+get_activity_streams.list <- function(act_data, stoken, acts = NULL, id = NULL, types = NULL, resolution = 'high', series_type = 'distance', ...){
 	
-	act_data <- compile_activities(act_data)
+	act_data <- compile_activities(act_data, acts = acts, id = id)
 	
-	get_activity_streams.actframe(act_data, stoken, acts = acts, types = types, resolution = resolution, series_type = series_type)
+	get_activity_streams.actframe(act_data, stoken, types = types, resolution = resolution, series_type = series_type)
 	
 }
 
@@ -52,7 +53,7 @@ get_activity_streams.list <- function(act_data, stoken, acts = NULL, types = NUL
 #' @export
 #'
 #' @method get_activity_streams actframe
-get_activity_streams.actframe <- function(act_data, stoken, acts = NULL, types = NULL, resolution = 'high', series_type = 'distance', ...){
+get_activity_streams.actframe <- function(act_data, stoken, types = NULL, resolution = 'high', series_type = 'distance', ...){
 
 	# Setup default streams
 	types.all <- list("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
@@ -70,8 +71,7 @@ get_activity_streams.actframe <- function(act_data, stoken, acts = NULL, types =
 	unit_vals <- attr(act_data, 'unit_vals')
 	
 	# Setup requested ids
-	if (is.null(acts)) acts <- 1:nrow(act_data)
-	list.ids <- as.list(act_data[acts,]$id)
+	list.ids <- as.list(act_data$id)
 	
 	# Get all activity streams
 	streams <- purrr::map(list.ids, ~ get_streams(stoken, id = ., request = 'activities', types = types, resolution = resolution, series_type = series_type))

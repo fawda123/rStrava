@@ -9,10 +9,11 @@
 get_activity_streams(act_data, ...)
 
 \method{get_activity_streams}{list}(act_data, stoken, acts = NULL,
-  types = NULL, resolution = "high", series_type = "distance", ...)
+  id = NULL, types = NULL, resolution = "high",
+  series_type = "distance", ...)
 
-\method{get_activity_streams}{actframe}(act_data, stoken, acts = NULL,
-  types = NULL, resolution = "high", series_type = "distance", ...)
+\method{get_activity_streams}{actframe}(act_data, stoken, types = NULL,
+  resolution = "high", series_type = "distance", ...)
 }
 \arguments{
 \item{act_data}{an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}
@@ -22,6 +23,8 @@ get_activity_streams(act_data, ...)
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
+
+\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{types}{list indicating which streams to get for each activity, defaults to all available, see details.}
 

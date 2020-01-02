@@ -9,10 +9,11 @@
 \usage{
 get_heat_map(act_data, ...)
 
-\method{get_heat_map}{list}(act_data, key, acts = 1, alpha = NULL,
-  f = 0.1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE,
-  distval = 0, size = 0.5, col = "red", expand = 10,
-  maptype = "terrain", source = "google", units = "metric", ...)
+\method{get_heat_map}{list}(act_data, key, acts = 1, id = NULL,
+  alpha = NULL, f = 0.1, add_elev = FALSE, as_grad = FALSE,
+  distlab = TRUE, distval = 0, size = 0.5, col = "red",
+  expand = 10, maptype = "terrain", source = "google",
+  units = "metric", ...)
 
 \method{get_heat_map}{actframe}(act_data, key, alpha = NULL, f = 1,
   add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0,
@@ -32,6 +33,8 @@ get_heat_map(act_data, ...)
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}} for polyline decoding, see details}
 
 \item{acts}{numeric indicating which activities to plot based on index in the activities list, defaults to most recent}
+
+\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 
@@ -84,11 +87,11 @@ my_acts <- get_activity_list(stoken)
 library(ggmap)
 register_google('xxxxxxxxxxx') # enter your key here
 
-# default
-get_heat_map(my_acts, acts = 1, alpha = 1)
+# default, requires Google key
+mykey <- 'Get Google API key'
+get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey)
 
 # plot elevation on locations, requires key
-mykey <- 'Get Google API key'
 get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey, add_elev = TRUE, col = 'Spectral', size = 2)
 
 # compile first, change units

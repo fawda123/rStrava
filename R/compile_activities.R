@@ -4,6 +4,7 @@
 #' 
 #' @param actlist an activities list returned by \code{\link{get_activity_list}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
+#' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param units chr string indicating metric or imperial
 #' @param ... arguments passed to or from other methods
 #' 
@@ -33,7 +34,7 @@
 #' attr(acts_data, 'unit_type')
 #' attr(acts_data, 'unit_vals')
 #' }
-compile_activities <- function(actlist, acts = NULL, units = 'metric'){
+compile_activities <- function(actlist, acts = NULL, id = NULL, units = 'metric'){
 	
 	# check units
 	if(!units %in% c('metric', 'imperial')) 
@@ -42,7 +43,23 @@ compile_activities <- function(actlist, acts = NULL, units = 'metric'){
 	if(identical(names(actlist[[1]]), c("resource_state", "athlete", "name", "distance", "moving_time", "elapsed_time", "total_elevation_gain", "type", "workout_type")))
 		stop('use "compile_club_activities" for club activities')
 	
-	if(is.null(acts)) acts <- 1:length(actlist)
+	# get all if acts and id empty
+	if(is.null(acts) & is.null(id)) 
+		acts <- 1:length(actlist)
+	
+	# get index of id if provided
+	if(!is.null(id)){
+		ids <- unlist(lapply(actlist, function(x) x$id))
+		acts <- which(ids %in% id)
+		
+		if(length(acts) != length(id)){
+			mis <- id[!id %in% ids]
+			mis <- paste(mis, collapse = ', ')
+			stop(paste('activity id', mis, 'not found'))
+		}
+		
+	}
+	
 	actlist <- actlist[acts]
 	temp <- unlist(actlist)
 	att <- unique(attributes(temp)$names)

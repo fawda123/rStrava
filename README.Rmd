@@ -2,6 +2,12 @@
 output: github_document
 ---
 
+```{r, echo = F, }
+library(knitr)
+
+opts_chunk$set(fig.path = 'man/figures/')
+```
+
 # rStrava
 
 ##### *Marcus W. Beck, mbafs2012@gmail.com, Pedro Villarroel, pedrodvf@gmail.com, Daniel Padfield, dp323@exeter.ac.uk, Lorenzo Gaborini, lorenzo.gaborini@unil.ch, Niklas von Maltzahn, niklasvm@gmail.com*
@@ -40,7 +46,7 @@ help.search('token', package = 'rStrava')
 
 An example using the scraping functions is below. Some users may have privacy settings that block public access to account data.
 
-```{r echo = FALSE, message = FALSE, cache = F}
+```{r echo = FALSE, message = FALSE}
 devtools::load_all('.')
 ```
 ```{r message = FALSE}
@@ -100,40 +106,44 @@ head(myinfo)
 ```
 
 An example creating a heat map of activities:
-```{r message = F, fig.height = 5.5, fig.width = 7, cache = TRUE, message = F, warning = F}
+```{r message = F, fig.height = 5.5, fig.width = 7, message = F, warning = F}
 library(dplyr)
 
-# get activities, get activities by lat/lon, plot
+# get activities, get activities by lat/lon, distance, plot
 my_acts <- get_activity_list(stoken)
 act_data <- compile_activities(my_acts) %>% 
 	filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
-	filter(start_latitude < 31.5 & start_latitude > 30)
+	filter(start_latitude < 31.5 & start_latitude > 30) %>% 
+	filter(distance > 20)
+	
 get_heat_map(act_data, key = mykey, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
-
 ```
 
 Plotting elevation and grade for a single ride:
 ```{r}
+# actitivy id
+id <- 1784292574
+
 # plot elevation along a single ride
-get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 
 # plot % gradient along a single ride
-get_heat_map(my_acts, acts = 1, alpha = 1, add_elev = T, f = 0.3, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
 Get elevation profiles for activities:
-```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
+```{r message = F, fig.height = 3, fig.width = 9}
 # get activities
 my_acts <- get_activity_list(stoken) 
 
-get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial')
-get_elev_prof(my_acts, acts = 1, key = mykey, units = 'imperial', total = T)
+get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial')
+get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial', total = T)
 ```  
 
 Plot average speed per split (km or mile) for an activity:
-```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
+```{r message = F, fig.height = 3, fig.width = 9}
 # plots for most recent activity
-plot_spdsplits(my_acts, stoken, acts = 1, units = 'imperial')
+plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
 ```
 
 Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
@@ -141,17 +151,17 @@ Additional functions are provided to get "stream" information for individual act
 Use `get_activity_streams` for detailed info about activites:
 ```{r, fig.height = 4, fig.with = 4}
 # get streams for the first activity in my_acts
-strms_data <- get_activity_streams(my_acts, stoken, acts = 1)
+strms_data <- get_activity_streams(my_acts, stoken, id = id)
 head(strms_data)
 ```
 
 Stream data can be plotted using any of the plotting functions.
-```{r, warning = F, message = F, cache = TRUE}
+```{r, warning = F, message = F}
 # heat map
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
 ```
 
-```{r message = F, fig.height = 3, fig.width = 9, cache = TRUE}
+```{r message = F, fig.height = 3, fig.width = 9}
 # elevation profile
 get_elev_prof(strms_data)
 

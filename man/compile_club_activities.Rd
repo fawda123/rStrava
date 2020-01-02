@@ -4,12 +4,10 @@
 \alias{compile_club_activities}
 \title{converts a list of club activities into a dataframe}
 \usage{
-compile_club_activities(actlist, acts = NULL)
+compile_club_activities(actlist)
 }
 \arguments{
 \item{actlist}{a club activities list returned by \code{\link{get_activity_list}}}
-
-\item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 }
 \value{
 An \code{data.frame} of the compiled activities from \code{actlist}
@@ -25,7 +23,7 @@ each activity has a value for every column present across all activities, with N
 \dontrun{
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 
-club_acts <- get_activity_list(stoken, id = '13502', club = TRUE)
+club_acts <- get_activity_list(stoken, id = 13502, club = TRUE)
 
 acts_data <- compile_club_activities(club_acts)
 

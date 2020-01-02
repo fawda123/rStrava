@@ -9,8 +9,9 @@
 \usage{
 get_elev_prof(act_data, ...)
 
-\method{get_elev_prof}{list}(act_data, acts = 1, key, total = FALSE,
-  expand = 10, units = "metric", fill = "darkblue", ...)
+\method{get_elev_prof}{list}(act_data, acts = 1, id = NULL, key,
+  total = FALSE, expand = 10, units = "metric", fill = "darkblue",
+  ...)
 
 \method{get_elev_prof}{actframe}(act_data, key, total = FALSE,
   expand = 10, fill = "darkblue", ...)
@@ -24,6 +25,8 @@ get_elev_prof(act_data, ...)
 \item{...}{arguments passed to or from other methods}
 
 \item{acts}{numeric value indicating which elements of \code{act_data} to plot, defaults to most recent}
+
+\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{key}{chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}}, see details}
 

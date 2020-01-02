@@ -30,7 +30,8 @@ my_acts <- get_activity_list(stoken)
 acts_data <- compile_activities(my_acts)[1, ]
 
 # get lat, lon
-latlon <- get_latlon(acts_data)
+polyline <- acts_data$map.summary_polyline
+latlon <- get_latlon(polyline, key = mykey)
 
 # get distance
 get_dists(latlon$lon, latlon$lat)

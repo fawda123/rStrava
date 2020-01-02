@@ -8,11 +8,13 @@
 
 <title>Get data for an athlete — athl_fun • rStrava</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,10 +34,11 @@
 
 
 
-<meta property="og:title" content="Get data for an athlete — athl_fun" />
 
+<meta property="og:title" content="Get data for an athlete — athl_fun" />
 <meta property="og:description" content="Get data for an athlete by web scraping, does not require authentication." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -66,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rStrava</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -82,7 +85,6 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -104,13 +106,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Get data for an athlete by web scraping, does not require authentication.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>athl_fun</span>(<span class='no'>athl_num</span>, <span class='kw'>trace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -123,15 +123,13 @@
       <td><p>logical indicating if output is returned to console</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list for each athlete, where each element is an additional list with elements for the athlete name, location, units of measurement, monthly data, recent activities, and achievements.  The list elements are named using the athlete id numbers.  <code>NA</code> will be returned if the data for an athlete could not be accessed.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The athlete id is assigned to the user during registration with Strava and this must be known to use the function.  Some users may have privacy settings that prevent public access to account information (a message indicating as such will be returned by the function). The function scrapes data from <a href='https://www.strava.com/athletes/'>https://www.strava.com/athletes/</a> with the appended athlete id, e.g., <a href='https://www.strava.com/athletes/2837007'>https://www.strava.com/athletes/2837007</a>.  Opening the URL in a web browser can verify if the data can be scraped.  Logging in to the Strava account on the website may also be required before using this function.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## single athlete</span>
@@ -147,27 +145,26 @@
 #&gt; 
 #&gt; $`2837007`$monthly
 #&gt;        month     miles hours elev_gain
-#&gt; 1 2019-05-01 351.16172    25      1266
-#&gt; 2 2019-06-01 283.40678    21      1132
-#&gt; 3 2019-07-01 273.54686    20       893
-#&gt; 4 2019-08-01 342.39727    25      1126
-#&gt; 5 2019-09-01 284.57744    20      1041
-#&gt; 6 2019-10-01  48.97586     7       773
-#&gt; 7 2019-11-01  56.55658     4       147
+#&gt; 1 2019-07-01 273.54686    20       893
+#&gt; 2 2019-08-01 342.39727    25      1126
+#&gt; 3 2019-09-01 284.57744    20      1041
+#&gt; 4 2019-10-01  48.97586     7       773
+#&gt; 5 2019-11-01 165.17040    14       545
+#&gt; 6 2019-12-01 124.46997    11       553
+#&gt; 7 2020-01-01   0.00000     0         0
 #&gt; 
 #&gt; $`2837007`$recent
-#&gt;           id           name type startDateLocal distance elevation movingTime
-#&gt; 1 2859540960   Morning Ride ride     2019-11-11      3.5        18      16:29
-#&gt; 2 2858493438 Afternoon Ride ride     2019-11-11     36.2       339    2:21:55
-#&gt; 3 2858170842    Morning Run  run     2019-11-08      3.2        47      23:36
+#&gt;           id          name type startDateLocal distance elevation movingTime
+#&gt; 1 2960494076     Lunch Run  run     2019-12-27      3.2       158      24:51
+#&gt; 2 2958411997 Afternoon Run  run     2019-12-26      3.2       160      24:57
+#&gt; 3 2955825575   Morning Run  run     2019-12-25      3.2       161      24:50
 #&gt; 
 #&gt; $`2837007`$achievements
-#&gt;                          description             timeago
-#&gt; 1   2nd best estimated 1 mile effort 2019-11-09 12:01:09
-#&gt; 2       3rd best estimated 1k effort 2019-11-09 12:01:09
-#&gt; 3 3rd best estimated 1/2 mile effort 2019-11-09 12:01:09
-#&gt; 4     3rd best estimated 400m effort 2019-11-09 12:01:09
-#&gt; 5  2nd fastest time on 21-9st Sprint 2019-11-12 12:10:31
+#&gt;                         description             timeago
+#&gt; 1             PR on Snell Bridge up 2019-12-15 18:04:34
+#&gt; 2               PR on 21-9st Sprint 2019-12-05 15:09:05
+#&gt; 3 2nd fastest time on 21-9st Sprint 2019-12-10 11:44:20
+#&gt; 4 2nd fastest time on 9-21st Sprint 2019-12-05 21:40:46
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'>## multiple athletes</span>
@@ -184,27 +181,26 @@
 #&gt; 
 #&gt; $`2837007`$monthly
 #&gt;        month     miles hours elev_gain
-#&gt; 1 2019-05-01 351.16172    25      1266
-#&gt; 2 2019-06-01 283.40678    21      1132
-#&gt; 3 2019-07-01 273.54686    20       893
-#&gt; 4 2019-08-01 342.39727    25      1126
-#&gt; 5 2019-09-01 284.57744    20      1041
-#&gt; 6 2019-10-01  48.97586     7       773
-#&gt; 7 2019-11-01  56.55658     4       147
+#&gt; 1 2019-07-01 273.54686    20       893
+#&gt; 2 2019-08-01 342.39727    25      1126
+#&gt; 3 2019-09-01 284.57744    20      1041
+#&gt; 4 2019-10-01  48.97586     7       773
+#&gt; 5 2019-11-01 165.17040    14       545
+#&gt; 6 2019-12-01 124.46997    11       553
+#&gt; 7 2020-01-01   0.00000     0         0
 #&gt; 
 #&gt; $`2837007`$recent
-#&gt;           id           name type startDateLocal distance elevation movingTime
-#&gt; 1 2859540960   Morning Ride ride     2019-11-11      3.5        18      16:29
-#&gt; 2 2858493438 Afternoon Ride ride     2019-11-11     36.2       339    2:21:55
-#&gt; 3 2858170842    Morning Run  run     2019-11-08      3.2        47      23:36
+#&gt;           id          name type startDateLocal distance elevation movingTime
+#&gt; 1 2960494076     Lunch Run  run     2019-12-27      3.2       158      24:51
+#&gt; 2 2958411997 Afternoon Run  run     2019-12-26      3.2       160      24:57
+#&gt; 3 2955825575   Morning Run  run     2019-12-25      3.2       161      24:50
 #&gt; 
 #&gt; $`2837007`$achievements
-#&gt;                          description             timeago
-#&gt; 1   2nd best estimated 1 mile effort 2019-11-09 12:01:09
-#&gt; 2       3rd best estimated 1k effort 2019-11-09 12:01:09
-#&gt; 3 3rd best estimated 1/2 mile effort 2019-11-09 12:01:09
-#&gt; 4     3rd best estimated 400m effort 2019-11-09 12:01:09
-#&gt; 5  2nd fastest time on 21-9st Sprint 2019-11-12 12:10:31
+#&gt;                         description             timeago
+#&gt; 1             PR on Snell Bridge up 2019-12-15 18:04:34
+#&gt; 2               PR on 21-9st Sprint 2019-12-05 15:09:05
+#&gt; 3 2nd fastest time on 21-9st Sprint 2019-12-10 11:44:20
+#&gt; 4 2nd fastest time on 9-21st Sprint 2019-12-05 21:40:46
 #&gt; 
 #&gt; 
 #&gt; $`2527465`
@@ -218,38 +214,30 @@
 #&gt; [1] "km" "m" 
 #&gt; 
 #&gt; $`2527465`$monthly
-#&gt;        month   miles hours elev_gain
-#&gt; 1 2019-05-01 593.138    30      5881
-#&gt; 2 2019-06-01 335.506    18      3265
-#&gt; 3 2019-07-01  95.858     5      1057
-#&gt; 4 2019-08-01   6.859     0        54
-#&gt; 5 2019-09-01   0.000     0         0
-#&gt; 6 2019-10-01  76.962     4       877
-#&gt; 7 2019-11-01  53.719     3       800
+#&gt;        month  miles hours elev_gain
+#&gt; 1 2019-07-01 95.858     5      1057
+#&gt; 2 2019-08-01  6.859     0        54
+#&gt; 3 2019-09-01  0.000     0         0
+#&gt; 4 2019-10-01 76.962     4       877
+#&gt; 5 2019-11-01 67.650     4       960
+#&gt; 6 2019-12-01  3.638     0        28
+#&gt; 7 2020-01-01 34.464     1       650
 #&gt; 
 #&gt; $`2527465`$recent
-#&gt;           id                                name type startDateLocal distance
-#&gt; 1 2853265134                 Training primaveral ride     2019-11-09     28.2
-#&gt; 2 2835378038   Comprando el desayuno en La Perla ride     2019-11-02     11.4
-#&gt; 3 2834222745 Vitius + Python Programming en EANT ride     2019-11-01     14.0
-#&gt;   elevation movingTime
-#&gt; 1       502    1:44:22
-#&gt; 2       118      38:05
-#&gt; 3       181      49:04
+#&gt;           id                name type startDateLocal distance elevation
+#&gt; 1 2974198613   Comenzando el año ride     2020-01-01     34.4       650
+#&gt; 2 2918189135 Biking Buenos Aires ride     2019-12-07      3.6        28
+#&gt;   movingTime
+#&gt; 1    1:43:25
+#&gt; 2      10:52
 #&gt; 
 #&gt; $`2527465`$achievements
-#&gt;                                                            description
-#&gt; 1                                      PR on Retiro-Olleros (por Lib.)
-#&gt; 2                             PR on Retiro hasta Au Illia x Libertador
-#&gt; 3                                            PR on Corrientes a Retiro
-#&gt; 4             2nd fastest time on La Pampa - Juramento x Virrey Vértiz
-#&gt; 5 2nd fastest time on Túnel Libertador hasta Barrancas x Virrey Vértiz
-#&gt;               timeago
-#&gt; 1 2019-11-09 17:09:17
-#&gt; 2 2019-11-09 17:09:17
-#&gt; 3 2019-11-09 17:09:17
-#&gt; 4 2019-11-09 17:09:17
-#&gt; 5 2019-11-09 17:09:17
+#&gt;                                                description             timeago
+#&gt; 1                     PR on Hipódromo - Palermo a Belgrano 2020-01-01 21:02:12
+#&gt; 2          PR on Bicisenda Zoologico (santa fe-Libertador) 2020-01-01 21:02:12
+#&gt; 3               PR on Las Heras (Pueyrredón - Pza. Italia) 2020-01-01 21:02:12
+#&gt; 4 2nd fastest time on SANTA FE INTEGRAL - #teamsilentcycle 2020-01-01 21:02:12
+#&gt; 5                     3rd fastest time on Plaza San Martín 2020-01-01 21:02:12
 #&gt; 
 #&gt; </div></pre>
   </div>
@@ -257,11 +245,8 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

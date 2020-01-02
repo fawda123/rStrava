@@ -4,12 +4,14 @@
 \alias{compile_activities}
 \title{converts a list of activities into a dataframe}
 \usage{
-compile_activities(actlist, acts = NULL, units = "metric")
+compile_activities(actlist, acts = NULL, id = NULL, units = "metric")
 }
 \arguments{
 \item{actlist}{an activities list returned by \code{\link{get_activity_list}}}
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
+
+\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{units}{chr string indicating metric or imperial}
 

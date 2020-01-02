@@ -3,7 +3,7 @@
 #' Get an activities list of the desired type (club, user)
 #'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id string for id of the activity or club if \code{club = TRUE}
+#' @param id numeric for id of the activity or club if \code{club = TRUE}, leave blank to retrieve all activities
 #' @param club logical if you want the activities of a club
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.  If retrieving activities using individual \code{id} values, the output list returned contains additional information from the API and the results have not been tested with the functions in this package.  It is better practice to retrieve all activities (as in the example below), use \code{\link{compile_activities}}, and then filter by individual activities.

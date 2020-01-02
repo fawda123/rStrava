@@ -8,6 +8,7 @@
 #' 
 #' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric value indicating which elements of \code{act_data} to plot, defaults to most recent
+#' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param key chr string of Google API key for elevation data, passed to \code{\link[googleway]{google_elevation}}, see details
 #' @param total logical indicating if elevations are plotted as cumulative climbed by distance
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation profile. Set \code{expand = 1} to suppress this behavior.  
@@ -45,10 +46,10 @@ get_elev_prof <- function(act_data, ...) UseMethod('get_elev_prof')
 #' @export
 #'
 #' @method get_elev_prof list
-get_elev_prof.list <- function(act_data, acts = 1, key, total = FALSE, expand = 10, units = 'metric', fill = 'darkblue', ...){
+get_elev_prof.list <- function(act_data, acts = 1, id = NULL, key, total = FALSE, expand = 10, units = 'metric', fill = 'darkblue', ...){
 
 	# compile
-	act_data <- compile_activities(act_data, acts = acts, units = units)
+	act_data <- compile_activities(act_data, acts = acts, id = id, units = units)
 
 	get_elev_prof.actframe(act_data, key = key, total = total, expand = expand, fill = fill, ...)
 	
