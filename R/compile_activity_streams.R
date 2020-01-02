@@ -39,11 +39,11 @@ compile_activity_streams <- function(streams, id = NULL){
       		
       	})
       )
-   
+
    # Expand data column to columns removing one layer of lists
    tmp.wide <- tmp %>% 
       tidyr::spread(data = ., key = type, value = data) %>% 
-      tidyr::unnest(cols = c(altitude, distance, grade_smooth, latlng, moving, time, velocity_smooth))
+      tidyr::unnest(cols = names(.))
    
    # Or:
    # tmp.wide <- x %>% map_dfc(~ tibble(data = pluck(.x, 'data')) %>% set_names(pluck(.x, 'type')))
@@ -53,7 +53,7 @@ compile_activity_streams <- function(streams, id = NULL){
       
       # Remove singletons (list-columns with 1-long lists)
       df.wide <- tmp.wide %>% 
-         tidyr::unnest(cols = c(altitude, distance, grade_smooth, moving, time, velocity_smooth))
+         tidyr::unnest(cols = names(.)[!names(.) %in% 'latlng'])
       
       # Assign names to latlng field
       f.latlng.to.df <- function(x) {
@@ -68,7 +68,7 @@ compile_activity_streams <- function(streams, id = NULL){
       
    } else {
       df.stream <- tmp.wide %>% 
-         tidyr::unnest()
+         tidyr::unnest(cols = names(.))
    }
    
    if (!is.null(id)) {
