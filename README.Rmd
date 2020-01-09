@@ -148,7 +148,7 @@ plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
 
 Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
 
-Use `get_activity_streams` for detailed info about activites:
+Use `get_activity_streams` for detailed info about activities:
 ```{r, fig.height = 4, fig.with = 4}
 # get streams for the first activity in my_acts
 strms_data <- get_activity_streams(my_acts, stoken, id = id)
