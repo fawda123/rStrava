@@ -65,6 +65,12 @@ get_activity_streams.actframe <- function(act_data, stoken, types = NULL, resolu
 			types.all %>% paste(collapse = ' ') %>% paste('types must be in:', .) %>% stop()
 		}
 	}
+	
+	# stop if manual activity
+	chk <- act_data$manual
+	chk <- act_data[as.logical(chk), 'id']
+	if(length(chk) > 0)
+		stop("Cannot get streams for manual activities: ", paste(chk, collapse = ', '))
 
 	# Get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
