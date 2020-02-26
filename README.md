@@ -69,20 +69,19 @@ athl_fun(2837007, trace = FALSE)
     ## 4 2019-10-01  48.97586     7       773
     ## 5 2019-11-01 165.17040    14       545
     ## 6 2019-12-01 124.46997    11       553
-    ## 7 2020-01-01   0.00000     0         0
+    ## 7 2020-01-01  18.50008     1        52
     ## 
     ## $`2837007`$recent
-    ##           id          name type startDateLocal distance elevation movingTime
-    ## 1 2960494076     Lunch Run  run     2019-12-27      3.2       158      24:51
-    ## 2 2958411997 Afternoon Run  run     2019-12-26      3.2       160      24:57
-    ## 3 2955825575   Morning Run  run     2019-12-25      3.2       161      24:50
+    ##           id           name type startDateLocal distance elevation movingTime
+    ## 1 2998245402   Morning Ride ride     2020-01-09      3.6        15      15:00
+    ## 2 2997205625 Afternoon Ride ride     2020-01-09      3.8        62      16:35
+    ## 3 2995517807   Morning Ride ride     2020-01-08      3.6        15      15:35
     ## 
     ## $`2837007`$achievements
     ##                         description             timeago
     ## 1             PR on Snell Bridge up 2019-12-15 18:04:34
-    ## 2               PR on 21-9st Sprint 2019-12-05 15:09:05
-    ## 3 2nd fastest time on 21-9st Sprint 2019-12-10 11:44:20
-    ## 4 2nd fastest time on 9-21st Sprint 2019-12-05 21:40:46
+    ## 2 2nd fastest time on 21-9st Sprint 2020-01-08 11:47:05
+    ## 3 3rd fastest time on 9-21st Sprint 2020-01-09 22:42:26
 
 ### API functions (token)
 
@@ -155,6 +154,11 @@ The API retrieval functions are used with the token.
 
 ``` r
 myinfo <- get_athlete(stoken, id = '2837007')
+```
+
+    ## Auto-refreshing stale OAuth token.
+
+``` r
 head(myinfo)
 ```
 
@@ -243,7 +247,7 @@ individual activities. Streams provide detailed information about
 location, time, speed, elevation, gradient, cadence, watts, temperature,
 and moving status (yes/no) for an individual activity.
 
-Use `get_activity_streams` for detailed info about activites:
+Use `get_activity_streams` for detailed info about activities:
 
 ``` r
 # get streams for the first activity in my_acts

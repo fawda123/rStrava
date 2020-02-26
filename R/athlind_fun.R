@@ -17,11 +17,14 @@ athlind_fun <- function(athl_num){
 	url_in <- paste0('https://www.strava.com/athletes/', athl_num)
 
 	# get page data for athlete, parsed as list
-	prsd <- url_in %>% 
+	xmlatt <- url_in %>% 
 		read_html() %>% 
 		rvest::html_nodes("[data-react-class]") %>%
-		xml_attr('data-react-props') %>%
-		V8::v8()$get(.)
+		xml_attr('data-react-props')
+		
+	prsd <- V8::v8()
+	prsd$assign('xmlatt', V8::JS(xmlatt))
+	prsd <- prsd$get('xmlatt')
 	
 	# exit if nothing found
 	if(is.null(prsd)){
