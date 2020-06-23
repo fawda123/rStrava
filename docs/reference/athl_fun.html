@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,7 +41,6 @@
 
 <meta property="og:title" content="Get data for an athlete — athl_fun" />
 <meta property="og:description" content="Get data for an athlete by web scraping, does not require authentication." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -55,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -86,7 +89,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/fawda123/rStrava/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -101,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get data for an athlete</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/fawda123/rStrava/blob/master/R/athl_fun.R'><code>R/athl_fun.R</code></a></small>
     <div class="hidden name"><code>athl_fun.Rd</code></div>
     </div>
 
@@ -145,27 +153,25 @@
 #&gt; 
 #&gt; $`2837007`$monthly
 #&gt;        month     miles hours elev_gain
-#&gt; 1 2019-08-01 342.39727    25      1126
-#&gt; 2 2019-09-01 284.57744    20      1041
-#&gt; 3 2019-10-01  48.97586     7       773
-#&gt; 4 2019-11-01 165.17040    14       545
-#&gt; 5 2019-12-01 124.46997    11       553
-#&gt; 6 2020-01-01 123.31422    10       406
-#&gt; 7 2020-02-01 155.43973    15       787
+#&gt; 1 2019-12-01 124.46997    11       553
+#&gt; 2 2020-01-01 123.31422    10       406
+#&gt; 3 2020-02-01 169.62067    17       843
+#&gt; 4 2020-03-01 130.29160    13       409
+#&gt; 5 2020-04-01  56.42858     7       204
+#&gt; 6 2020-05-01  66.76882     8       282
+#&gt; 7 2020-06-01  49.55994     6       206
 #&gt; 
 #&gt; $`2837007`$recent
-#&gt;           id           name type startDateLocal distance elevation movingTime
-#&gt; 1 3133405499   Morning Ride ride     2020-02-25      3.5        15      16:32
-#&gt; 2 3133270186    Morning Run  run     2020-02-25      3.2        38      25:50
-#&gt; 3 3132215422 Afternoon Ride ride     2020-02-25      3.6        63      14:07
+#&gt;           id          name type startDateLocal distance elevation movingTime
+#&gt; 1 3656064336   Evening Run  run     2020-06-22      3.2        54      26:30
+#&gt; 2 3651210961 Afternoon Run  run     2020-06-21      3.2        48      26:59
+#&gt; 3 3637733702   Morning Run  run     2020-06-18      3.2        37      26:04
 #&gt; 
 #&gt; $`2837007`$achievements
-#&gt;                           description             timeago
-#&gt; 1                 PR on 9-21st Sprint 2020-02-11 22:05:06
-#&gt; 2                 PR on 9-21st Sprint 2020-02-05 23:46:32
-#&gt; 3                 PR on 9-21st Sprint 2020-02-04 22:16:20
-#&gt; 4 2nd fastest time on Snell Bridge up 2020-02-23 19:38:42
-#&gt; 5   2nd fastest time on 9-21st Sprint 2020-02-12 22:52:57
+#&gt;                                      description             timeago
+#&gt; 1      3rd overall on 7th St N, 38th to 30th Ave 2020-06-17 22:31:59
+#&gt; 2     10th overall on 7th St N, 38th to 30th Ave 2020-06-15 21:06:16
+#&gt; 3 2nd fastest time on 7th St N, 38th to 30th Ave 2020-06-22 22:25:46
 #&gt; 
 #&gt; </div><div class='input'>
 <span class='co'>## multiple athletes</span>
@@ -182,27 +188,25 @@
 #&gt; 
 #&gt; $`2837007`$monthly
 #&gt;        month     miles hours elev_gain
-#&gt; 1 2019-08-01 342.39727    25      1126
-#&gt; 2 2019-09-01 284.57744    20      1041
-#&gt; 3 2019-10-01  48.97586     7       773
-#&gt; 4 2019-11-01 165.17040    14       545
-#&gt; 5 2019-12-01 124.46997    11       553
-#&gt; 6 2020-01-01 123.31422    10       406
-#&gt; 7 2020-02-01 155.43973    15       787
+#&gt; 1 2019-12-01 124.46997    11       553
+#&gt; 2 2020-01-01 123.31422    10       406
+#&gt; 3 2020-02-01 169.62067    17       843
+#&gt; 4 2020-03-01 130.29160    13       409
+#&gt; 5 2020-04-01  56.42858     7       204
+#&gt; 6 2020-05-01  66.76882     8       282
+#&gt; 7 2020-06-01  49.55994     6       206
 #&gt; 
 #&gt; $`2837007`$recent
-#&gt;           id           name type startDateLocal distance elevation movingTime
-#&gt; 1 3133405499   Morning Ride ride     2020-02-25      3.5        15      16:32
-#&gt; 2 3133270186    Morning Run  run     2020-02-25      3.2        38      25:50
-#&gt; 3 3132215422 Afternoon Ride ride     2020-02-25      3.6        63      14:07
+#&gt;           id          name type startDateLocal distance elevation movingTime
+#&gt; 1 3656064336   Evening Run  run     2020-06-22      3.2        54      26:30
+#&gt; 2 3651210961 Afternoon Run  run     2020-06-21      3.2        48      26:59
+#&gt; 3 3637733702   Morning Run  run     2020-06-18      3.2        37      26:04
 #&gt; 
 #&gt; $`2837007`$achievements
-#&gt;                           description             timeago
-#&gt; 1                 PR on 9-21st Sprint 2020-02-11 22:05:06
-#&gt; 2                 PR on 9-21st Sprint 2020-02-05 23:46:32
-#&gt; 3                 PR on 9-21st Sprint 2020-02-04 22:16:20
-#&gt; 4 2nd fastest time on Snell Bridge up 2020-02-23 19:38:42
-#&gt; 5   2nd fastest time on 9-21st Sprint 2020-02-12 22:52:57
+#&gt;                                      description             timeago
+#&gt; 1      3rd overall on 7th St N, 38th to 30th Ave 2020-06-17 22:31:59
+#&gt; 2     10th overall on 7th St N, 38th to 30th Ave 2020-06-15 21:06:16
+#&gt; 3 2nd fastest time on 7th St N, 38th to 30th Ave 2020-06-22 22:25:46
 #&gt; 
 #&gt; 
 #&gt; $`2527465`
@@ -210,50 +214,33 @@
 #&gt; [1] "Pedro Villarroel"
 #&gt; 
 #&gt; $`2527465`$location
-#&gt; [1] "Buenos Aires, Ciudad AutÃ³noma de Buenos Aires, Argentina"
+#&gt; [1] "Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
 #&gt; 
 #&gt; $`2527465`$units
-#&gt; [1] "km" "m" 
+#&gt; character(0)
 #&gt; 
 #&gt; $`2527465`$monthly
 #&gt;        month   miles hours elev_gain
-#&gt; 1 2019-08-01   6.859     0        54
-#&gt; 2 2019-09-01   0.000     0         0
-#&gt; 3 2019-10-01  76.962     4       877
-#&gt; 4 2019-11-01  67.650     4       960
-#&gt; 5 2019-12-01   3.638     0        28
-#&gt; 6 2020-01-01 419.956    22      5525
-#&gt; 7 2020-02-01 409.334    26      5383
+#&gt; 1 2019-12-01   3.638     0        28
+#&gt; 2 2020-01-01 419.956    22      5525
+#&gt; 3 2020-02-01 452.434    29      5903
+#&gt; 4 2020-03-01  93.978     6      1095
+#&gt; 5 2020-04-01   0.000     0         0
+#&gt; 6 2020-05-01   0.000     0         0
+#&gt; 7 2020-06-01   0.000     0         0
 #&gt; 
 #&gt; $`2527465`$recent
-#&gt;           id                                     name type startDateLocal
-#&gt; 1 3129524154                       Rodada de carnaval ride     2020-02-24
-#&gt; 2 3120476101 Rodada de descargue de una semana pesada ride     2020-02-21
-#&gt; 3 3117611317                                  Working ride     2020-02-20
-#&gt;   distance elevation movingTime
-#&gt; 1     39.3       595    1:51:37
-#&gt; 2     24.5       326    1:10:27
-#&gt; 3     23.3       264    1:06:46
+#&gt; function (...)  .Primitive("list")
 #&gt; 
 #&gt; $`2527465`$achievements
-#&gt;                                description             timeago
-#&gt; 1                           PR on Pampeana 2020-02-24 22:30:51
-#&gt; 2                  PR on Plaza San MartÃ­n 2020-02-21 23:40:48
-#&gt; 3                PR on Urquiza - Chacarita 2020-02-20 13:09:16
-#&gt; 4       PR on CÃ³rdoba (GascÃ³n - Newbery) 2020-02-20 13:09:16
-#&gt; 5 2nd fastest time on Moreno - Curapaligue 2020-02-24 22:30:51
+#&gt; list()
 #&gt; 
 #&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -264,7 +251,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

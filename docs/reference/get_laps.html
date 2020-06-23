@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set the url for the different segment requests — url_segment • rStrava</title>
+<title>Retrieve the laps of an activity — get_laps • rStrava</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Set the url for the different segment requests — url_segment" />
-<meta property="og:description" content="Set the url for the different segment requests" />
+<meta property="og:title" content="Retrieve the laps of an activity — get_laps" />
+<meta property="og:description" content="Retrieve the laps of an activity" />
 
 
 
@@ -108,40 +108,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set the url for the different segment requests</h1>
-    <small class="dont-index">Source: <a href='https://github.com/fawda123/rStrava/blob/master/R/url_segment.R'><code>R/url_segment.R</code></a></small>
-    <div class="hidden name"><code>url_segment.Rd</code></div>
+    <h1>Retrieve the laps of an activity</h1>
+    <small class="dont-index">Source: <a href='https://github.com/fawda123/rStrava/blob/master/R/get_laps.R'><code>R/get_laps.R</code></a></small>
+    <div class="hidden name"><code>get_laps.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Set the url for the different segment requests</p>
+    <p>Retrieve the laps of an activity</p>
     </div>
 
-    <pre class="usage"><span class='fu'>url_segment</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_laps</span>(<span class='no'>stoken</span>, <span class='no'>id</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>id</th>
-      <td><p>numeric for id of the segment if <code>request = "all_efforts"</code> or <code>"leaderboard"</code>, or id of the athlete if <code>request = "starred"</code>, or NULL if using <code>request = "explore"</code> or <code>"starred"</code> of the athenticated user</p></td>
+      <th>stoken</th>
+      <td><p>A <code><a href='https://httr.r-lib.org/reference/config.html'>config</a></code> object created using the <code><a href='strava_oauth.html'>strava_oauth</a></code> function</p></td>
     </tr>
     <tr>
-      <th>request</th>
-      <td><p>chr string, must be "starred", "all_efforts", "leaderboard", "explore" or NULL for segment details</p></td>
+      <th>id</th>
+      <td><p>numeric for id of the activity with the laps to request</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A url string.</p>
+    <p>Data from an API request.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Function is used internally within <code><a href='get_segment.html'>get_segment</a></code>, <code><a href='get_starred.html'>get_starred</a></code>, <code><a href='get_leaderboard.html'>get_leaderboard</a></code>, <code><a href='get_efforts_list.html'>get_efforts_list</a></code>, and <code><a href='get_explore.html'>get_explore</a></code></p>
+    <p>Requires authentication stoken using the <code><a href='strava_oauth.html'>strava_oauth</a></code> function and a user-created API on the strava website.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>url_segment</span>()</div><div class='output co'>#&gt; [1] "https://www.strava.com/api/v3/segments/"</div><div class='input'>
-<span class='fu'>url_segment</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>123</span>, <span class='kw'>request</span> <span class='kw'>=</span> <span class='st'>'leaderboard'</span>)</div><div class='output co'>#&gt; [1] "https://www.strava.com/api/v3/segments/123/leaderboard"</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># create authentication token</span>
+<span class='co'># requires user created app name, id, and secret from Strava website</span>
+<span class='no'>stoken</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://httr.r-lib.org/reference/config.html'>config</a></span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='strava_oauth.html'>strava_oauth</a></span>(<span class='no'>app_name</span>, <span class='no'>app_client_id</span>,
+        <span class='no'>app_secret</span>, <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
+
+<span class='fu'>get_laps</span>(<span class='no'>stoken</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='fl'>351217692</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
