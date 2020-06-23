@@ -4,8 +4,13 @@
 \alias{get_explore}
 \title{Explore segments within a bounded area}
 \usage{
-get_explore(stoken, bounds, activity_type = "riding", max_cat = NULL,
-  min_cat = NULL)
+get_explore(
+  stoken,
+  bounds,
+  activity_type = "riding",
+  max_cat = NULL,
+  min_cat = NULL
+)
 }
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}

@@ -11,7 +11,7 @@ Imports:
     bitops,
     dplyr,
 		geosphere,
-    ggmap,
+		ggmap,
     ggplot2,
     ggrepel,
     googleway,
@@ -28,7 +28,7 @@ Imports:
     tibble,
     V8
 Depends:
-    R (>= 3.1.1)
+    R (>= 3.5.0)
 Authors@R: c(
 	person(given = "Marcus W.", family = "Beck",
     role = c("cre"),
@@ -50,4 +50,4 @@ Authors@R: c(
   	email = "niklasv@gmail.com"
   	)
   )
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

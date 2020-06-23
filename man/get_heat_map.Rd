@@ -9,21 +9,57 @@
 \usage{
 get_heat_map(act_data, ...)
 
-\method{get_heat_map}{list}(act_data, key, acts = 1, id = NULL,
-  alpha = NULL, f = 0.1, add_elev = FALSE, as_grad = FALSE,
-  distlab = TRUE, distval = 0, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", source = "google",
-  units = "metric", ...)
+\method{get_heat_map}{list}(
+  act_data,
+  key,
+  acts = 1,
+  id = NULL,
+  alpha = NULL,
+  f = 0.1,
+  add_elev = FALSE,
+  as_grad = FALSE,
+  distlab = TRUE,
+  distval = 0,
+  size = 0.5,
+  col = "red",
+  expand = 10,
+  maptype = "terrain",
+  source = "google",
+  units = "metric",
+  ...
+)
 
-\method{get_heat_map}{actframe}(act_data, key, alpha = NULL, f = 1,
-  add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0,
-  size = 0.5, col = "red", expand = 10, maptype = "terrain",
-  source = "google", ...)
+\method{get_heat_map}{actframe}(
+  act_data,
+  key,
+  alpha = NULL,
+  f = 1,
+  add_elev = FALSE,
+  as_grad = FALSE,
+  distlab = TRUE,
+  distval = 0,
+  size = 0.5,
+  col = "red",
+  expand = 10,
+  maptype = "terrain",
+  source = "google",
+  ...
+)
 
-\method{get_heat_map}{strframe}(act_data, alpha = NULL, f = 1,
+\method{get_heat_map}{strframe}(
+  act_data,
+  alpha = NULL,
+  f = 1,
   filltype = c("elevation", "distance", "slope", "speed"),
-  distlab = TRUE, distval = 0, size = 0.5, col = "red",
-  expand = 10, maptype = "terrain", source = "google", ...)
+  distlab = TRUE,
+  distval = 0,
+  size = 0.5,
+  col = "red",
+  expand = 10,
+  maptype = "terrain",
+  source = "google",
+  ...
+)
 }
 \arguments{
 \item{act_data}{an activities list object returned by \code{\link{get_activity_list}}, an \code{actframe} returned by \code{\link{compile_activities}}, or a \code{strfame} returned by \code{\link{get_activity_streams}}}

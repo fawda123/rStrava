@@ -6,7 +6,6 @@
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
 #' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param units chr string indicating metric or imperial
-#' @param ... arguments passed to or from other methods
 #' 
 #' @author Daniel Padfield
 #' 

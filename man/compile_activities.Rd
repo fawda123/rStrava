@@ -14,8 +14,6 @@ compile_activities(actlist, acts = NULL, id = NULL, units = "metric")
 \item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{units}{chr string indicating metric or imperial}
-
-\item{...}{arguments passed to or from other methods}
 }
 \value{
 An activities frame object (\code{actframe} that includes a data frame for the data and attributes for the distance, speed, and elevation units

@@ -8,11 +8,17 @@
 \usage{
 plot_spdsplits(act_data, ...)
 
-\method{plot_spdsplits}{list}(act_data, stoken, acts = 1, id = NULL,
-  units = "metric", fill = "darkblue", ...)
+\method{plot_spdsplits}{list}(
+  act_data,
+  stoken,
+  acts = 1,
+  id = NULL,
+  units = "metric",
+  fill = "darkblue",
+  ...
+)
 
-\method{plot_spdsplits}{default}(act_data, stoken, units = "metric",
-  fill = "darkblue", ...)
+\method{plot_spdsplits}{default}(act_data, stoken, units = "metric", fill = "darkblue", ...)
 }
 \arguments{
 \item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}

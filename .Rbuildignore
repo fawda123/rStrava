@@ -13,3 +13,4 @@ examples.r
 ggmapTemp.png
 ^docs$
 ^\.github$
+^\.httr-oauth$

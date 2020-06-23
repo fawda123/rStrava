@@ -9,15 +9,28 @@
 \usage{
 get_elev_prof(act_data, ...)
 
-\method{get_elev_prof}{list}(act_data, acts = 1, id = NULL, key,
-  total = FALSE, expand = 10, units = "metric", fill = "darkblue",
-  ...)
+\method{get_elev_prof}{list}(
+  act_data,
+  acts = 1,
+  id = NULL,
+  key,
+  total = FALSE,
+  expand = 10,
+  units = "metric",
+  fill = "darkblue",
+  ...
+)
 
-\method{get_elev_prof}{actframe}(act_data, key, total = FALSE,
-  expand = 10, fill = "darkblue", ...)
+\method{get_elev_prof}{actframe}(
+  act_data,
+  key,
+  total = FALSE,
+  expand = 10,
+  fill = "darkblue",
+  ...
+)
 
-\method{get_elev_prof}{strframe}(act_data, total = FALSE, expand = 10,
-  fill = "darkblue", ...)
+\method{get_elev_prof}{strframe}(act_data, total = FALSE, expand = 10, fill = "darkblue", ...)
 }
 \arguments{
 \item{act_data}{an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}

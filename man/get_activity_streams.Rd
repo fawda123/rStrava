@@ -8,12 +8,25 @@
 \usage{
 get_activity_streams(act_data, ...)
 
-\method{get_activity_streams}{list}(act_data, stoken, acts = NULL,
-  id = NULL, types = NULL, resolution = "high",
-  series_type = "distance", ...)
+\method{get_activity_streams}{list}(
+  act_data,
+  stoken,
+  acts = NULL,
+  id = NULL,
+  types = NULL,
+  resolution = "high",
+  series_type = "distance",
+  ...
+)
 
-\method{get_activity_streams}{actframe}(act_data, stoken, types = NULL,
-  resolution = "high", series_type = "distance", ...)
+\method{get_activity_streams}{actframe}(
+  act_data,
+  stoken,
+  types = NULL,
+  resolution = "high",
+  series_type = "distance",
+  ...
+)
 }
 \arguments{
 \item{act_data}{an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}}

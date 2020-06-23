@@ -4,8 +4,14 @@
 \alias{get_streams}
 \title{Retrieve a Strava data stream for a single activity}
 \usage{
-get_streams(stoken, id, request = "activities", types = NULL,
-  resolution = NULL, series_type = NULL)
+get_streams(
+  stoken,
+  id,
+  request = "activities",
+  types = NULL,
+  resolution = NULL,
+  series_type = NULL
+)
 }
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}

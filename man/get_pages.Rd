@@ -4,8 +4,15 @@
 \alias{get_pages}
 \title{Get several pages of one type of request}
 \usage{
-get_pages(url_, stoken, per_page = 30, page_id = 1, page_max = 1,
-  queries = NULL, All = FALSE)
+get_pages(
+  url_,
+  stoken,
+  per_page = 30,
+  page_id = 1,
+  page_max = 1,
+  queries = NULL,
+  All = FALSE
+)
 }
 \arguments{
 \item{url_}{string of url for the request to the API}

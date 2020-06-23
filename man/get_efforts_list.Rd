@@ -4,8 +4,13 @@
 \alias{get_efforts_list}
 \title{Get all the efforts in a segment if no queries are specified}
 \usage{
-get_efforts_list(stoken, id, athlete_id = NULL,
-  start_date_local = NULL, end_date_local = NULL)
+get_efforts_list(
+  stoken,
+  id,
+  athlete_id = NULL,
+  start_date_local = NULL,
+  end_date_local = NULL
+)
 }
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}

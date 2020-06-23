@@ -4,8 +4,13 @@
 \alias{strava_oauth}
 \title{Generata Strava API authentication token}
 \usage{
-strava_oauth(app_name, app_client_id, app_secret, app_scope = "public",
-  cache = FALSE)
+strava_oauth(
+  app_name,
+  app_client_id,
+  app_secret,
+  app_scope = "public",
+  cache = FALSE
+)
 }
 \arguments{
 \item{app_name}{chr string for name of the app}
