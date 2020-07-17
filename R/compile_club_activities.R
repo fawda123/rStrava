@@ -27,9 +27,11 @@ compile_club_activities <- function(actlist){
 
 	out <- tibble::enframe(actlist) %>% 
 		dplyr::mutate(value = purrr::map(value, compile_activity)) %>% 
+		dplyr::mutate(value = purrr::map(value, tidyr::gather, 'var', 'val')) %>% 
 		tidyr::unnest(cols = c(value)) %>% 
-		dplyr::mutate_at(dplyr::vars(dplyr::matches('^distance$|^elapsed\\_time$|^moving\\_time$|^total\\_elevation\\_gain$')), dplyr::funs(as.numeric(.))) %>% 
 		dplyr::rename(activity = name) %>% 
+		tidyr::spread(var, val)	%>% 
+		dplyr::mutate_at(dplyr::vars(dplyr::matches('^distance$|^elapsed\\_time$|^moving\\_time$|^total\\_elevation\\_gain$')), list(as.numeric)) %>% 
 		as.data.frame(stringsAsFactors = FALSE)
 		
 	return(out)
