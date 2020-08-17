@@ -7,6 +7,8 @@
 #' @param per_page numeric indicating number of items retrieved per page (maximum 200)
 #' @param page_id numeric indicating page id
 #' @param page_max numeric indicating maximum number of pages to return
+#' @param before date object for filtering activities after the indicated date
+#' @param after date object for filtering activities before the indicated date
 #' @param queries list of additional queries to pass to the API
 #' @param All logical if you want all possible pages within the ratelimit constraint
 #'
@@ -32,10 +34,10 @@
 #' get_pages('https://strava.com/api/v3/activities', stoken)
 #' 
 #' }
-get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, queries=NULL, All = FALSE){
+get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, before=NULL, after=NULL, queries=NULL, All = FALSE){
 
 	dataRaw <- list()
-	
+
 	# check for leaderboard request
 	# per_page and length of content request are handled differently
 	chk_lead <- grepl('leaderboard$', url_)
@@ -44,6 +46,9 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
 	req <- GET(url_, stoken, query = c(list(per_page=per_page, page=page_id), queries))
 	ratelimit(req)
 
+	before <- seltime_fun(before, TRUE)
+	after <- seltime_fun(after, FALSE)
+	
 	if(All){
 		per_page=200 #reduces the number of requests
 		page_id=1
@@ -72,7 +77,7 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, quer
 				
 		} else {
 			
-			req <- GET(url_, stoken, query = c(list(per_page=per_page, page=i), queries))
+			req <- GET(url_, stoken, query = c(list(per_page=per_page, page=i, before=before, after=after), queries))
 			cont_req <- content(req)
 			
 		}

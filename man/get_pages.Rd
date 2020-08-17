@@ -10,6 +10,8 @@ get_pages(
   per_page = 30,
   page_id = 1,
   page_max = 1,
+  before = NULL,
+  after = NULL,
   queries = NULL,
   All = FALSE
 )
@@ -24,6 +26,10 @@ get_pages(
 \item{page_id}{numeric indicating page id}
 
 \item{page_max}{numeric indicating maximum number of pages to return}
+
+\item{before}{date object for filtering activities after the indicated date}
+
+\item{after}{date object for filtering activities before the indicated date}
 
 \item{queries}{list of additional queries to pass to the API}
 

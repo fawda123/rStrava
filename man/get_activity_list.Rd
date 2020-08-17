@@ -4,12 +4,16 @@
 \alias{get_activity_list}
 \title{Get an activities list}
 \usage{
-get_activity_list(stoken, id = NULL, club = FALSE)
+get_activity_list(stoken, id = NULL, before = NULL, after = NULL, club = FALSE)
 }
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
 \item{id}{numeric for id of the activity or club if \code{club = TRUE}, leave blank to retrieve all activities}
+
+\item{before}{date object for filtering activities after the indicated date}
+
+\item{after}{date object for filtering activities before the indicated date}
 
 \item{club}{logical if you want the activities of a club}
 }
