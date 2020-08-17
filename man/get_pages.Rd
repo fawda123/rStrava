@@ -27,9 +27,9 @@ get_pages(
 
 \item{page_max}{numeric indicating maximum number of pages to return}
 
-\item{before}{date object for filtering activities after the indicated date}
+\item{before}{date object for filtering activities before the indicated date}
 
-\item{after}{date object for filtering activities before the indicated date}
+\item{after}{date object for filtering activities after the indicated date}
 
 \item{queries}{list of additional queries to pass to the API}
 

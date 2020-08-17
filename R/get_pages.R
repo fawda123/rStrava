@@ -7,8 +7,8 @@
 #' @param per_page numeric indicating number of items retrieved per page (maximum 200)
 #' @param page_id numeric indicating page id
 #' @param page_max numeric indicating maximum number of pages to return
-#' @param before date object for filtering activities after the indicated date
-#' @param after date object for filtering activities before the indicated date
+#' @param before date object for filtering activities before the indicated date
+#' @param after date object for filtering activities after the indicated date
 #' @param queries list of additional queries to pass to the API
 #' @param All logical if you want all possible pages within the ratelimit constraint
 #'
