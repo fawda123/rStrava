@@ -42,9 +42,10 @@ compile_seg_effort <- function(x){
 				dplyr::left_join(desired_cols, ., by = 'ColNames') %>% 
 				tidyr::spread(ColNames, unlist.x.)
 			
-		}) %>% 
-		do.call('rbind', .)
+		}) 
+	
+	out <- dplyr::bind_rows(temp)
 
-	return(temp)
+	return(out)
 	
 }
