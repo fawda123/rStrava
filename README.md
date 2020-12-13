@@ -3,10 +3,9 @@
 
 ##### *Marcus W. Beck, <mbafs2012@gmail.com>, Pedro Villarroel, <pedrodvf@gmail.com>, Daniel Padfield, <dp323@exeter.ac.uk>, Lorenzo Gaborini, <lorenzo.gaborini@unil.ch>, Niklas von Maltzahn, <niklasvm@gmail.com>*
 
-[![Travis-CI Build
-Status](https://travis-ci.org/fawda123/rStrava.svg?branch=master)](https://travis-ci.org/fawda123/rStrava)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/fawda123/rStrava?branch=master)](https://ci.appveyor.com/project/fawda123/rStrava)
+[![R-CMD-check](https://github.com/fawda123/rStrava/workflows/R-CMD-check/badge.svg)](https://github.com/fawda123/rStrava/actions)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/ue8g98kdmt0csexo?svg=true)](https://ci.appveyor.com/project/fawda123/rstrava)
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
 <img src="man/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300" />
@@ -62,26 +61,23 @@ athl_fun(2837007, trace = FALSE)
     ## [1] "mi" "ft"
     ## 
     ## $`2837007`$monthly
-    ##        month     miles hours elev_gain
-    ## 1 2019-07-01 273.54686    20       893
-    ## 2 2019-08-01 342.39727    25      1126
-    ## 3 2019-09-01 284.57744    20      1041
-    ## 4 2019-10-01  48.97586     7       773
-    ## 5 2019-11-01 165.17040    14       545
-    ## 6 2019-12-01 124.46997    11       553
-    ## 7 2020-01-01  18.50008     1        52
+    ##        month    miles hours elev_gain
+    ## 1 2020-06-01 63.02319     8       258
+    ## 2 2020-07-01 58.18209     8       229
+    ## 3 2020-08-01 85.70946     9       280
+    ## 4 2020-09-01 67.77482     9       257
+    ## 5 2020-10-01 55.90228     7       199
+    ## 6 2020-11-01 61.53501     8       293
+    ## 7 2020-12-01 19.60985     2        59
     ## 
     ## $`2837007`$recent
-    ##           id           name type startDateLocal distance elevation movingTime
-    ## 1 2998245402   Morning Ride ride     2020-01-09      3.6        15      15:00
-    ## 2 2997205625 Afternoon Ride ride     2020-01-09      3.8        62      16:35
-    ## 3 2995517807   Morning Ride ride     2020-01-08      3.6        15      15:35
+    ##           id          name type startDateLocal distance elevation movingTime
+    ## 1 4460011257 Afternoon Run  run     2020-12-11      3.2        10      26:00
+    ## 2 4456641577   Evening Run  run     2020-12-10      3.2         9      26:19
+    ## 3 4456641936   Evening Run  run     2020-12-09      3.3        40      27:00
     ## 
     ## $`2837007`$achievements
-    ##                         description             timeago
-    ## 1             PR on Snell Bridge up 2019-12-15 18:04:34
-    ## 2 2nd fastest time on 21-9st Sprint 2020-01-08 11:47:05
-    ## 3 3rd fastest time on 9-21st Sprint 2020-01-09 22:42:26
+    ## list()
 
 ### API functions (token)
 
@@ -154,11 +150,6 @@ The API retrieval functions are used with the token.
 
 ``` r
 myinfo <- get_athlete(stoken, id = '2837007')
-```
-
-    ## Auto-refreshing stale OAuth token.
-
-``` r
 head(myinfo)
 ```
 
@@ -252,6 +243,15 @@ Use `get_activity_streams` for detailed info about activities:
 ``` r
 # get streams for the first activity in my_acts
 strms_data <- get_activity_streams(my_acts, stoken, id = id)
+```
+
+    ## Warning: `as.tibble()` is deprecated as of tibble 2.0.0.
+    ## Please use `as_tibble()` instead.
+    ## The signature and semantics have changed, see `?as_tibble`.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+
+``` r
 head(strms_data)
 ```
 

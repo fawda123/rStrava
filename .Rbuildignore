@@ -4,7 +4,6 @@ R/funcs.R
 extra.R
 examples.r
 .httr-oauth
-^\.travis\.yml$
 ^appveyor\.yml$
 ^README.*
 ^README_files/.*
