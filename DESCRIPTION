@@ -11,7 +11,6 @@ Imports:
     bitops,
     dplyr,
 		geosphere,
-		ggmap,
     ggplot2,
     ggrepel,
     googleway,
@@ -27,6 +26,8 @@ Imports:
     purrr,
     tibble,
     V8
+Suggests:
+		ggmap
 Depends:
     R (>= 3.5.0)
 Authors@R: c(

@@ -119,14 +119,19 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 		temp$ele <- temp$ele *  3.28084
 	}
 
-	# xy lims
-	bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
+	# to appease CRAN checks
+	if(requireNamespace('ggmap', quietly = TRUE)){
+		
+		# xy lims
+		bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
 
-	# map and base plot
-	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
-	pbase <- suppressMessages(ggmap::ggmap(map) +
-		ggplot2::coord_map() + 
-		ggplot2::theme(axis.title = ggplot2::element_blank()))
+		# map and base plot
+		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
+		pbase <- suppressMessages(ggmap::ggmap(map) +
+			ggplot2::coord_map() + 
+			ggplot2::theme(axis.title = ggplot2::element_blank()))
+		
+	}
 	
 	# add elevation to plot
 	if(add_elev){
@@ -237,15 +242,20 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('e
 	})
 	temp <- do.call('rbind', temp)
 	
-	# xy lims
-	bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
+	# to appease CRAN checks
+	if(requireNamespace('ggmap', quietly = TRUE)){
+		
+		# xy lims
+		bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
 	
-	# map and base plot
-	map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
-	pbase <- ggmap::ggmap(map) +
-		ggplot2::coord_fixed(ratio = 1) +
-		ggplot2::theme(axis.title = ggplot2::element_blank())
-
+		# map and base plot
+		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
+		pbase <- ggmap::ggmap(map) +
+			ggplot2::coord_fixed(ratio = 1) +
+			ggplot2::theme(axis.title = ggplot2::element_blank())
+	
+	}
+	
 	# legend and plot
 	if(filltype == 'slope') leglab <- '%'
 	else leglab <- unit_vals[filltype]
