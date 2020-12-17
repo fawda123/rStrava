@@ -4,8 +4,7 @@
 ##### *Marcus W. Beck, <mbafs2012@gmail.com>, Pedro Villarroel, <pedrodvf@gmail.com>, Daniel Padfield, <dp323@exeter.ac.uk>, Lorenzo Gaborini, <lorenzo.gaborini@unil.ch>, Niklas von Maltzahn, <niklasvm@gmail.com>*
 
 [![R-CMD-check](https://github.com/fawda123/rStrava/workflows/R-CMD-check/badge.svg)](https://github.com/fawda123/rStrava/actions)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/ue8g98kdmt0csexo?svg=true)](https://ci.appveyor.com/project/fawda123/rstrava)
+[![pkgdown](https://github.com/fawda123/rStrava/workflows/pkgdown/badge.svg)](https://github.com/fawda123/rStrava/actions)
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
 <img src="man/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300" />
@@ -68,13 +67,13 @@ athl_fun(2837007, trace = FALSE)
     ## 4 2020-09-01 67.77482     9       257
     ## 5 2020-10-01 55.90228     7       199
     ## 6 2020-11-01 61.53501     8       293
-    ## 7 2020-12-01 19.60985     2        59
+    ## 7 2020-12-01 29.38278     3        80
     ## 
     ## $`2837007`$recent
-    ##           id          name type startDateLocal distance elevation movingTime
-    ## 1 4460011257 Afternoon Run  run     2020-12-11      3.2        10      26:00
-    ## 2 4456641577   Evening Run  run     2020-12-10      3.2         9      26:19
-    ## 3 4456641936   Evening Run  run     2020-12-09      3.3        40      27:00
+    ##           id        name type startDateLocal distance elevation movingTime
+    ## 1 4481298718 Evening Run  run     2020-12-16      3.2        44      25:57
+    ## 2 4473443991 Evening Run  run     2020-12-14      3.2        10      26:08
+    ## 3 4468636914   Lunch Run  run     2020-12-13      3.2        14      26:43
     ## 
     ## $`2837007`$achievements
     ## list()
@@ -150,6 +149,11 @@ The API retrieval functions are used with the token.
 
 ``` r
 myinfo <- get_athlete(stoken, id = '2837007')
+```
+
+    ## Auto-refreshing stale OAuth token.
+
+``` r
 head(myinfo)
 ```
 
