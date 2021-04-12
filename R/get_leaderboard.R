@@ -28,8 +28,8 @@
 #' }
 get_leaderboard <- function(stoken, id, nleaders = 10, All = FALSE){
 
-	dataRaw <- get_pages(url_segment(id, request="leaderboard"), stoken, 
-											 per_page = nleaders, All = All)
+	dataRaw <- get_pages(paste0('https://www.strava.com/api/v3/segment_efforts?segment_id=', id), stoken, per_page = nleaders, All = All)
+
 	return(dataRaw)
 	
 }
