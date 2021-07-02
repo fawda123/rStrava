@@ -21,11 +21,11 @@ opts_chunk$set(fig.path = 'man/figures/')
 
 ### Overview and installation
 
-This is the development repository for rStrava, an R package to access data from the Strava API.  The package can be installed and loaded as follows:
+This is the development repository for rStrava, an R package to access data from the Strava API.  The package can be installed from [r-universe](https://fawda123.r-universe.dev/) and loaded as follows:
 
 ```{r eval = F}
-install.packages('devtools')
-devtools::install_github('fawda123/rStrava')
+install.packages('rStrava', repos = 'https://fawda123.r-universe.dev/')
+library(rStrava)
 ```
 
 ### Issues and suggestions
