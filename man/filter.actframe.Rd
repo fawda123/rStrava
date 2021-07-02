@@ -4,7 +4,7 @@
 \alias{filter.actframe}
 \title{Filter}
 \usage{
-\method{filter}{actframe}(.data, ...)
+filter.actframe(.data, ...)
 }
 \arguments{
 \item{.data}{an actframe object}
