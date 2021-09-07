@@ -4,8 +4,6 @@
 #'
 #' @param .data an actframe object
 #' @param ... Logical predicates defined in terms of the variables in .data
-#'  
-#' @exportMethod filter actframe
 #' 
 #' @importFrom dplyr filter
 #' 
@@ -16,7 +14,7 @@
 #' library(dplyr)
 #' 
 #' # get actframe, all activities
-#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
 #' my_acts <- get_activity_list(stoken)
 #' act_data <- compile_activities(my_acts)
 #' 
@@ -53,8 +51,6 @@ filter.actframe <- function(.data,...) {
 #' @param .data an actframe object
 #' @param ... Name-value pairs of expressions. Use NULL to drop a variable.
 #' 
-#' @exportMethod mutate actframe
-#' 
 #' @importFrom dplyr mutate
 #' 
 #' @return an actframe object
@@ -64,7 +60,7 @@ filter.actframe <- function(.data,...) {
 #' library(dplyr)
 #' 
 #' # get actframe, all activities
-#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
+#' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
 #' my_acts <- get_activity_list(stoken)
 #' act_data <- compile_activities(my_acts)
 #' 
