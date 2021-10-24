@@ -12,7 +12,7 @@ get_athlete(stoken, id = NULL)
 \item{id}{string or integer of athlete}
 }
 \value{
-Data from an API request to \url{https://strava.com/api/v3/athlete}.  Specifically, a list of athlete information including athlete name, location, followers, etc. as described here: \url{https://strava.github.io/api/v3/athlete/}.
+A list of athlete information including athlete name, location, followers, etc. as described here: \url{https://strava.github.io/api/v3/athlete/}.
 }
 \description{
 Get basic athlete data for an athlete using an API request

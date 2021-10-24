@@ -44,7 +44,7 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, befo
 	
 	# initalize usage_left with ratelimit
 	req <- GET(url_, stoken, query = c(list(per_page=per_page, page=page_id), queries))
-	ratelimit(req)
+	usage_left <- ratelimit(req)
 
 	before <- seltime_fun(before, TRUE)
 	after <- seltime_fun(after, FALSE)

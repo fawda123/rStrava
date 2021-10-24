@@ -10,7 +10,7 @@ ratelimit(req)
 \item{req}{value returned from the \code{\link[httr]{GET}} function, used internally in other functions}
 }
 \value{
-A global variable \code{usage_left} shows the current limits.
+A variable for the current limits.
 }
 \description{
 Checks the ratelimit values after the last request and stores the left requests in a global variable.

@@ -123,7 +123,7 @@ get_activity_streams.actframe <- function(act_data, stoken, types = NULL, resolu
 	   # distance from m to mi
 	   # velocity_smooth from m/s to mi/hr
 	   # altitude in m to ft
-	   # temp from °C to °F
+	   # temp from C to F
 	   out <- dplyr::mutate(out, 
 	                        distance = distance * 0.000621371,
 	                        velocity_smooth = velocity_smooth * 2.23694,

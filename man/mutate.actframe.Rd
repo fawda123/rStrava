@@ -22,7 +22,14 @@ This is a wrapper function to dplyr::mutate which can be applied to an actframe 
 library(dplyr)
 
 # get actframe, all activities
-stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, app_scope="activity:read_all"))
+stoken <- httr::config(
+  token = strava_oauth(
+    app_name, 
+    app_client_id, 
+    app_secret, 
+    app_scope="activity:read_all"
+  )
+)
 my_acts <- get_activity_list(stoken)
 act_data <- compile_activities(my_acts)
 
