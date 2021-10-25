@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission to fix issues on original CRAN submission, including: 
+
+* Used single quotes for software and API names in DESCRIPTION file
+* Added web reference to the API in the DESCRIPTION file
+* Added missing \value text descriptions to function documentation
+
 ## Test environments
 
 * ubuntu 20.04 (on GitHub Actions), R 4.1.1

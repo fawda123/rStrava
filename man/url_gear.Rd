@@ -9,6 +9,9 @@ url_gear(id)
 \arguments{
 \item{id}{string of gear id assigned by Strava}
 }
+\value{
+A character string of the gear URL used for API requests
+}
 \description{
 Set the url of the equipment item to get data using an ID
 }

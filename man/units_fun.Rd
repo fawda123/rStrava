@@ -9,6 +9,9 @@ units_fun(prsd)
 \arguments{
 \item{prsd}{parsed input list}
 }
+\value{
+A character vector indicating the units for distance used by the athlete
+}
 \description{
 Get units of measurement, used internally in \code{\link{athl_fun}}
 }

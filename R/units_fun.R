@@ -7,6 +7,8 @@
 #' @export
 #' 
 #' @concept notoken
+#' 
+#' @return A character vector indicating the units for distance used by the athlete
 units_fun <- function(prsd){
 
 	dist <- prsd$recentActivities$distance

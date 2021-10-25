@@ -15,6 +15,28 @@
 #' @export
 #'
 #' @concept token
+#' 
+#' @return A \code{Token2.0} object returned by \code{\link[httr]{oauth2.0_token}} to be used with API function calls
+#' 
+#' @examples 
+#' \dontrun{
+#' app_name <- 'myappname' # chosen by user
+#' app_client_id  <- 'myid' # an integer, assigned by Strava
+#' app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
+#'
+#' # create the authentication token
+#' stoken <- httr::config(
+#'   token = strava_oauth(
+#'     app_name, 
+#'     app_client_id, 
+#'     app_secret, 
+#'     app_scope="activity:read_all"
+#'   )
+#' )
+#'
+#' # use authentication token
+#' get_athlete(stoken, id = '2837007')
+#' }
 strava_oauth <- function(app_name, app_client_id, app_secret, app_scope = 'public', cache = FALSE){
       
 	strava_app <- oauth_app(appname = app_name, key = app_client_id, secret = app_secret)  

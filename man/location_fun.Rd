@@ -9,6 +9,9 @@ location_fun(prsd)
 \arguments{
 \item{prsd}{parsed input list}
 }
+\value{
+A character string of the athlete location
+}
 \description{
 Get athlete location, used internally in \code{\link{athl_fun}}
 }

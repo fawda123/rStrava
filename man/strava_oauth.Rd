@@ -23,10 +23,33 @@ strava_oauth(
 
 \item{cache}{logical to cache the token}
 }
+\value{
+A \code{Token2.0} object returned by \code{\link[httr]{oauth2.0_token}} to be used with API function calls
+}
 \description{
 Generate a token for the user and the desired scope. The user is sent to the strava authentication page if he/she hasn't given permission to the app yet, else, is sent to the app webpage.
 }
 \details{
 The \code{app_name}, \code{app_client_id}, and \code{app_secret} are specific to the user and can be obtained by registering an app on the Strava API authentication page: \url{http://strava.github.io/api/v3/oauth/}.  This requires a personal Strava account.
+}
+\examples{
+\dontrun{
+app_name <- 'myappname' # chosen by user
+app_client_id  <- 'myid' # an integer, assigned by Strava
+app_secret <- 'xxxxxxxx' # an alphanumeric secret, assigned by Strava
+
+# create the authentication token
+stoken <- httr::config(
+  token = strava_oauth(
+    app_name, 
+    app_client_id, 
+    app_secret, 
+    app_scope="activity:read_all"
+  )
+)
+
+# use authentication token
+get_athlete(stoken, id = '2837007')
+}
 }
 \concept{token}

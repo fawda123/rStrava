@@ -9,6 +9,10 @@ achievement_fun(prsd)
 \arguments{
 \item{prsd}{parsed input list}
 }
+\value{
+A data frame of recent achievements for the athlete.  An empty list is returned if none found
+}
 \description{
 Get recent achievements, used internally in \code{\link{athl_fun}}
 }
+\concept{notoken}

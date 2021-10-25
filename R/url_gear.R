@@ -7,6 +7,8 @@
 #' @export
 #' 
 #' @details used by other functions
+#' 
+#' @return A character string of the gear URL used for API requests
 url_gear <- function(id){
 	url_ <- "https://www.strava.com/api/v3/gear/"
 	url_ <- paste(url_, id, sep = "")

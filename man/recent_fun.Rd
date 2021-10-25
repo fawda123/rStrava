@@ -9,6 +9,9 @@ recent_fun(prsd)
 \arguments{
 \item{prsd}{parsed input list}
 }
+\value{
+A data frame of recent activities for the athlete.  An empty list is returned if none found.
+}
 \description{
 Get last three recent activities, used internally in \code{\link{athl_fun}}
 }

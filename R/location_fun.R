@@ -7,6 +7,8 @@
 #' @export
 #' 
 #' @concept notoken
+#' 
+#' @return A character string of the athlete location
 location_fun <- function(prsd){
 	
 	out <- prsd$athlete$location

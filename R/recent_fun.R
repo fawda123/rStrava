@@ -7,6 +7,8 @@
 #' @export
 #' 
 #' @concept notoken
+#' 
+#' @return  A data frame of recent activities for the athlete.  An empty list is returned if none found. 
 recent_fun <- function(prsd){
 	
 	if(is.null(prsd$recentActivities))

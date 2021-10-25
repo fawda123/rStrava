@@ -7,7 +7,10 @@
 url_athlete(id = NULL)
 }
 \arguments{
-\item{id}{str or integet of athlete id assigned by Strava, NULL will set the authenticated user URL}
+\item{id}{str or integer of athlete id assigned by Strava, NULL will set the authenticated user URL}
+}
+\value{
+A character string of the athlete URL used for API requests
 }
 \description{
 Set the url of the athlete to get data using an ID

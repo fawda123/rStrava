@@ -14,3 +14,4 @@ ggmapTemp.png
 ^\.github$
 ^\.httr-oauth$
 ^cran-comments\.md$
+^CRAN-RELEASE$

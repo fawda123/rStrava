@@ -6,6 +6,9 @@
 #' 
 #' @export
 #' 
+#' @concept notoken
+#' 
+#' @return A data frame of recent achievements for the athlete.  An empty list is returned if none found 
 achievement_fun <- function(prsd){
 	
 	if(length(prsd$achievements) == 0)

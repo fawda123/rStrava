@@ -9,6 +9,9 @@ monthly_fun(prsd)
 \arguments{
 \item{prsd}{parsed input list}
 }
+\value{
+A data frame of monthly summaries for the athlete, including distance, time, and elevation gain each month.  A \code{NA} value is returned if no activity was observed in recent months.
+}
 \description{
 Get distances for last twelve months, used internally in \code{\link{athl_fun}}
 }

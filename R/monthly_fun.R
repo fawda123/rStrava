@@ -7,6 +7,8 @@
 #' @export
 #' 
 #' @concept notoken
+#' 
+#' @return  A data frame of monthly summaries for the athlete, including distance, time, and elevation gain each month.  A \code{NA} value is returned if no activity was observed in recent months. 
 monthly_fun <- function(prsd){
 
 	out <- prsd$stats$chartData
