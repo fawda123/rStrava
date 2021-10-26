@@ -15,15 +15,7 @@ This is a resubmission to fix issues on original CRAN submission, including:
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs.
-
-There was one NOTE.  These are not misspelled.
-
-* checking CRAN incoming feasibility ... NOTE
-
-Possibly misspelled words in DESCRIPTION:
-  Strava (3:19)
-  Strava's (6:44)
+There were no ERRORs, WARNINGs, or NOTEs.
   
 ## Downstream dependencies
 
