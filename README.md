@@ -4,6 +4,8 @@
 ##### *Marcus W. Beck, <mbafs2012@gmail.com>, Pedro Villarroel, <pedrodvf@gmail.com>, Daniel Padfield, <dp323@exeter.ac.uk>, Lorenzo Gaborini, <lorenzo.gaborini@unil.ch>, Niklas von Maltzahn, <niklasvm@gmail.com>*
 
 [![R-CMD-check](https://github.com/fawda123/rStrava/workflows/R-CMD-check/badge.svg)](https://github.com/fawda123/rStrava/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rStrava)](https://CRAN.R-project.org/package=rStrava)
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
 
 <img src="man/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300" />
@@ -12,7 +14,14 @@
 ### Overview and installation
 
 This is the development repository for rStrava, an R package to access
-data from the Strava API. The package can be installed and loaded as
+data from the Strava API. The package can be installed from CRAN. It is
+also available on [r-universe](https://fawda123.r-universe.dev/).
+
+``` r
+install.packages('rStrava')
+```
+
+The development version from this repository can be installed as
 follows:
 
 ``` r
@@ -53,29 +62,34 @@ athl_fun(2837007, trace = FALSE)
     ## [1] "Marcus Beck"
     ## 
     ## $`2837007`$location
-    ## [1] "Irvine, California"
+    ## [1] "Saint Petersburg, Florida"
     ## 
     ## $`2837007`$units
     ## [1] "mi" "ft"
     ## 
     ## $`2837007`$monthly
     ##        month    miles hours elev_gain
-    ## 1 2020-06-01 63.02319     8       258
-    ## 2 2020-07-01 58.18209     8       229
-    ## 3 2020-08-01 85.70946     9       280
-    ## 4 2020-09-01 67.77482     9       257
-    ## 5 2020-10-01 55.90228     7       199
-    ## 6 2020-11-01 61.53501     8       293
-    ## 7 2020-12-01 29.38278     3        80
+    ## 1 2021-04-01 56.37266     7       231
+    ## 2 2021-05-01 85.27512    10       165
+    ## 3 2021-06-01 71.34770     9       101
+    ## 4 2021-07-01 61.49214     8        86
+    ## 5 2021-08-01 69.58798     9       149
+    ## 6 2021-09-01 57.58868     8        94
+    ## 7 2021-10-01 76.01979     9       109
     ## 
     ## $`2837007`$recent
-    ##           id        name type startDateLocal distance elevation movingTime
-    ## 1 4481298718 Evening Run  run     2020-12-16      3.2        44      25:57
-    ## 2 4473443991 Evening Run  run     2020-12-14      3.2        10      26:08
-    ## 3 4468636914   Lunch Run  run     2020-12-13      3.2        14      26:43
+    ##           id           name type startDateLocal distance elevation movingTime
+    ## 1 6173651845    Morning Run  run     2021-10-27      3.2        11      27:07
+    ## 2 6171228127 Afternoon Ride ride     2021-10-26      2.9        16      12:55
+    ## 3 6168437171   Morning Ride ride     2021-10-26      3.0         0      15:16
     ## 
     ## $`2837007`$achievements
-    ## list()
+    ##                                            description             timeago
+    ## 1              2nd fastest time on Bayshore Drive 400m 2021-10-24 17:56:50
+    ## 2              2nd fastest time on Bayshore Drive 800m 2021-10-24 17:56:50
+    ## 3              2nd fastest time on Bayshore Drive 200m 2021-10-24 17:56:50
+    ## 4        2nd fastest time on st Avenue Southeast Climb 2021-10-24 17:56:50
+    ## 5 2nd fastest time on Dan Wheldon Way to 2nd Ave North 2021-10-24 17:56:50
 
 ### API functions (token)
 
@@ -137,6 +151,10 @@ API key is needed to use the function. This key must be registered
 externally with the ggmap package using `register_google()` before
 executing `get_heat_map`.
 
+    ## Warning: package 'httr' was built under R version 4.0.5
+
+    ## Warning: package 'ggplot2' was built under R version 4.0.5
+
 ``` r
 library(ggmap)
 register_google(mykey)
@@ -148,11 +166,6 @@ The API retrieval functions are used with the token.
 
 ``` r
 myinfo <- get_athlete(stoken, id = '2837007')
-```
-
-    ## Auto-refreshing stale OAuth token.
-
-``` r
 head(myinfo)
 ```
 
@@ -171,8 +184,8 @@ head(myinfo)
     ## $lastname
     ## [1] "Beck"
     ## 
-    ## $city
-    ## [1] "Irvine"
+    ## $bio
+    ## [1] ""
 
 An example creating a heat map of activities:
 
@@ -189,7 +202,7 @@ act_data <- compile_activities(my_acts) %>%
 get_heat_map(act_data, key = mykey, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 Plotting elevation and grade for a single ride:
 
@@ -201,14 +214,14 @@ id <- 1784292574
 get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
 # plot % gradient along a single ride
 get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-13-2.png)<!-- -->
+![](man/figures/unnamed-chunk-14-2.png)<!-- -->
 
 Get elevation profiles for activities:
 
@@ -219,13 +232,13 @@ my_acts <- get_activity_list(stoken)
 get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
 ``` r
 get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial', total = T)
 ```
 
-![](man/figures/unnamed-chunk-14-2.png)<!-- -->
+![](man/figures/unnamed-chunk-15-2.png)<!-- -->
 
 Plot average speed per split (km or mile) for an activity:
 
@@ -234,7 +247,7 @@ Plot average speed per split (km or mile) for an activity:
 plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/unnamed-chunk-16-1.png)<!-- -->
 
 Additional functions are provided to get “stream” information for
 individual activities. Streams provide detailed information about
@@ -248,11 +261,9 @@ Use `get_activity_streams` for detailed info about activities:
 strms_data <- get_activity_streams(my_acts, stoken, id = id)
 ```
 
-    ## Warning: `as.tibble()` is deprecated as of tibble 2.0.0.
+    ## Warning: `as.tibble()` was deprecated in tibble 2.0.0.
     ## Please use `as_tibble()` instead.
     ## The signature and semantics have changed, see `?as_tibble`.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
 
 ``` r
 head(strms_data)
@@ -280,21 +291,21 @@ Stream data can be plotted using any of the plotting functions.
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
 ```
 
-![](man/figures/unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
 # elevation profile
 get_elev_prof(strms_data)
 ```
 
-![](man/figures/unnamed-chunk-18-1.png)<!-- -->
+![](man/figures/unnamed-chunk-19-1.png)<!-- -->
 
 ``` r
 # speed splits
 plot_spdsplits(strms_data, stoken)
 ```
 
-![](man/figures/unnamed-chunk-18-2.png)<!-- -->
+![](man/figures/unnamed-chunk-19-2.png)<!-- -->
 
 ### Contributing
 
