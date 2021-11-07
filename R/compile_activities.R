@@ -68,7 +68,7 @@ compile_activities <- function(actlist, acts = NULL, id = NULL, units = 'metric'
 	cols <- c('id', 'achievement_count', 'athlete.resource_state', 'athlete_count', 'average_speed', 'average_watts', 'comment_count', 'distance', 'elapsed_time', 'elev_high', 'elev_low', 'end_latlng1', 'end_latlng2', 'kilojoules', 'kudos_count', 'map.resource_state', 'max_speed', 'moving_time', 'photo_count', 'resource_state', 'start_latitude', 'start_latlng1', 'start_latlng2', 'start_longitude', 'total_elevation_gain', 'total_photo_count')
 	cols <- names(out)[names(out) %in% cols]
 	out <- dplyr::mutate_at(out, cols, as.numeric)
-	
+
 	if(units == 'metric'){
 		
 		# distance from m to km
@@ -98,12 +98,17 @@ compile_activities <- function(actlist, acts = NULL, id = NULL, units = 'metric'
 		# total_elevation_gain from m to ft
 		out <- dplyr::mutate(out, 
 			distance = distance * 0.000621371,
-			average_speed = average_speed * 2.23694, 
-			elev_high = elev_high * 3.28084, 
-			elev_low = elev_low * 3.28084,
+			average_speed = average_speed * 2.23694,
 			max_speed = max_speed * 2.23694,
 			total_elevation_gain = total_elevation_gain * 3.28084
 		)
+		
+		# these will be missing if trainer == T
+		if(sum(names(out) %in% c('elev_high', 'elev_low')) == 2)
+			out <- dplyr::mutate(out, 
+				elev_high = elev_high * 3.28084, 
+				elev_low = elev_low * 3.28084
+			)
 		
 		unit_type <- units
 		unit_vals <- c(distance = 'mi', speed = 'mi/hr', elevation = 'ft')
