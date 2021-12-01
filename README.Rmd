@@ -5,7 +5,7 @@ output: github_document
 ```{r, echo = F, warning = F, message = F}
 library(knitr)
 
-opts_chunk$set(fig.path = 'man/figures/')
+opts_chunk$set(fig.path = 'man/figures/', warning = F, message = F)
 ```
 
 # rStrava
@@ -15,6 +15,7 @@ opts_chunk$set(fig.path = 'man/figures/')
 [![R-CMD-check](https://github.com/fawda123/rStrava/workflows/R-CMD-check/badge.svg)](https://github.com/fawda123/rStrava/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/rStrava)](https://CRAN.R-project.org/package=rStrava)
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/rStrava)](https://cran.rstudio.com/web/packages/rStrava/index.html)
 
 <img src="man/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300" />
 <br></br>
@@ -90,7 +91,7 @@ cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
     append=TRUE)
 
 # retrieve the key, restart R if not found
-mykey <- Sys.getenv("google_key")
+google_key <- Sys.getenv("google_key")
 ```
 
 The `get_heat_map` function uses [ggmap](https://github.com/dkahle/ggmap) to create base maps.  A Google API key is needed to use the function.  This key must be registered externally with the ggmap package using `register_google()` before executing `get_heat_map`.
@@ -100,7 +101,7 @@ source('extra.R')
 ```
 ```{r, message = F, warning = F}
 library(ggmap)
-register_google(mykey)
+register_google(google_key)
 ```
 
 #### Using the functions
@@ -122,7 +123,7 @@ act_data <- compile_activities(my_acts) %>%
 	filter(start_latitude < 31.5 & start_latitude > 30) %>% 
 	filter(distance > 20)
 	
-get_heat_map(act_data, key = mykey, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
+get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
 Plotting elevation and grade for a single ride:
@@ -131,10 +132,10 @@ Plotting elevation and grade for a single ride:
 id <- 1784292574
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = google_key, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
 Get elevation profiles for activities:
@@ -142,8 +143,8 @@ Get elevation profiles for activities:
 # get activities
 my_acts <- get_activity_list(stoken) 
 
-get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial')
-get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial', total = T)
+get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial')
+get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial', total = T)
 ```  
 
 Plot average speed per split (km or mile) for an activity:

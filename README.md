@@ -7,6 +7,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rStrava)](https://CRAN.R-project.org/package=rStrava)
 [![DOI](https://zenodo.org/badge/23404183.svg)](https://zenodo.org/badge/latestdoi/23404183)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/rStrava)](https://cran.rstudio.com/web/packages/rStrava/index.html)
 
 <img src="man/figures/api_logo_pwrdBy_strava_horiz_light.png" align="left" width="300" />
 <br></br> <br></br>
@@ -68,28 +69,30 @@ athl_fun(2837007, trace = FALSE)
     ## [1] "mi" "ft"
     ## 
     ## $`2837007`$monthly
-    ##        month    miles hours elev_gain
-    ## 1 2021-04-01 56.37266     7       231
-    ## 2 2021-05-01 85.27512    10       165
-    ## 3 2021-06-01 71.34770     9       101
-    ## 4 2021-07-01 61.49214     8        86
-    ## 5 2021-08-01 69.58798     9       149
-    ## 6 2021-09-01 57.58868     8        94
-    ## 7 2021-10-01 76.01979     9       109
+    ##        month      miles hours elev_gain
+    ## 1 2021-06-01  71.347704     9       101
+    ## 2 2021-07-01  61.492136     8        86
+    ## 3 2021-08-01  69.587981     9       149
+    ## 4 2021-09-01  57.588682     8        94
+    ## 5 2021-10-01  90.255408    11       132
+    ## 6 2021-11-01 101.732756    11       221
+    ## 7 2021-12-01   3.237965     0         5
     ## 
     ## $`2837007`$recent
     ##           id           name type startDateLocal distance elevation movingTime
-    ## 1 6173651845    Morning Run  run     2021-10-27      3.2        11      27:07
-    ## 2 6171228127 Afternoon Ride ride     2021-10-26      2.9        16      12:55
-    ## 3 6168437171   Morning Ride ride     2021-10-26      3.0         0      15:16
+    ## 1 6329459767    Morning Run  run     2021-12-01      3.2        17      26:36
+    ## 2 6327742864 Afternoon Ride ride     2021-11-30      2.9        24      14:02
+    ## 3 6325224982   Morning Ride ride     2021-11-30      2.7        12      11:59
     ## 
     ## $`2837007`$achievements
-    ##                                            description             timeago
-    ## 1              2nd fastest time on Bayshore Drive 400m 2021-10-24 17:56:50
-    ## 2              2nd fastest time on Bayshore Drive 800m 2021-10-24 17:56:50
-    ## 3              2nd fastest time on Bayshore Drive 200m 2021-10-24 17:56:50
-    ## 4        2nd fastest time on st Avenue Southeast Climb 2021-10-24 17:56:50
-    ## 5 2nd fastest time on Dan Wheldon Way to 2nd Ave North 2021-10-24 17:56:50
+    ##                                                                      description
+    ## 1                  2nd fastest time on Bay Shore northbound - Pier to 5th Ave NE
+    ## 2 2nd fastest time on Bay Shore and Vinoy northbound - Pier to the tennis courts
+    ## 3                          3rd fastest time on Barwood, VInoy, and N Straub Park
+    ##               timeago
+    ## 1 2021-11-14 17:17:56
+    ## 2 2021-11-14 17:17:56
+    ## 3 2021-11-14 17:17:56
 
 ### API functions (token)
 
@@ -142,7 +145,7 @@ cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
     append=TRUE)
 
 # retrieve the key, restart R if not found
-mykey <- Sys.getenv("google_key")
+google_key <- Sys.getenv("google_key")
 ```
 
 The `get_heat_map` function uses
@@ -151,13 +154,9 @@ API key is needed to use the function. This key must be registered
 externally with the ggmap package using `register_google()` before
 executing `get_heat_map`.
 
-    ## Warning: package 'httr' was built under R version 4.0.5
-
-    ## Warning: package 'ggplot2' was built under R version 4.0.5
-
 ``` r
 library(ggmap)
-register_google(mykey)
+register_google(google_key)
 ```
 
 #### Using the functions
@@ -199,7 +198,7 @@ act_data <- compile_activities(my_acts) %>%
     filter(start_latitude < 31.5 & start_latitude > 30) %>% 
     filter(distance > 20)
     
-get_heat_map(act_data, key = mykey, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
+get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
@@ -211,14 +210,14 @@ Plotting elevation and grade for a single ride:
 id <- 1784292574
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = mykey, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = google_key, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = mykey, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-14-2.png)<!-- -->
@@ -229,13 +228,13 @@ Get elevation profiles for activities:
 # get activities
 my_acts <- get_activity_list(stoken) 
 
-get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial')
+get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
 ``` r
-get_elev_prof(my_acts, id = id, key = mykey, units = 'imperial', total = T)
+get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial', total = T)
 ```
 
 ![](man/figures/unnamed-chunk-15-2.png)<!-- -->
@@ -259,13 +258,6 @@ Use `get_activity_streams` for detailed info about activities:
 ``` r
 # get streams for the first activity in my_acts
 strms_data <- get_activity_streams(my_acts, stoken, id = id)
-```
-
-    ## Warning: `as.tibble()` was deprecated in tibble 2.0.0.
-    ## Please use `as_tibble()` instead.
-    ## The signature and semantics have changed, see `?as_tibble`.
-
-``` r
 head(strms_data)
 ```
 
