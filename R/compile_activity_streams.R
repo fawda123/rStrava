@@ -25,7 +25,7 @@ compile_activity_streams <- function(streams, id = NULL){
    # Remove 'resolution', 'series_type', 'original_size' columns from stream contents
    tmp <- streams %>% 
       purrr::transpose(.) %>% 
-      tibble::as.tibble() %>% 
+      tibble::as_tibble() %>% 
       dplyr::select(type, data) %>% 
       dplyr::mutate(
       	type = unlist(type), 
@@ -58,7 +58,7 @@ compile_activity_streams <- function(streams, id = NULL){
       # Assign names to latlng field
       f.latlng.to.df <- function(x) {
          purrr::set_names(x, nm = c('lat', 'lng')) %>% 
-            tibble::as.tibble()
+            tibble::as_tibble()
       }
       
       # and unnest to columns
