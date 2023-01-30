@@ -33,8 +33,12 @@ get_streams  <- function(stoken, id, request = "activities",
 	if (length(id) != 1){
 		stop('id must be a scalar.')
 	}
-	if(is.null(types))
-		types <- c("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
+	VALID_TYPES <- c("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
+	if(!is.null(types)) {
+		types <- match.arg(types, VALID_TYPES)
+	} else {
+		types <- VALID_TYPES
+	}
 	
 	req <- GET(url_streams(id, request, types), stoken,
 						 query = list(resolution = resolution, series_type = series_type))
