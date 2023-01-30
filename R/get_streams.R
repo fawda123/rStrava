@@ -6,7 +6,7 @@
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
 #' @param id numeric for id of the request
 #' @param request chr string defining the stream type, must be "activities", "segment_efforts", "segments"
-#' @param types list of chr strings with any combination of "time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", or "grade_smooth"
+#' @param types list of chr strings with any combination of "time" (seconds), "latlng", "distance" (meters), "altitude" (meters), "velocity_smooth" (meters per second), "heartrate" (bpm), "cadence" (rpm), "watts", "temp" (degrees Celsius), "moving" (boolean), or "grade_smooth" (percent)
 #' @param resolution chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all
 #' @param series_type chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" (default) or "time".
 #' 
