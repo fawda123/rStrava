@@ -15,7 +15,7 @@ get_heat_map(act_data, ...)
   acts = 1,
   id = NULL,
   alpha = NULL,
-  f = 0.1,
+  f = 1,
   add_elev = FALSE,
   as_grad = FALSE,
   distlab = TRUE,
@@ -25,6 +25,7 @@ get_heat_map(act_data, ...)
   expand = 10,
   maptype = "terrain",
   source = "google",
+  zoom = "auto",
   units = "metric",
   ...
 )
@@ -92,7 +93,7 @@ get_heat_map(act_data, ...)
 
 \item{maptype}{chr string indicating the base map type relevant for the \code{source}, passed to \code{\link[ggmap]{get_map}}}
 
-\item{source}{chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported}
+\item{source}{chr string indicating map source, passed to \code{\link[ggmap]{get_map}}}
 
 \item{units}{chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}}
 

@@ -2,7 +2,7 @@ Package: rStrava
 Type: Package
 Title: Access the 'Strava' API
 Version: 1.1.4.9000
-Date: 2021-11-07
+Date: 2023-01-31
 Description: Functions to access data from the 'Strava v3 API' <https://developers.strava.com/>.
 BugReports: https://github.com/fawda123/rStrava/issues
 License: CC0
@@ -50,4 +50,4 @@ Authors@R: c(
   	email = "niklasv@gmail.com"
   	)
   )
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
