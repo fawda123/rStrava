@@ -24,7 +24,7 @@ get_streams(
 
 \item{resolution}{chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all}
 
-\item{series_type}{chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" or "time". If omitted, no merging is perfomed.}
+\item{series_type}{chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" or "time". If omitted, no merging is performed.}
 }
 \value{
 Data from an API request.

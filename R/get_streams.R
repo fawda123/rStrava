@@ -8,7 +8,7 @@
 #' @param request chr string defining the stream type, must be "activities", "segment_efforts", "segments"
 #' @param types list of chr strings with any combination of "time" (seconds), "latlng", "distance" (meters), "altitude" (meters), "velocity_smooth" (meters per second), "heartrate" (bpm), "cadence" (rpm), "watts", "temp" (degrees Celsius), "moving" (boolean), or "grade_smooth" (percent)
 #' @param resolution chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all
-#' @param series_type chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" or "time". If omitted, no merging is perfomed.
+#' @param series_type chr string for merging the data if \code{resolution} is not equal to "all".  Accepted values are "distance" or "time". If omitted, no merging is performed.
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website. From the API documentation, 'streams' is the Strava term for the raw data associated with an activity.
 #' 
