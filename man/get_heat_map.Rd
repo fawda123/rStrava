@@ -25,7 +25,6 @@ get_heat_map(act_data, ...)
   expand = 10,
   maptype = "terrain",
   source = "google",
-  zoom = "auto",
   units = "metric",
   ...
 )
