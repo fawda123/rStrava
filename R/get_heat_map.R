@@ -21,7 +21,7 @@
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
 #' @param maptype chr string indicating the base map type relevant for the \code{source}, passed to \code{\link[ggmap]{get_map}}
-#' @param source chr string indicating map source, passed to \code{\link[ggmap]{get_map}}, currently only \code{"google"} and \code{"osm"} are supported
+#' @param source chr string indicating map source, passed to \code{\link[ggmap]{get_map}}
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
 #' 
@@ -68,7 +68,7 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map list
-get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, f = 0.1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
+get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, f = 1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, id = id, units = units)
@@ -126,7 +126,7 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 		bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
 
 		# map and base plot
-		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
+		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype, source = source)))
 		pbase <- suppressMessages(ggmap::ggmap(map) +
 			ggplot2::coord_map() + 
 			ggplot2::theme(axis.title = ggplot2::element_blank()))
@@ -249,7 +249,7 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('e
 		bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
 	
 		# map and base plot
-		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype)))
+		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype, source = source)))
 		pbase <- ggmap::ggmap(map) +
 			ggplot2::coord_fixed(ratio = 1) +
 			ggplot2::theme(axis.title = ggplot2::element_blank())
