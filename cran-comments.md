@@ -1,17 +1,13 @@
 ## Resubmission
 
-This is a resubmission to fix issues on original CRAN submission, including: 
-
-* Used single quotes for software and API names in DESCRIPTION file
-* Added web reference to the API in the DESCRIPTION file
-* Added missing \value text descriptions to function documentation
+This is a resubmission for a version update
 
 ## Test environments
 
-* ubuntu 20.04 (on GitHub Actions), R 4.1.1
-* OS X (on GitHub Actions), R 4.1.1
-* win-builder [http://win-builder.r-project.org/](http://win-builder.r-project.org/) (devel and release)
-* local Windows 7 install, R 4.1.0
+* ubuntu 20.04 (on GitHub Actions, devel, release, old-release)
+* OS X (on GitHub Actions), R 4.3.0
+* win-builder [http://win-builder.r-project.org/](http://win-builder.r-project.org/) (devel, release, old-release)
+* local Windows 7 install, R 4.2.3
 
 ## R CMD check results
 
