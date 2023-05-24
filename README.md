@@ -69,30 +69,23 @@ athl_fun(2837007, trace = FALSE)
     ## [1] "mi" "ft"
     ## 
     ## $`2837007`$monthly
-    ##        month      miles hours elev_gain
-    ## 1 2021-06-01  71.347704     9       101
-    ## 2 2021-07-01  61.492136     8        86
-    ## 3 2021-08-01  69.587981     9       149
-    ## 4 2021-09-01  57.588682     8        94
-    ## 5 2021-10-01  90.255408    11       132
-    ## 6 2021-11-01 101.732756    11       221
-    ## 7 2021-12-01   3.237965     0         5
+    ##        month     miles hours elev_gain
+    ## 1 2022-11-01  45.55707     6       195
+    ## 2 2022-12-01  62.25518     8       983
+    ## 3 2023-01-01 112.87767    12       273
+    ## 4 2023-02-01  74.15133     9       109
+    ## 5 2023-03-01  94.99336    11       227
+    ## 6 2023-04-01  77.32219     9        98
+    ## 7 2023-05-01  69.49664     8        87
     ## 
     ## $`2837007`$recent
     ##           id           name type startDateLocal distance elevation movingTime
-    ## 1 6329459767    Morning Run  run     2021-12-01      3.2        17      26:36
-    ## 2 6327742864 Afternoon Ride ride     2021-11-30      2.9        24      14:02
-    ## 3 6325224982   Morning Ride ride     2021-11-30      2.7        12      11:59
+    ## 1 9130931408   Morning Ride ride     2023-05-24      2.7        11      10:52
+    ## 2 9130716559    Morning Run  run     2023-05-24      3.2        12      26:35
+    ## 3 9128167016 Afternoon Ride ride     2023-05-23      2.7        20      12:43
     ## 
     ## $`2837007`$achievements
-    ##                                                                      description
-    ## 1                  2nd fastest time on Bay Shore northbound - Pier to 5th Ave NE
-    ## 2 2nd fastest time on Bay Shore and Vinoy northbound - Pier to the tennis courts
-    ## 3                          3rd fastest time on Barwood, VInoy, and N Straub Park
-    ##               timeago
-    ## 1 2021-11-14 17:17:56
-    ## 2 2021-11-14 17:17:56
-    ## 3 2021-11-14 17:17:56
+    ## list()
 
 ### API functions (token)
 
@@ -194,8 +187,8 @@ library(dplyr)
 # get activities, get activities by lat/lon, distance, plot
 my_acts <- get_activity_list(stoken)
 act_data <- compile_activities(my_acts) %>% 
-    filter(start_longitude < -86.5 & start_longitude > -88.5) %>% 
-    filter(start_latitude < 31.5 & start_latitude > 30) %>% 
+    filter(start_latlng2 < -86.5 & start_latlng2 > -88.5) %>% 
+    filter(start_latlng1 < 31.5 & start_latlng1 > 30) %>% 
     filter(distance > 20)
     
 get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
@@ -210,14 +203,14 @@ Plotting elevation and grade for a single ride:
 id <- 1784292574
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3, distlab = F, key = google_key, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.5, distlab = F, key = google_key, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.3,  distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.5,  distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-14-2.png)<!-- -->
@@ -280,7 +273,7 @@ Stream data can be plotted using any of the plotting functions.
 
 ``` r
 # heat map
-get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.3, size = 2, col = 'Spectral', distlab = F)
+get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.5, size = 2, col = 'Spectral', distlab = F, maptype = 'satellite')
 ```
 
 ![](man/figures/unnamed-chunk-18-1.png)<!-- -->
