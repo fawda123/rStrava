@@ -60,7 +60,7 @@ get_activity_streams.actframe <- function(act_data, stoken, types = NULL, resolu
 	types.all <- list("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
 	force(types)
 	if (is.null(types)) {
-		types <- types.all
+		types <- unlist(types.all)
 	} else {
 		if (!all(types %in% types.all)) {
 			types.all %>% paste(collapse = ' ') %>% paste('types must be in:', .) %>% stop()
