@@ -1,8 +1,8 @@
 Package: rStrava
 Type: Package
 Title: Access the 'Strava' API
-Version: 1.2.0
-Date: 2023-05-24
+Version: 1.2.0.9000
+Date: 2023-06-16
 Description: Functions to access data from the 'Strava v3 API' <https://developers.strava.com/>.
 BugReports: https://github.com/fawda123/rStrava/issues
 License: CC0

@@ -143,10 +143,10 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 			temp <- dplyr::mutate(temp, EleDiff = c(0, diff(ele)),
 														distdiff = c(0, diff(distance)),
 														grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
-			
+
 			p <- pbase +
 				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = grad), 
-													 alpha = alpha, data = temp, size = size) +
+													 alpha = alpha, data = temp, linewidth = size) +
 				ggplot2::scale_colour_distiller('Gradient (%)', palette = col)
 		
 		# plot elevation			
@@ -157,7 +157,7 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 			
 			p <- pbase +
 				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = ele), 
-													 alpha = alpha, data = temp, size = size) +
+													 alpha = alpha, data = temp, linewidth = size) +
 				ggplot2::scale_colour_distiller(leglab, palette = col)
 			
 		}
@@ -167,7 +167,7 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 		
 		p <- pbase +
 			ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity), 
-												 alpha = alpha, data = temp, size = size, colour = col)
+												 alpha = alpha, data = temp, linewidth = size, colour = col)
 		
 	}
 	
@@ -261,7 +261,7 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('e
 	else leglab <- unit_vals[filltype]
 	p <- pbase +
 		ggplot2::geom_path(ggplot2::aes_string(x = 'lng', y = 'lat', group = 'id', colour = filltype), 
-											 alpha = alpha, data = temp, size = size) +
+											 alpha = alpha, data = temp, linewidth = size) +
 		ggplot2::scale_colour_distiller(leglab, palette = col)
 
 	# plot distances
