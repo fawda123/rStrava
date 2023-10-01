@@ -21,6 +21,11 @@ athlind_fun <- function(athl_num){
 		read_html() %>% 
 		rvest::html_nodes("[data-react-class]") %>%
 		xml_attr('data-react-props')
+	
+	# # use page inspect to find this info, div classes can be selected using . notation, see html_elements help fil
+	# athlname <- url_in %>% 
+	# 	read_html() %>% 
+	# 	rvest::html_elements(".Details_name__Wz5bH")
 		
 	prsd <- V8::v8()
 	prsd$assign('xmlatt', V8::JS(xmlatt))
