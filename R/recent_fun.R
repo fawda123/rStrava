@@ -11,16 +11,19 @@
 #' @return  A data frame of recent activities for the athlete.  An empty list is returned if none found. 
 recent_fun <- function(prsd){
 	
-	if(is.null(prsd$recentActivities))
-		return(list)
-
-	out <- prsd$recentActivities[, c('id', 'name', 'type', 'startDateLocal', 'distance', 'elevation', 'movingTime')]
-	out$distance <- as.numeric(gsub('^(.*)\\s.*$', '\\1', out$distance))
-	out$elevation <- as.numeric(gsub('^(.*)\\s.*$', '\\1', out$elevation))
-	out$startDateLocal[out$startDateLocal %in% 'Yesterday'] <- format(Sys.Date() - 1, '%B %d, %Y')
-	out$startDateLocal[out$startDateLocal %in% 'Today'] <- format(Sys.Date(), '%B %d, %Y')
-	out$startDateLocal <- as.Date(out$startDateLocal, '%B %d, %Y')
-
+	recent <- prsd %>%
+		rvest::html_elements(".RecentActivities_card__oYIGT")
+	
+	if(length(recent) == 0)
+		return(NA)
+	
+	out <- list()
+	out$name <- rvest::html_elements(recent, ".RecentActivities_title__wXGAv") %>% xml2::xml_text()
+	out$date <- rvest::html_elements(recent, ".RecentActivities_timestamp__pB9a8") %>% xml2::xml_text()
+	out$labs <- rvest::html_elements(recent, ".Stat_statLabel___khR4") %>% xml2::xml_text()
+	out$stats <- rvest::html_elements(recent, ".ActivityStats_statValue__8IGVY") %>% xml2::xml_text()
+		
+	# matrix(out$stats, ncol = length(out$date), byrow = T)
 	return(out)
 	
 }

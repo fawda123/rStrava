@@ -11,9 +11,11 @@
 #' @return A character string of the athlete location
 location_fun <- function(prsd){
 	
-	out <- prsd$athlete$location
+	out <- prsd %>% 
+		rvest::html_elements(".Details_location__2Dwwo") %>% 
+		xml2::xml_text()
 	
-	if(out == '') 
+	if(length(out) == 0) 
 		out <- NA
 	
 	return(out)
