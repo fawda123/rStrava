@@ -19,18 +19,17 @@ athlind_fun <- function(athl_num){
 	# get page data for athlete
 	prsd <- url_in %>% 
 		read_html()
-	browser()
-	
-	# exit if nothing found
-	if(is.null(prsd)){
-		out <- paste0('No data for athlete ', athl_num, ', sharing permissions likely set to private.')
-		return(out)
-	}
-	
+
 	# name
 	name <- prsd %>%
 		rvest::html_elements(".Details_name__Wz5bH") %>% 
 		xml2::xml_text()
+
+	# exit if nothing found
+	if(length(name) == 0){
+		out <- paste0("No data for athlete ", athl_num, ", doesn't exist or sharing set to private.")
+		return(out)
+	}
 	
 	# get athlete location
 	loc <- location_fun(prsd)
