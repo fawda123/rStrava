@@ -8,15 +8,18 @@
 #' 
 #' @concept notoken
 #' 
-#' @return A data frame of recent achievements for the athlete.  An empty list is returned if none found 
+#' @return A data frame of recent achievements for the athlete.  An empty list is returned if none found. 
 achievement_fun <- function(prsd){
 	
-	if(length(prsd$achievements) == 0)
+	achieve <- rvest::html_elements(prsd, ".Achievements_title__uBr_B")
+
+	if(length(achieve) == 0)
 		return(list())
 	
-	out <- prsd$achievements[, c('description', 'timeago')]
-	out$timeago <- gsub('^.*\"timeago\"\\sdatetime=\\"(.*Z)\\".*$', '\\1', out$timeago)
-	out$timeago <- as.POSIXct(gsub('T|Z', ' ', out$timeago), 'GMT')
+	dts <- rvest::html_elements(prsd, '.timeago') %>% xml2::xml_text()
+	achieve <- achieve %>% xml2::xml_text()
+	
+	out <- data.frame(Date = dts, Achievement = achieve)
 	
 	return(out)
 	

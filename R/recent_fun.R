@@ -16,14 +16,21 @@ recent_fun <- function(prsd){
 	
 	if(length(recent) == 0)
 		return(NA)
+
+	nms <- rvest::html_elements(recent, ".RecentActivities_title__wXGAv") %>% xml2::xml_text()
+	dts <- rvest::html_elements(recent, ".RecentActivities_timestamp__pB9a8") %>% xml2::xml_text()
+	lbs <- rvest::html_elements(recent, ".Stat_statLabel___khR4") %>% xml2::xml_text()
+	stats <- rvest::html_elements(recent, ".ActivityStats_statValue__8IGVY") %>% 
+		xml2::xml_text() %>% 
+		matrix(nrow = length(recent), byrow = TRUE) %>% 
+		as.data.frame()
+	lbs <- lbs[1:ncol(stats)]
+	names(stats) <- lbs
+	stats$Date <- dts
+	stats$Name <- nms
 	
-	out <- list()
-	out$name <- rvest::html_elements(recent, ".RecentActivities_title__wXGAv") %>% xml2::xml_text()
-	out$date <- rvest::html_elements(recent, ".RecentActivities_timestamp__pB9a8") %>% xml2::xml_text()
-	out$labs <- rvest::html_elements(recent, ".Stat_statLabel___khR4") %>% xml2::xml_text()
-	out$stats <- rvest::html_elements(recent, ".ActivityStats_statValue__8IGVY") %>% xml2::xml_text()
+	out <- stats[, c('Date', 'Name', lbs)]
 		
-	# matrix(out$stats, ncol = length(out$date), byrow = T)
 	return(out)
 	
 }

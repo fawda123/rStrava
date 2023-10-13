@@ -33,15 +33,15 @@ athlind_fun <- function(athl_num){
 	
 	# get athlete location
 	loc <- location_fun(prsd)
-	
-	# get units of measurement
-	unts <- units_fun(prsd)
-	
+
 	# monthly data from bar plot
 	monthly <- monthly_fun(prsd)
 	
 	# recent activities
 	recent <- recent_fun(prsd)
+	
+	# trophies
+	trophies <- trophy_fun(prsd)
 	
 	# achievements
 	achievements <- achievement_fun(prsd)
@@ -50,9 +50,9 @@ athlind_fun <- function(athl_num){
 	out <- list(
 		name = name,
 		location = loc, 
-		units = unts, 
 		monthly = monthly, 
 		recent= recent,
+		trophies = trophies,
 		achievements = achievements
 	)
 	
