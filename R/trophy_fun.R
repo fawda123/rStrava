@@ -11,7 +11,6 @@
 #' @return  A data frame of trophies for the athlete. An empty list is returned if none found.
 trophy_fun <- function(prsd){
 	
-	# xml_find_all(parsed_xml, './/title')
 	trophies <- prsd %>%
 		rvest::html_elements(".Trophy_description__EcC86")
 

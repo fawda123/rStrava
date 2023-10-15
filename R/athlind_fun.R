@@ -34,6 +34,9 @@ athlind_fun <- function(athl_num){
 	# get athlete location
 	loc <- location_fun(prsd)
 
+	# get follower data
+	follow <- follow_fun(prsd)
+	
 	# monthly data from bar plot
 	monthly <- monthly_fun(prsd)
 	
@@ -50,6 +53,7 @@ athlind_fun <- function(athl_num){
 	out <- list(
 		name = name,
 		location = loc, 
+		follow = follow,
 		monthly = monthly, 
 		recent= recent,
 		trophies = trophies,
