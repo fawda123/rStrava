@@ -10,7 +10,7 @@
 #' 
 #' @export
 #' 
-#' @return 	A list with elements for the athlete name, location, units of measurement, monthly data, recent activities, and achievements.
+#' @return 	A list with elements for the athlete's information.
 athlind_fun <- function(athl_num){
 	
 	# get unparsed url text using input

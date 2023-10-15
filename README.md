@@ -65,24 +65,22 @@ athl_fun(2837007, trace = FALSE)
     ## $`2837007`$location
     ## [1] "Saint Petersburg, Florida"
     ## 
-    ## $`2837007`$units
-    ## [1] "mi" "ft"
+    ## $`2837007`$follow
+    ##   Followers Following
+    ## 1        79        82
     ## 
     ## $`2837007`$monthly
-    ##        month     miles hours elev_gain
-    ## 1 2022-11-01  45.55707     6       195
-    ## 2 2022-12-01  62.25518     8       983
-    ## 3 2023-01-01 112.87767    12       273
-    ## 4 2023-02-01  74.15133     9       109
-    ## 5 2023-03-01  94.99336    11       227
-    ## 6 2023-04-01  77.32219     9        98
-    ## 7 2023-05-01  69.49664     8        87
+    ##   Distance Moving Time
+    ## 1  12.0 mi     5:54:18
     ## 
     ## $`2837007`$recent
-    ##           id           name type startDateLocal distance elevation movingTime
-    ## 1 9130931408   Morning Ride ride     2023-05-24      2.7        11      10:52
-    ## 2 9130716559    Morning Run  run     2023-05-24      3.2        12      26:35
-    ## 3 9128167016 Afternoon Ride ride     2023-05-23      2.7        20      12:43
+    ##               Date           Name  Time
+    ## 1 October 13, 2023   Evening Ride 41:03
+    ## 2 October 12, 2023 Afternoon Ride 40:40
+    ## 3  October 9, 2023 Afternoon Ride 42:28
+    ## 
+    ## $`2837007`$trophies
+    ## list()
     ## 
     ## $`2837007`$achievements
     ## list()
