@@ -2,7 +2,7 @@
 % Please edit documentation in R/monthly_fun.R
 \name{monthly_fun}
 \alias{monthly_fun}
-\title{Get distances for last twelve months}
+\title{Get distance and time for current month}
 \usage{
 monthly_fun(prsd)
 }
@@ -10,9 +10,9 @@ monthly_fun(prsd)
 \item{prsd}{parsed input list}
 }
 \value{
-A data frame of monthly summaries for the athlete, including distance, time, and elevation gain each month.  A \code{NA} value is returned if no activity was observed in recent months.
+A data frame of the current monthly distance and time for the athlete. An empty list is returned if none found.
 }
 \description{
-Get distances for last twelve months, used internally in \code{\link{athl_fun}}
+Get distance and time for current month, used internally in \code{\link{athl_fun}}
 }
 \concept{notoken}

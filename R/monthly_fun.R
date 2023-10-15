@@ -1,6 +1,6 @@
-#' Get distances for last twelve months
+#' Get distance and time for current month
 #'
-#' Get distances for last twelve months, used internally in \code{\link{athl_fun}}
+#' Get distance and time for current month, used internally in \code{\link{athl_fun}}
 #' 
 #' @param prsd parsed input list
 #' 
@@ -8,15 +8,24 @@
 #' 
 #' @concept notoken
 #' 
-#' @return  A data frame of monthly summaries for the athlete, including distance, time, and elevation gain each month.  A \code{NA} value is returned if no activity was observed in recent months. 
+#' @return  A data frame of the current monthly distance and time for the athlete. An empty list is returned if none found.
 monthly_fun <- function(prsd){
 
-	out <- prsd$stats$chartData
+	mos <- prsd %>% 
+		rvest::html_elements('.MonthlyStats_monthlyStats__5VwJ_')
 	
-	if(is.null(out)) 
-		return(NA)
-	
-	out$month <- as.Date(out$month, format = '%Y-%m-%d')
+	if(length(mos) == 0)
+		return(list())
+
+	labs <- mos %>% 
+		rvest::html_elements('.Stat_statLabel___khR4') %>% 
+		xml2::xml_text()
+	vals <- mos %>% 
+		rvest::html_elements('.Stat_statValue__3_kAe') %>% 
+		xml2::xml_text()
+
+	out <- data.frame(matrix(vals, ncol = length(vals)))
+	names(out) <- labs
 	
 	return(out)
 	
