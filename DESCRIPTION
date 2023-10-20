@@ -10,21 +10,19 @@ Imports:
     dplyr,
 		geosphere,
     ggplot2,
-    ggrepel,
+    ggspatial,
     googleway,
     httr,
     magrittr,
     plyr,
+    prettymapr,
     RCurl,
     rvest,
     tidyr,
     XML,
     xml2,
     purrr,
-    tibble,
-    V8
-Suggests:
-		ggmap
+    tibble
 Depends:
     R (>= 3.5.0)
 Authors@R: c(

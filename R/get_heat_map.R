@@ -11,29 +11,26 @@
 #' @param acts numeric indicating which activities to plot based on index in the activities list, defaults to most recent
 #' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
-#' @param f number specifying the fraction by which the range should be extended for the bounding box of the activities, passed to \code{\link[ggmap]{make_bbox}}
 #' @param add_elev logical indicating if elevation is overlayed by color shading on the activity lines
 #' @param as_grad logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}
 #' @param filltype chr string specifying which stream variable to use for filling line segments, applies only to \code{strframe} objects, acceptable values are \code{"elevation"}, \code{"distance"}, \code{"slope"}, or \code{"speed"}
-#' @param distlab logical if distance labels are plotted along the route with \code{\link[ggrepel]{geom_label_repel}}
+#' @param distlab logical if distance labels are plotted along the route
 #' @param distval numeric indicating rounding factor for distance labels which has direct control on label density, see details 
 #' @param size numeric indicating width of activity lines
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
-#' @param maptype chr string indicating the base map type relevant for the \code{source}, passed to \code{\link[ggmap]{get_map}}
-#' @param source chr string indicating map source, passed to \code{\link[ggmap]{get_map}}
+#' @param maptype chr string as \code{"cartolight"}, \code{"cartodark"}, \code{"osm"}, or \code{"hotstyle"} indicating the basemap type
+#' @param zoom numeric indicating zoom factor for map tiles, higher numbers increase resolution
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
 #' 
-#' @details uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggmap to produce the map and ggplot2 to plot the route.
+#' @details uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes to use in the map. Uses ggspatial to produce the map and ggplot2 to plot the route.
 #' 
-#' The Google API key for elevation is easy to obtain, follow instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
-#' 
-#' A Google API key is needed if using any map services where \code{source = "google"}.  The same key used for the elevation API can be used but must be registered externally with the ggmap package using \code{register_google()} before executing \code{get_heat_map()}.  See the examples.
+#' A Google API key is needed for the elevation data and must be included with function execution.  The API key can be obtained following the instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 #'
-#' The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequenc of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc. 
+#' The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequence of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc. 
 #' 
-#' @return plot of activity on a Google map
+#' @return A \code{\link[ggplot2]{ggplot}} object showing a map with activity locations.
 #' 
 #' @export
 #' 
@@ -45,10 +42,6 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' my_acts <- get_activity_list(stoken)
 #' 
-#' # register Google maps API key
-#' library(ggmap)
-#' register_google('xxxxxxxxxxx') # enter your key here
-#' 
 #' # default, requires Google key
 #' mykey <- 'Get Google API key'
 #' get_heat_map(my_acts, acts = 1, alpha = 1, key = mykey)
@@ -58,8 +51,7 @@
 #' 
 #' # compile first, change units
 #' my_acts <- compile_activities(my_acts, acts = 156, units = 'imperial')
-#' get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2, 
-#'   maptype = 'satellite')
+#' get_heat_map(my_acts, key = mykey, alpha = 1, add_elev = T, col = 'Spectral', size = 2)
 #' }
 get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 
@@ -68,12 +60,12 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map list
-get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, f = 1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', units = 'metric', ...){
+get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, id = id, units = units)
 
-	get_heat_map.actframe(act_data, alpha = alpha, f = f, key = key, add_elev = add_elev, as_grad = as_grad, distlab = distlab, distval = distval, size = size, col = col, expand = expand, maptype = maptype, source = source, ...)	
+	get_heat_map.actframe(act_data, alpha = alpha, key = key, add_elev = add_elev, as_grad = as_grad, distlab = distlab, distval = distval, size = size, col = col, expand = expand, maptype = maptype, zoom = zoom, ...)	
 	
 }
 	
@@ -82,12 +74,15 @@ get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, 
 #' @export
 #'
 #' @method get_heat_map actframe
-get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
+get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
 
+	# check maptype
+	maptype <- match.arg(maptype, c( 'cartolight', 'cartodark', 'osm', 'hotstyle'))
+	
 	# warning if units conflict
 	args <- as.list(match.call())
 	if('units' %in% names(args))
@@ -119,19 +114,10 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 		temp$ele <- temp$ele *  3.28084
 	}
 
-	# to appease CRAN checks
-	if(requireNamespace('ggmap', quietly = TRUE)){
-		
-		# xy lims
-		bbox <- ggmap::make_bbox(temp$lon, temp$lat, f = f)
-
-		# map and base plot
-		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype, source = source)))
-		pbase <- suppressMessages(ggmap::ggmap(map) +
-			ggplot2::coord_map() + 
-			ggplot2::theme(axis.title = ggplot2::element_blank()))
-		
-	}
+	# base plot
+	pbase <- ggplot2::ggplot() +
+		ggspatial::annotation_map_tile(zoom = zoom, quiet = TRUE, progress = "none", type = maptype, cachedir = system.file("rosm.cache", package = "ggspatial")) +
+		ggplot2::theme(axis.title = ggplot2::element_blank())
 	
 	# add elevation to plot
 	if(add_elev){
@@ -145,8 +131,8 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 														grad = c(0, (EleDiff[2:nrow(temp)]/10)/distdiff[2:nrow(temp)]))
 
 			p <- pbase +
-				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = grad), 
-													 alpha = alpha, data = temp, linewidth = size) +
+				ggspatial::geom_spatial_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = grad), 
+																		 alpha = alpha, data = temp, linewidth = size, crs = 4326) +
 				ggplot2::scale_colour_distiller('Gradient (%)', palette = col)
 		
 		# plot elevation			
@@ -156,8 +142,8 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 			leglab <- paste0('Elevation (', unit_vals['elevation'], ')')
 			
 			p <- pbase +
-				ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = ele), 
-													 alpha = alpha, data = temp, linewidth = size) +
+				ggspatial::geom_spatial_path(ggplot2::aes(x = lon, y = lat, group = activity, colour = ele), 
+													 alpha = alpha, data = temp, linewidth = size, crs = 4326) +
 				ggplot2::scale_colour_distiller(leglab, palette = col)
 			
 		}
@@ -166,11 +152,11 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 	} else {
 		
 		p <- pbase +
-			ggplot2::geom_path(ggplot2::aes(x = lon, y = lat, group = activity), 
-												 alpha = alpha, data = temp, linewidth = size, colour = col)
+			ggspatial::geom_spatial_path(ggplot2::aes(x = lon, y = lat, group = activity), 
+																	 alpha = alpha, data = temp, linewidth = size, colour = col, crs = 4326)
 		
 	}
-	
+
 	# plot distances
 	if(distlab){
 
@@ -191,15 +177,16 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 
 		# add to plot
 		p <- p + 
-			ggrepel::geom_label_repel(
+			ggspatial::geom_spatial_label_repel(
 				data = disttemp, 
 				ggplot2::aes(x = lon, y = lat, label = distance),
-				point.padding = grid::unit(0.4, "lines")
+				point.padding = grid::unit(0.4, "lines"), 
+				crs = 4326
 				)
 		
 	}
 	
-	return(suppressWarnings(p))
+	return(p)
 	
 }
 
@@ -208,11 +195,14 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev =
 #' @export
 #'
 #' @method get_heat_map strframe
-get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('elevation', 'distance', 'slope', 'speed'), distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'terrain', source = 'google', ...){
+get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation', distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
+	
+	# check maptype
+	maptype <- match.arg(maptype, c( 'cartolight', 'cartodark', 'osm', 'hotstyle'))
 	
 	# warning if units conflict
 	args <- as.list(match.call())
@@ -221,7 +211,7 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('e
 			warning('units argument ignored for strframe objects')
 	
 	# get filltype
-	filltype <- match.arg(filltype)
+	filltype <- match.arg(filltype, c('elevation', 'distance', 'slope', 'speed'))
 	
 	if(is.null(alpha)) alpha <- 0.5
 
@@ -242,26 +232,17 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('e
 	})
 	temp <- do.call('rbind', temp)
 	
-	# to appease CRAN checks
-	if(requireNamespace('ggmap', quietly = TRUE)){
-		
-		# xy lims
-		bbox <- ggmap::make_bbox(temp$lng, temp$lat, f = f)
-	
-		# map and base plot
-		map <- suppressWarnings(suppressMessages(ggmap::get_map(bbox, maptype = maptype, source = source)))
-		pbase <- ggmap::ggmap(map) +
-			ggplot2::coord_fixed(ratio = 1) +
-			ggplot2::theme(axis.title = ggplot2::element_blank())
-	
-	}
-	
+	# base plot
+	pbase <- ggplot2::ggplot() +
+		ggspatial::annotation_map_tile(zoom = zoom, quiet = TRUE, progress = "none", type = maptype, cachedir = system.file("rosm.cache", package = "ggspatial")) +
+		ggplot2::theme(axis.title = ggplot2::element_blank())
+
 	# legend and plot
 	if(filltype == 'slope') leglab <- '%'
 	else leglab <- unit_vals[filltype]
 	p <- pbase +
-		ggplot2::geom_path(ggplot2::aes_string(x = 'lng', y = 'lat', group = 'id', colour = filltype), 
-											 alpha = alpha, data = temp, linewidth = size) +
+		ggspatial::geom_spatial_path(ggplot2::aes_string(x = 'lng', y = 'lat', group = 'id', colour = filltype), 
+											 alpha = alpha, data = temp, linewidth = size, crs = 4326) +
 		ggplot2::scale_colour_distiller(leglab, palette = col)
 
 	# plot distances
@@ -284,10 +265,11 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, f = 1, filltype = c('e
 		
 		# add to plot
 		p <- p + 
-			ggrepel::geom_label_repel(
+			ggspatial::geom_spatial_label_repel(
 				data = disttemp, 
 				ggplot2::aes(x = lng, y = lat, label = distance),
-				point.padding = grid::unit(0.4, "lines")
+				point.padding = grid::unit(0.4, "lines"), 
+				crs = 4326
 			)
 		
 	}

@@ -26,8 +26,7 @@ The development version from this repository can be installed as
 follows:
 
 ``` r
-install.packages('devtools')
-devtools::install_github('fawda123/rStrava')
+install.packages('rStrava', repos = c('https://fawda123.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ### Issues and suggestions
@@ -71,13 +70,13 @@ athl_fun(2837007, trace = FALSE)
     ## 
     ## $`2837007`$monthly
     ##   Distance Moving Time
-    ## 1  12.0 mi     5:54:18
+    ## 1  12.0 mi     8:08:00
     ## 
     ## $`2837007`$recent
     ##               Date           Name  Time
-    ## 1 October 13, 2023   Evening Ride 41:03
-    ## 2 October 12, 2023 Afternoon Ride 40:40
-    ## 3  October 9, 2023 Afternoon Ride 42:28
+    ## 1 October 18, 2023   Evening Ride 41:37
+    ## 2 October 16, 2023 Afternoon Ride 40:54
+    ## 3 October 15, 2023 Afternoon Ride 51:11
     ## 
     ## $`2837007`$trophies
     ## list()
@@ -132,22 +131,11 @@ The key can be added to the R environment file for later use:
 ``` r
 # save the key, do only once
 cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
-    file=file.path(normalizePath("~/"), ".Renviron"),
-    append=TRUE)
+    file = file.path(normalizePath("~/"), ".Renviron"),
+    append = TRUE)
 
 # retrieve the key, restart R if not found
 google_key <- Sys.getenv("google_key")
-```
-
-The `get_heat_map` function uses
-[ggmap](https://github.com/dkahle/ggmap) to create base maps. A Google
-API key is needed to use the function. This key must be registered
-externally with the ggmap package using `register_google()` before
-executing `get_heat_map`.
-
-``` r
-library(ggmap)
-register_google(google_key)
 ```
 
 #### Using the functions
@@ -192,26 +180,26 @@ act_data <- compile_activities(my_acts) %>%
 get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)<!-- -->
 
 Plotting elevation and grade for a single ride:
 
 ``` r
-# actitivy id
+# activity id
 id <- 1784292574
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.5, distlab = F, key = google_key, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.5,  distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-14-2.png)<!-- -->
+![](man/figures/unnamed-chunk-13-2.png)<!-- -->
 
 Get elevation profiles for activities:
 
@@ -222,13 +210,13 @@ my_acts <- get_activity_list(stoken)
 get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
 get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial', total = T)
 ```
 
-![](man/figures/unnamed-chunk-15-2.png)<!-- -->
+![](man/figures/unnamed-chunk-14-2.png)<!-- -->
 
 Plot average speed per split (km or mile) for an activity:
 
@@ -237,10 +225,10 @@ Plot average speed per split (km or mile) for an activity:
 plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
 ```
 
-![](man/figures/unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/unnamed-chunk-15-1.png)<!-- -->
 
 Additional functions are provided to get “stream” information for
-individual activities. Streams provide detailed information about
+individual activities. Streams provide more detailed information about
 location, time, speed, elevation, gradient, cadence, watts, temperature,
 and moving status (yes/no) for an individual activity.
 
@@ -271,24 +259,24 @@ Stream data can be plotted using any of the plotting functions.
 
 ``` r
 # heat map
-get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.5, size = 2, col = 'Spectral', distlab = F, maptype = 'satellite')
+get_heat_map(strms_data, alpha = 1, filltype = 'speed', size = 2, col = 'Spectral', distlab = F)
 ```
 
-![](man/figures/unnamed-chunk-18-1.png)<!-- -->
+![](man/figures/unnamed-chunk-17-1.png)<!-- -->
 
 ``` r
 # elevation profile
 get_elev_prof(strms_data)
 ```
 
-![](man/figures/unnamed-chunk-19-1.png)<!-- -->
+![](man/figures/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
 # speed splits
 plot_spdsplits(strms_data, stoken)
 ```
 
-![](man/figures/unnamed-chunk-19-2.png)<!-- -->
+![](man/figures/unnamed-chunk-18-2.png)<!-- -->
 
 ### Contributing
 

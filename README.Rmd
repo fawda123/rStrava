@@ -32,8 +32,7 @@ install.packages('rStrava')
 The development version from this repository can be installed as follows:
 
 ```{r, eval = F}
-install.packages('devtools')
-devtools::install_github('fawda123/rStrava')
+install.packages('rStrava', repos = c('https://fawda123.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ### Issues and suggestions
@@ -87,24 +86,18 @@ Finally, the `get_heat_map` and `get_elev_prof` functions require a key from the
 ```{r eval = FALSE}
 # save the key, do only once
 cat("google_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n",
-    file=file.path(normalizePath("~/"), ".Renviron"),
-    append=TRUE)
+    file = file.path(normalizePath("~/"), ".Renviron"),
+    append = TRUE)
 
 # retrieve the key, restart R if not found
 google_key <- Sys.getenv("google_key")
 ```
 
-The `get_heat_map` function uses [ggmap](https://github.com/dkahle/ggmap) to create base maps.  A Google API key is needed to use the function.  This key must be registered externally with the ggmap package using `register_google()` before executing `get_heat_map`.
+#### Using the functions
 
 ```{r echo = FALSE, message = FALSE}
 source('extra.R')
 ```
-```{r, message = F, warning = F}
-library(ggmap)
-register_google(google_key)
-```
-
-#### Using the functions
 
 The API retrieval functions are used with the token.
 ```{r}
@@ -128,14 +121,14 @@ get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = 
 
 Plotting elevation and grade for a single ride:
 ```{r}
-# actitivy id
+# activity id
 id <- 1784292574
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.5, distlab = F, key = google_key, size = 2, col = 'Spectral', maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, f = 0.5,  distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, maptype = 'satellite', units = 'imperial')
+get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, units = 'imperial')
 ```
 
 Get elevation profiles for activities:
@@ -153,7 +146,7 @@ Plot average speed per split (km or mile) for an activity:
 plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
 ```
 
-Additional functions are provided to get "stream" information for individual activities.  Streams provide detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
+Additional functions are provided to get "stream" information for individual activities.  Streams provide more detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
 
 Use `get_activity_streams` for detailed info about activities:
 ```{r, fig.height = 4, fig.with = 4}
@@ -165,7 +158,7 @@ head(strms_data)
 Stream data can be plotted using any of the plotting functions.
 ```{r, warning = F, message = F}
 # heat map
-get_heat_map(strms_data, alpha = 1, filltype = 'speed', f = 0.5, size = 2, col = 'Spectral', distlab = F, maptype = 'satellite')
+get_heat_map(strms_data, alpha = 1, filltype = 'speed', size = 2, col = 'Spectral', distlab = F)
 ```
 
 ```{r message = F, fig.height = 3, fig.width = 9}
