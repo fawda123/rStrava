@@ -32,7 +32,6 @@ get_heat_map(act_data, ...)
   act_data,
   key,
   alpha = NULL,
-  f = 1,
   add_elev = FALSE,
   as_grad = FALSE,
   distlab = TRUE,

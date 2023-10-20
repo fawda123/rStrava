@@ -35,6 +35,7 @@
 #' @export
 #' 
 #' @import magrittr
+#' @import prettymapr
 #' 
 #' @examples 
 #' \dontrun{
@@ -74,7 +75,7 @@ get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, 
 #' @export
 #'
 #' @method get_heat_map actframe
-get_heat_map.actframe <- function(act_data, key, alpha = NULL, f = 1, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, ...){
+get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
