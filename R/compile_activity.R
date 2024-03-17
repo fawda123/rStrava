@@ -18,9 +18,24 @@
 
 compile_activity <- function(x, columns){
 	
-	temp <- data.frame(unlist(x), stringsAsFactors = F)
+	# these are the names if querying api with date ranges
+	# need to subset if querying by id
+	tosel <- c("resource_state", "athlete", "name", "distance", "moving_time", 
+		"elapsed_time", "total_elevation_gain", "type", "sport_type", 
+		"workout_type", "id", "start_date", "start_date_local", "timezone", 
+		"utc_offset", "location_city", "location_state", "location_country", 
+		"achievement_count", "kudos_count", "comment_count", "athlete_count", 
+		"photo_count", "map", "trainer", "commute", "manual", "private", 
+		"visibility", "flagged", "gear_id", "start_latlng", "end_latlng", 
+		"average_speed", "max_speed", "has_heartrate", "average_heartrate", 
+		"max_heartrate", "heartrate_opt_out", "display_hide_heartrate_option", 
+		"elev_high", "elev_low", "upload_id", "upload_id_str", "external_id", 
+		"from_accepted_tag", "pr_count", "total_photo_count", "has_kudoed"
+		)
+	
+	temp <- data.frame(unlist(x[tosel]), stringsAsFactors = F)
 	temp$ColNames <- rownames(temp)
-	temp <- tidyr::spread(temp, ColNames, unlist.x.)
+	temp <- tidyr::spread(temp, ColNames, unlist.x.tosel..)
 	if(missing(columns)){return(temp)}
 	else{
 		cols_not_present <- columns[! columns %in% colnames(temp)]
