@@ -14,7 +14,6 @@ Imports:
     googleway,
     httr,
     magrittr,
-    plyr,
     prettymapr,
     RCurl,
     rvest,
