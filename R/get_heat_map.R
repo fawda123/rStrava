@@ -37,7 +37,6 @@
 #' @export
 #' 
 #' @import magrittr
-#' @import prettymapr
 #' 
 #' @examples 
 #' \dontrun{
