@@ -22,8 +22,8 @@ get_heat_map(act_data, ...)
   size = 0.5,
   col = "red",
   expand = 10,
-  maptype = "cartolight",
-  zoom = NULL,
+  maptype = "CartoDB.Positron",
+  zoom = 14,
   units = "metric",
   ...
 )
@@ -39,8 +39,8 @@ get_heat_map(act_data, ...)
   size = 0.5,
   col = "red",
   expand = 10,
-  maptype = "cartolight",
-  zoom = NULL,
+  maptype = "CartoDB.Positron",
+  zoom = 14,
   ...
 )
 
@@ -53,8 +53,8 @@ get_heat_map(act_data, ...)
   size = 0.5,
   col = "red",
   expand = 10,
-  maptype = "cartolight",
-  zoom = NULL,
+  maptype = "CartoDB.Positron",
+  zoom = 14,
   ...
 )
 }
@@ -85,7 +85,7 @@ get_heat_map(act_data, ...)
 
 \item{expand}{a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.}
 
-\item{maptype}{chr string as \code{"cartolight"}, \code{"cartodark"}, \code{"osm"}, or \code{"hotstyle"} indicating the basemap type}
+\item{maptype}{chr string indicating the provider for the basemap, see details}
 
 \item{zoom}{numeric indicating zoom factor for map tiles, higher numbers increase resolution}
 
@@ -104,7 +104,9 @@ uses \code{\link{get_latlon}} to produce a dataframe of latitudes and longitudes
 
 A Google API key is needed for the elevation data and must be included with function execution.  The API key can be obtained following the instructions here: https://developers.google.com/maps/documentation/elevation/#api_key
 
-The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequence of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc.
+The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequence of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc. 
+
+The base map type is selected with the \code{maptype} argument.  The \code{zoom} value specifies the resolution of the map.  Use higher values to download map tiles with greater resolution, although this increases the download time.  Acceptable options for \code{maptype} include \code{"OpenStreetMap"}, \code{"OpenStreetMap.DE"}, \code{"OpenStreetMap.France"}, \code{"OpenStreetMap.HOT"}, \code{"OpenTopoMap"}, \code{"Esri.WorldStreetMap"}, \code{"Esri.DeLorme"}, \code{"Esri.WorldTopoMap"}, \code{"Esri.WorldImagery"}, \code{"Esri.WorldTerrain"}, \code{"Esri.WorldShadedRelief"}, \code{"Esri.OceanBasemap"}, \code{"Esri.NatGeoWorldMap"}, \code{"Esri.WorldGrayCanvas"}, \code{"CartoDB.Positron"}, \code{"CartoDB.PositronNoLabels"}, \code{"CartoDB.PositronOnlyLabels"}, \code{"CartoDB.DarkMatter"}, \code{"CartoDB.DarkMatterNoLabels"}, \code{"CartoDB.DarkMatterOnlyLabels"}, \code{"CartoDB.Voyager"}, \code{"CartoDB.VoyagerNoLabels"}, or \code{"CartoDB.VoyagerOnlyLabels"}.
 }
 \examples{
 \dontrun{

@@ -19,7 +19,7 @@
 #' @param size numeric indicating width of activity lines
 #' @param col chr string indicating either a single color of the activity lines if \code{add_grad = FALSE} or a color palette passed to \code{\link[ggplot2]{scale_fill_distiller}} if \code{add_grad = TRUE}
 #' @param expand a numeric multiplier for expanding the number of lat/lon points on straight lines.  This can create a smoother elevation gradient if \code{add_grad = TRUE}.  Set \code{expand = 1} to suppress this behavior.  
-#' @param maptype chr string as \code{"cartolight"}, \code{"cartodark"}, \code{"osm"}, or \code{"hotstyle"} indicating the basemap type
+#' @param maptype chr string indicating the provider for the basemap, see details
 #' @param zoom numeric indicating zoom factor for map tiles, higher numbers increase resolution
 #' @param units chr string indicating plot units as either metric or imperial, this has no effect if input data are already compiled with \code{\link{compile_activities}}
 #' @param ... arguments passed to or from other methods
@@ -30,6 +30,8 @@
 #'
 #' The \code{distval} argument is passed to the \code{digits} argument of \code{round}. This controls the density of the distance labels, e.g., 1 will plot all distances in sequence of 0.1, 0 will plot all distances in sequence of one, -1 will plot all distances in sequence of 10, etc. 
 #' 
+#' The base map type is selected with the \code{maptype} argument.  The \code{zoom} value specifies the resolution of the map.  Use higher values to download map tiles with greater resolution, although this increases the download time.  Acceptable options for \code{maptype} include \code{"OpenStreetMap"}, \code{"OpenStreetMap.DE"}, \code{"OpenStreetMap.France"}, \code{"OpenStreetMap.HOT"}, \code{"OpenTopoMap"}, \code{"Esri.WorldStreetMap"}, \code{"Esri.DeLorme"}, \code{"Esri.WorldTopoMap"}, \code{"Esri.WorldImagery"}, \code{"Esri.WorldTerrain"}, \code{"Esri.WorldShadedRelief"}, \code{"Esri.OceanBasemap"}, \code{"Esri.NatGeoWorldMap"}, \code{"Esri.WorldGrayCanvas"}, \code{"CartoDB.Positron"}, \code{"CartoDB.PositronNoLabels"}, \code{"CartoDB.PositronOnlyLabels"}, \code{"CartoDB.DarkMatter"}, \code{"CartoDB.DarkMatterNoLabels"}, \code{"CartoDB.DarkMatterOnlyLabels"}, \code{"CartoDB.Voyager"}, \code{"CartoDB.VoyagerNoLabels"}, or \code{"CartoDB.VoyagerOnlyLabels"}.
+#'
 #' @return A \code{\link[ggplot2]{ggplot}} object showing a map with activity locations.
 #' 
 #' @export
@@ -61,7 +63,7 @@ get_heat_map <- function(act_data, ...) UseMethod('get_heat_map')
 #' @export
 #'
 #' @method get_heat_map list
-get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, units = 'metric', ...){
+get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'CartoDB.Positron', zoom = 14, units = 'metric', ...){
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, id = id, units = units)
@@ -75,14 +77,22 @@ get_heat_map.list <- function(act_data, key, acts = 1, id = NULL, alpha = NULL, 
 #' @export
 #'
 #' @method get_heat_map actframe
-get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, ...){
+get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE, as_grad = FALSE, distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'CartoDB.Positron', zoom = 14, ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
 
 	# check maptype
-	maptype <- match.arg(maptype, c( 'cartolight', 'cartodark', 'osm', 'hotstyle'))
+	maptype <- match.arg(maptype, c("OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France", 
+																	"OpenStreetMap.HOT", "OpenTopoMap",
+																	"Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap", 
+																	"Esri.WorldImagery", "Esri.WorldTerrain", "Esri.WorldShadedRelief", 
+																	"Esri.OceanBasemap", "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", 
+																	"CartoDB.Positron", "CartoDB.PositronNoLabels", 
+																	"CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter", 
+																	"CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels", 
+																	"CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels"))
 	
 	# warning if units conflict
 	args <- as.list(match.call())
@@ -114,10 +124,14 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE,
 		temp$distance <- temp$distance * 0.621371
 		temp$ele <- temp$ele *  3.28084
 	}
+	
+	# create as spatvector for tiles
+	tempsv <- tidyterra::as_spatvector(temp[, c('lon', 'lat')], crs = 4326)
+	tls <- maptiles::get_tiles(x = tempsv, provider = maptype, zoom = zoom, )
 
 	# base plot
 	pbase <- ggplot2::ggplot() +
-		ggspatial::annotation_map_tile(zoom = zoom, quiet = TRUE, progress = "none", type = maptype, cachedir = system.file("rosm.cache", package = "ggspatial")) +
+		tidyterra::geom_spatraster_rgb(data = tls, maxcell = 1e8) +
 		ggplot2::theme(axis.title = ggplot2::element_blank())
 	
 	# add elevation to plot
@@ -187,6 +201,9 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE,
 		
 	}
 	
+	p <- p +
+		ggplot2::coord_sf(xlim = range(temp$lon), ylim = range(temp$lat))
+	
 	return(p)
 	
 }
@@ -196,14 +213,22 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE,
 #' @export
 #'
 #' @method get_heat_map strframe
-get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation', distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'cartolight', zoom = NULL, ...){
+get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation', distlab = TRUE, distval = 0, size = 0.5, col = 'red', expand = 10, maptype = 'CartoDB.Positron', zoom = 14, ...){
 
 	# get unit types and values attributes
 	unit_type <- attr(act_data, 'unit_type')
 	unit_vals <- attr(act_data, 'unit_vals')
 	
 	# check maptype
-	maptype <- match.arg(maptype, c( 'cartolight', 'cartodark', 'osm', 'hotstyle'))
+	maptype <- match.arg(maptype, c("OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France", 
+																	"OpenStreetMap.HOT", "OpenTopoMap",
+																	"Esri.WorldStreetMap", "Esri.DeLorme", "Esri.WorldTopoMap", 
+																	"Esri.WorldImagery", "Esri.WorldTerrain", "Esri.WorldShadedRelief", 
+																	"Esri.OceanBasemap", "Esri.NatGeoWorldMap", "Esri.WorldGrayCanvas", 
+																	"CartoDB.Positron", "CartoDB.PositronNoLabels", 
+																	"CartoDB.PositronOnlyLabels", "CartoDB.DarkMatter", 
+																	"CartoDB.DarkMatterNoLabels", "CartoDB.DarkMatterOnlyLabels", 
+																	"CartoDB.Voyager", "CartoDB.VoyagerNoLabels", "CartoDB.VoyagerOnlyLabels"))
 	
 	# warning if units conflict
 	args <- as.list(match.call())
@@ -232,10 +257,14 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation'
 		
 	})
 	temp <- do.call('rbind', temp)
+
+	# create as spatvector for tiles
+	tempsv <- tidyterra::as_spatvector(temp[, c('lon', 'lat')], crs = 4326)
+	tls <- maptiles::get_tiles(x = tempsv, provider = maptype, zoom = zoom)
 	
 	# base plot
 	pbase <- ggplot2::ggplot() +
-		ggspatial::annotation_map_tile(zoom = zoom, quiet = TRUE, progress = "none", type = maptype, cachedir = system.file("rosm.cache", package = "ggspatial")) +
+		tidyterra::geom_spatraster_rgb(data = tls, maxcell = 1e8) +
 		ggplot2::theme(axis.title = ggplot2::element_blank())
 
 	# legend and plot
