@@ -17,7 +17,7 @@ recent_fun <- function(prsd){
 	if(length(recent) == 0)
 		return(NA)
 
-	nms <- rvest::html_elements(recent, ".RecentActivities_title__wXGAv") %>% xml2::xml_text()
+	nms <- rvest::html_elements(recent, ".RecentActivities_titleButton__1Uq_v") %>% xml2::xml_text()
 	dts <- rvest::html_elements(recent, ".RecentActivities_timestamp__pB9a8") %>% xml2::xml_text()
 	lbs <- rvest::html_elements(recent, ".Stat_statLabel___khR4") %>% xml2::xml_text()
 	stats <- rvest::html_elements(recent, ".ActivityStats_statValue__8IGVY") %>% 
