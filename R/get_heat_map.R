@@ -11,7 +11,7 @@
 #' @param acts numeric indicating which activities to plot based on index in the activities list, defaults to most recent
 #' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param alpha the opacity of the line desired. A single activity should be 1. Defaults to 0.5
-#' @param add_elev logical indicating if elevation is overlayed by color shading on the activity lines
+#' @param add_elev logical indicating if elevation is shown by color shading on the activity lines
 #' @param as_grad logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}
 #' @param filltype chr string specifying which stream variable to use for filling line segments, applies only to \code{strframe} objects, acceptable values are \code{"elevation"}, \code{"distance"}, \code{"slope"}, or \code{"speed"}
 #' @param distlab logical if distance labels are plotted along the route
@@ -185,10 +185,7 @@ get_heat_map.actframe <- function(act_data, key, alpha = NULL, add_elev = FALSE,
 			dplyr::ungroup(.) %>% 
 			dplyr::select(-tosel, -diffdist) %>% 
 			dplyr::mutate(distance = as.character(round(distance)))
-		# final <- temp[nrow(temp), ] 
-		# final$distance <- format(final$distance, nsmall = 1, digits = 1)
-		# disttemp <- rbind(disttemp, final)
-
+		
 		# add to plot
 		p <- p + 
 			ggspatial::geom_spatial_label_repel(
@@ -252,7 +249,7 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation'
 		alti <- stats::approx(x= x$altitude, n = expand * nrow(x))$y
 		grds <- stats::approx(x= x$grade_smooth, n = expand * nrow(x))$y
 		vels <- stats::approx(x= x$velocity_smooth, n = expand * nrow(x))$y
-		data.frame(id = unique(x$id), lat = yint, lng = xint, distance = dist, elevation = alti, slope = grds, speed = vels)
+		data.frame(id = unique(x$id), lat = yint, lon = xint, distance = dist, elevation = alti, slope = grds, speed = vels)
 		
 	})
 	temp <- do.call('rbind', temp)
@@ -270,7 +267,7 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation'
 	if(filltype == 'slope') leglab <- '%'
 	else leglab <- unit_vals[filltype]
 	p <- pbase +
-		ggspatial::geom_spatial_path(ggplot2::aes_string(x = 'lng', y = 'lat', group = 'id', colour = filltype), 
+		ggspatial::geom_spatial_path(ggplot2::aes_string(x = 'lon', y = 'lat', group = 'id', colour = filltype), 
 											 alpha = alpha, data = temp, linewidth = size, crs = 4326) +
 		ggplot2::scale_colour_distiller(leglab, palette = col)
 
@@ -288,20 +285,20 @@ get_heat_map.strframe <- function(act_data, alpha = NULL, filltype = 'elevation'
 			dplyr::ungroup(.) %>% 
 			dplyr::select(-tosel, -diffdist) %>% 
 			dplyr::mutate(distance = as.character(round(distance)))
-		# final <- temp[nrow(temp), ] 
-		# final$distance <- format(final$distance, nsmall = 1, digits = 1)
-		# disttemp <- rbind(disttemp, final)
 		
 		# add to plot
 		p <- p + 
 			ggspatial::geom_spatial_label_repel(
 				data = disttemp, 
-				ggplot2::aes(x = lng, y = lat, label = distance),
+				ggplot2::aes(x = lon, y = lat, label = distance),
 				point.padding = grid::unit(0.4, "lines"), 
 				crs = 4326
 			)
 		
 	}
+	
+	p <- p +
+		ggplot2::coord_sf(xlim = range(temp$lon), ylim = range(temp$lat))
 	
 	return(p)
 	

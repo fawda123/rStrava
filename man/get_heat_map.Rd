@@ -71,7 +71,7 @@ get_heat_map(act_data, ...)
 
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 
-\item{add_elev}{logical indicating if elevation is overlayed by color shading on the activity lines}
+\item{add_elev}{logical indicating if elevation is shown by color shading on the activity lines}
 
 \item{as_grad}{logical indicating if elevation is plotted as percent gradient, applies only if \code{add_elev = TRUE}}
 

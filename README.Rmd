@@ -109,41 +109,42 @@ An example creating a heat map of activities:
 ```{r message = F, fig.height = 5.5, fig.width = 7, message = F, warning = F}
 library(dplyr)
 
-# get activities, get activities by lat/lon, distance, plot
-my_acts <- get_activity_list(stoken)
-act_data <- compile_activities(my_acts) %>% 
-	filter(start_latlng2 < -86.5 & start_latlng2 > -88.5) %>% 
-	filter(start_latlng1 < 31.5 & start_latlng1 > 30) %>% 
-	filter(distance > 20)
-	
-get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
+# get activities by date range
+my_acts <- get_activity_list(stoken, after = as.Date('2020-12-31'))
+act_data <- compile_activities(my_acts) 
+
+# subset by location
+toplo <- act_data %>% 
+	filter(grepl('Run$', name)) %>% 
+	filter(start_latlng2 < -82.63 & start_latlng2 > -82.65) %>% 
+	filter(start_latlng1 < 27.81 & start_latlng1 > 27.78) 
+
+get_heat_map(toplo, key = google_key, col = 'darkred', size = 1.5, distlab = F, alpha = 0.6, zoom = 13)
 ```
 
 Plotting elevation and grade for a single ride:
 ```{r}
-# activity id
-id <- 1784292574
+# get data for a single activity
+my_acts <- get_activity_list(stoken, id = 1784292574)
+act_data <- compile_activities(my_acts) 
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
+get_heat_map(my_acts, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, units = 'imperial')
+get_heat_map(my_acts, alpha = 1, add_elev = T, distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 ```
 
 Get elevation profiles for activities:
 ```{r message = F, fig.height = 3, fig.width = 9}
-# get activities
-my_acts <- get_activity_list(stoken) 
-
-get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial')
-get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial', total = T)
+get_elev_prof(my_acts, key = google_key, units = 'imperial')
+get_elev_prof(my_acts, key = google_key, units = 'imperial', total = T)
 ```  
 
 Plot average speed per split (km or mile) for an activity:
 ```{r message = F, fig.height = 3, fig.width = 9}
 # plots for most recent activity
-plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
+plot_spdsplits(my_acts, stoken, units = 'imperial')
 ```
 
 Additional functions are provided to get "stream" information for individual activities.  Streams provide more detailed information about location, time, speed, elevation, gradient, cadence, watts, temperature, and moving status (yes/no) for an individual activity.
@@ -151,7 +152,7 @@ Additional functions are provided to get "stream" information for individual act
 Use `get_activity_streams` for detailed info about activities:
 ```{r, fig.height = 4, fig.with = 4}
 # get streams for the first activity in my_acts
-strms_data <- get_activity_streams(my_acts, stoken, id = id)
+strms_data <- get_activity_streams(my_acts, stoken)
 head(strms_data)
 ```
 
