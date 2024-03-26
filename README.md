@@ -62,7 +62,7 @@ athl_fun(2837007, trace = FALSE)
     ## [1] "Marcus Beck"
     ## 
     ## $`2837007`$location
-    ## [1] "Saint Petersburg, Florida"
+    ## [1] "United States"
     ## 
     ## $`2837007`$follow
     ##   Followers Following
@@ -70,13 +70,13 @@ athl_fun(2837007, trace = FALSE)
     ## 
     ## $`2837007`$monthly
     ##   Distance Moving Time
-    ## 1  12.0 mi     8:08:00
+    ## 1  62.6 mi     9:29:20
     ## 
     ## $`2837007`$recent
-    ##               Date           Name  Time
-    ## 1 October 18, 2023   Evening Ride 41:37
-    ## 2 October 16, 2023 Afternoon Ride 40:54
-    ## 3 October 15, 2023 Afternoon Ride 51:11
+    ##             Date          Name Distance Elevation  Time
+    ## 1      Yesterday Afternoon Run   5.2 km       5 m 28:10
+    ## 2 March 24, 2024 Afternoon Run   8.1 km       4 m 45:27
+    ## 3 March 22, 2024 Afternoon Run   5.2 km       4 m 27:18
     ## 
     ## $`2837007`$trophies
     ## list()
@@ -170,14 +170,17 @@ An example creating a heat map of activities:
 ``` r
 library(dplyr)
 
-# get activities, get activities by lat/lon, distance, plot
-my_acts <- get_activity_list(stoken)
-act_data <- compile_activities(my_acts) %>% 
-    filter(start_latlng2 < -86.5 & start_latlng2 > -88.5) %>% 
-    filter(start_latlng1 < 31.5 & start_latlng1 > 30) %>% 
-    filter(distance > 20)
-    
-get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = F, f = 0.4)
+# get activities by date range
+my_acts <- get_activity_list(stoken, after = as.Date('2020-12-31'))
+act_data <- compile_activities(my_acts) 
+
+# subset by location
+toplo <- act_data %>% 
+    filter(grepl('Run$', name)) %>% 
+    filter(start_latlng2 < -82.63 & start_latlng2 > -82.65) %>% 
+    filter(start_latlng1 < 27.81 & start_latlng1 > 27.78) 
+
+get_heat_map(toplo, key = google_key, col = 'darkred', size = 1.5, distlab = F, alpha = 0.6, zoom = 13)
 ```
 
 ![](man/figures/unnamed-chunk-12-1.png)<!-- -->
@@ -185,18 +188,19 @@ get_heat_map(act_data, key = google_key, col = 'darkgreen', size = 2, distlab = 
 Plotting elevation and grade for a single ride:
 
 ``` r
-# activity id
-id <- 1784292574
+# get data for a single activity
+my_acts <- get_activity_list(stoken, id = 1784292574)
+act_data <- compile_activities(my_acts) 
 
 # plot elevation along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
+get_heat_map(my_acts, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
 # plot % gradient along a single ride
-get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', expand = 5, units = 'imperial')
+get_heat_map(my_acts, alpha = 1, add_elev = T, distlab = F, as_grad = T, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-13-2.png)<!-- -->
@@ -204,16 +208,13 @@ get_heat_map(my_acts, id = id, alpha = 1, add_elev = T, distlab = F, as_grad = T
 Get elevation profiles for activities:
 
 ``` r
-# get activities
-my_acts <- get_activity_list(stoken) 
-
-get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial')
+get_elev_prof(my_acts, key = google_key, units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-14-1.png)<!-- -->
 
 ``` r
-get_elev_prof(my_acts, id = id, key = google_key, units = 'imperial', total = T)
+get_elev_prof(my_acts, key = google_key, units = 'imperial', total = T)
 ```
 
 ![](man/figures/unnamed-chunk-14-2.png)<!-- -->
@@ -222,7 +223,7 @@ Plot average speed per split (km or mile) for an activity:
 
 ``` r
 # plots for most recent activity
-plot_spdsplits(my_acts, stoken, id = id, units = 'imperial')
+plot_spdsplits(my_acts, stoken, units = 'imperial')
 ```
 
 ![](man/figures/unnamed-chunk-15-1.png)<!-- -->
@@ -236,7 +237,7 @@ Use `get_activity_streams` for detailed info about activities:
 
 ``` r
 # get streams for the first activity in my_acts
-strms_data <- get_activity_streams(my_acts, stoken, id = id)
+strms_data <- get_activity_streams(my_acts, stoken)
 head(strms_data)
 ```
 
