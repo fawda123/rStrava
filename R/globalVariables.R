@@ -3,7 +3,7 @@ globalVariables(c('altitude', 'data', 'latlng', 'left_join', 'spread', 'temp', '
 									'elev_low', 'Elevation (m)', 'facets', 'grad', 'lat', 'latlon', 'location_city', 'lon', 'map.summary_polyline', 
 									'max_speed', 'spd', 'size', 'start_date', 'tosel', 'total_elevation_gain', 'type', 'unlist.x.', 'upload_id', 
 									'usage_left', 'value', '<<-', '.', 'id', 'lng', 'act_list', 'name', 'unlist.seglist.', 'location', 'resolution', 
-									'elevation', 'locs', 'val', 'var'))
+									'elevation', 'locs', 'val', 'var', 'unlist.x.tosel..'))
 
 #' @importFrom utils data
 NULL
