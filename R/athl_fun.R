@@ -2,7 +2,7 @@
 #'
 #' Get data for an athlete by web scraping, does not require authentication.  
 
-#' @param athl_num numeric vector of athlete id(s) used by Strava
+#' @param athl_num numeric vector of athlete id(s) used by Strava, as character string
 #' @param trace logical indicating if output is returned to console
 #' 
 #' @export
@@ -15,11 +15,14 @@
 #' 
 #' @examples
 #' ## single athlete
-#' athl_fun(2837007)
+#' athl_fun('2837007')
 #' 
 #' ## multiple athletes
-#' athl_fun(c(2837007, 2527465))
+#' athl_fun(c('2837007', '2527465'))
 athl_fun <- function(athl_num, trace = TRUE){
+	
+	if(any(!is.character(athl_num))) 
+		stop('athl_num must be a character vector')
 	
 	# allocate empty list
 	out <- vector('list', length(athl_num))

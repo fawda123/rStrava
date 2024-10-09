@@ -67,7 +67,7 @@ get_heat_map(act_data, ...)
 
 \item{acts}{numeric indicating which activities to plot based on index in the activities list, defaults to most recent}
 
-\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
+\item{id}{optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{alpha}{the opacity of the line desired. A single activity should be 1. Defaults to 0.5}
 

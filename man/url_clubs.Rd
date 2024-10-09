@@ -7,7 +7,7 @@
 url_clubs(id = NULL, request = NULL)
 }
 \arguments{
-\item{id}{numeric for id of the club, defaults to authenticated club of the athlete}
+\item{id}{character for id of the club, defaults to authenticated club of the athlete}
 
 \item{request}{chr string, must be "members", "activities" or \code{NULL} for club details}
 }
@@ -23,6 +23,6 @@ Function is used internally within \code{\link{get_club}}
 \examples{
 url_clubs()
 
-url_clubs(123, request = 'members')
+url_clubs('123', request = 'members')
 }
 \concept{token}

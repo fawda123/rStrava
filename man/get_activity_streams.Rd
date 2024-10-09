@@ -37,7 +37,7 @@ get_activity_streams(act_data, ...)
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 
-\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
+\item{id}{optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{types}{list indicating which streams to get for each activity, defaults to all available, see details.}
 

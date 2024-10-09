@@ -27,7 +27,7 @@ This function concatenates appropriate strings so no authentication token is req
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-url_activities(2837007)
+url_activities('2837007')
 }
 }
 \concept{token}

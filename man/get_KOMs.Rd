@@ -7,7 +7,7 @@
 get_KOMs(id, stoken)
 }
 \arguments{
-\item{id}{string or integer of athlete}
+\item{id}{string of athlete id}
 
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 }
@@ -27,7 +27,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_KOMs(2837007, stoken)
+get_KOMs('2837007', stoken)
 }
 }
 \concept{token}

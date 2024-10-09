@@ -54,7 +54,7 @@ privacy settings that block public access to account data.
 
 ``` r
 # get athlete data 
-athl_fun(2837007, trace = FALSE)
+athl_fun('2837007', trace = FALSE)
 ```
 
     ## $`2837007`
@@ -66,17 +66,17 @@ athl_fun(2837007, trace = FALSE)
     ## 
     ## $`2837007`$follow
     ##   Followers Following
-    ## 1        79        82
+    ## 1        79        83
     ## 
     ## $`2837007`$monthly
     ##   Distance Moving Time
-    ## 1  62.6 mi     9:29:20
+    ## 1  14.8 mi     2:14:43
     ## 
     ## $`2837007`$recent
-    ##             Date          Name Distance Elevation  Time
-    ## 1      Yesterday Afternoon Run   5.2 km       5 m 28:10
-    ## 2 March 24, 2024 Afternoon Run   8.1 km       4 m 45:27
-    ## 3 March 22, 2024 Afternoon Run   5.2 km       4 m 27:18
+    ##              Date          Name Distance Elevation  Time
+    ## 1       Yesterday Afternoon Run   5.2 km      30 m 29:42
+    ## 2 October 6, 2024 Afternoon Run   8.1 km      13 m 46:43
+    ## 3 October 4, 2024 Afternoon Run   5.2 km       5 m 28:31
     ## 
     ## $`2837007`$trophies
     ## list()
@@ -189,7 +189,7 @@ Plotting elevation and grade for a single ride:
 
 ``` r
 # get data for a single activity
-my_acts <- get_activity_list(stoken, id = 1784292574)
+my_acts <- get_activity_list(stoken, id = '1784292574')
 act_data <- compile_activities(my_acts) 
 
 # plot elevation along a single ride

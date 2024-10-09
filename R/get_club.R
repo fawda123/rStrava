@@ -3,7 +3,7 @@
 #' Get club data for a given request
 #'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id numeric for id of the club, defaults to authenticated club of the athlete
+#' @param id character vector for id of the club, defaults to authenticated club of the athlete
 #' @param request chr string, must be "members", "activities" or \code{NULL} for club details
 #'
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.

@@ -2,7 +2,7 @@
 #' 
 #' Get detailed data of an activity, including segment efforts
 #'
-#' @param id numeric for id of the activity
+#' @param id character vector for id of the activity
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
@@ -24,10 +24,13 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' get_activity(75861631, stoken)
+#' get_activity('75861631', stoken)
 #' }
 get_activity <- function(id, stoken){
 
+	if(any(!is.character(id))) 
+		stop('id must be a character vector')
+	
 	req <- GET(url_activities(id), stoken, query = list(include_all_efforts=TRUE)) 
 	stop_for_status(req)
 	dataRaw <- content(req)

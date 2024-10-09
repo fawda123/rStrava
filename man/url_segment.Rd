@@ -7,7 +7,7 @@
 url_segment(id = NULL, request = NULL)
 }
 \arguments{
-\item{id}{numeric for id of the segment if \code{request = "all_efforts"} or \code{"leaderboard"}, or id of the athlete if \code{request = "starred"}, or NULL if using \code{request = "explore"} or \code{"starred"} of the athenticated user}
+\item{id}{character for id of the segment if \code{request = "all_efforts"} or \code{"leaderboard"}, or id of the athlete if \code{request = "starred"}, or NULL if using \code{request = "explore"} or \code{"starred"} of the athenticated user}
 
 \item{request}{chr string, must be "starred", "all_efforts", "leaderboard", "explore" or NULL for segment details}
 }
@@ -23,6 +23,6 @@ Function is used internally within \code{\link{get_segment}}, \code{\link{get_st
 \examples{
 url_segment()
 
-url_segment(id = 123, request = 'leaderboard')
+url_segment(id = '123', request = 'leaderboard')
 }
 \concept{token}

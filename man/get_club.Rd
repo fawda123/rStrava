@@ -9,7 +9,7 @@ get_club(stoken, id = NULL, request = NULL)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the club, defaults to authenticated club of the athlete}
+\item{id}{character vector for id of the club, defaults to authenticated club of the athlete}
 
 \item{request}{chr string, must be "members", "activities" or \code{NULL} for club details}
 }

@@ -22,12 +22,16 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' url_activities(2837007)
+#' url_activities('2837007')
 #' }
 url_activities <- function(id = NULL, club = FALSE){
 	
 	url_ <- "https://www.strava.com/api/v3/activities/"
 	if(!is.null(id)){
+		
+		if(any(!is.character(id)))
+			stop('id must be a character vector')
+		
 		if(club){#Url for the activities of the club with ID = id
 			url_ <- paste("https://www.strava.com/api/v3/clubs/", id,"/activities", sep="")
 		}

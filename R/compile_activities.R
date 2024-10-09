@@ -4,7 +4,7 @@
 #' 
 #' @param actlist an activities list returned by \code{\link{get_activity_list}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
-#' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
+#' @param id optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param units chr string indicating metric or imperial
 #' 
 #' @author Daniel Padfield
@@ -32,6 +32,10 @@
 #' attr(acts_data, 'unit_vals')
 #' }
 compile_activities <- function(actlist, acts = NULL, id = NULL, units = 'metric'){
+	
+	# check id is character
+	if(!is.null(id) & any(!is.character(id))) 
+		stop('id must be a character vector')
 	
 	# check units
 	if(!units %in% c('metric', 'imperial')) 
@@ -63,7 +67,7 @@ compile_activities <- function(actlist, acts = NULL, id = NULL, units = 'metric'
 	out <- purrr::map_dfr(actlist, compile_activity, columns = att)
 	
 	# convert relevant columns to numeric
-	cols <- c('id', 'achievement_count', 'athlete.resource_state', 'athlete_count', 'average_speed', 'average_watts', 'comment_count', 'distance', 'elapsed_time', 'elev_high', 'elev_low', 'end_latlng1', 'end_latlng2', 'kilojoules', 'kudos_count', 'map.resource_state', 'max_speed', 'moving_time', 'photo_count', 'resource_state', 'start_latitude', 'start_latlng1', 'start_latlng2', 'start_longitude', 'total_elevation_gain', 'total_photo_count')
+	cols <- c('achievement_count', 'athlete.resource_state', 'athlete_count', 'average_speed', 'average_watts', 'comment_count', 'distance', 'elapsed_time', 'elev_high', 'elev_low', 'end_latlng1', 'end_latlng2', 'kilojoules', 'kudos_count', 'map.resource_state', 'max_speed', 'moving_time', 'photo_count', 'resource_state', 'start_latitude', 'start_latlng1', 'start_latlng2', 'start_longitude', 'total_elevation_gain', 'total_photo_count')
 	cols <- names(out)[names(out) %in% cols]
 	out <- dplyr::mutate_at(out, cols, as.numeric)
 

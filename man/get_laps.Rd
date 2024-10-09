@@ -9,7 +9,7 @@ get_laps(stoken, id)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the activity with the laps to request}
+\item{id}{character for id of the activity with the laps to request}
 }
 \value{
 Data from an API request.
@@ -27,7 +27,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_laps(stoken, id = 351217692)
+get_laps(stoken, id = '351217692')
 }
 }
 \concept{token}

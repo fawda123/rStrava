@@ -7,7 +7,7 @@
 url_streams(id, request = "activities", types = list("latlng"))
 }
 \arguments{
-\item{id}{numeric for id of the request}
+\item{id}{character for id of the request}
 
 \item{request}{chr string defining the stream type, must be "activities", "segment_efforts", "segments"}
 
@@ -23,6 +23,6 @@ Set the url for stream requests
 Function is used internally within \code{\link{get_streams}}. From the API documentation, 'streams' is the Strava term for the raw data associated with an activity.
 }
 \examples{
-url_streams(123)
+url_streams('123')
 }
 \concept{token}

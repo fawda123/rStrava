@@ -9,7 +9,7 @@
 #' @param act_data an activities list object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
 #' @param acts numeric indicating which activity to plot based on index in the activities list, defaults to most recent
-#' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
+#' @param id optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param units chr string indicating plot units as either metric or imperial
 #' @param fill chr string of fill color for profile
 #' @param ... arguments passed to other methods
@@ -39,6 +39,9 @@ plot_spdsplits <- function(act_data, ...) UseMethod('plot_spdsplits')
 #'
 #' @method plot_spdsplits list
 plot_spdsplits.list <- function(act_data, stoken, acts = 1, id = NULL, units = 'metric', fill = 'darkblue', ...){
+	
+	if(!is.null(id) & any(!is.character(id)))
+		stop('id must be a character vector')
 	
 	# compile
 	act_data <- compile_activities(act_data, acts = acts, id = id, units = units)

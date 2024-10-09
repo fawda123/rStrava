@@ -3,7 +3,7 @@
 #' Get an activities list of the desired type (club, user)
 #'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id numeric for id of the activity or club if \code{club = TRUE}, leave blank to retrieve all activities
+#' @param id character vector for id of the activity or club if \code{club = TRUE}, leave blank to retrieve all activities
 #' @param club logical if you want the activities of a club
 #' @param before date object for filtering activities before the indicated date
 #' @param after date object for filtering activities after the indicated date
@@ -37,6 +37,9 @@ get_activity_list <- function(stoken, id = NULL, before = NULL, after = NULL, cl
 	# get individual id activities for user
 	if(!is.null(id) & !club){
 		dataRaw <- list()
+		
+		if(any(!is.character(id))) 
+			stop('id must be a character vector')
 		
 		for(i in id){
 			

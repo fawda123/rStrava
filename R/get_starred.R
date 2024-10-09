@@ -3,7 +3,7 @@
 #' Retrieve a summary of the segments starred by an athlete
 #'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id numeric for id of the athlete, defaults to authenticated athlete
+#' @param id character for id of the athlete, defaults to authenticated athlete
 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
 #' 
@@ -26,6 +26,9 @@
 #' }
 get_starred <- function(stoken, id = NULL){     
 
+	if(any(!is.character(id)))
+		stop('id must be a character vector')
+	
 	dataRaw <- get_basic(url_segment(id=id, request="starred"), stoken)
 	return(dataRaw)
 

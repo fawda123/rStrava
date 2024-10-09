@@ -4,7 +4,7 @@
 #' 
 #' @param act_data an \code{list} object returned by \code{\link{get_activity_list}} or a \code{data.frame} returned by \code{\link{compile_activities}}
 #' @param acts numeric indicating which activities to compile starting with most recent, defaults to all
-#' @param id optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
+#' @param id optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function 
 #' @param types list indicating which streams to get for each activity, defaults to all available, see details.
 #' @param resolution chr string for the data resolution to retrieve, can be "low", "medium", "high", defaults to all

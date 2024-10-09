@@ -7,7 +7,7 @@
 athlind_fun(athl_num)
 }
 \arguments{
-\item{athl_num}{numeric athlete id used by Strava}
+\item{athl_num}{numeric athlete id used by Strava, as character string}
 }
 \value{
 A list with elements for the athlete's information.

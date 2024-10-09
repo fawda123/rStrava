@@ -7,7 +7,7 @@
 athl_fun(athl_num, trace = TRUE)
 }
 \arguments{
-\item{athl_num}{numeric vector of athlete id(s) used by Strava}
+\item{athl_num}{numeric vector of athlete id(s) used by Strava, as character string}
 
 \item{trace}{logical indicating if output is returned to console}
 }
@@ -22,9 +22,9 @@ The athlete id is assigned to the user during registration with Strava and this 
 }
 \examples{
 ## single athlete
-athl_fun(2837007)
+athl_fun('2837007')
 
 ## multiple athletes
-athl_fun(c(2837007, 2527465))
+athl_fun(c('2837007', '2527465'))
 }
 \concept{notoken}

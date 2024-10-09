@@ -9,7 +9,7 @@ get_athlete(stoken, id = NULL)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{string or integer of athlete}
+\item{id}{string of athlete}
 }
 \value{
 A list of athlete information including athlete name, location, followers, etc. as described here: \url{https://strava.github.io/api/v3/athlete/}.

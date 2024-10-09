@@ -9,7 +9,7 @@ get_leaderboard(stoken, id, nleaders = 10, All = FALSE)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the segment}
+\item{id}{charcater for id of the segment}
 
 \item{nleaders}{numeric for number of leaders to retrieve}
 
@@ -31,7 +31,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_leaderboard(stoken, id = 229781)
+get_leaderboard(stoken, id = '229781')
 }
 }
 \concept{token}

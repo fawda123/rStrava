@@ -3,7 +3,7 @@
 #' Get basic athlete data for an athlete using an API request
 #' 
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id string or integer of athlete
+#' @param id string of athlete
 #' 
 #' @details Requires authentication stoken using the \code{\link{strava_oauth}} function and a user-created API on the strava website.
 #' 
@@ -26,6 +26,9 @@
 #' }
 get_athlete <-function(stoken, id = NULL){
 
+	if(any(!is.character(id))) 
+		stop('id must be a character vector')
+	
 	dataRaw <- get_basic(url_athlete(id), stoken)
 	return(dataRaw)
 	

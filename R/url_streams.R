@@ -2,7 +2,7 @@
 #' 
 #' Set the url for stream requests
 #'
-#' @param id numeric for id of the request
+#' @param id character for id of the request
 #' @param request chr string defining the stream type, must be "activities", "segment_efforts", "segments"
 #' @param types list of chr strings with any combination of "time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", or "grade_smooth"
 #' 
@@ -15,8 +15,11 @@
 #' @concept token
 #' 
 #' @examples
-#' url_streams(123)
+#' url_streams('123')
 url_streams  <- function(id, request = "activities", types = list("latlng")){
+	
+	if(any(!is.character(id)))
+		stop('id must be a character vector')
 	
 	#Converting the list of types into the proper string
 	strtypes <- types[[1]]

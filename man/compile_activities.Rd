@@ -11,7 +11,7 @@ compile_activities(actlist, acts = NULL, id = NULL, units = "metric")
 
 \item{acts}{numeric indicating which activities to compile starting with most recent, defaults to all}
 
-\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
+\item{id}{optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{units}{chr string indicating metric or imperial}
 }

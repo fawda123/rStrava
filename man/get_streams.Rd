@@ -16,7 +16,7 @@ get_streams(
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the request}
+\item{id}{character for id of the request}
 
 \item{request}{chr string defining the stream type, must be "activities", "segment_efforts", "segments"}
 
@@ -43,7 +43,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_streams(stoken, id = 351217692, types = list('distance', 'latlng'))
+get_streams(stoken, id = '351217692', types = list('distance', 'latlng'))
 }
 }
 \concept{token}

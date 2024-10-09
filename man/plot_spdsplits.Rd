@@ -29,7 +29,7 @@ plot_spdsplits(act_data, ...)
 
 \item{acts}{numeric indicating which activity to plot based on index in the activities list, defaults to most recent}
 
-\item{id}{optional numeric vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
+\item{id}{optional character vector to specify the id(s) of the activity/activities to plot, \code{acts} is ignored if provided}
 
 \item{units}{chr string indicating plot units as either metric or imperial}
 

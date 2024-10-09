@@ -57,7 +57,7 @@ devtools::load_all('.')
 ```
 ```{r message = FALSE}
 # get athlete data 
-athl_fun(2837007, trace = FALSE)
+athl_fun('2837007', trace = FALSE)
 ```
 
 ### API functions (token)
@@ -125,7 +125,7 @@ get_heat_map(toplo, key = google_key, col = 'darkred', size = 1.5, distlab = F, 
 Plotting elevation and grade for a single ride:
 ```{r}
 # get data for a single activity
-my_acts <- get_activity_list(stoken, id = 1784292574)
+my_acts <- get_activity_list(stoken, id = '1784292574')
 act_data <- compile_activities(my_acts) 
 
 # plot elevation along a single ride

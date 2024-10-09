@@ -27,7 +27,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_gear("g2275365", stoken)
+get_gear("2275365", stoken)
 }
 }
 \concept{token}

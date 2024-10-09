@@ -26,13 +26,13 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 	app_secret, cache = TRUE))
 
 # compile segment info
-get_segment(stoken, id = 229781) \%>\% compile_segment
+get_segment(stoken, id = '229781') \%>\% compile_segment
 
 # compile top ten leaderboard for the segment
-get_segment(stoken, id = 229781, request = "leaderboard") \%>\% compile_segment
+get_segment(stoken, id = '229781', request = "leaderboard") \%>\% compile_segment
 
 # compile all efforts for the authenticated user on the segment
-get_segment(stoken, id = 4483903, request = 'all_efforts') \%>\% compile_segment
+get_segment(stoken, id = '4483903', request = 'all_efforts') \%>\% compile_segment
 
 # compile the starred segments for the user
 get_segment(stoken, request = 'starred') \%>\% compile_segment

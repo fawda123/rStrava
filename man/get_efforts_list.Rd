@@ -15,9 +15,9 @@ get_efforts_list(
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the segment}
+\item{id}{character string for id of the segment}
 
-\item{athlete_id}{numeric for the athlete id for filtering the results}
+\item{athlete_id}{character string for the athlete id for filtering the results}
 
 \item{start_date_local}{the start date for filtering the results}
 
@@ -39,7 +39,7 @@ Requires authentication stoken using the \code{\link{strava_oauth}} function and
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_efforts_list(stoken, id = 229781)
+get_efforts_list(stoken, id = '229781')
 }
 }
 \concept{token}

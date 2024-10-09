@@ -4,7 +4,7 @@
 #' @author Lorenzo Gaborini
 #' @details used internally in \code{\link{get_activity_streams}}
 #' @param streams a list containing details of the Strava streams of a single activity (output of \code{\link{get_streams}})
-#' @param id if not missing, the activity id of the stream (will be appended to the data.frame, if non-empty)
+#' @param id if not missing, the activity id of the stream (will be appended to the data.frame, if non-empty), as character vector
 #' @return data frame where every column is the stream data for the retrieved types.
 #' @concept token
 #' @importFrom magrittr %>%
@@ -12,12 +12,15 @@
 #' \dontrun{
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret, cache = TRUE))
 #' 
-#' act_id <- 351217692
+#' act_id <- '351217692'
 #' streams <- get_streams(stoken, id = act_id, types = list('distance', 'latlng'))
 #' 
 #' compile_activity_streams(streams, id = act_id)}
 compile_activity_streams <- function(streams, id = NULL){
 
+	if(any(!is.character(id))) 
+		stop('id must be a character vector')
+	
    if (!is.null(id) && length(id) != 1) {
       stop('id must be a scalar or NULL.')
    }

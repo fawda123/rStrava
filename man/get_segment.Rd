@@ -9,7 +9,7 @@ get_segment(stoken, id = NULL, request = NULL)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the segment}
+\item{id}{character for id of the segment}
 
 \item{request}{chr string, must be "starred", "leaderboard", "all_efforts", or NULL for segment details}
 }
@@ -30,13 +30,13 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 	app_secret, cache = TRUE))
 
 # get segment info
-get_segment(stoken, id = 229781)
+get_segment(stoken, id = '229781')
 
 # get top ten leaderboard for the segment
-get_segment(stoken, id = 229781, request = "leaderboard")
+get_segment(stoken, id = '229781', request = "leaderboard")
 
 # get all efforts for the authenticated user on the segment
-get_segment(stoken, id = 4483903, request = 'all_efforts')
+get_segment(stoken, id = '4483903', request = 'all_efforts')
 
 # get the starred segments for the user
 get_segment(stoken, request = 'starred') 

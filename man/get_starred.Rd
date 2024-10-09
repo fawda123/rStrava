@@ -9,7 +9,7 @@ get_starred(stoken, id = NULL)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{numeric for id of the athlete, defaults to authenticated athlete}
+\item{id}{character for id of the athlete, defaults to authenticated athlete}
 }
 \value{
 Data from an API request.

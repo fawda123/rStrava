@@ -7,7 +7,7 @@
 get_activity(id, stoken)
 }
 \arguments{
-\item{id}{numeric for id of the activity}
+\item{id}{character vector for id of the activity}
 
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 }
@@ -29,7 +29,7 @@ The id for each activity can be viewed using results from \code{\link{get_activi
 stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 	app_secret, cache = TRUE))
 
-get_activity(75861631, stoken)
+get_activity('75861631', stoken)
 }
 }
 \concept{token}
