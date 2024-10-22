@@ -66,7 +66,8 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, befo
 		if(chk_lead){
 			
 			req <- GET(url_, stoken, query = c(list(per_page=pmin(200, per_page), page=i), queries))
-			cont_req <- content(req)$entries
+			cont_req <- content(req, as = 'text', encoding = 'UTF-8')
+			cont_req <- jsonlite::fromJSON(cont_req, simplifyVector = FALSE, bigint_as_char = TRUE)$entries
 			
 			if(length(cont_req) == 200){
 				per_page <- per_page - length(cont_req)
@@ -76,9 +77,10 @@ get_pages<-function(url_, stoken, per_page = 30, page_id = 1, page_max = 1, befo
 			if(per_page == 0) page_max <- i
 				
 		} else {
-			
+
 			req <- GET(url_, stoken, query = c(list(per_page=per_page, page=i, before=before, after=after), queries))
-			cont_req <- content(req)
+			cont_req <- content(req, as = 'text', encoding = 'UTF-8')
+			cont_req <- jsonlite::fromJSON(cont_req, simplifyVector = FALSE, bigint_as_char = TRUE)
 			
 		}
 	

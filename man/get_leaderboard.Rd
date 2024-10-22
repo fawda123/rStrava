@@ -9,7 +9,7 @@ get_leaderboard(stoken, id, nleaders = 10, All = FALSE)
 \arguments{
 \item{stoken}{A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function}
 
-\item{id}{charcater for id of the segment}
+\item{id}{character for id of the segment}
 
 \item{nleaders}{numeric for number of leaders to retrieve}
 
