@@ -4,7 +4,7 @@
 
 #' @param athl_num numeric athlete id used by Strava, as character string
 #'
-#' @import RCurl XML xml2
+#' @import XML xml2
 #' 
 #' @concept notoken
 #' 

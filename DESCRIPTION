@@ -16,7 +16,6 @@ Imports:
     jsonlite,
     magrittr,
 		maptiles,
-    RCurl,
     rvest,
     tidyr,
     tidyterra,
