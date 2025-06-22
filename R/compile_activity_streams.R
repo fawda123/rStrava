@@ -15,10 +15,11 @@
 #' act_id <- '351217692'
 #' streams <- get_streams(stoken, id = act_id, types = list('distance', 'latlng'))
 #' 
-#' compile_activity_streams(streams, id = act_id)}
+#' compile_activity_streams(streams, id = act_id)
+#' }
 compile_activity_streams <- function(streams, id = NULL){
 
-	if(any(!is.character(id))) 
+	if(any(!is.character(id)) & !is.null(id)) 
 		stop('id must be a character vector')
 	
    if (!is.null(id) && length(id) != 1) {

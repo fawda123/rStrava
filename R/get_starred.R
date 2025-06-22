@@ -26,7 +26,7 @@
 #' }
 get_starred <- function(stoken, id = NULL){     
 
-	if(any(!is.character(id)))
+	if(any(!is.character(id)) & !is.null(id))
 		stop('id must be a character vector')
 	
 	dataRaw <- get_basic(url_segment(id=id, request="starred"), stoken)

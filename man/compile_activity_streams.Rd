@@ -27,7 +27,8 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id, app_secret,
 act_id <- '351217692'
 streams <- get_streams(stoken, id = act_id, types = list('distance', 'latlng'))
 
-compile_activity_streams(streams, id = act_id)}
+compile_activity_streams(streams, id = act_id)
+}
 }
 \author{
 Lorenzo Gaborini
