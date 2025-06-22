@@ -12,9 +12,10 @@
 location_fun <- function(prsd){
 	
 	out <- prsd %>% 
-		rvest::html_elements(".Details_location__2Dwwo") %>% 
+		rvest::html_elements(".Details_details__LVsuT") %>%
+		rvest::html_elements(".Details_location__glkUL") %>% 
 		xml2::xml_text()
-	
+
 	if(length(out) == 0) 
 		out <- NA
 	

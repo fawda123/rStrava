@@ -66,23 +66,17 @@ athl_fun('2837007', trace = FALSE)
     ## 
     ## $`2837007`$follow
     ##   Followers Following
-    ## 1        79        83
+    ## 1        82        83
     ## 
     ## $`2837007`$monthly
     ##   Distance Moving Time
-    ## 1  14.8 mi     2:14:43
+    ## 1  92.2 mi    10:11:08
     ## 
     ## $`2837007`$recent
-    ##              Date          Name Distance Elevation  Time
-    ## 1       Yesterday Afternoon Run   5.2 km      30 m 29:42
-    ## 2 October 6, 2024 Afternoon Run   8.1 km      13 m 46:43
-    ## 3 October 4, 2024 Afternoon Run   5.2 km       5 m 28:31
-    ## 
-    ## $`2837007`$trophies
-    ## list()
-    ## 
-    ## $`2837007`$achievements
-    ## list()
+    ##            Date           Name Distance Elevation  Time
+    ## 1 June 20, 2025   Morning Ride   4.4 km       4 m 11:57
+    ## 2 June 20, 2025    Morning Run   5.1 km       5 m 28:39
+    ## 3 June 19, 2025 Afternoon Ride   4.4 km       6 m 12:18
 
 ### API functions (token)
 
@@ -196,6 +190,8 @@ act_data <- compile_activities(my_acts)
 get_heat_map(my_acts, alpha = 1, add_elev = T, distlab = F, key = google_key, size = 2, col = 'Spectral', units = 'imperial')
 ```
 
+    ## |---------|---------|---------|---------|=========================================                                          
+
 ![](man/figures/unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
@@ -262,6 +258,8 @@ Stream data can be plotted using any of the plotting functions.
 # heat map
 get_heat_map(strms_data, alpha = 1, filltype = 'speed', size = 2, col = 'Spectral', distlab = F)
 ```
+
+    ## |---------|---------|---------|---------|=========================================                                          
 
 ![](man/figures/unnamed-chunk-17-1.png)<!-- -->
 
