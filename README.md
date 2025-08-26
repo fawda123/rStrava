@@ -66,17 +66,17 @@ athl_fun('2837007', trace = FALSE)
     ## 
     ## $`2837007`$follow
     ##   Followers Following
-    ## 1        82        83
+    ## 1        83        83
     ## 
     ## $`2837007`$monthly
     ##   Distance Moving Time
-    ## 1  92.2 mi    10:11:08
+    ## 1  83.6 mi    10:26:07
     ## 
     ## $`2837007`$recent
-    ##            Date           Name Distance Elevation  Time
-    ## 1 June 20, 2025   Morning Ride   4.4 km       4 m 11:57
-    ## 2 June 20, 2025    Morning Run   5.1 km       5 m 28:39
-    ## 3 June 19, 2025 Afternoon Ride   4.4 km       6 m 12:18
+    ##              Date          Name Distance Elevation  Time
+    ## 1       Yesterday   Evening Run   5.2 km       5 m 29:19
+    ## 2 August 24, 2025 Afternoon Run   8.0 km      19 m 46:34
+    ## 3 August 22, 2025   Morning Run   5.2 km       4 m 29:00
 
 ### API functions (token)
 

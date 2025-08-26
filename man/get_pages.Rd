@@ -33,7 +33,7 @@ get_pages(
 
 \item{queries}{list of additional queries to pass to the API}
 
-\item{All}{logical if you want all possible pages within the ratelimit constraint}
+\item{All}{logical if you want all possible pages}
 }
 \value{
 Data from an API request.
@@ -53,7 +53,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 
 # get basic user info
 # returns 30 activities
-get_pages('https://strava.com/api/v3/activities', stoken)
+get_pages('https://www.strava.com/api/v3/activities', stoken)
 
 }
 }

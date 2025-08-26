@@ -24,12 +24,12 @@
 #' 	app_secret, cache = TRUE))
 #' 
 #' # get basic user info
-#' get_basic('https://strava.com/api/v3/athlete', stoken)
+#' get_basic('https://www.strava.com/api/v3/athlete', stoken)
 #' }
 get_basic <- function(url_, stoken, queries = NULL){
 	
 	req <- GET(url_, stoken, query = queries)
-	ratelimit(req)
+
 	stop_for_status(req)
 	dataRaw <- content(req)
 	return (dataRaw)
