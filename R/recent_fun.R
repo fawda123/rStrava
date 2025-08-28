@@ -12,15 +12,15 @@
 recent_fun <- function(prsd){
 	
 	recent <- prsd %>%
-		rvest::html_elements(".RecentActivities_card__oYIGT")
-	
+		rvest::html_elements(".RecentActivities_card__7X4_0")
+
 	if(length(recent) == 0)
 		return(NA)
 
-	nms <- rvest::html_elements(recent, ".RecentActivities_titleButton__1Uq_v") %>% xml2::xml_text()
-	dts <- rvest::html_elements(recent, ".RecentActivities_timestamp__pB9a8") %>% xml2::xml_text()
-	lbs <- rvest::html_elements(recent, ".Stat_statLabel___khR4") %>% xml2::xml_text()
-	stats <- rvest::html_elements(recent, ".ActivityStats_statValue__8IGVY") %>% 
+	nms <- rvest::html_elements(recent, ".RecentActivities_titleButton__LEtn9") %>% xml2::xml_text()
+	dts <- rvest::html_elements(recent, ".RecentActivities_timestamp__t851x") %>% xml2::xml_text()
+	lbs <- rvest::html_elements(recent, ".Stat_statLabel__SZaIf") %>% xml2::xml_text()
+	stats <- rvest::html_elements(recent, ".ActivityStats_statValue__KFG2b") %>% 
 		xml2::xml_text() %>% 
 		matrix(nrow = length(recent), byrow = TRUE) %>% 
 		as.data.frame()

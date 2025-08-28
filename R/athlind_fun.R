@@ -4,7 +4,7 @@
 
 #' @param athl_num numeric athlete id used by Strava, as character string
 #'
-#' @import RCurl XML xml2
+#' @import XML xml2
 #' 
 #' @concept notoken
 #' 
@@ -18,14 +18,14 @@ athlind_fun <- function(athl_num){
 	
 	# get unparsed url text using input
 	url_in <- paste0('https://www.strava.com/athletes/', athl_num)
-	
+
 	# get page data for athlete
 	prsd <- url_in %>% 
 		read_html()
 
 	# name
 	name <- prsd %>%
-		rvest::html_elements(".Details_name__Wz5bH") %>% 
+		rvest::html_elements(".Details_name__GicQw") %>% 
 		xml2::xml_text()
 
 	# exit if nothing found
@@ -46,21 +46,13 @@ athlind_fun <- function(athl_num){
 	# recent activities
 	recent <- recent_fun(prsd)
 	
-	# trophies
-	trophies <- trophy_fun(prsd)
-	
-	# achievements
-	achievements <- achievement_fun(prsd)
-	
 	# output
 	out <- list(
 		name = name,
 		location = loc, 
 		follow = follow,
 		monthly = monthly, 
-		recent= recent,
-		trophies = trophies,
-		achievements = achievements
+		recent= recent
 	)
 	
 	return(out)

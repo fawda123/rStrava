@@ -13,9 +13,9 @@ Imports:
     ggspatial,
     googleway,
     httr,
+    jsonlite,
     magrittr,
 		maptiles,
-    RCurl,
     rvest,
     tidyr,
     tidyterra,
@@ -46,4 +46,4 @@ Authors@R: c(
   	email = "niklasv@gmail.com"
   	)
   )
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

@@ -14,7 +14,7 @@ url_athlete <- function(id = NULL){
 	url_ <- "https://www.strava.com/api/v3/athlete"
 	if(!is.null(id)){
 		
-		if(any(!is.character(id)))
+		if(any(!is.character(id)) & !is.null(id))
 			stop('id must be a character vector')
 		
 		url_ <- paste(url_,"s/",id, sep = "")

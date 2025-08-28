@@ -12,16 +12,16 @@
 monthly_fun <- function(prsd){
 
 	mos <- prsd %>% 
-		rvest::html_elements('.MonthlyStats_monthlyStats__5VwJ_')
+		rvest::html_elements('.MonthlyStats_monthlyStats__zYNaz')
 	
 	if(length(mos) == 0)
 		return(list())
 
 	labs <- mos %>% 
-		rvest::html_elements('.Stat_statLabel___khR4') %>% 
+		rvest::html_elements('.Stat_statLabel__SZaIf') %>% 
 		xml2::xml_text()
 	vals <- mos %>% 
-		rvest::html_elements('.Stat_statValue__3_kAe') %>% 
+		rvest::html_elements('.Stat_statValue__lmw2H') %>% 
 		xml2::xml_text()
 
 	out <- data.frame(matrix(vals, ncol = length(vals)))

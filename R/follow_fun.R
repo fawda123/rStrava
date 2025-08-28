@@ -11,17 +11,18 @@
 #' @return  A data frame of counts of followers and following for the athlete. An empty list is returned if none found.
 follow_fun <- function(prsd){
 	
-	follow <- prsd %>%
-		rvest::html_elements(".Details_followStats__Pwe6T")
-	
+	follow <- prsd %>% 
+		rvest::html_elements(".Details_details__LVsuT") %>%
+		rvest::html_elements(".Details_followStats__WjnCq") 
+
 	if(length(follow) == 0)
 		return(list())
 	
 	labs <- follow %>% 
-		rvest::html_elements(".Stat_statLabel___khR4") %>% 
+		rvest::html_elements(".Stat_statLabel__SZaIf") %>% 
 		xml2::xml_text()
 	fols <- follow %>% 
-		rvest::html_elements(".Stat_statValue__3_kAe") %>% 
+		rvest::html_elements(".Stat_statValue__lmw2H") %>% 
 		xml2::xml_text()
 	
 	out <- data.frame(matrix(fols, ncol = length(labs)))

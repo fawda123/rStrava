@@ -3,7 +3,7 @@
 #' Retrieve the leaderboard of a segment
 #'
 #' @param stoken A \code{\link[httr]{config}} object created using the \code{\link{strava_oauth}} function
-#' @param id charcater for id of the segment
+#' @param id character for id of the segment
 #' @param nleaders numeric for number of leaders to retrieve
 #' @param All logical to retrieve all of the list
 #' 

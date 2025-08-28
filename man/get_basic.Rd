@@ -30,7 +30,7 @@ stoken <- httr::config(token = strava_oauth(app_name, app_client_id,
 	app_secret, cache = TRUE))
 
 # get basic user info
-get_basic('https://strava.com/api/v3/athlete', stoken)
+get_basic('https://www.strava.com/api/v3/athlete', stoken)
 }
 }
 \concept{token}

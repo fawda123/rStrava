@@ -22,11 +22,11 @@
 #' stoken <- httr::config(token = strava_oauth(app_name, app_client_id, 
 #' 	app_secret, cache = TRUE))
 #' 
-#' get_athlete(stoken, id = '2527465')
+#' get_athlete(stoken, id = '2837007')
 #' }
 get_athlete <-function(stoken, id = NULL){
 
-	if(any(!is.character(id))) 
+	if(any(!is.character(id)) & !is.null(id)) 
 		stop('id must be a character vector')
 	
 	dataRaw <- get_basic(url_athlete(id), stoken)

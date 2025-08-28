@@ -38,16 +38,17 @@ get_streams  <- function(stoken, id, request = "activities",
 	}
 	VALID_TYPES <- c("time", "latlng", "distance", "altitude", "velocity_smooth", "heartrate", "cadence", "watts", "temp", "moving", "grade_smooth")
 	if(!is.null(types)) {
-		types <- match.arg(types, VALID_TYPES, several.ok = TRUE)
+		types <- match.arg(unlist(types), VALID_TYPES, several.ok = TRUE)
 	} else {
 		types <- VALID_TYPES
 	}
 
 	req <- GET(url_streams(id, request, types), stoken,
 						 query = list(resolution = resolution, series_type = series_type))
-	ratelimit(req)
+
 	stop_for_status(req)
-	dataRaw <- content(req)
+	dataRaw <- content(req, as = 'text', encoding = 'UTF-8')
+	dataRaw <- jsonlite::fromJSON(dataRaw, simplifyVector = FALSE, bigint_as_char = TRUE)
 	
 	return(dataRaw)
 	
