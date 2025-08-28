@@ -15,3 +15,4 @@ ggmapTemp.png
 ^\.httr-oauth$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^revdep$
