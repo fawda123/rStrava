@@ -1,6 +1,6 @@
 # rStrava 1.3.3
 
-* Fixed bug with that prevented `NULL` value for `id` argument in `get_athlete()`.
+* Fixed bug that prevented `NULL` value for `id` argument in `get_athlete()`.
 * Removed `ratelimit()` function that was causing issues with some requests.
 * `get_pages()` function refactored, usage still the same.
 
