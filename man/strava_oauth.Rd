@@ -8,8 +8,9 @@ strava_oauth(
   app_name,
   app_client_id,
   app_secret,
-  app_scope = "public",
-  cache = FALSE
+  app_scope = c("public", "read", "read_all", "profile:read_all", "profile:write",
+    "activity:read", "activity:read_all", "activity:write"),
+  cache = TRUE
 )
 }
 \arguments{
@@ -19,9 +20,9 @@ strava_oauth(
 
 \item{app_secret}{chr string for secret received when the app was registered}
 
-\item{app_scope}{chr string for scope of authentication, Must be "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all" or "activity:write"}
+\item{app_scope}{chr string for scope of authentication, Must be one of "public", "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all" or "activity:write"}
 
-\item{cache}{logical to cache the token}
+\item{cache}{logical to cache the token, default is set}
 }
 \value{
 A \code{Token2.0} object returned by \code{\link[httr]{oauth2.0_token}} to be used with API function calls

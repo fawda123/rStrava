@@ -5,8 +5,8 @@
 #' @param app_name chr string for name of the app
 #' @param app_client_id chr string for ID received when the app was registered
 #' @param app_secret chr string for secret received when the app was registered
-#' @param app_scope chr string for scope of authentication, Must be "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all" or "activity:write"
-#' @param cache logical to cache the token
+#' @param app_scope chr string for scope of authentication, Must be one of "public", "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all" or "activity:write"
+#' @param cache logical to cache the token, default is set
 #'
 #' @details The \code{app_name}, \code{app_client_id}, and \code{app_secret} are specific to the user and can be obtained by registering an app on the Strava API authentication page: \url{http://strava.github.io/api/v3/oauth/}.  This requires a personal Strava account.
 #'
@@ -37,8 +37,12 @@
 #' # use authentication token
 #' get_athlete(stoken, id = '2837007')
 #' }
-strava_oauth <- function(app_name, app_client_id, app_secret, app_scope = 'public', cache = FALSE){
-      
+strava_oauth <- function(app_name, app_client_id, app_secret,
+                         app_scope = c("public", "read" , "read_all", "profile:read_all", "profile:write", "activity:read", "activity:read_all", "activity:write"),
+                         cache = TRUE){
+
+        app_scope <- match.arg(app_scope)
+
 	strava_app <- oauth_app(appname = app_name, key = app_client_id, secret = app_secret)  
 	
 	strava_end <- oauth_endpoint(
