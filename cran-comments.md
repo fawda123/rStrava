@@ -4,10 +4,10 @@ This is a resubmission for a version update
 
 ## Test environments
 
-* ubuntu 24.04.2 (on GitHub Actions, devel, release, old-release)
-* macOS 15.5 (on GitHub Actions, release)
+* ubuntu 24.04.3 (on GitHub Actions, devel, release, old-release)
+* macOS 15.7.2 (on GitHub Actions, release)
 * win-builder [http://win-builder.r-project.org/](http://win-builder.r-project.org/) (devel, release, old-release)
-* local Windows 10 install, R 4.4.2
+* local Windows 10 install, R 4.5.1
 
 ## R CMD check results
 

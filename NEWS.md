@@ -1,3 +1,9 @@
+# rStrava 1.3.4
+
+* Minor update to `strava_oauth()` to explicitly check options passed to `app_scope` argument using `match.arg()`, limiting available choices to one of `"public"` (default), `"read"`, `"read_all"`, `"profile:read_all"`, `"profile:write"`, `"activity:read"`, `"activity:read_all"`, or `"activity:write"`.
+* Minor update to `strava_oauth()` to set `cache` argument to `TRUE` by default, so that tokens are saved for future sessions unless otherwise specified.
+* See issue #111 for details.
+
 # rStrava 1.3.3
 
 * Fixed bug that prevented `NULL` value for `id` argument in `get_athlete()`.
