@@ -80,6 +80,8 @@ athl_fun('2837007', trace = FALSE)
 
 ### API functions (token)
 
+__As of June 1, 2026, a subscription is required to access the Strava API.__
+
 #### Setup
 
 These functions require a Strava account and a personal API, both of
