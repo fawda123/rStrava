@@ -17,8 +17,10 @@
 #' ## single athlete
 #' athl_fun('2837007')
 #' 
+#' \dontrun{
 #' ## multiple athletes
 #' athl_fun(c('2837007', '2527465'))
+#' }
 athl_fun <- function(athl_num, trace = TRUE){
 	
 	if(any(!is.character(athl_num))) 

@@ -24,7 +24,9 @@ The athlete id is assigned to the user during registration with Strava and this 
 ## single athlete
 athl_fun('2837007')
 
+\dontrun{
 ## multiple athletes
 athl_fun(c('2837007', '2527465'))
+}
 }
 \concept{notoken}
